@@ -2,10 +2,12 @@
 
 namespace LD\LanguageDetection\Middleware;
 
+use LD\LanguageDetection\Service\BrowserLanguauge;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
+use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 
 /**
  * LanguageDetection
@@ -13,9 +15,23 @@ use Psr\Http\Server\RequestHandlerInterface;
  */
 class LanguageDetection implements MiddlewareInterface
 {
+    /**
+     * @var BrowserLanguauge
+     */
+    protected $browserLanguage;
+
+    public function __construct(BrowserLanguauge $browserLanguage)
+    {
+        $this->browserLanguage = $browserLanguage;
+    }
+
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
-
+        // DebuggerUtility::var_dump($request->getAttribute('site'));
+        // die();
+        //$browserLanguages = $this->browserLanguage->get();
+        //DebuggerUtility::var_dump($browserLanguages);
+        //die();
         // TODO: Implement process() method.
 
         return $handler->handle($request);
@@ -32,7 +48,6 @@ class LanguageDetection implements MiddlewareInterface
      * The service for internal detection of the language.
      *
      * @var \HDNET\Hdnet\Service\LanguageService
-     * @TYPO3\CMS\Extbase\Annotation\Inject
      */
     protected $languageService;
 
@@ -40,7 +55,6 @@ class LanguageDetection implements MiddlewareInterface
      * The session Service.
      *
      * @var \HDNET\Hdnet\Service\Storage\SessionService
-     * @TYPO3\CMS\Extbase\Annotation\Inject
      */
     protected $sessionService;
 
@@ -442,9 +456,9 @@ class LanguageDetection implements MiddlewareInterface
             $referer,
             GeneralUtility::getIndpEnv('TYPO3_SITE_URL')
         ) || false !== \mb_stripos(
-                    $referer,
-                    $baseUrl
-                ) || false !== \mb_stripos(
+            $referer,
+            $baseUrl
+        ) || false !== \mb_stripos(
                     $referer . '/',
                     GeneralUtility::getIndpEnv('TYPO3_SITE_URL')
                 ) || false !== \mb_stripos(
