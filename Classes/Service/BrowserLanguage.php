@@ -4,7 +4,7 @@ namespace LD\LanguageDetection\Service;
 
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
-class BrowserLanguauge
+class BrowserLanguage
 {
     /**
      * Returns the browser languages ordered by quality.

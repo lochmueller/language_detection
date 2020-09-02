@@ -2,7 +2,7 @@
 
 namespace LD\LanguageDetection\Middleware;
 
-use LD\LanguageDetection\Service\BrowserLanguauge;
+use LD\LanguageDetection\Service\BrowserLanguage;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
@@ -16,19 +16,29 @@ use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 class LanguageDetection implements MiddlewareInterface
 {
     /**
-     * @var BrowserLanguauge
+     * @var BrowserLanguage
      */
     protected $browserLanguage;
 
-    public function __construct(BrowserLanguauge $browserLanguage)
+    public function __construct(BrowserLanguage $browserLanguage)
     {
         $this->browserLanguage = $browserLanguage;
     }
 
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
-        // DebuggerUtility::var_dump($request->getAttribute('site'));
-        // die();
+        /** @var \TYPO3\CMS\Core\Site\Entity\Site $site */
+        $site = $request->getAttribute('site');
+        $config = $site->getConfiguration();
+
+        $enable = $config['enableLanguageDetection'] ?? true;
+        if (!$enable) {
+            return $handler->handle($request);
+        }
+
+        $addIp = $config['addIpLocationToBrowserLanguage'] ?? false;
+        //DebuggerUtility::var_dump($addIp);
+        //die();
         //$browserLanguages = $this->browserLanguage->get();
         //DebuggerUtility::var_dump($browserLanguages);
         //die();
@@ -456,9 +466,9 @@ class LanguageDetection implements MiddlewareInterface
             $referer,
             GeneralUtility::getIndpEnv('TYPO3_SITE_URL')
         ) || false !== \mb_stripos(
-            $referer,
-            $baseUrl
-        ) || false !== \mb_stripos(
+                    $referer,
+                    $baseUrl
+                ) || false !== \mb_stripos(
                     $referer . '/',
                     GeneralUtility::getIndpEnv('TYPO3_SITE_URL')
                 ) || false !== \mb_stripos(
