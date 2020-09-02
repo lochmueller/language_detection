@@ -1,7 +1,4 @@
 <?php
-/**
- *
- */
 
 namespace LD\LanguageDetection\Middleware;
 
@@ -16,7 +13,6 @@ use Psr\Http\Server\RequestHandlerInterface;
  */
 class LanguageDetection implements MiddlewareInterface
 {
-
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
 
@@ -24,7 +20,6 @@ class LanguageDetection implements MiddlewareInterface
 
         return $handler->handle($request);
     }
-
 
     /**
      * Detection Messages.
@@ -112,7 +107,6 @@ class LanguageDetection implements MiddlewareInterface
      *
      * @return LanguageDetectionService
      * @throws LanguageDetectionException
-     *
      */
     public function checkLoggedInToBackend()
     {
@@ -349,7 +343,6 @@ class LanguageDetection implements MiddlewareInterface
      *
      * @return LanguageDetectionService
      * @throws LanguageDetectionException
-     *
      */
     protected function checkSameRedirectUri()
     {
@@ -370,7 +363,6 @@ class LanguageDetection implements MiddlewareInterface
      *
      * @return LanguageDetectionService
      * @throws LanguageDetectionException
-     *
      */
     protected function checkDryRun($dryRun)
     {
@@ -389,7 +381,6 @@ class LanguageDetection implements MiddlewareInterface
      *
      * @return LanguageDetectionService
      * @throws LanguageDetectionException
-     *
      */
     protected function checkInvalidRedirectUri()
     {
@@ -441,7 +432,6 @@ class LanguageDetection implements MiddlewareInterface
      *
      * @return LanguageDetectionService
      * @throws LanguageDetectionException
-     *
      */
     protected function checkFromThisPage()
     {
@@ -449,9 +439,9 @@ class LanguageDetection implements MiddlewareInterface
         $referer = GeneralUtility::getIndpEnv('HTTP_REFERER');
         $baseUrl = $GLOBALS['TSFE']->baseUrl;
         if (!$this->inHomePageMode() && \mb_strlen($referer) && (false !== \mb_stripos(
-                    $referer,
-                    GeneralUtility::getIndpEnv('TYPO3_SITE_URL')
-                ) || false !== \mb_stripos(
+            $referer,
+            GeneralUtility::getIndpEnv('TYPO3_SITE_URL')
+        ) || false !== \mb_stripos(
                     $referer,
                     $baseUrl
                 ) || false !== \mb_stripos(
@@ -475,7 +465,6 @@ class LanguageDetection implements MiddlewareInterface
      *
      * @return LanguageDetectionService
      * @throws LanguageDetectionException
-     *
      */
     protected function checkLanguageAlreadyChosen()
     {
@@ -495,7 +484,6 @@ class LanguageDetection implements MiddlewareInterface
      *
      * @return LanguageDetectionService
      * @throws LanguageDetectionException
-     *
      */
     protected function checkWorkspacePreview()
     {
@@ -514,7 +502,6 @@ class LanguageDetection implements MiddlewareInterface
      *
      * @return LanguageDetectionService
      * @throws LanguageDetectionException
-     *
      */
     protected function checkUriInSession()
     {

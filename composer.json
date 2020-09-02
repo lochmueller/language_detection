@@ -1,0 +1,63 @@
+{
+	"name": "lochmueller/language-detection",
+	"type": "typo3-cms-extension",
+	"description": "Language Detection Middleware for TYPO3",
+	"autoload": {
+		"psr-4": {
+			"LD\\LanguageDetection\\": "Classes"
+		}
+	},
+	"autoload-dev": {
+		"psr-4": {
+			"LD\\LanguageDetection\\Tests\\": "Tests"
+		}
+	},
+	"keywords": [
+		"TYPO3 CMS",
+		"Language",
+		"Detection"
+	],
+	"authors": [
+		{
+			"name": "Tim Lochmüller",
+			"email": "tim@fruit-lab.de",
+			"role": "Developer",
+			"homepage": "https://github.com/lochmueller"
+		}
+	],
+	"require": {
+		"php": "^7.3||^7.4",
+		"typo3/cms-core": "^10.4.6"
+	},
+	"homepage": "https://github.com/lochmueller/language_detection",
+	"license": "GPL-2.0-or-later",
+	"support": {
+		"issues": "https://github.com/lochmueller/language_detection/issues"
+	},
+	"require-dev": {
+		"typo3/testing-framework": "^6.1",
+		"friendsofphp/php-cs-fixer": "^2.16"
+	},
+	"config": {
+		"vendor-dir": ".Build/vendor",
+		"bin-dir": ".Build/bin"
+	},
+	"extra": {
+		"typo3/cms": {
+			"extension-key": "language_detection",
+			"cms-package-dir": "{$vendor-dir}/typo3/cms",
+			"web-dir": ".Build/Web"
+		}
+	},
+	"scripts": {
+		"code": [
+			"@code:php-cs-fixer"
+		],
+		"code:php-cs-fixer": [
+			"php-cs-fixer fix --config Resources/Private/Build/PhpCsFixer.php --cache-file=.Build/phpcs.cache"
+		],
+		"test": [
+			"phpunit -c Tests/UnitTests.xml"
+		]
+	}
+}

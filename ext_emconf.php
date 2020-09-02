@@ -1,10 +1,4 @@
 <?php
-/**
- * $EM_CONF
- *
- * @package    Hdnet
- * @author     Tim Lochmüller <tim.lochmueller@hdnet.de>
- */
 
 $EM_CONF[$_EXTKEY] = [
     'title' => 'Language Detection',
@@ -22,6 +16,6 @@ $EM_CONF[$_EXTKEY] = [
         ],
     ],
     'autoload' => [
-        'psr-4' => ['LD\\Hdnet\\' => 'Classes']
+        'psr-4' => ['LD\\LanguageDetection\\' => 'Classes']
     ],
 ];
