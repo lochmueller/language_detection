@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+use TYPO3\CMS\Core\Utility\HttpUtility;
+
 $GLOBALS['SiteConfiguration']['site']['columns']['enableLanguageDetection'] = [
     'label' => 'Enable',
     'config' => [
@@ -24,9 +26,38 @@ $GLOBALS['SiteConfiguration']['site']['columns']['addIpLocationToBrowserLanguage
     ],
 ];
 
+$GLOBALS['SiteConfiguration']['site']['columns']['redirectHttpStatusCode'] = [
+    'label' => 'Redirect HTTP status code',
+    'config' => [
+        'type' => 'select',
+        'renderType' => 'selectSingle',
+        'items' => [
+            [HttpUtility::HTTP_STATUS_307, 307],
+            [HttpUtility::HTTP_STATUS_302, 302],
+            [HttpUtility::HTTP_STATUS_303, 303],
+            [HttpUtility::HTTP_STATUS_300, 300],
+        ],
+    ],
+];
+
+$GLOBALS['SiteConfiguration']['site']['columns']['disableRedirectWithBackendSession'] = [
+    'label' => 'Disable redirect with backend session',
+    'config' => [
+        'type' => 'check',
+        'default' => 0,
+    ],
+];
+$GLOBALS['SiteConfiguration']['site']['columns']['forwardRedirectParamters'] = [
+    'label' => 'Forward redirect parameters',
+    'config' => [
+        'type' => 'input',
+        'default' => 'gclid',
+    ],
+];
+
 $GLOBALS['SiteConfiguration']['site']['types']['0']['showitem'] = str_replace(
     'base,',
-    'base,--div--;Language Detection,enableLanguageDetection,addIpLocationToBrowserLanguage,',
+    'base,--div--;Language Detection,enableLanguageDetection,addIpLocationToBrowserLanguage,redirectHttpStatusCode,disableRedirectWithBackendSession,forwardRedirectParamters,',
     $GLOBALS['SiteConfiguration']['site']['types']['0']['showitem']
 );
 
@@ -43,5 +74,3 @@ $GLOBALS['SiteConfiguration']['site_language']['types']['1']['showitem'] = str_r
     'flag, excludeFromLanguageDetection, ',
     $GLOBALS['SiteConfiguration']['site_language']['types']['1']['showitem']
 );
-
-// @todo more detail configuration

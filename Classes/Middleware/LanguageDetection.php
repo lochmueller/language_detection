@@ -9,8 +9,12 @@ use LD\LanguageDetection\Service\UserLanguages;
 use Psr\EventDispatcher\EventDispatcherInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
+use Psr\Http\Message\UriInterface;
 use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
+use TYPO3\CMS\Core\Http\Uri;
+use TYPO3\CMS\Core\Site\Entity\Site;
+use TYPO3\CMS\Core\Site\Entity\SiteLanguage;
 use TYPO3\CMS\Core\Utility\HttpUtility;
 use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 
@@ -32,70 +36,47 @@ class LanguageDetection implements MiddlewareInterface
 
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
-        /** @var \TYPO3\CMS\Core\Site\Entity\Site $site */
+        /** @var Site $site */
         $site = $request->getAttribute('site');
 
-        $event = new HandleLanguageDetection($site);
+        $event = new HandleLanguageDetection($site, $request);
         $this->eventDispatcher->dispatch($event);
 
-        if (!$event->isHandleLanguageDetection() || '/' !== $request->getUri()->getPath()) {
-            // @todo configure "/" move to listener base url
+        if (!$event->isHandleLanguageDetection()) {
             return $handler->handle($request);
         }
 
-        // @todo check Backend login and disable (as configuration)
-
         //$userLanguages = $this->userLanguages->get($site);
+        //$siteLanguages = $site->getAllLanguages();
+        // Filter by enabled
 
-        //DebuggerUtility::var_dump($addIp);
-        //die();
-        //
         //DebuggerUtility::var_dump($userLanguages);
+        //DebuggerUtility::var_dump($siteLanguages);
+        //DebuggerUtility::var_dump((string)$this->buildRedirectUri($site, $siteLanguages[0]));
         //die();
+
+        // redirectHttpStatusCode
 
         // HttpUtility::redirect($this->redirectUri, $httpStatus); // @todo configuration for status code
 
         return $handler->handle($request);
     }
 
-    /**
-     * Build up the redirect URI.
-     *
-     * @return string|bool
-     */
-    protected function getRedirectUri()
+    protected function buildRedirectUri(Site $site, SiteLanguage $language): UriInterface
     {
-        $this->messages[] = 'Get the redirect URI...';
+        /** @var Uri $target */
+        $target = $language->getBase();
 
-        /** @var $matchConfiguration \HDNET\Hdnet\Domain\Model\DetectionConfiguration */
-        $matchConfiguration = $this->getMatchConfiguration($this->browserLanguages);
-        if (!\is_object($matchConfiguration)) {
-            $this->messages[] = '... no matching object found for the redirect URI!!!';
+        // $target->getQuery()
+        // $target->withQuery()
 
-            return false;
-        }
+        // DebuggerUtility::var_dump($target);
 
-        if ($matchConfiguration->getExt()) {
-            $parts = parse_url($matchConfiguration->getExt());
-            if (!isset($parts['scheme'])) {
-                $parts['scheme'] = 'http';
-            }
+        //if (null !== GeneralUtility::_GET('gclid')) {
+        //    $params['gclid'] = GeneralUtility::_GET('gclid');
+        //}
 
-            return HttpUtility::buildUrl($parts);
-        }
-
-        $targetPage = $matchConfiguration->getPage() > 0 ? $matchConfiguration->getPage() : $GLOBALS['TSFE']->id;
-        $params = ['L' => $matchConfiguration->getLanguage()];
-
-        if (null !== GeneralUtility::_GET('gclid')) {
-            $params['gclid'] = GeneralUtility::_GET('gclid');
-        }
-
-        return $this->uriBuilder->reset()
-            ->setCreateAbsoluteUri(true)
-            ->setTargetPageUid($targetPage)
-            ->setArguments($params)
-            ->build();
+        return $target;
     }
 
     /**
@@ -177,25 +158,6 @@ class LanguageDetection implements MiddlewareInterface
             throw new LanguageDetectionException('TYPO3_REQUEST_URL === redirect', 1470995534);
         }
         $this->messages[] = '... not the same as current page!!!';
-
-        return $this;
-    }
-
-    /**
-     * Check Invalid Redirected Uri.
-     *
-     * @return LanguageDetectionService
-     *
-     * @throws LanguageDetectionException
-     */
-    protected function checkInvalidRedirectUri()
-    {
-        $this->messages[] = 'Check invalid redirect URI...';
-        if (!$this->redirectUri or !mb_strlen($this->redirectUri)) {
-            $this->messages[] = '... it is no valid URI!!!';
-            throw new LanguageDetectionException('No valid URI: ' . $this->redirectUri, 1470995536);
-        }
-        $this->messages[] = '... the URI is valid';
 
         return $this;
     }

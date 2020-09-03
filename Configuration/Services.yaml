@@ -24,3 +24,15 @@ services:
       - name: event.listener
         identifier: 'languageDetectionWorkspacePreview'
         event: LD\LanguageDetection\Event\HandleLanguageDetection
+
+  LD\LanguageDetection\Listener\PathListener:
+    tags:
+      - name: event.listener
+        identifier: 'languageDetectionPath'
+        event: LD\LanguageDetection\Event\HandleLanguageDetection
+
+  LD\LanguageDetection\Listener\BackendUserListener:
+    tags:
+      - name: event.listener
+        identifier: 'languageDetectionBackendUser'
+        event: LD\LanguageDetection\Event\HandleLanguageDetection

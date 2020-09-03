@@ -7,23 +7,16 @@ namespace LD\LanguageDetection\Service;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
- * Location Service
+ * Location Service.
+ *
  * Get the Location based on the IP.
  * Use the geoplugin.net API.
  */
 class IpPosition
 {
-    /**
-     * Get the location information for the given IP address.
-     *
-     * @param string|null $ip
-     *
-     * @throws \Exception
-     *
-     * @return array
-     */
-    public function get($ip = null)
+    public function get(?string $ip = null): array
     {
+        $ip = '212.100.44.250';
         if (null === $ip) {
             $ip = GeneralUtility::getIndpEnv('REMOTE_ADDR');
         }
@@ -46,9 +39,16 @@ class IpPosition
         return $content;
     }
 
-    public function getLanguage(string $country): string
+    public function getLanguage(?string $ip = null): ?string
     {
-        // @todo
+        $data = $this->get($ip);
+        if (isset($data['geoplugin_countryCode'])) {
+            return (string)$this->mapCountryToLanguage($data['geoplugin_countryCode']);
+        }
+    }
+
+    public function mapCountryToLanguage(string $country): string
+    {
         $subtags = \ResourceBundle::create('likelySubtags', 'ICUDATA', false);
         $country = \Locale::canonicalize('und_' . $country);
         $locale = $subtags->get($country) ?: $subtags->get('und');

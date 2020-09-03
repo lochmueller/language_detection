@@ -6,33 +6,16 @@ namespace LD\LanguageDetection\Listener;
 
 use LD\LanguageDetection\Event\HandleLanguageDetection;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
+use TYPO3\CMS\Core\Utility\StringUtility;
 
 class FromCurrentPageListener
 {
     public function __invoke(HandleLanguageDetection $event): void
     {
         $referer = (string)GeneralUtility::getIndpEnv('HTTP_REFERER');
+        $baseUri = rtrim((string)$event->getSite()->getBase(), '/');
 
-        DebuggerUtility::var_dump('Call');
-        die();
-        // @todo Handle
-
-        $baseUrl = $GLOBALS['TSFE']->baseUrl;
-        if (mb_strlen($referer) && (false !== mb_stripos(
-            $referer,
-            GeneralUtility::getIndpEnv('TYPO3_SITE_URL')
-        ) || false !== mb_stripos(
-            $referer,
-            $baseUrl
-        ) || false !== mb_stripos(
-            $referer . '/',
-            GeneralUtility::getIndpEnv('TYPO3_SITE_URL')
-        ) || false !== mb_stripos(
-            $referer . '/',
-            $baseUrl
-        ))
-        ) {
+        if ('' !== $referer && StringUtility::beginsWith($referer, $baseUri)) {
             $event->disableLanguageDetection();
         }
     }
