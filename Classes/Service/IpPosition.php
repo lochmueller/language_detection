@@ -20,34 +20,30 @@ class IpPosition
         if (null === $ip) {
             $ip = GeneralUtility::getIndpEnv('REMOTE_ADDR');
         }
-        $report = [];
         try {
             $urlService = 'http://www.geoplugin.net/php.gp?ip=' . $ip;
-            $content = unserialize(GeneralUtility::getUrl($urlService, 0, false, $report));
+            $content = unserialize(GeneralUtility::getUrl($urlService, 0, false));
+            if (!\is_array($content) || !\count($content) || '404' === $content['geoplugin_status']) {
+                throw new \Exception('Missing information in response', 123781);
+            }
+
+            return $content;
         } catch (\Exception $exc) {
-            throw new \Exception('Can\'t get the location: ' . var_export($report, true), 561786287945235);
+            throw new \Exception('Can\'t get the location via geoplugin.net', 123681);
         }
-
-        if (!\count($content)) {
-            throw new \Exception('No content for the location: ' . var_export($report, true), 23847628734324);
-        }
-
-        if ('404' === $content['geoplugin_status']) {
-            throw new \Exception('IP location not found: ' . var_export($report, true), 561786287945237);
-        }
-
-        return $content;
     }
 
     public function getLanguage(?string $ip = null): ?string
     {
         $data = $this->get($ip);
-        if (isset($data['geoplugin_countryCode'])) {
-            return (string)$this->mapCountryToLanguage($data['geoplugin_countryCode']);
+        if (!isset($data['geoplugin_countryCode'])) {
+            return null;
         }
+
+        return (string)$this->mapCountryToLanguage($data['geoplugin_countryCode']);
     }
 
-    public function mapCountryToLanguage(string $country): string
+    protected function mapCountryToLanguage(string $country): string
     {
         $subtags = \ResourceBundle::create('likelySubtags', 'ICUDATA', false);
         $country = \Locale::canonicalize('und_' . $country);
