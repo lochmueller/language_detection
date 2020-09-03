@@ -6,3 +6,21 @@ services:
 
   LD\LanguageDetection\:
     resource: '../Classes/*'
+
+  LD\LanguageDetection\Listener\EnableListener:
+    tags:
+      - name: event.listener
+        identifier: 'languageDetectionEnable'
+        event: LD\LanguageDetection\Event\HandleLanguageDetection
+
+  LD\LanguageDetection\Listener\FromCurrentPageListener:
+    tags:
+      - name: event.listener
+        identifier: 'languageDetectionFromCurrentPage'
+        event: LD\LanguageDetection\Event\HandleLanguageDetection
+
+  LD\LanguageDetection\Listener\WorkspacePreviewListener:
+    tags:
+      - name: event.listener
+        identifier: 'languageDetectionWorkspacePreview'
+        event: LD\LanguageDetection\Event\HandleLanguageDetection

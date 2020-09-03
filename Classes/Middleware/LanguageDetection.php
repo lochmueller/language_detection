@@ -2,7 +2,9 @@
 
 namespace LD\LanguageDetection\Middleware;
 
+use LD\LanguageDetection\Event\HandleLanguageDetection;
 use LD\LanguageDetection\Service\UserLanguages;
+use Psr\EventDispatcher\EventDispatcherInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
@@ -17,20 +19,23 @@ use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 class LanguageDetection implements MiddlewareInterface
 {
     protected UserLanguages $userLanguages;
+    protected EventDispatcherInterface $eventDispatcher;
 
-    public function __construct(UserLanguages $userLanguages)
+    public function __construct(UserLanguages $userLanguages, EventDispatcherInterface $eventDispatcher)
     {
         $this->userLanguages = $userLanguages;
+        $this->eventDispatcher = $eventDispatcher;
     }
 
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
         /** @var \TYPO3\CMS\Core\Site\Entity\Site $site */
         $site = $request->getAttribute('site');
-        $config = $site->getConfiguration();
 
-        $enable = $config['enableLanguageDetection'] ?? true;
-        if (!$enable || $request->getUri()->getPath() !== '/') {
+        $event = new HandleLanguageDetection($site);
+        $this->eventDispatcher->dispatch($event);
+
+        if (!$event->isHandleLanguageDetection() || $request->getUri()->getPath() !== '/') {
             // @todo configure "/" move to listener base url
             return $handler->handle($request);
         }
