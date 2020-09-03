@@ -6,37 +6,20 @@ use TYPO3\CMS\Core\Site\Entity\Site;
 
 class HandleLanguageDetection
 {
+    protected Site $site;
 
-    /**
-     * @var Site
-     */
-    protected $site;
+    protected bool $handleLanguageDetection = true;
 
-    /**
-     * @var bool
-     */
-    protected $handleLanguageDetection = true;
-
-    /**
-     * HandleLanguageDetection constructor.
-     * @param Site $site
-     */
     public function __construct(Site $site)
     {
         $this->site = $site;
     }
 
-    /**
-     * @return Site
-     */
     public function getSite(): Site
     {
         return $this->site;
     }
 
-    /**
-     * @return bool
-     */
     public function isHandleLanguageDetection(): bool
     {
         return $this->handleLanguageDetection;

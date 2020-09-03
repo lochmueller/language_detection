@@ -16,10 +16,7 @@ use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
  */
 class LanguageDetection implements MiddlewareInterface
 {
-    /**
-     * @var $userLanguages
-     */
-    protected $userLanguages;
+    protected UserLanguages $userLanguages;
 
     public function __construct(UserLanguages $userLanguages)
     {
@@ -100,7 +97,7 @@ class LanguageDetection implements MiddlewareInterface
      *
      * @return LanguageDetection
      */
-    protected function getMatchConfiguration($browserLanguages)
+    protected function getMatchConfiguration(array $browserLanguages)
     {
         $configs = $this->currentConfiguration->getConfigurations()
             ->toArray();

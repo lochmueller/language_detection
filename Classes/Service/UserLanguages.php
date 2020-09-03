@@ -3,30 +3,16 @@
 namespace LD\LanguageDetection\Service;
 
 use TYPO3\CMS\Core\Exception;
+use TYPO3\CMS\Core\Site\Entity\Site;
 
 class UserLanguages
 {
+    protected BrowserLanguage $browserLanguage;
 
-    /**
-     * @var BrowserLanguage
-     */
-    protected $browserLanguage;
+    protected IpPosition $ipPosition;
 
-    /**
-     * @var IpPosition
-     */
-    protected $ipPosition;
+    protected Normalizer $normalizer;
 
-    /**
-     * @var Normalizer
-     */
-    protected $normalizer;
-
-    /**
-     * UserLanguages constructor.
-     * @param BrowserLanguage $browserLanguage
-     * @param IpPosition $ipPosition
-     */
     public function __construct(BrowserLanguage $browserLanguage, IpPosition $ipPosition, Normalizer $normalizer)
     {
         $this->browserLanguage = $browserLanguage;
@@ -34,7 +20,7 @@ class UserLanguages
         $this->normalizer = $normalizer;
     }
 
-    public function get(\TYPO3\CMS\Core\Site\Entity\Site $site): array
+    public function get(Site $site): array
     {
         $config = $site->getConfiguration();
         $addIp = $config['addIpLocationToBrowserLanguage'] ?? '';
