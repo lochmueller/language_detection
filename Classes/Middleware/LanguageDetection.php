@@ -34,19 +34,19 @@ class LanguageDetection implements MiddlewareInterface
 
         $enable = $config['enableLanguageDetection'] ?? true;
         if (!$enable || $request->getUri()->getPath() !== '/') {
-            // @todo configure "/"
+            // @todo configure "/" move to listener base url
             return $handler->handle($request);
         }
 
         // @todo check Backend login and disable (as configuration)
 
-        #$userLanguages = $this->userLanguages->get($site);
+        //$userLanguages = $this->userLanguages->get($site);
 
         //DebuggerUtility::var_dump($addIp);
         //die();
         //
-        #DebuggerUtility::var_dump($userLanguages);
-        #die();
+        //DebuggerUtility::var_dump($userLanguages);
+        //die();
 
         // HttpUtility::redirect($this->redirectUri, $httpStatus); // @todo configuration for status code
 
@@ -178,26 +178,6 @@ class LanguageDetection implements MiddlewareInterface
     }
 
     /**
-     * Check dry run.
-     *
-     * @param bool $dryRun
-     *
-     * @return LanguageDetectionService
-     * @throws LanguageDetectionException
-     */
-    protected function checkDryRun($dryRun)
-    {
-        $this->messages[] = 'Check dry run...';
-        if (!$this->inHomePageMode() && $dryRun) {
-            $this->messages[] = '... dry run!!!';
-            throw new LanguageDetectionException('dryRun: ' . $this->redirectUri, 1470995535);
-        }
-        $this->messages[] = '... no dry run';
-
-        return $this;
-    }
-
-    /**
      * Check Invalid Redirected Uri.
      *
      * @return LanguageDetectionService
@@ -233,105 +213,5 @@ class LanguageDetection implements MiddlewareInterface
         $this->messages[] = '... set: ' . $this->redirectHttpStatus;
 
         return $this;
-    }
-
-    /**
-     * Retrun true if the user come from the current page.
-     *
-     * @return LanguageDetectionService
-     * @throws LanguageDetectionException
-     */
-    protected function checkFromThisPage()
-    {
-        $this->messages[] = 'Check from this page...';
-        $referer = GeneralUtility::getIndpEnv('HTTP_REFERER');
-        $baseUrl = $GLOBALS['TSFE']->baseUrl;
-        if (!$this->inHomePageMode() && \mb_strlen($referer) && (false !== \mb_stripos(
-            $referer,
-            GeneralUtility::getIndpEnv('TYPO3_SITE_URL')
-        ) || false !== \mb_stripos(
-            $referer,
-            $baseUrl
-        ) || false !== \mb_stripos(
-            $referer . '/',
-            GeneralUtility::getIndpEnv('TYPO3_SITE_URL')
-        ) || false !== \mb_stripos(
-                    $referer . '/',
-                    $baseUrl
-                ))
-        ) {
-            $this->messages[] = '... user is already from this page!!!';
-            throw new LanguageDetectionException('fromThisPage', 1470995537);
-        }
-        $this->messages[] = '... user is not from this page';
-
-        return $this;
-    }
-
-    /**
-     * Return true if there is a L var in the URI.
-     *
-     * @return LanguageDetectionService
-     * @throws LanguageDetectionException
-     */
-    protected function checkLanguageAlreadyChosen()
-    {
-        $this->messages[] = 'Check language already chosen...';
-        $hasLanguageParameter = null !== GeneralUtility::_GP('L');
-        if (!$this->inHomePageMode() && $hasLanguageParameter) {
-            $this->messages[] = '... language is already chosen (L=' . GeneralUtility::_GP('L') . ')!!!';
-            throw new LanguageDetectionException('languageAlreadyChosen', 1470995538);
-        }
-        $this->messages[] = '... no language / default language is selected';
-
-        return $this;
-    }
-
-    /**
-     * Return true if the user is in the Workspace Preview.
-     *
-     * @return LanguageDetectionService
-     * @throws LanguageDetectionException
-     */
-    protected function checkWorkspacePreview()
-    {
-        $this->messages[] = 'Check preview link...';
-        if (null !== GeneralUtility::_GP('ADMCMD_prev') || null !== GeneralUtility::_GP('ADMCMD_previewWS')) {
-            $this->messages[] = '... yes, it is a preview link!!!';
-            throw new LanguageDetectionException('workspacePreview', 1470995540);
-        }
-        $this->messages[] = '... no preview link';
-
-        return $this;
-    }
-
-    /**
-     * Checks uri in session.
-     *
-     * @return LanguageDetectionService
-     * @throws LanguageDetectionException
-     */
-    protected function checkUriInSession()
-    {
-        $this->messages[] = 'Check URI in session...';
-        if (!$this->inHomePageMode() && $this->sessionService->has('uri')) {
-            $this->messages[] = '... found in session!!!';
-            throw new LanguageDetectionException('one redirect per session', 1470995541);
-        }
-        $this->messages[] = '... not found in session';
-
-        return $this;
-    }
-
-    /**
-     * Send a LanguageDetection Header.
-     *
-     * @param string $msg
-     */
-    protected function sendHeader($msg)
-    {
-        static $headerCount = 0;
-        \header('X-Note: LD-' . $headerCount . '-' . $msg);
-        ++$headerCount;
     }
 }
