@@ -14,9 +14,11 @@ class Normalizer
     public function normalize(string $locale): string
     {
         // Drop charset
-        list($code, $charset) = explode('.', $locale);
+        if (false !== strpos($locale, '.')) {
+            list($locale, $charset) = explode('.', $locale);
+        }
 
-        $code = str_replace('-', '_', $code);
+        $code = str_replace('-', '_', $locale);
         list($language, $region) = explode('_', $code);
 
         $locale = strtolower($language);

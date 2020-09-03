@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace LD\LanguageDetection\Middleware;
 
 use LD\LanguageDetection\Event\HandleLanguageDetection;
+use LD\LanguageDetection\Service\LanguageNegotiation;
 use LD\LanguageDetection\Service\UserLanguages;
 use Psr\EventDispatcher\EventDispatcherInterface;
 use Psr\Http\Message\ResponseInterface;
@@ -27,11 +28,13 @@ class LanguageDetection implements MiddlewareInterface
 {
     protected UserLanguages $userLanguages;
     protected EventDispatcherInterface $eventDispatcher;
+    protected LanguageNegotiation $languageNegotiation;
 
-    public function __construct(UserLanguages $userLanguages, EventDispatcherInterface $eventDispatcher)
+    public function __construct(UserLanguages $userLanguages, EventDispatcherInterface $eventDispatcher, LanguageNegotiation $languageNegotiation)
     {
         $this->userLanguages = $userLanguages;
         $this->eventDispatcher = $eventDispatcher;
+        $this->languageNegotiation = $languageNegotiation;
     }
 
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
@@ -49,9 +52,12 @@ class LanguageDetection implements MiddlewareInterface
         $userLanguages = $this->userLanguages->get($site);
         $siteLanguages = $site->getAllLanguages();
 
-        // @todo Compoare $userLanguages & $siteLanguages
+        $targetLanguage = $this->languageNegotiation->findBestSiteLanguage($userLanguages, $siteLanguages);
+        if (null === $targetLanguage) {
+            return $handler->handle($request);
+        }
 
-        $targetUri = $request->getUri(); // $this->buildRedirectUri($site, $request, $siteLanguages[0]);
+        $targetUri = $this->buildRedirectUri($site, $request, $targetLanguage);
         if ((string)$request->getUri() !== (string)$targetUri) {
             $config = $site->getConfiguration();
             $code = $config['redirectHttpStatusCode'] ?? 307;

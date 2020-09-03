@@ -8,6 +8,7 @@ require $baseDir . '/.Build/vendor/autoload.php';
 $finder = PhpCsFixer\Finder::create()
     ->in($baseDir . '/Classes')
     ->in($baseDir . '/Configuration/SiteConfiguration')
+    ->in($baseDir . '/Tests')
     ->in($baseDir . '/Resources/Private/Build');
 
 return PhpCsFixer\Config::create()

@@ -39,8 +39,6 @@ class UserLanguages
                     case 'replace':
                         $browserLanguages = [$language];
                         break;
-                    default:
-                        // there is no default action
                 }
             } catch (\Exception $exception) {
             }
