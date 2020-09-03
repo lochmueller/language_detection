@@ -22,7 +22,7 @@ class IpPosition
      *
      * @return array
      */
-    public function getPosition($ip = null)
+    public function get($ip = null)
     {
         if (null === $ip) {
             $ip = GeneralUtility::getIndpEnv('REMOTE_ADDR');
@@ -44,5 +44,14 @@ class IpPosition
         }
 
         return $content;
+    }
+
+    public function getLanguage(string $country): string
+    {
+        // @todo
+        $subtags = \ResourceBundle::create('likelySubtags', 'ICUDATA', false);
+        $country = \Locale::canonicalize('und_' . $country);
+        $locale = $subtags->get($country) ?: $subtags->get('und');
+        return \Locale::getPrimaryLanguage($locale);
     }
 }

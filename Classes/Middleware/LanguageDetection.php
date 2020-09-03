@@ -2,11 +2,12 @@
 
 namespace LD\LanguageDetection\Middleware;
 
-use LD\LanguageDetection\Service\BrowserLanguage;
+use LD\LanguageDetection\Service\UserLanguages;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
+use TYPO3\CMS\Core\Utility\HttpUtility;
 use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 
 /**
@@ -16,13 +17,13 @@ use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 class LanguageDetection implements MiddlewareInterface
 {
     /**
-     * @var BrowserLanguage
+     * @var $userLanguages
      */
-    protected $browserLanguage;
+    protected $userLanguages;
 
-    public function __construct(BrowserLanguage $browserLanguage)
+    public function __construct(UserLanguages $userLanguages)
     {
-        $this->browserLanguage = $browserLanguage;
+        $this->userLanguages = $userLanguages;
     }
 
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
@@ -32,172 +33,24 @@ class LanguageDetection implements MiddlewareInterface
         $config = $site->getConfiguration();
 
         $enable = $config['enableLanguageDetection'] ?? true;
-        if (!$enable) {
+        if (!$enable || $request->getUri()->getPath() !== '/') {
+            // @todo configure "/"
             return $handler->handle($request);
         }
 
-        $addIp = $config['addIpLocationToBrowserLanguage'] ?? false;
+        // @todo check Backend login and disable (as configuration)
+
+        $userLanguages = $this->userLanguages->get($site);
+
         //DebuggerUtility::var_dump($addIp);
         //die();
-        //$browserLanguages = $this->browserLanguage->get();
-        //DebuggerUtility::var_dump($browserLanguages);
-        //die();
-        // TODO: Implement process() method.
+        //
+        DebuggerUtility::var_dump($userLanguages);
+        die();
+
+        // HttpUtility::redirect($this->redirectUri, $httpStatus); // @todo configuration for status code
 
         return $handler->handle($request);
-    }
-
-    /**
-     * Detection Messages.
-     *
-     * @var array
-     */
-    protected $messages = [];
-
-    /**
-     * The service for internal detection of the language.
-     *
-     * @var \HDNET\Hdnet\Service\LanguageService
-     */
-    protected $languageService;
-
-    /**
-     * The session Service.
-     *
-     * @var \HDNET\Hdnet\Service\Storage\SessionService
-     */
-    protected $sessionService;
-
-    /**
-     * UriBuilder.
-     *
-     * @var \TYPO3\CMS\Extbase\Mvc\Web\Routing\UriBuilder
-     */
-    protected $uriBuilder;
-
-    /**
-     * Redirect URI.
-     *
-     * @var string
-     */
-    protected $redirectUri;
-
-    /**
-     * Redirect HTTP STATUS.
-     *
-     * @var string
-     */
-    protected $redirectHttpStatus;
-
-    /**
-     * Browser languages.
-     *
-     * @var array
-     */
-    protected $browserLanguages = [];
-
-    /**
-     * @var LanguageDetection
-     */
-    protected $currentConfiguration;
-
-    /**
-     * Trigger the detection of the language.
-     *
-     * @param LanguageDetection $configuration
-     * @param bool $dryRun
-     *
-     * @throws LanguageDetectionException
-     */
-    public function processLanguageDetection(LanguageDetection $configuration, $dryRun = false)
-    {
-        $this->currentConfiguration = $configuration;
-        $this->checkLanguageAlreadyChosen()
-            ->checkFromThisPage()
-            ->checkWorkspacePreview()
-            ->checkUriInSession()
-            ->buildBrowserLanguages()
-            ->buildRedirectUri()
-            ->buildRedirectHttpStatus()
-            ->checkInvalidRedirectUri()
-            ->checkSameRedirectUri()
-            ->checkDryRun($dryRun)
-            ->checkLoggedInToBackend()
-            ->redirect();
-    }
-
-    /**
-     * Return true, if there is a Backend User auth.
-     *
-     * @return LanguageDetectionService
-     * @throws LanguageDetectionException
-     */
-    public function checkLoggedInToBackend()
-    {
-        $this->messages[] = 'Check BE user is in the backend...';
-        if (!$this->inHomePageMode() && $GLOBALS['BE_USER'] instanceof FrontendBackendUserAuthentication) {
-            $this->messages[] = '... yes, there is a backend login!!!';
-            throw new LanguageDetectionException('in Backend: ' . $this->redirectUri, 1470995539);
-        }
-        $this->messages[] = '... no, there is no BE user in the backend';
-
-        return $this;
-    }
-
-    /**
-     * Get the current messages.
-     *
-     * @return array
-     */
-    public function getMessages()
-    {
-        return $this->messages;
-    }
-
-    /**
-     * Sets the uri builder.
-     *
-     * @param \TYPO3\CMS\Extbase\Mvc\Web\Routing\UriBuilder $uriBuilder
-     */
-    public function setUriBuilder($uriBuilder)
-    {
-        $this->uriBuilder = $uriBuilder;
-    }
-
-    /**
-     * Returns the uri builder.
-     *
-     * @return \TYPO3\CMS\Extbase\Mvc\Web\Routing\UriBuilder
-     */
-    public function getUriBuilder()
-    {
-        return $this->uriBuilder;
-    }
-
-    /**
-     * Build up the browser languages.
-     *
-     * @return LanguageDetectionService
-     */
-    protected function buildBrowserLanguages()
-    {
-        $this->messages[] = 'Build browser languages...';
-
-        $this->browserLanguages = $this->getBrowserLanguages($this->currentConfiguration->getGeolocation());
-
-        $this->messages[] = '... get browser languages: ' . \implode(' / ', $this->browserLanguages);
-
-        if ($this->currentConfiguration->getCheckPositions()) {
-            $this->messages[] = 'Reduce browser languages...';
-            $this->browserLanguages = \array_slice(
-                $this->browserLanguages,
-                0,
-                $this->currentConfiguration->getCheckPositions()
-            );
-            $this->messages[] = '... after reduce: ' . \implode(' / ', $this->browserLanguages);
-        }
-
-        return $this;
     }
 
     /**
@@ -307,62 +160,6 @@ class LanguageDetection implements MiddlewareInterface
     }
 
     /**
-     * Get the Browser languages incl. Geo position.
-     *
-     * @param string $geoLocation
-     *
-     * @return array
-     */
-    protected function getBrowserLanguages($geoLocation = '')
-    {
-        $languages = $this->languageService->getBrowserLanguages();
-        $browserLanguages = [];
-        foreach (\array_keys($languages) as $key) {
-            $browserLanguages[] = \mb_strtolower(\str_replace('-', '_', $key));
-        }
-        if ('' !== $geoLocation) {
-            $locationService = GeneralUtility::makeInstance(LocationService::class);
-            $data = $locationService->getPosition();
-            $countryCode = isset($data['geoplugin_countryCode']) ? 'xx_' . \mb_strtolower($data['geoplugin_countryCode']) : false;
-            if ($countryCode) {
-                switch ($geoLocation) {
-                    case 'before':
-                        \array_unshift($browserLanguages, $countryCode);
-                        break;
-                    case 'after':
-                        $browserLanguages[] = $countryCode;
-                        break;
-                    case 'replace':
-                        $browserLanguages = [$countryCode];
-                        break;
-                    default:
-                        // there is no default action
-                }
-            }
-        }
-
-        return $browserLanguages;
-    }
-
-    /**
-     * Redirects the LanguageDetectionService.
-     *
-     * @return LanguageDetectionService
-     */
-    protected function redirect()
-    {
-        $this->messages[] = 'Set session URI';
-        $this->sessionService->set('uri', $this->redirectUri);
-        $this->sendHeader('Redirect URI (#' . $this->redirectUri . ')');
-
-        $this->messages[] = 'Redirect';
-        $httpStatus = \constant('TYPO3\CMS\Core\Utility\HttpUtility::' . $this->redirectHttpStatus);
-        HttpUtility::redirect($this->redirectUri, $httpStatus);
-
-        return $this;
-    }
-
-    /**
      * Check the same redirect Uri.
      *
      * @return LanguageDetectionService
@@ -419,19 +216,6 @@ class LanguageDetection implements MiddlewareInterface
     }
 
     /**
-     * Build Redirect Uri.
-     *
-     * @return LanguageDetectionService
-     */
-    protected function buildRedirectUri()
-    {
-        // build URI
-        $this->redirectUri = $this->getRedirectUri();
-
-        return $this;
-    }
-
-    /**
      * Build from the LanguageDetection configuration the HTTP Status.
      *
      * @return LanguageDetectionService
@@ -466,12 +250,12 @@ class LanguageDetection implements MiddlewareInterface
             $referer,
             GeneralUtility::getIndpEnv('TYPO3_SITE_URL')
         ) || false !== \mb_stripos(
-                    $referer,
-                    $baseUrl
-                ) || false !== \mb_stripos(
-                    $referer . '/',
-                    GeneralUtility::getIndpEnv('TYPO3_SITE_URL')
-                ) || false !== \mb_stripos(
+            $referer,
+            $baseUrl
+        ) || false !== \mb_stripos(
+            $referer . '/',
+            GeneralUtility::getIndpEnv('TYPO3_SITE_URL')
+        ) || false !== \mb_stripos(
                     $referer . '/',
                     $baseUrl
                 ))
@@ -549,13 +333,5 @@ class LanguageDetection implements MiddlewareInterface
         static $headerCount = 0;
         \header('X-Note: LD-' . $headerCount . '-' . $msg);
         ++$headerCount;
-    }
-
-    /**
-     * @return bool
-     */
-    protected function inHomePageMode()
-    {
-        return $this->currentConfiguration->isHomePageMode();
     }
 }
