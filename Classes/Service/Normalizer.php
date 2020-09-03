@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace LD\LanguageDetection\Service;
 
 class Normalizer
@@ -21,6 +23,7 @@ class Normalizer
         if (isset($region)) {
             $locale .= '_' . strtoupper($region);
         }
+
         return $locale;
     }
 }

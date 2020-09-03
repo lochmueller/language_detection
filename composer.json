@@ -37,6 +37,7 @@
 	},
 	"require-dev": {
 		"typo3/testing-framework": "^6.1",
+		"phpmetrics/phpmetrics": "^2.4",
 		"friendsofphp/php-cs-fixer": "^2.16"
 	},
 	"config": {
@@ -52,10 +53,14 @@
 	},
 	"scripts": {
 		"code": [
-			"@code:php-cs-fixer"
+			"@code:php-cs-fixer",
+			"@code:metrics"
 		],
 		"code:php-cs-fixer": [
 			"php-cs-fixer fix --config Resources/Private/Build/PhpCsFixer.php --cache-file=.Build/phpcs.cache"
+		],
+		"code:metrics": [
+			"phpmetrics --report-html='.Build/Metrics' --exclude='.Build' ."
 		],
 		"test": [
 			"phpunit -c Tests/UnitTests.xml"

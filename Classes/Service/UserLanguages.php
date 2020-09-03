@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace LD\LanguageDetection\Service;
 
 use TYPO3\CMS\Core\Exception;
@@ -28,13 +30,13 @@ class UserLanguages
         if ($addIp) {
             try {
                 $data = $this->ipPosition->get();
-                if (!isset($data['geoplugin_countryCode']) || $data['geoplugin_countryCode'] === null) {
+                if (!isset($data['geoplugin_countryCode']) || null === $data['geoplugin_countryCode']) {
                     throw new Exception('Not found', 12738);
                 }
-                $countryCode = 'xx_' . \mb_strtolower($data['geoplugin_countryCode']);
+                $countryCode = 'xx_' . mb_strtolower($data['geoplugin_countryCode']);
                 switch ($addIp) {
                     case 'before':
-                        \array_unshift($browserLanguages, $countryCode);
+                        array_unshift($browserLanguages, $countryCode);
                         break;
                     case 'after':
                         $browserLanguages[] = $countryCode;

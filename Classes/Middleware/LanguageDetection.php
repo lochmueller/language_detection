@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace LD\LanguageDetection\Middleware;
 
 use LD\LanguageDetection\Event\HandleLanguageDetection;
@@ -13,7 +15,8 @@ use TYPO3\CMS\Core\Utility\HttpUtility;
 use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 
 /**
- * LanguageDetection
+ * LanguageDetection.
+ *
  * @todo move old logic to services/events
  */
 class LanguageDetection implements MiddlewareInterface
@@ -35,7 +38,7 @@ class LanguageDetection implements MiddlewareInterface
         $event = new HandleLanguageDetection($site);
         $this->eventDispatcher->dispatch($event);
 
-        if (!$event->isHandleLanguageDetection() || $request->getUri()->getPath() !== '/') {
+        if (!$event->isHandleLanguageDetection() || '/' !== $request->getUri()->getPath()) {
             // @todo configure "/" move to listener base url
             return $handler->handle($request);
         }
@@ -73,7 +76,7 @@ class LanguageDetection implements MiddlewareInterface
         }
 
         if ($matchConfiguration->getExt()) {
-            $parts = \parse_url($matchConfiguration->getExt());
+            $parts = parse_url($matchConfiguration->getExt());
             if (!isset($parts['scheme'])) {
                 $parts['scheme'] = 'http';
             }
@@ -98,8 +101,6 @@ class LanguageDetection implements MiddlewareInterface
     /**
      * Get the redirect object for the language detection.
      *
-     * @param array $browserLanguages
-     *
      * @return LanguageDetection
      */
     protected function getMatchConfiguration(array $browserLanguages)
@@ -115,7 +116,7 @@ class LanguageDetection implements MiddlewareInterface
             foreach ($browserLanguages as $browserLanguage) {
                 foreach ($configs as $c) {
                     /** @var $c \HDNET\Hdnet\Domain\Model\DetectionConfiguration */
-                    $match = \preg_match('#' . $c->getMatching() . '#', $browserLanguage);
+                    $match = preg_match('#' . $c->getMatching() . '#', $browserLanguage);
                     $this->messages[] = '... match: ' . $browserLanguage . ' vs. ' . $c->getMatching() . ' = ' . ($match ? 'Y' : 'N');
                     if ($match) {
                         return $c;
@@ -128,7 +129,7 @@ class LanguageDetection implements MiddlewareInterface
             foreach ($configs as $c) {
                 foreach ($browserLanguages as $browserLanguage) {
                     /** @var $c \HDNET\Hdnet\Domain\Model\DetectionConfiguration */
-                    $match = \preg_match('#' . $c->getMatching() . '#', $browserLanguage);
+                    $match = preg_match('#' . $c->getMatching() . '#', $browserLanguage);
                     $this->messages[] = '... match: ' . $browserLanguage . ' vs. ' . $c->getMatching() . ' = ' . ($match ? 'Y' : 'N');
                     if ($match) {
                         return $c;
@@ -165,6 +166,7 @@ class LanguageDetection implements MiddlewareInterface
      * Check the same redirect Uri.
      *
      * @return LanguageDetectionService
+     *
      * @throws LanguageDetectionException
      */
     protected function checkSameRedirectUri()
@@ -183,12 +185,13 @@ class LanguageDetection implements MiddlewareInterface
      * Check Invalid Redirected Uri.
      *
      * @return LanguageDetectionService
+     *
      * @throws LanguageDetectionException
      */
     protected function checkInvalidRedirectUri()
     {
         $this->messages[] = 'Check invalid redirect URI...';
-        if (!$this->redirectUri or !\mb_strlen($this->redirectUri)) {
+        if (!$this->redirectUri or !mb_strlen($this->redirectUri)) {
             $this->messages[] = '... it is no valid URI!!!';
             throw new LanguageDetectionException('No valid URI: ' . $this->redirectUri, 1470995536);
         }

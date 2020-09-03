@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 $GLOBALS['SiteConfiguration']['site']['columns']['enableLanguageDetection'] = [
     'label' => 'Enable',
     'config' => [

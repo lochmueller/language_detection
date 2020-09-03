@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace LD\LanguageDetection\Service;
 
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -9,7 +11,6 @@ class BrowserLanguage
     /**
      * Returns the browser languages ordered by quality.
      *
-     * @return array
      * @see https://tools.ietf.org/html/rfc7231#section-5.3.1
      */
     public function get(): array
@@ -24,7 +25,7 @@ class BrowserLanguage
         $acceptedLanguagesArr = [];
         foreach ($languages as $languageAndQualityStr) {
             list($languageCode, $quality) = GeneralUtility::trimExplode(';', $languageAndQualityStr, true);
-            $acceptedLanguagesArr[$languageCode] = $quality ? (float)\mb_substr($quality, 2) : 1.0;
+            $acceptedLanguagesArr[$languageCode] = $quality ? (float)mb_substr($quality, 2) : 1.0;
         }
 
         // Sort
@@ -32,7 +33,7 @@ class BrowserLanguage
 
         // Remove quality 0.0
         $acceptedLanguagesArr = array_filter($acceptedLanguagesArr, function ($value, $key) {
-            return $value !== 0.0;
+            return 0.0 !== $value;
         }, ARRAY_FILTER_USE_BOTH);
 
         return array_keys($acceptedLanguagesArr);

@@ -30,17 +30,17 @@ class IpPosition
         $report = [];
         try {
             $urlService = 'http://www.geoplugin.net/php.gp?ip=' . $ip;
-            $content = \unserialize(GeneralUtility::getUrl($urlService, 0, false, $report));
+            $content = unserialize(GeneralUtility::getUrl($urlService, 0, false, $report));
         } catch (\Exception $exc) {
-            throw new \Exception('Can\'t get the location: ' . \var_export($report, true), 561786287945235);
+            throw new \Exception('Can\'t get the location: ' . var_export($report, true), 561786287945235);
         }
 
         if (!\count($content)) {
-            throw new \Exception('No content for the location: ' . \var_export($report, true), 23847628734324);
+            throw new \Exception('No content for the location: ' . var_export($report, true), 23847628734324);
         }
 
         if ('404' === $content['geoplugin_status']) {
-            throw new \Exception('IP location not found: ' . \var_export($report, true), 561786287945237);
+            throw new \Exception('IP location not found: ' . var_export($report, true), 561786287945237);
         }
 
         return $content;
@@ -52,6 +52,7 @@ class IpPosition
         $subtags = \ResourceBundle::create('likelySubtags', 'ICUDATA', false);
         $country = \Locale::canonicalize('und_' . $country);
         $locale = $subtags->get($country) ?: $subtags->get('und');
+
         return \Locale::getPrimaryLanguage($locale);
     }
 }

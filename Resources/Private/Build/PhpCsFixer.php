@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-$baseDir = \dirname(\dirname(\dirname(__DIR__)));
+$baseDir = dirname(__DIR__, 3);
 require $baseDir . '/.Build/vendor/autoload.php';
 
 $finder = PhpCsFixer\Finder::create()
@@ -13,8 +13,13 @@ $finder = PhpCsFixer\Finder::create()
 return PhpCsFixer\Config::create()
     ->setRiskyAllowed(true)
     ->setRules([
+        '@Symfony' => true,
+        '@Symfony:risky' => true,
         '@DoctrineAnnotation' => true,
         '@PSR2' => true,
+        '@PHP71Migration' => true,
+        '@PHP71Migration:risky' => true,
+        '@PHP73Migration' => true,
         'array_syntax' => ['syntax' => 'short'],
         'blank_line_after_opening_tag' => true,
         'braces' => ['allow_single_line_closure' => true],

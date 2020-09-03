@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace LD\LanguageDetection\Event;
 
 use TYPO3\CMS\Core\Site\Entity\Site;
