@@ -40,13 +40,13 @@ class LanguageDetection implements MiddlewareInterface
 
         // @todo check Backend login and disable (as configuration)
 
-        $userLanguages = $this->userLanguages->get($site);
+        #$userLanguages = $this->userLanguages->get($site);
 
         //DebuggerUtility::var_dump($addIp);
         //die();
         //
-        DebuggerUtility::var_dump($userLanguages);
-        die();
+        #DebuggerUtility::var_dump($userLanguages);
+        #die();
 
         // HttpUtility::redirect($this->redirectUri, $httpStatus); // @todo configuration for status code
 
