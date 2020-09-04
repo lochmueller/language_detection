@@ -8,10 +8,30 @@ use TYPO3\CMS\Core\Site\Entity\SiteLanguage;
 
 class LanguageNegotiation
 {
-    /**
-     * @todo Compoare $userLanguages & $siteLanguages
-     */
+    protected Normalizer $normalizer;
+
+    public function __construct(Normalizer $normalizer)
+    {
+        $this->normalizer = $normalizer;
+    }
+
     public function findBestSiteLanguage(array $userLanguages, array $siteLanguages): ?SiteLanguage
     {
+        $compareWith = [
+            'getLocale',
+            'getTwoLetterIsoCode',
+        ];
+        foreach ($compareWith as $function) {
+            foreach ($userLanguages as $userLanguage) {
+                foreach ($siteLanguages as $siteLanguage) {
+                    /** @var $siteLanguage SiteLanguage */
+                    if ($userLanguage === $this->normalizer->normalize($siteLanguage->$function())) {
+                        return $siteLanguage;
+                    }
+                }
+            }
+        }
+
+        return null;
     }
 }

@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace LD\LanguageDetection\Service;
 
+use Exception;
+use Locale;
+use ResourceBundle;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
@@ -14,29 +17,28 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  */
 class IpPosition
 {
-    public function get(?string $ip = null): array
+    public function get(?string $ip = null): ?array
     {
-        $ip = '212.100.44.250';
         if (null === $ip) {
             $ip = GeneralUtility::getIndpEnv('REMOTE_ADDR');
         }
         try {
             $urlService = 'http://www.geoplugin.net/php.gp?ip=' . $ip;
             $content = unserialize(GeneralUtility::getUrl($urlService, 0, false));
-            if (!\is_array($content) || !\count($content) || '404' === $content['geoplugin_status']) {
-                throw new \Exception('Missing information in response', 123781);
+            if (!\is_array($content) || empty($content) || '404' === $content['geoplugin_status']) {
+                throw new Exception('Missing information in response', 123781);
             }
 
             return $content;
-        } catch (\Exception $exc) {
-            throw new \Exception('Can\'t get the location via geoplugin.net', 123681);
+        } catch (Exception $exc) {
+            return null;
         }
     }
 
     public function getLanguage(?string $ip = null): ?string
     {
         $data = $this->get($ip);
-        if (!isset($data['geoplugin_countryCode'])) {
+        if (null !== $data && !isset($data['geoplugin_countryCode'])) {
             return null;
         }
 
@@ -45,10 +47,10 @@ class IpPosition
 
     protected function mapCountryToLanguage(string $country): string
     {
-        $subtags = \ResourceBundle::create('likelySubtags', 'ICUDATA', false);
-        $country = \Locale::canonicalize('und_' . $country);
+        $subtags = ResourceBundle::create('likelySubtags', 'ICUDATA', false);
+        $country = Locale::canonicalize('und_' . $country);
         $locale = $subtags->get($country) ?: $subtags->get('und');
 
-        return \Locale::getPrimaryLanguage($locale);
+        return Locale::getPrimaryLanguage($locale);
     }
 }

@@ -57,7 +57,7 @@ class LanguageDetection implements MiddlewareInterface
             return $handler->handle($request);
         }
 
-        $targetUri = $this->buildRedirectUri($site, $request, $targetLanguage);
+        $targetUri = $this->buildRedirectUri($site, $targetLanguage);
         if ((string)$request->getUri() !== (string)$targetUri) {
             $config = $site->getConfiguration();
             $code = $config['redirectHttpStatusCode'] ?? 307;
@@ -71,7 +71,7 @@ class LanguageDetection implements MiddlewareInterface
         return $handler->handle($request);
     }
 
-    protected function buildRedirectUri(Site $site, ServerRequestInterface $request, SiteLanguage $language): UriInterface
+    protected function buildRedirectUri(Site $site, SiteLanguage $language): UriInterface
     {
         /** @var Uri $target */
         $target = $language->getBase();

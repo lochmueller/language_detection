@@ -8,10 +8,27 @@ use LD\LanguageDetection\Tests\Unit\AbstractTest;
 
 class NormalizerTest extends AbstractTest
 {
-    public function test_normalize_list(): void
+    /**
+     * @dataProvider normalizeProvider
+     */
+    public function test_normalize_list($base, $result): void
     {
         $normalizer = new Normalizer();
 
-        self::assertEquals('de_DE', $normalizer->normalize('de-de'));
+        self::assertEquals($result, $normalizer->normalize($base));
+    }
+
+    public function normalizeProvider(): array
+    {
+        return [
+            [
+                'de-de',
+                'de_DE',
+            ],
+            [
+                'de_DE.UTF-8',
+                'de_DE',
+            ],
+        ];
     }
 }

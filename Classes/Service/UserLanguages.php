@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace LD\LanguageDetection\Service;
 
+use Exception;
 use TYPO3\CMS\Core\Site\Entity\Site;
 
 class UserLanguages
@@ -40,7 +41,7 @@ class UserLanguages
                         $browserLanguages = [$language];
                         break;
                 }
-            } catch (\Exception $exception) {
+            } catch (Exception $exception) {
             }
         }
 
