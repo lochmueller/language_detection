@@ -25,7 +25,7 @@ class LanguageNegotiation
             foreach ($userLanguages as $userLanguage) {
                 foreach ($siteLanguages as $siteLanguage) {
                     /** @var $siteLanguage SiteLanguage */
-                    if ($userLanguage === $this->normalizer->normalize($siteLanguage->$function())) {
+                    if ($userLanguage === $this->normalizer->normalize((string)$siteLanguage->$function())) {
                         return $siteLanguage;
                     }
                 }

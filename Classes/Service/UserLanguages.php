@@ -30,6 +30,9 @@ class UserLanguages
         if ($addIp) {
             try {
                 $language = $this->ipPosition->getLanguage();
+                if (null === $language) {
+                    throw new \Exception('No language found via IP', 12637);
+                }
                 switch ($addIp) {
                     case 'before':
                         array_unshift($browserLanguages, $language);
