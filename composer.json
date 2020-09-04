@@ -1,7 +1,7 @@
 {
 	"name": "lochmueller/language-detection",
 	"type": "typo3-cms-extension",
-	"description": "Language Detection Middleware for TYPO3",
+	"description": "Modern language detection middleware for TYPO3",
 	"autoload": {
 		"psr-4": {
 			"LD\\LanguageDetection\\": "Classes"

@@ -2,7 +2,7 @@
 
 $EM_CONF[$_EXTKEY] = [
     'title' => 'Language Detection',
-    'description' => 'Language Detection Middleware for TYPO3',
+    'description' => 'Modern language detection middleware for TYPO3',
     'category' => 'fe',
     'version' => '0.1.0',
     'state' => 'beta',
