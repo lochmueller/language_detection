@@ -4,3 +4,4 @@
 /.gitignore export-ignore
 /composer.lock export-ignore
 /.github/ export-ignore
+/Resources/Private/ export-ignore
