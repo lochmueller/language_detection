@@ -47,7 +47,7 @@ $GLOBALS['SiteConfiguration']['site']['columns']['disableRedirectWithBackendSess
         'default' => 0,
     ],
 ];
-$GLOBALS['SiteConfiguration']['site']['columns']['forwardRedirectParamters'] = [
+$GLOBALS['SiteConfiguration']['site']['columns']['forwardRedirectParameters'] = [
     'label' => 'Forward redirect parameters',
     'config' => [
         'type' => 'input',
@@ -57,7 +57,7 @@ $GLOBALS['SiteConfiguration']['site']['columns']['forwardRedirectParamters'] = [
 
 $GLOBALS['SiteConfiguration']['site']['types']['0']['showitem'] = str_replace(
     'base,',
-    'base,--div--;Language Detection,enableLanguageDetection,addIpLocationToBrowserLanguage,redirectHttpStatusCode,disableRedirectWithBackendSession,forwardRedirectParamters,',
+    'base,--div--;Language Detection,enableLanguageDetection,addIpLocationToBrowserLanguage,redirectHttpStatusCode,disableRedirectWithBackendSession,forwardRedirectParameters,',
     $GLOBALS['SiteConfiguration']['site']['types']['0']['showitem']
 );
 

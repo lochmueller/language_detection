@@ -77,7 +77,7 @@ class LanguageDetection implements MiddlewareInterface
         $target = $language->getBase();
 
         $config = $site->getConfiguration();
-        $params = $config['forwardRedirectParamters'] ?? '';
+        $params = $config['forwardRedirectParameters'] ?? '';
         $params = GeneralUtility::trimExplode(',', $params, true);
 
         foreach ($params as $param) {
