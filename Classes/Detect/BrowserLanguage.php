@@ -5,18 +5,10 @@ declare(strict_types=1);
 namespace LD\LanguageDetection\Detect;
 
 use LD\LanguageDetection\Event\DetectUserLanguages;
-use LD\LanguageDetection\Service\Normalizer;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 class BrowserLanguage
 {
-    protected Normalizer $normalizer;
-
-    public function __construct(Normalizer $normalizer)
-    {
-        $this->normalizer = $normalizer;
-    }
-
     public function __invoke(DetectUserLanguages $event): void
     {
         $languages = GeneralUtility::trimExplode(
@@ -40,6 +32,6 @@ class BrowserLanguage
             return 0.0 !== $value;
         }, ARRAY_FILTER_USE_BOTH);
 
-        $event->setUserLanguages($this->normalizer->normalizeList(array_keys($acceptedLanguagesArr)));
+        $event->setUserLanguages(array_keys($acceptedLanguagesArr));
     }
 }

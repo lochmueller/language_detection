@@ -28,8 +28,9 @@ class DefaultNegotiation
             'getLocale',
             'getTwoLetterIsoCode',
         ];
+        $userLanguages = $this->normalizer->normalizeList($event->getUserLanguages());
         foreach ($compareWith as $function) {
-            foreach ($event->getUserLanguages() as $userLanguage) {
+            foreach ($userLanguages as $userLanguage) {
                 foreach ($event->getSite()->getAllLanguages() as $siteLanguage) {
                     /** @var $siteLanguage SiteLanguage */
                     if ($siteLanguage->enabled() && $userLanguage === $this->normalizer->normalize((string)$siteLanguage->$function())) {
@@ -38,10 +39,5 @@ class DefaultNegotiation
                 }
             }
         }
-    }
-
-    public function findBestSiteLanguage(array $userLanguages, array $siteLanguages): ?SiteLanguage
-    {
-        return null;
     }
 }
