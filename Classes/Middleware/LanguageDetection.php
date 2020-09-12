@@ -47,7 +47,7 @@ class LanguageDetection implements MiddlewareInterface
             return $handler->handle($request);
         }
 
-        $userLanguages = $this->userLanguages->get($site);
+        $userLanguages = $this->userLanguages->get($site, $request);
 
         $event = new NegotiateSiteLanguage($site, $request, $userLanguages);
         $this->eventDispatcher->dispatch($event);
@@ -56,7 +56,7 @@ class LanguageDetection implements MiddlewareInterface
             return $handler->handle($request);
         }
 
-        $targetUri = $this->buildRedirectUri($site, $event->getSelectedLanguage());
+        $targetUri = $this->buildRedirectUri($site, $request, $event->getSelectedLanguage());
         if ((string)$request->getUri() !== (string)$targetUri) {
             $config = $site->getConfiguration();
             $code = $config['redirectHttpStatusCode'] ?? 307;
@@ -70,22 +70,21 @@ class LanguageDetection implements MiddlewareInterface
         return $handler->handle($request);
     }
 
-    protected function buildRedirectUri(Site $site, SiteLanguage $language): UriInterface
+    protected function buildRedirectUri(Site $site, ServerRequestInterface $request, SiteLanguage $language): UriInterface
     {
         /** @var Uri $target */
         $target = $language->getBase();
 
-        $config = $site->getConfiguration();
-        $params = $config['forwardRedirectParameters'] ?? '';
-        $params = GeneralUtility::trimExplode(',', $params, true);
+        $params = GeneralUtility::trimExplode(',', (string)$site->getConfiguration()['forwardRedirectParameters'] ?? '', true);
+        parse_str((string)$request->getUri()->getQuery(), $requestQuery);
+        parse_str((string)$target->getQuery(), $targetQuery);
 
         foreach ($params as $param) {
-            $result = GeneralUtility::_GET($param);
-            if (null !== $result) {
-                $target = $target->withQuery(trim($target->getQuery() . '&' . $param . '=' . $result, '&'));
+            if (isset($requestQuery[$param])) {
+                $targetQuery[$param] = $requestQuery[$param];
             }
         }
 
-        return $target;
+        return $target->withQuery(http_build_query($targetQuery));
     }
 }

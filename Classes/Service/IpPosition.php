@@ -6,6 +6,7 @@ namespace LD\LanguageDetection\Service;
 
 use Exception;
 use Locale;
+use Psr\Http\Message\ServerRequestInterface;
 use ResourceBundle;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
@@ -17,11 +18,10 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  */
 class IpPosition
 {
-    public function get(?string $ip = null): ?array
+    public function get(ServerRequestInterface $request): ?array
     {
-        if (null === $ip) {
-            $ip = GeneralUtility::getIndpEnv('REMOTE_ADDR');
-        }
+        $params = $request->getServerParams();
+        $ip = $params['REMOTE_ADDR'];
         try {
             $urlService = 'http://www.geoplugin.net/php.gp?ip=' . $ip;
             $content = unserialize(GeneralUtility::getUrl($urlService, 0, false));
@@ -35,9 +35,9 @@ class IpPosition
         }
     }
 
-    public function getLanguage(?string $ip = null): ?string
+    public function getLanguage(ServerRequestInterface $request): ?string
     {
-        $data = $this->get($ip);
+        $data = $this->get($request);
         if (null !== $data && !isset($data['geoplugin_countryCode'])) {
             return null;
         }

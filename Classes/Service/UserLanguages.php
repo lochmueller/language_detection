@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace LD\LanguageDetection\Service;
 
 use Exception;
+use Psr\Http\Message\ServerRequestInterface;
 use TYPO3\CMS\Core\Site\Entity\Site;
 
 class UserLanguages
@@ -22,14 +23,14 @@ class UserLanguages
         $this->normalizer = $normalizer;
     }
 
-    public function get(Site $site): array
+    public function get(Site $site, ServerRequestInterface $request): array
     {
         $config = $site->getConfiguration();
         $addIp = $config['addIpLocationToBrowserLanguage'] ?? '';
-        $browserLanguages = $this->browserLanguage->get();
+        $browserLanguages = $this->browserLanguage->get($request);
         if ($addIp) {
             try {
-                $language = $this->ipPosition->getLanguage();
+                $language = $this->ipPosition->getLanguage($request);
                 if (null === $language) {
                     throw new \Exception('No language found via IP', 12637);
                 }

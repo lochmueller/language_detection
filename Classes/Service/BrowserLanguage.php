@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace LD\LanguageDetection\Service;
 
+use Psr\Http\Message\ServerRequestInterface;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 class BrowserLanguage
@@ -13,11 +14,11 @@ class BrowserLanguage
      *
      * @see https://tools.ietf.org/html/rfc7231#section-5.3.1
      */
-    public function get(): array
+    public function get(ServerRequestInterface $request): array
     {
         $languages = GeneralUtility::trimExplode(
             ',',
-            GeneralUtility::getIndpEnv('HTTP_ACCEPT_LANGUAGE'),
+            implode(',', $request->getHeader('accept-language')),
             true
         );
 
