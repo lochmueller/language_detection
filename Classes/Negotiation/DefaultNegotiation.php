@@ -1,11 +1,6 @@
 <?php
 
 declare(strict_types=1);
-/**
- * @todo General file information
- *
- * @author  Tim Lochmüller
- */
 
 namespace LD\LanguageDetection\Negotiation;
 

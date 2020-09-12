@@ -21,8 +21,6 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * LanguageDetection.
- *
- * @todo move old logic to services/events
  */
 class LanguageDetection implements MiddlewareInterface
 {
@@ -47,6 +45,7 @@ class LanguageDetection implements MiddlewareInterface
             return $handler->handle($request);
         }
 
+        // @todo move to "DetectLanguages" event and split server params and IP detection
         $userLanguages = $this->userLanguages->get($site, $request);
 
         $event = new NegotiateSiteLanguage($site, $request, $userLanguages);
@@ -56,6 +55,7 @@ class LanguageDetection implements MiddlewareInterface
             return $handler->handle($request);
         }
 
+        // @todo move to "BuildResponse" event and add DefaultBuilder
         $targetUri = $this->buildRedirectUri($site, $request, $event->getSelectedLanguage());
         if ((string)$request->getUri() !== (string)$targetUri) {
             $config = $site->getConfiguration();
