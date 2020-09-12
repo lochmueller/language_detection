@@ -2,23 +2,26 @@
 
 declare(strict_types=1);
 
-namespace LD\LanguageDetection\Service;
+namespace LD\LanguageDetection\Detect;
 
-use Psr\Http\Message\ServerRequestInterface;
+use LD\LanguageDetection\Event\DetectUserLanguages;
+use LD\LanguageDetection\Service\Normalizer;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 class BrowserLanguage
 {
-    /**
-     * Returns the browser languages ordered by quality.
-     *
-     * @see https://tools.ietf.org/html/rfc7231#section-5.3.1
-     */
-    public function get(ServerRequestInterface $request): array
+    protected Normalizer $normalizer;
+
+    public function __construct(Normalizer $normalizer)
+    {
+        $this->normalizer = $normalizer;
+    }
+
+    public function __invoke(DetectUserLanguages $event): void
     {
         $languages = GeneralUtility::trimExplode(
             ',',
-            implode(',', $request->getHeader('accept-language')),
+            implode(',', $event->getRequest()->getHeader('accept-language')),
             true
         );
 
@@ -37,6 +40,6 @@ class BrowserLanguage
             return 0.0 !== $value;
         }, ARRAY_FILTER_USE_BOTH);
 
-        return array_keys($acceptedLanguagesArr);
+        $event->setUserLanguages($this->normalizer->normalizeList(array_keys($acceptedLanguagesArr)));
     }
 }

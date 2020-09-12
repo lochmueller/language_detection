@@ -42,3 +42,16 @@ services:
       - name: event.listener
         identifier: 'defaultNegotiation'
         event: LD\LanguageDetection\Event\NegotiateSiteLanguage
+
+  LD\LanguageDetection\Detect\BrowserLanguage:
+    tags:
+      - name: event.listener
+        identifier: 'browserLanguage'
+        event: LD\LanguageDetection\Event\DetectUserLanguages
+
+  LD\LanguageDetection\Detect\IpLanguage:
+    tags:
+      - name: event.listener
+        identifier: 'ipLanguage'
+        after: 'browserLanguage'
+        event: LD\LanguageDetection\Event\DetectUserLanguages

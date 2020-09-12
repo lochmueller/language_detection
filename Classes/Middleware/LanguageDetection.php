@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace LD\LanguageDetection\Middleware;
 
 use LD\LanguageDetection\Event\CheckLanguageDetection;
+use LD\LanguageDetection\Event\DetectUserLanguages;
 use LD\LanguageDetection\Event\NegotiateSiteLanguage;
-use LD\LanguageDetection\Service\UserLanguages;
 use Psr\EventDispatcher\EventDispatcherInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
@@ -24,12 +24,10 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  */
 class LanguageDetection implements MiddlewareInterface
 {
-    protected UserLanguages $userLanguages;
     protected EventDispatcherInterface $eventDispatcher;
 
-    public function __construct(UserLanguages $userLanguages, EventDispatcherInterface $eventDispatcher)
+    public function __construct(EventDispatcherInterface $eventDispatcher)
     {
-        $this->userLanguages = $userLanguages;
         $this->eventDispatcher = $eventDispatcher;
     }
 
@@ -38,25 +36,25 @@ class LanguageDetection implements MiddlewareInterface
         /** @var Site $site */
         $site = $request->getAttribute('site');
 
-        $event = new CheckLanguageDetection($site, $request);
-        $this->eventDispatcher->dispatch($event);
+        $check = new CheckLanguageDetection($site, $request);
+        $this->eventDispatcher->dispatch($check);
 
-        if (!$event->isLanguageDetectionEnable()) {
+        if (!$check->isLanguageDetectionEnable()) {
             return $handler->handle($request);
         }
 
-        // @todo move to "DetectLanguages" event and split server params and IP detection
-        $userLanguages = $this->userLanguages->get($site, $request);
+        $detect = new DetectUserLanguages($site, $request);
+        $this->eventDispatcher->dispatch($detect);
 
-        $event = new NegotiateSiteLanguage($site, $request, $userLanguages);
-        $this->eventDispatcher->dispatch($event);
+        $negotiate = new NegotiateSiteLanguage($site, $request, $detect->getUserLanguages());
+        $this->eventDispatcher->dispatch($negotiate);
 
-        if (null === $event->getSelectedLanguage()) {
+        if (null === $negotiate->getSelectedLanguage()) {
             return $handler->handle($request);
         }
 
         // @todo move to "BuildResponse" event and add DefaultBuilder
-        $targetUri = $this->buildRedirectUri($site, $request, $event->getSelectedLanguage());
+        $targetUri = $this->buildRedirectUri($site, $request, $negotiate->getSelectedLanguage());
         if ((string)$request->getUri() !== (string)$targetUri) {
             $config = $site->getConfiguration();
             $code = $config['redirectHttpStatusCode'] ?? 307;

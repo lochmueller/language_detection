@@ -2,9 +2,10 @@
 
 declare(strict_types=1);
 
-namespace LD\LanguageDetection\Service;
+namespace LD\LanguageDetection\Detect;
 
 use Exception;
+use LD\LanguageDetection\Event\DetectUserLanguages;
 use Locale;
 use Psr\Http\Message\ServerRequestInterface;
 use ResourceBundle;
@@ -16,8 +17,36 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  * Get the Location based on the IP.
  * Use the geoplugin.net API.
  */
-class IpPosition
+class IpLanguage
 {
+    public function __invoke(DetectUserLanguages $event): void
+    {
+        $config = $event->getSite()->getConfiguration();
+        $addIp = $config['addIpLocationToBrowserLanguage'] ?? '';
+        if (!\in_array($addIp, ['before', 'after', 'replace'])) {
+            return;
+        }
+
+        $language = $this->getLanguage($event->getRequest());
+        if (null === $language) {
+            return;
+        }
+
+        $base = $event->getUserLanguages();
+        switch ($addIp) {
+            case 'before':
+                array_unshift($base, $language);
+                break;
+            case 'after':
+                $base[] = $language;
+                break;
+            case 'replace':
+                $base = [$language];
+                break;
+        }
+        $event->setUserLanguages($base);
+    }
+
     public function get(ServerRequestInterface $request): ?array
     {
         $params = $request->getServerParams();
