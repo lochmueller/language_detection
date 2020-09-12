@@ -46,6 +46,10 @@ class LanguageDetection implements MiddlewareInterface
         $detect = new DetectUserLanguages($site, $request);
         $this->eventDispatcher->dispatch($detect);
 
+        if (empty($detect->getUserLanguages())) {
+            return $handler->handle($request);
+        }
+
         $negotiate = new NegotiateSiteLanguage($site, $request, $detect->getUserLanguages());
         $this->eventDispatcher->dispatch($negotiate);
 
