@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace LD\LanguageDetection\Middleware;
 
 use LD\LanguageDetection\Event\HandleLanguageDetection;
-use LD\LanguageDetection\Service\LanguageNegotiation;
+use LD\LanguageDetection\Event\NegotiateSiteLanguage;
 use LD\LanguageDetection\Service\UserLanguages;
 use Psr\EventDispatcher\EventDispatcherInterface;
 use Psr\Http\Message\ResponseInterface;
@@ -28,13 +28,11 @@ class LanguageDetection implements MiddlewareInterface
 {
     protected UserLanguages $userLanguages;
     protected EventDispatcherInterface $eventDispatcher;
-    protected LanguageNegotiation $languageNegotiation;
 
-    public function __construct(UserLanguages $userLanguages, EventDispatcherInterface $eventDispatcher, LanguageNegotiation $languageNegotiation)
+    public function __construct(UserLanguages $userLanguages, EventDispatcherInterface $eventDispatcher)
     {
         $this->userLanguages = $userLanguages;
         $this->eventDispatcher = $eventDispatcher;
-        $this->languageNegotiation = $languageNegotiation;
     }
 
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
@@ -50,14 +48,15 @@ class LanguageDetection implements MiddlewareInterface
         }
 
         $userLanguages = $this->userLanguages->get($site);
-        $siteLanguages = $site->getAllLanguages();
 
-        $targetLanguage = $this->languageNegotiation->findBestSiteLanguage($userLanguages, $siteLanguages);
-        if (null === $targetLanguage) {
+        $event = new NegotiateSiteLanguage($site, $request, $userLanguages);
+        $this->eventDispatcher->dispatch($event);
+
+        if (null === $event->getSelectedLanguage()) {
             return $handler->handle($request);
         }
 
-        $targetUri = $this->buildRedirectUri($site, $targetLanguage);
+        $targetUri = $this->buildRedirectUri($site, $event->getSelectedLanguage());
         if ((string)$request->getUri() !== (string)$targetUri) {
             $config = $site->getConfiguration();
             $code = $config['redirectHttpStatusCode'] ?? 307;

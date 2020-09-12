@@ -7,7 +7,7 @@ namespace LD\LanguageDetection\Event;
 use Psr\Http\Message\ServerRequestInterface;
 use TYPO3\CMS\Core\Site\Entity\Site;
 
-class HandleLanguageDetection
+final class HandleLanguageDetection
 {
     protected Site $site;
     protected ServerRequestInterface $request;

@@ -36,3 +36,9 @@ services:
       - name: event.listener
         identifier: 'languageDetectionBackendUser'
         event: LD\LanguageDetection\Event\HandleLanguageDetection
+
+  LD\LanguageDetection\Negotiation\DefaultNegotiation:
+    tags:
+      - name: event.listener
+        identifier: 'defaultNegotiation'
+        event: LD\LanguageDetection\Event\NegotiateSiteLanguage
