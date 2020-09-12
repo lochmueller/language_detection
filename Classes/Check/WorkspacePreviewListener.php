@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace LD\LanguageDetection\Listener;
+namespace LD\LanguageDetection\Check;
 
-use LD\LanguageDetection\Event\HandleLanguageDetection;
+use LD\LanguageDetection\Event\CheckLanguageDetection;
 
 class WorkspacePreviewListener
 {
-    public function __invoke(HandleLanguageDetection $event): void
+    public function __invoke(CheckLanguageDetection $event): void
     {
         $arguments = $event->getRequest()->getQueryParams();
         $argumentsNames = array_keys($arguments);

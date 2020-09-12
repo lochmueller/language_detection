@@ -7,12 +7,11 @@ namespace LD\LanguageDetection\Event;
 use Psr\Http\Message\ServerRequestInterface;
 use TYPO3\CMS\Core\Site\Entity\Site;
 
-final class HandleLanguageDetection
+final class CheckLanguageDetection
 {
     protected Site $site;
     protected ServerRequestInterface $request;
-
-    protected bool $handleLanguageDetection = true;
+    protected bool $handle = true;
 
     public function __construct(Site $site, ServerRequestInterface $request)
     {
@@ -30,13 +29,13 @@ final class HandleLanguageDetection
         return $this->request;
     }
 
-    public function isHandleLanguageDetection(): bool
+    public function isLanguageDetectionEnable(): bool
     {
-        return $this->handleLanguageDetection;
+        return $this->handle;
     }
 
     public function disableLanguageDetection(): void
     {
-        $this->handleLanguageDetection = false;
+        $this->handle = false;
     }
 }

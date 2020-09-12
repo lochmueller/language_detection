@@ -7,35 +7,35 @@ services:
   LD\LanguageDetection\:
     resource: '../Classes/*'
 
-  LD\LanguageDetection\Listener\EnableListener:
+  LD\LanguageDetection\Check\EnableListener:
     tags:
       - name: event.listener
         identifier: 'languageDetectionEnable'
-        event: LD\LanguageDetection\Event\HandleLanguageDetection
+        event: LD\LanguageDetection\Event\CheckLanguageDetection
 
-  LD\LanguageDetection\Listener\FromCurrentPageListener:
+  LD\LanguageDetection\Check\FromCurrentPageListener:
     tags:
       - name: event.listener
         identifier: 'languageDetectionFromCurrentPage'
-        event: LD\LanguageDetection\Event\HandleLanguageDetection
+        event: LD\LanguageDetection\Event\CheckLanguageDetection
 
-  LD\LanguageDetection\Listener\WorkspacePreviewListener:
+  LD\LanguageDetection\Check\WorkspacePreviewListener:
     tags:
       - name: event.listener
         identifier: 'languageDetectionWorkspacePreview'
-        event: LD\LanguageDetection\Event\HandleLanguageDetection
+        event: LD\LanguageDetection\Event\CheckLanguageDetection
 
-  LD\LanguageDetection\Listener\PathListener:
+  LD\LanguageDetection\Check\PathListener:
     tags:
       - name: event.listener
         identifier: 'languageDetectionPath'
-        event: LD\LanguageDetection\Event\HandleLanguageDetection
+        event: LD\LanguageDetection\Event\CheckLanguageDetection
 
-  LD\LanguageDetection\Listener\BackendUserListener:
+  LD\LanguageDetection\Check\BackendUserListener:
     tags:
       - name: event.listener
         identifier: 'languageDetectionBackendUser'
-        event: LD\LanguageDetection\Event\HandleLanguageDetection
+        event: LD\LanguageDetection\Event\CheckLanguageDetection
 
   LD\LanguageDetection\Negotiation\DefaultNegotiation:
     tags:

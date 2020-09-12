@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace LD\LanguageDetection\Middleware;
 
-use LD\LanguageDetection\Event\HandleLanguageDetection;
+use LD\LanguageDetection\Event\CheckLanguageDetection;
 use LD\LanguageDetection\Event\NegotiateSiteLanguage;
 use LD\LanguageDetection\Service\UserLanguages;
 use Psr\EventDispatcher\EventDispatcherInterface;
@@ -40,10 +40,10 @@ class LanguageDetection implements MiddlewareInterface
         /** @var Site $site */
         $site = $request->getAttribute('site');
 
-        $event = new HandleLanguageDetection($site, $request);
+        $event = new CheckLanguageDetection($site, $request);
         $this->eventDispatcher->dispatch($event);
 
-        if (!$event->isHandleLanguageDetection()) {
+        if (!$event->isLanguageDetectionEnable()) {
             return $handler->handle($request);
         }
 

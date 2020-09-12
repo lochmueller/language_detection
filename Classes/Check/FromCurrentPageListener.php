@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace LD\LanguageDetection\Listener;
+namespace LD\LanguageDetection\Check;
 
-use LD\LanguageDetection\Event\HandleLanguageDetection;
+use LD\LanguageDetection\Event\CheckLanguageDetection;
 use TYPO3\CMS\Core\Utility\StringUtility;
 
 class FromCurrentPageListener
 {
-    public function __invoke(HandleLanguageDetection $event): void
+    public function __invoke(CheckLanguageDetection $event): void
     {
         $serverInformation = $event->getRequest()->getServerParams();
 

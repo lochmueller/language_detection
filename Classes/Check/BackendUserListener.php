@@ -2,16 +2,16 @@
 
 declare(strict_types=1);
 
-namespace LD\LanguageDetection\Listener;
+namespace LD\LanguageDetection\Check;
 
 use Exception;
-use LD\LanguageDetection\Event\HandleLanguageDetection;
+use LD\LanguageDetection\Event\CheckLanguageDetection;
 use TYPO3\CMS\Core\Context\Context;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 class BackendUserListener
 {
-    public function __invoke(HandleLanguageDetection $event): void
+    public function __invoke(CheckLanguageDetection $event): void
     {
         $config = $event->getSite()->getConfiguration();
         $disableForBackendUser = $config['disableRedirectWithBackendSession'] ?? false;
