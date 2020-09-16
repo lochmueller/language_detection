@@ -5,24 +5,24 @@ declare(strict_types=1);
 namespace LD\LanguageDetection\Event;
 
 use Psr\Http\Message\ServerRequestInterface;
-use TYPO3\CMS\Core\Site\Entity\Site;
+use TYPO3\CMS\Core\Site\Entity\SiteInterface;
 use TYPO3\CMS\Core\Site\Entity\SiteLanguage;
 
 final class NegotiateSiteLanguage
 {
-    protected Site $site;
+    protected SiteInterface $site;
     protected ServerRequestInterface $request;
     protected array $userLanguages;
     protected ?SiteLanguage $selectedLanguage = null;
 
-    public function __construct(Site $site, ServerRequestInterface $request, array $userLanguages)
+    public function __construct(SiteInterface $site, ServerRequestInterface $request, array $userLanguages)
     {
         $this->site = $site;
         $this->request = $request;
         $this->userLanguages = $userLanguages;
     }
 
-    public function getSite(): Site
+    public function getSite(): SiteInterface
     {
         return $this->site;
     }
