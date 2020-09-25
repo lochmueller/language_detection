@@ -55,3 +55,9 @@ services:
         identifier: 'ipLanguage'
         after: 'browserLanguage'
         event: LD\LanguageDetection\Event\DetectUserLanguages
+
+  LD\LanguageDetection\Response\DefaultResponse:
+    tags:
+      - name: event.listener
+        identifier: 'defaultResponse'
+        event: LD\LanguageDetection\Event\BuildResponse

@@ -4,20 +4,16 @@ declare(strict_types=1);
 
 namespace LD\LanguageDetection\Middleware;
 
+use LD\LanguageDetection\Event\BuildResponse;
 use LD\LanguageDetection\Event\CheckLanguageDetection;
 use LD\LanguageDetection\Event\DetectUserLanguages;
 use LD\LanguageDetection\Event\NegotiateSiteLanguage;
 use Psr\EventDispatcher\EventDispatcherInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
-use Psr\Http\Message\UriInterface;
 use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
-use TYPO3\CMS\Core\Http\RedirectResponse;
-use TYPO3\CMS\Core\Http\Uri;
 use TYPO3\CMS\Core\Site\Entity\Site;
-use TYPO3\CMS\Core\Site\Entity\SiteLanguage;
-use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * LanguageDetection.
@@ -57,36 +53,13 @@ class LanguageDetection implements MiddlewareInterface
             return $handler->handle($request);
         }
 
-        // @todo move to "BuildResponse" event and add DefaultBuilder
-        $targetUri = $this->buildRedirectUri($site, $request, $negotiate->getSelectedLanguage());
-        if ((string)$request->getUri() !== (string)$targetUri) {
-            $config = $site->getConfiguration();
-            $code = $config['redirectHttpStatusCode'] ?? 307;
-            if ((int)$code <= 0) {
-                $code = 307;
-            }
+        $response = new BuildResponse($site, $request, $negotiate->getSelectedLanguage());
+        $this->eventDispatcher->dispatch($response);
 
-            return new RedirectResponse((string)$targetUri, $code);
+        if (null !== $response->getResponse()) {
+            return $response->getResponse();
         }
 
         return $handler->handle($request);
-    }
-
-    protected function buildRedirectUri(Site $site, ServerRequestInterface $request, SiteLanguage $language): UriInterface
-    {
-        /** @var Uri $target */
-        $target = $language->getBase();
-
-        $params = GeneralUtility::trimExplode(',', (string)$site->getConfiguration()['forwardRedirectParameters'] ?? '', true);
-        parse_str((string)$request->getUri()->getQuery(), $requestQuery);
-        parse_str((string)$target->getQuery(), $targetQuery);
-
-        foreach ($params as $param) {
-            if (isset($requestQuery[$param])) {
-                $targetQuery[$param] = $requestQuery[$param];
-            }
-        }
-
-        return $target->withQuery(http_build_query($targetQuery));
     }
 }
