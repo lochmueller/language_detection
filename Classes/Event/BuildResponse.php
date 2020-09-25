@@ -14,7 +14,7 @@ final class BuildResponse
     protected SiteInterface $site;
     protected ServerRequestInterface $request;
     protected SiteLanguage $selectedLanguage;
-    protected ?ResponseInterface $response;
+    protected ?ResponseInterface $response = null;
 
     public function __construct(SiteInterface $site, ServerRequestInterface $request, SiteLanguage $selectedLanguage)
     {

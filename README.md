@@ -6,7 +6,7 @@
 
 ## Configuration
 
-Use the site configuration module to configure the language detection.
+Use the site configuration module to configure the language detection. Just enable it, and it will works :)
 
-![Configuration](https://raw.githubusercontent.com/lochmueller/language_detection/master/Resources/Public/Configuration.png)
+![Configuration](https://raw.githubusercontent.com/lochmueller/language_detection/master/Resources/Public/Configuration.jpg)
 
