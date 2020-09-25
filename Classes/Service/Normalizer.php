@@ -19,11 +19,11 @@ class Normalizer
         }
 
         $code = str_replace('-', '_', $locale);
-        list($language, $region) = explode('_', $code);
+        $parts = explode('_', $code);
 
-        $locale = strtolower($language);
-        if (isset($region)) {
-            $locale .= '_' . strtoupper($region);
+        $locale = strtolower($parts[0]);
+        if (isset($parts[1])) {
+            $locale .= '_' . strtoupper($parts[1]);
         }
 
         return $locale;

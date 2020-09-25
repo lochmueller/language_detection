@@ -29,6 +29,14 @@ class NormalizerTest extends AbstractTest
                 'de_DE.UTF-8',
                 'de_DE',
             ],
+            [
+                'en-gB',
+                'en_GB',
+            ],
+            [
+                'EN',
+                'en',
+            ],
         ];
     }
 }
