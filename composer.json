@@ -1,7 +1,7 @@
 {
 	"name": "lochmueller/language-detection",
 	"type": "typo3-cms-extension",
-	"description": "Modern language detection middleware for TYPO3",
+	"description": "Modern language detection middleware for TYPO3. Based on PSR-14 & PSR-15.",
 	"autoload": {
 		"psr-4": {
 			"LD\\LanguageDetection\\": "Classes"
@@ -28,7 +28,8 @@
 	"require": {
 		"php": "^7.4",
 		"ext-intl": "*",
-		"typo3/cms-core": "^10.4.6"
+		"typo3/cms-core": "^10.4.6",
+		"typo3/cms-frontend": "^10.4.6"
 	},
 	"homepage": "https://github.com/lochmueller/language_detection",
 	"license": "GPL-2.0-or-later",

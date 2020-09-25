@@ -1,0 +1,50 @@
+<?php
+
+declare(strict_types=1);
+
+namespace LD\LanguageDetection\Event;
+
+use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\ServerRequestInterface;
+use TYPO3\CMS\Core\Site\Entity\SiteInterface;
+use TYPO3\CMS\Core\Site\Entity\SiteLanguage;
+
+final class BuildResponse
+{
+    protected SiteInterface $site;
+    protected ServerRequestInterface $request;
+    protected SiteLanguage $selectedLanguage;
+    protected ?ResponseInterface $response;
+
+    public function __construct(SiteInterface $site, ServerRequestInterface $request, SiteLanguage $selectedLanguage)
+    {
+        $this->site = $site;
+        $this->request = $request;
+        $this->selectedLanguage = $selectedLanguage;
+    }
+
+    public function getSite(): SiteInterface
+    {
+        return $this->site;
+    }
+
+    public function getRequest(): ServerRequestInterface
+    {
+        return $this->request;
+    }
+
+    public function getSelectedLanguage(): SiteLanguage
+    {
+        return $this->selectedLanguage;
+    }
+
+    public function getResponse(): ?ResponseInterface
+    {
+        return $this->response;
+    }
+
+    public function setResponse(ResponseInterface $response): void
+    {
+        $this->response = $response;
+    }
+}
