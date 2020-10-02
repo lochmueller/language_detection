@@ -2,20 +2,43 @@
 
 declare(strict_types=1);
 
-namespace LD\LanguageDetection\Service;
+namespace LD\LanguageDetection\Tests\Service;
 
+use LD\LanguageDetection\Service\Normalizer;
 use LD\LanguageDetection\Tests\Unit\AbstractTest;
 
+/**
+ * @internal
+ * @coversNothing
+ */
 class NormalizerTest extends AbstractTest
 {
     /**
      * @dataProvider normalizeProvider
+     *
+     * @param mixed $base
+     * @param mixed $result
      */
-    public function test_normalize_list($base, $result): void
+    public function testNormalize($base, $result): void
     {
         $normalizer = new Normalizer();
 
         self::assertEquals($result, $normalizer->normalize($base));
+    }
+
+    public function testNormalizeList(): void
+    {
+        $normalizer = new Normalizer();
+
+        $base = array_map(function ($item) {
+            return $item[0];
+        }, $this->normalizeProvider());
+
+        $result = array_map(function ($item) {
+            return $item[1];
+        }, $this->normalizeProvider());
+
+        self::assertEquals($result, $normalizer->normalizeList($base));
     }
 
     public function normalizeProvider(): array
@@ -32,6 +55,10 @@ class NormalizerTest extends AbstractTest
             [
                 'en-gB',
                 'en_GB',
+            ],
+            [
+                'EN-us',
+                'en_US',
             ],
             [
                 'EN',

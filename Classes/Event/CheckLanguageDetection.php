@@ -9,9 +9,9 @@ use TYPO3\CMS\Core\Site\Entity\SiteInterface;
 
 final class CheckLanguageDetection
 {
-    protected SiteInterface $site;
-    protected ServerRequestInterface $request;
-    protected bool $handle = true;
+    private SiteInterface $site;
+    private ServerRequestInterface $request;
+    private bool $handle = true;
 
     public function __construct(SiteInterface $site, ServerRequestInterface $request)
     {

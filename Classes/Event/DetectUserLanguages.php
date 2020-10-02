@@ -9,9 +9,9 @@ use TYPO3\CMS\Core\Site\Entity\SiteInterface;
 
 final class DetectUserLanguages
 {
-    protected SiteInterface $site;
-    protected ServerRequestInterface $request;
-    protected array $userLanguages = [];
+    private SiteInterface $site;
+    private ServerRequestInterface $request;
+    private array $userLanguages = [];
 
     public function __construct(SiteInterface $site, ServerRequestInterface $request)
     {

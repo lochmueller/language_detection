@@ -9,11 +9,13 @@ $finder = PhpCsFixer\Finder::create()
     ->in($baseDir . '/Classes')
     ->in($baseDir . '/Configuration/SiteConfiguration')
     ->in($baseDir . '/Tests')
-    ->in($baseDir . '/Resources/Private/Build');
+    ->in($baseDir . '/Resources/Private/Build')
+;
 
 return PhpCsFixer\Config::create()
     ->setRiskyAllowed(true)
     ->setRules([
+        '@PhpCsFixer' => true,
         '@Symfony' => true,
         '@Symfony:risky' => true,
         '@DoctrineAnnotation' => true,
@@ -68,4 +70,5 @@ return PhpCsFixer\Config::create()
         'single_trait_insert_per_statement' => true,
         'whitespace_after_comma_in_array' => true,
     ])
-    ->setFinder($finder);
+    ->setFinder($finder)
+;

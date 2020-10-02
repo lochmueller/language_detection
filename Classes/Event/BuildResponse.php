@@ -11,10 +11,10 @@ use TYPO3\CMS\Core\Site\Entity\SiteLanguage;
 
 final class BuildResponse
 {
-    protected SiteInterface $site;
-    protected ServerRequestInterface $request;
-    protected SiteLanguage $selectedLanguage;
-    protected ?ResponseInterface $response = null;
+    private SiteInterface $site;
+    private ServerRequestInterface $request;
+    private SiteLanguage $selectedLanguage;
+    private ?ResponseInterface $response = null;
 
     public function __construct(SiteInterface $site, ServerRequestInterface $request, SiteLanguage $selectedLanguage)
     {

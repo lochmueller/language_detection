@@ -10,10 +10,10 @@ use TYPO3\CMS\Core\Site\Entity\SiteLanguage;
 
 final class NegotiateSiteLanguage
 {
-    protected SiteInterface $site;
-    protected ServerRequestInterface $request;
-    protected array $userLanguages;
-    protected ?SiteLanguage $selectedLanguage = null;
+    private SiteInterface $site;
+    private ServerRequestInterface $request;
+    private array $userLanguages;
+    private ?SiteLanguage $selectedLanguage = null;
 
     public function __construct(SiteInterface $site, ServerRequestInterface $request, array $userLanguages)
     {
