@@ -35,6 +35,7 @@ class DefaultNegotiation
                     /** @var SiteLanguage $siteLanguage */
                     if ($siteLanguage->enabled() && $userLanguage === $this->normalizer->normalize((string)$siteLanguage->{$function}())) {
                         $event->setSelectedLanguage($siteLanguage);
+                        return;
                     }
                 }
             }
