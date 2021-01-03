@@ -13,6 +13,12 @@ services:
         identifier: 'languageDetectionEnable'
         event: LD\LanguageDetection\Event\CheckLanguageDetection
 
+  LD\LanguageDetection\Check\BotListener:
+    tags:
+      - name: event.listener
+        identifier: 'languageDetectionBot'
+        event: LD\LanguageDetection\Event\CheckLanguageDetection
+
   LD\LanguageDetection\Check\FromCurrentPageListener:
     tags:
       - name: event.listener
