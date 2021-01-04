@@ -5,7 +5,7 @@ declare(strict_types=1);
 use TYPO3\CMS\Core\Utility\HttpUtility;
 
 $GLOBALS['SiteConfiguration']['site']['columns']['enableLanguageDetection'] = [
-    'label' => 'Enable',
+    'label' => 'LLL:EXT:language_detection/Resources/Private/Language/locallang.xlf:enable',
     'config' => [
         'type' => 'check',
         'default' => '1',
@@ -13,7 +13,7 @@ $GLOBALS['SiteConfiguration']['site']['columns']['enableLanguageDetection'] = [
 ];
 
 $GLOBALS['SiteConfiguration']['site']['columns']['addIpLocationToBrowserLanguage'] = [
-    'label' => 'Add IP location to browser language',
+    'label' => 'LLL:EXT:language_detection/Resources/Private/Language/locallang.xlf:ip.location.to.language',
     'config' => [
         'type' => 'select',
         'renderType' => 'selectSingle',
@@ -26,8 +26,16 @@ $GLOBALS['SiteConfiguration']['site']['columns']['addIpLocationToBrowserLanguage
     ],
 ];
 
+$GLOBALS['SiteConfiguration']['site']['columns']['allowAllPaths'] = [
+    'label' => 'LLL:EXT:language_detection/Resources/Private/Language/locallang.xlf:allow.all.paths',
+    'config' => [
+        'type' => 'check',
+        'default' => '0',
+    ],
+];
+
 $GLOBALS['SiteConfiguration']['site']['columns']['redirectHttpStatusCode'] = [
-    'label' => 'Redirect HTTP status code',
+    'label' => 'LLL:EXT:language_detection/Resources/Private/Language/locallang.xlf:redirect.status.code',
     'config' => [
         'type' => 'select',
         'renderType' => 'selectSingle',
@@ -41,14 +49,14 @@ $GLOBALS['SiteConfiguration']['site']['columns']['redirectHttpStatusCode'] = [
 ];
 
 $GLOBALS['SiteConfiguration']['site']['columns']['disableRedirectWithBackendSession'] = [
-    'label' => 'Disable redirect with backend session',
+    'label' => 'LLL:EXT:language_detection/Resources/Private/Language/locallang.xlf:disable.with.backend.session',
     'config' => [
         'type' => 'check',
         'default' => 0,
     ],
 ];
 $GLOBALS['SiteConfiguration']['site']['columns']['forwardRedirectParameters'] = [
-    'label' => 'Forward redirect parameters',
+    'label' => 'LLL:EXT:language_detection/Resources/Private/Language/locallang.xlf:forward.redirect.parameter',
     'config' => [
         'type' => 'input',
         'default' => 'gclid',
@@ -57,12 +65,12 @@ $GLOBALS['SiteConfiguration']['site']['columns']['forwardRedirectParameters'] = 
 
 $GLOBALS['SiteConfiguration']['site']['types']['0']['showitem'] = str_replace(
     'base,',
-    'base,--div--;Language Detection,enableLanguageDetection,addIpLocationToBrowserLanguage,redirectHttpStatusCode,disableRedirectWithBackendSession,forwardRedirectParameters,',
+    'base,--div--;LLL:EXT:language_detection/Resources/Private/Language/locallang.xlf:language.detection,enableLanguageDetection,allowAllPaths,addIpLocationToBrowserLanguage,redirectHttpStatusCode,disableRedirectWithBackendSession,forwardRedirectParameters,',
     $GLOBALS['SiteConfiguration']['site']['types']['0']['showitem']
 );
 
 $GLOBALS['SiteConfiguration']['site_language']['columns']['excludeFromLanguageDetection'] = [
-    'label' => 'Exclude From Language Detection',
+    'label' => 'LLL:EXT:language_detection/Resources/Private/Language/locallang.xlf:exclude.language.from.detection',
     'config' => [
         'type' => 'check',
         'default' => '0',

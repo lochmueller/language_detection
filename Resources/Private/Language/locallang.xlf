@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+	<file source-language="en" datatype="plaintext" original="messages" date="2020-04-11T14:06:26Z">
+		<header>
+			<type>database</type>
+			<description>Language file for EXT:language_detection</description>
+			<authorName>Tim Lochmüller</authorName>
+			<authorEmail>tim@fruit-lab.de</authorEmail>
+		</header>
+		<body>
+			<trans-unit id="language.detection">
+				<source>Language detection</source>
+			</trans-unit>
+			<trans-unit id="enable">
+				<source>Enable</source>
+			</trans-unit>
+			<trans-unit id="exclude.language.from.detection">
+				<source>Exclude language from language detection</source>
+			</trans-unit>
+			<trans-unit id="forward.redirect.parameter">
+				<source>Forward redirect parameters</source>
+			</trans-unit>
+			<trans-unit id="disable.with.backend.session">
+				<source>Disable redirect with backend session</source>
+			</trans-unit>
+			<trans-unit id="redirect.status.code">
+				<source>Redirect HTTP status code</source>
+			</trans-unit>
+			<trans-unit id="ip.location.to.language">
+				<source>Add IP location to browser language</source>
+			</trans-unit>
+			<trans-unit id="allow.all.paths">
+				<source>Allow all paths (otherwise the detection works only on "/")</source>
+			</trans-unit>
+		</body>
+	</file>
+</xliff>
