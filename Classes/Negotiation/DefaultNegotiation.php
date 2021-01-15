@@ -29,9 +29,9 @@ class DefaultNegotiation
             'getTwoLetterIsoCode',
         ];
         $userLanguages = $this->normalizer->normalizeList($event->getUserLanguages());
-        foreach ($compareWith as $function) {
-            foreach ($userLanguages as $userLanguage) {
-                foreach ($event->getSite()->getAllLanguages() as $siteLanguage) {
+        foreach ($userLanguages as $userLanguage) {
+            foreach ($event->getSite()->getAllLanguages() as $siteLanguage) {
+                foreach ($compareWith as $function) {
                     /** @var SiteLanguage $siteLanguage */
                     if ($siteLanguage->enabled() && $userLanguage === $this->normalizer->normalize((string)$siteLanguage->{$function}())) {
                         $event->setSelectedLanguage($siteLanguage);
