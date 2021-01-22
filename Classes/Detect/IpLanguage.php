@@ -77,8 +77,8 @@ class IpLanguage
     protected function mapCountryToLanguage(string $country): string
     {
         $subtags = ResourceBundle::create('likelySubtags', 'ICUDATA', false);
-        $country = Locale::canonicalize('und_' . $country);
-        $locale = $subtags->get($country) ?: $subtags->get('und');
+        $dummy = 'und_' . strtoupper($country);
+        $locale = $subtags->get($dummy) ?: $subtags->get('und');
 
         return Locale::getPrimaryLanguage($locale);
     }
