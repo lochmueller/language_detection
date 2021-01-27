@@ -14,11 +14,11 @@
 			</trans-unit>
 			<trans-unit id="enable">
 				<source>Enable</source>
-				<target>Einschalten</target>
+				<target>Aktivieren</target>
 			</trans-unit>
 			<trans-unit id="exclude.language.from.detection">
 				<source>Exclude language from language detection</source>
-				<target>Sprache aus Sprach Erkennung ausschließen</target>
+				<target>Sprache von der Spracherkennung ausschließen</target>
 			</trans-unit>
 			<trans-unit id="forward.redirect.parameter">
 				<source>Forward redirect parameters</source>
@@ -30,7 +30,7 @@
 			</trans-unit>
 			<trans-unit id="redirect.status.code">
 				<source>Redirect HTTP status code</source>
-				<target>Weiterleitung HTTP Status Code</target>
+				<target>HTTP Status Code für Weiterleitung</target>
 			</trans-unit>
 			<trans-unit id="ip.location.to.language">
 				<source>Add IP location to browser language</source>
