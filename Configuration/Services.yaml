@@ -49,6 +49,13 @@ services:
         identifier: 'defaultNegotiation'
         event: LD\LanguageDetection\Event\NegotiateSiteLanguage
 
+  LD\LanguageDetection\Negotiation\FallbackNegotiation:
+    tags:
+      - name: event.listener
+        identifier: 'fallbackNegotiation'
+        after: 'defaultNegotiation'
+        event: LD\LanguageDetection\Event\NegotiateSiteLanguage
+
   LD\LanguageDetection\Detect\BrowserLanguage:
     tags:
       - name: event.listener

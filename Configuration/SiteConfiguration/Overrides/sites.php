@@ -26,6 +26,19 @@ $GLOBALS['SiteConfiguration']['site']['columns']['addIpLocationToBrowserLanguage
     ],
 ];
 
+$GLOBALS['SiteConfiguration']['site']['columns']['fallbackDetectionLanguage'] = [
+    'label' => 'LLL:EXT:language_detection/Resources/Private/Language/locallang.xlf:fallback.detection.language',
+    'config' => [
+        'type' => 'select',
+        'renderType' => 'selectSingle',
+        'special' => 'languages',
+        'items' => [
+            ['', ''],
+        ],
+        'default' => '',
+    ],
+];
+
 $GLOBALS['SiteConfiguration']['site']['columns']['allowAllPaths'] = [
     'label' => 'LLL:EXT:language_detection/Resources/Private/Language/locallang.xlf:allow.all.paths',
     'config' => [
@@ -65,7 +78,7 @@ $GLOBALS['SiteConfiguration']['site']['columns']['forwardRedirectParameters'] = 
 
 $GLOBALS['SiteConfiguration']['site']['types']['0']['showitem'] = str_replace(
     'base,',
-    'base,--div--;LLL:EXT:language_detection/Resources/Private/Language/locallang.xlf:language.detection,enableLanguageDetection,allowAllPaths,addIpLocationToBrowserLanguage,redirectHttpStatusCode,disableRedirectWithBackendSession,forwardRedirectParameters,',
+    'base,--div--;LLL:EXT:language_detection/Resources/Private/Language/locallang.xlf:language.detection,enableLanguageDetection,allowAllPaths,fallbackDetectionLanguage,addIpLocationToBrowserLanguage,redirectHttpStatusCode,disableRedirectWithBackendSession,forwardRedirectParameters,',
     $GLOBALS['SiteConfiguration']['site']['types']['0']['showitem']
 );
 

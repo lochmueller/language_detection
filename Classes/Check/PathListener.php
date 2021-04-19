@@ -12,7 +12,6 @@ class PathListener
     public function __invoke(CheckLanguageDetection $event): void
     {
         if (!($event->getSite() instanceof Site)) {
-
             return;
         }
         $config = $event->getSite()->getConfiguration();

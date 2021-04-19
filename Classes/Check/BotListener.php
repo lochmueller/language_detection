@@ -25,10 +25,10 @@ class BotListener
     {
         $userAgent = $request->getHeader('user-agent');
 
-        if (is_array($userAgent) && !empty($userAgent)) {
+        if (\is_array($userAgent) && !empty($userAgent)) {
             $userAgent = array_shift($userAgent);
         }
 
-        return is_string($userAgent) && preg_match(self::BOT_PATTERN, $userAgent);
+        return \is_string($userAgent) && preg_match(self::BOT_PATTERN, $userAgent);
     }
 }

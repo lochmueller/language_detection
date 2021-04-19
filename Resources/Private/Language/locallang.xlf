@@ -14,6 +14,9 @@
 			<trans-unit id="enable">
 				<source>Enable</source>
 			</trans-unit>
+			<trans-unit id="fallback.detection.language">
+				<source>Fallback detection language</source>
+			</trans-unit>
 			<trans-unit id="exclude.language.from.detection">
 				<source>Exclude language from language detection</source>
 			</trans-unit>
