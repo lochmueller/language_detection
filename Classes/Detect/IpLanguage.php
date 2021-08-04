@@ -10,6 +10,7 @@ use Locale;
 use Psr\Http\Message\ServerRequestInterface;
 use ResourceBundle;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Core\Utility\VersionNumberUtility;
 
 /**
  * Location Service.
@@ -53,7 +54,12 @@ class IpLanguage
         $ip = $params['REMOTE_ADDR'];
         try {
             $urlService = 'http://www.geoplugin.net/php.gp?ip=' . $ip;
-            $content = unserialize(GeneralUtility::getUrl($urlService, 0, false));
+            $version11Branch = VersionNumberUtility::convertVersionNumberToInteger(TYPO3_branch) >= VersionNumberUtility::convertVersionNumberToInteger('11.2');
+            if ($version11Branch) {
+                $content = unserialize(GeneralUtility::getUrl($urlService));
+            } else {
+                $content = unserialize(GeneralUtility::getUrl($urlService, 0, false));
+            }
             if (!\is_array($content) || empty($content) || '404' === $content['geoplugin_status']) {
                 throw new Exception('Missing information in response', 123781);
             }

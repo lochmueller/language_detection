@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use LD\LanguageDetection\Service\TcaLanguageSelection;
 use TYPO3\CMS\Core\Utility\HttpUtility;
 use TYPO3\CMS\Core\Utility\VersionNumberUtility;
 
@@ -33,7 +34,9 @@ if ($version11Branch) {
     $GLOBALS['SiteConfiguration']['site']['columns']['fallbackDetectionLanguage'] = [
         'label' => 'LLL:EXT:language_detection/Resources/Private/Language/locallang.xlf:fallback.detection.language',
         'config' => [
-            'type' => 'language'
+            'type' => 'select',
+            'renderType' => 'selectSingle',
+            'itemsProcFunc' => TcaLanguageSelection::class . '->get',
         ],
     ];
 } else {

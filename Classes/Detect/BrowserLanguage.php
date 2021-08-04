@@ -20,7 +20,7 @@ class BrowserLanguage
         // Set default quality
         $acceptedLanguagesArr = [];
         foreach ($languages as $languageAndQualityStr) {
-            list($languageCode, $quality) = GeneralUtility::trimExplode(';', $languageAndQualityStr, true);
+            [$languageCode, $quality] = GeneralUtility::trimExplode(';', $languageAndQualityStr, true);
             $acceptedLanguagesArr[$languageCode] = $quality ? (float)mb_substr($quality, 2) : 1.0;
         }
 
@@ -30,7 +30,7 @@ class BrowserLanguage
         // Remove quality 0.0
         $acceptedLanguagesArr = array_filter($acceptedLanguagesArr, function ($value, $key) {
             return 0.0 !== $value;
-        }, ARRAY_FILTER_USE_BOTH);
+        }, \ARRAY_FILTER_USE_BOTH);
 
         $event->setUserLanguages(array_keys($acceptedLanguagesArr));
     }
