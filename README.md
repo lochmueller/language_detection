@@ -48,9 +48,10 @@ This event calculate the best matching page language for the user. If you build 
 
 Default-Listener:
 
-| Name               | Description                                                                                               |
-| ------------------ | --------------------------------------------------------------------------------------------------------- |
-| DefaultNegotiation | Check the Locale and TwoLetterIso of the TYPO3 languages against the user languages of the previous event |
+| Name                | Description                                                                                               |
+| ------------------- | --------------------------------------------------------------------------------------------------------- |
+| DefaultNegotiation  | Check the Locale and TwoLetterIso of the TYPO3 languages against the user languages of the previous event |
+| FallbackNegotiation | Handle a fallback, if there are no matches by the default negotiation                                     |
 
 ### Event: BuildResponse
 
@@ -63,5 +64,8 @@ Default-Listener:
 | DefaultResponse | Build the repsonse object and respect the "redirectHttpStatusCode" config |
 
 
+## Troubleshooting
 
+Q: There are missing or wrong languages in the detection process.
+A: Do you check in incognito mode? The browser will not send all languages in incognito mode. So "wrong results" are possible.
 
