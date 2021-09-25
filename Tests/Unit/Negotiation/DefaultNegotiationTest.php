@@ -6,10 +6,6 @@ namespace LD\LanguageDetection\Tests\Negotiation;
 
 use LD\LanguageDetection\Tests\Unit\AbstractTest;
 
-/**
- * @internal
- * @coversNothing
- */
 class DefaultNegotiationTest extends AbstractTest
 {
     public function testDummy(): void

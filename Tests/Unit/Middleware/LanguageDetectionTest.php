@@ -6,10 +6,6 @@ namespace LD\LanguageDetection\Tests\Middleware;
 
 use LD\LanguageDetection\Tests\Unit\AbstractTest;
 
-/**
- * @internal
- * @coversNothing
- */
 class LanguageDetectionTest extends AbstractTest
 {
     public function testDummy(): void
