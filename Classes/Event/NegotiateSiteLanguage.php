@@ -8,7 +8,7 @@ use Psr\Http\Message\ServerRequestInterface;
 use TYPO3\CMS\Core\Site\Entity\SiteInterface;
 use TYPO3\CMS\Core\Site\Entity\SiteLanguage;
 
-final class NegotiateSiteLanguage
+final class NegotiateSiteLanguage extends AbstractEvent
 {
     private SiteInterface $site;
     private ServerRequestInterface $request;

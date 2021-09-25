@@ -17,11 +17,6 @@ class DefaultResponse
 {
     public function __invoke(BuildResponse $event): void
     {
-        if (null !== $event->getResponse()) {
-            // Another event has already define the response
-            return;
-        }
-
         $targetUri = $this->buildRedirectUri($event->getSite(), $event->getRequest(), $event->getSelectedLanguage());
         if ((string)$event->getRequest()->getUri() !== (string)$targetUri) {
             $config = $event->getSite()->getConfiguration();
@@ -31,6 +26,7 @@ class DefaultResponse
             }
 
             $event->setResponse(new RedirectResponse((string)$targetUri, $code));
+            $event->stopPropagation();
         }
     }
 

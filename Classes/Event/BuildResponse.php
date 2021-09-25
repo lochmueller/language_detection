@@ -9,7 +9,7 @@ use Psr\Http\Message\ServerRequestInterface;
 use TYPO3\CMS\Core\Site\Entity\SiteInterface;
 use TYPO3\CMS\Core\Site\Entity\SiteLanguage;
 
-final class BuildResponse
+final class BuildResponse extends AbstractEvent
 {
     private SiteInterface $site;
     private ServerRequestInterface $request;

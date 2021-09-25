@@ -7,7 +7,7 @@ namespace LD\LanguageDetection\Event;
 use Psr\Http\Message\ServerRequestInterface;
 use TYPO3\CMS\Core\Site\Entity\SiteInterface;
 
-final class CheckLanguageDetection
+final class CheckLanguageDetection extends AbstractEvent
 {
     private SiteInterface $site;
     private ServerRequestInterface $request;

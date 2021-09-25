@@ -13,11 +13,6 @@ class FallbackNegotiation
 {
     public function __invoke(NegotiateSiteLanguage $event): void
     {
-        if (null !== $event->getSelectedLanguage()) {
-            // Another event has already negotiate the language
-            return;
-        }
-
         $site = $event->getSite();
         if (!$site instanceof Site) {
             return;
@@ -35,6 +30,7 @@ class FallbackNegotiation
             /** @var SiteLanguage $siteLanguage */
             if ($siteLanguage->getLanguageId() === $fallback) {
                 $event->setSelectedLanguage($siteLanguage);
+                $event->stopPropagation();
 
                 return;
             }
