@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace LD\LanguageDetection\Detect;
 
+use TYPO3\CMS\Core\Information\Typo3Version;
 use Exception;
 use LD\LanguageDetection\Event\DetectUserLanguages;
 use Locale;
@@ -54,7 +55,7 @@ class IpLanguage
         $ip = $params['REMOTE_ADDR'];
         try {
             $urlService = 'http://www.geoplugin.net/php.gp?ip=' . $ip;
-            $version11Branch = VersionNumberUtility::convertVersionNumberToInteger(TYPO3_branch) >= VersionNumberUtility::convertVersionNumberToInteger('11.2');
+            $version11Branch = VersionNumberUtility::convertVersionNumberToInteger(GeneralUtility::makeInstance(Typo3Version::class)->getBranch()) >= VersionNumberUtility::convertVersionNumberToInteger('11.2');
             if ($version11Branch) {
                 $content = unserialize(GeneralUtility::getUrl($urlService));
             } else {
