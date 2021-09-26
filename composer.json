@@ -55,8 +55,12 @@
 	},
 	"scripts": {
 		"code": [
+			"@code:rector",
 			"@code:php-cs-fixer",
 			"@code:metrics"
+		],
+		"code:rector": [
+			"rector"
 		],
 		"code:php-cs-fixer": [
 			"php-cs-fixer fix --config Resources/Private/Build/PhpCsFixer.php --cache-file=.Build/phpcs.cache"
@@ -66,9 +70,6 @@
 		],
 		"test": [
 			"phpunit -c Tests/UnitTests.xml"
-		],
-		"rector": [
-			"rector"
 		]
 	}
 }

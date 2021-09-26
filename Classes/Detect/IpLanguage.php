@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace LD\LanguageDetection\Detect;
 
-use TYPO3\CMS\Core\Information\Typo3Version;
 use Exception;
 use LD\LanguageDetection\Event\DetectUserLanguages;
 use Locale;
 use Psr\Http\Message\ServerRequestInterface;
 use ResourceBundle;
+use TYPO3\CMS\Core\Information\Typo3Version;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Core\Utility\VersionNumberUtility;
 

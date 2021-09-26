@@ -6,6 +6,7 @@ use Rector\Core\Configuration\Option;
 use Rector\Core\ValueObject\PhpVersion;
 use Rector\Php55\Rector\String_\StringClassNameToClassConstantRector;
 use Rector\PostRector\Rector\NameImportingPostRector;
+use Rector\Set\ValueObject\SetList;
 use Ssch\TYPO3Rector\Configuration\Typo3Option;
 use Ssch\TYPO3Rector\FileProcessor\Composer\Rector\ExtensionComposerRector;
 use Ssch\TYPO3Rector\FileProcessor\TypoScript\Rector\FileIncludeToImportStatementTypoScriptRector;
@@ -18,8 +19,13 @@ use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigura
 return static function (ContainerConfigurator $containerConfigurator): void {
     $parameters = $containerConfigurator->parameters();
 
+    $containerConfigurator->import(Typo3SetList::TYPO3_76);
+    $containerConfigurator->import(Typo3SetList::TYPO3_87);
+    $containerConfigurator->import(Typo3SetList::TYPO3_95);
     $containerConfigurator->import(Typo3SetList::TYPO3_104);
     $containerConfigurator->import(Typo3SetList::TYPO3_11);
+
+    #$containerConfigurator->import(SetList::CODE_QUALITY);
 
     // In order to have a better analysis from phpstan we teach it here some more things
     $parameters->set(Option::PHPSTAN_FOR_RECTOR_PATH, Typo3Option::PHPSTAN_FOR_RECTOR_PATH);
@@ -40,7 +46,11 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     // If you only want to process one/some TYPO3 extension(s), you can specify its path(s) here.
     // If you use the option --config change __DIR__ to getcwd()
     $parameters->set(Option::PATHS, [
+        'ext_emconf.php',
+        'composer.json',
         __DIR__ . '/Classes/',
+        __DIR__ . '/Configuration/',
+        __DIR__ . '/Tests/',
     ]);
 
     // If you set option Option::AUTO_IMPORT_NAMES to true, you should consider excluding some TYPO3 files.
