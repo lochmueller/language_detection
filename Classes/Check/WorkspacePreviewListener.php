@@ -11,8 +11,7 @@ class WorkspacePreviewListener
     public function __invoke(CheckLanguageDetection $event): void
     {
         $arguments = $event->getRequest()->getQueryParams();
-        $argumentsNames = array_keys($arguments);
-        if (\in_array('ADMCMD_prev', $argumentsNames) || \in_array('ADMCMD_previewWS', $argumentsNames)) {
+        if (\array_key_exists('ADMCMD_prev', $arguments) || \in_array('ADMCMD_previewWS', $argumentsNames)) {
             $event->disableLanguageDetection();
         }
     }

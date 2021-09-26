@@ -33,9 +33,6 @@
 	},
 	"homepage": "https://github.com/lochmueller/language_detection",
 	"license": "GPL-2.0-or-later",
-	"support": {
-		"issues": "https://github.com/lochmueller/language_detection/issues"
-	},
 	"require-dev": {
 		"typo3/testing-framework": "^6.1",
 		"phpmetrics/phpmetrics": "^2.4",
@@ -49,7 +46,6 @@
 	"extra": {
 		"typo3/cms": {
 			"extension-key": "language_detection",
-			"cms-package-dir": "{$vendor-dir}/typo3/cms",
 			"web-dir": ".Build/Web"
 		}
 	},

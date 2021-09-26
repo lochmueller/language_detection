@@ -14,10 +14,8 @@ class BotListener
 
     public function __invoke(CheckLanguageDetection $event): void
     {
-        if ($event->getSite() instanceof Site) {
-            if ($this->isBot($event->getRequest())) {
-                $event->disableLanguageDetection();
-            }
+        if ($event->getSite() instanceof Site && $this->isBot($event->getRequest())) {
+            $event->disableLanguageDetection();
         }
     }
 

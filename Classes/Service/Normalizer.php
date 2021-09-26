@@ -8,7 +8,9 @@ class Normalizer
 {
     public function normalizeList(array $locales): array
     {
-        return array_map([$this, 'normalize'], $locales);
+        return array_map(function (string $locale): string {
+            return $this->normalize($locale);
+        }, $locales);
     }
 
     public function normalize(string $locale): string

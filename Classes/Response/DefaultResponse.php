@@ -35,8 +35,8 @@ class DefaultResponse
         $target = $language->getBase();
 
         $params = GeneralUtility::trimExplode(',', (string)$site->getConfiguration()['forwardRedirectParameters'] ?? '', true);
-        parse_str((string)$request->getUri()->getQuery(), $requestQuery);
-        parse_str((string)$target->getQuery(), $targetQuery);
+        parse_str($request->getUri()->getQuery(), $requestQuery);
+        parse_str($target->getQuery(), $targetQuery);
 
         foreach ($params as $param) {
             if (isset($requestQuery[$param])) {

@@ -78,7 +78,7 @@ class IpLanguage
             return null;
         }
 
-        return (string)$this->mapCountryToLanguage($data['geoplugin_countryCode']);
+        return $this->mapCountryToLanguage($data['geoplugin_countryCode']);
     }
 
     protected function mapCountryToLanguage(string $country): string
