@@ -6,11 +6,12 @@ namespace LD\LanguageDetection\Service;
 
 class Normalizer
 {
+    /**
+     * @return array<string>
+     */
     public function normalizeList(array $locales): array
     {
-        return array_map(function (string $locale): string {
-            return $this->normalize($locale);
-        }, $locales);
+        return array_map(fn (string $locale): string => $this->normalize($locale), $locales);
     }
 
     public function normalize(string $locale): string

@@ -28,6 +28,11 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     //$containerConfigurator->import(SetList::CODE_QUALITY);
     //$containerConfigurator->import(SetList::DEAD_CODE);
 
+    $containerConfigurator->import(SetList::PHP_74);
+
+    $containerConfigurator->import(SetList::TYPE_DECLARATION);
+    $containerConfigurator->import(SetList::TYPE_DECLARATION_STRICT);
+
     // In order to have a better analysis from phpstan we teach it here some more things
     $parameters->set(Option::PHPSTAN_FOR_RECTOR_PATH, Typo3Option::PHPSTAN_FOR_RECTOR_PATH);
 

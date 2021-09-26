@@ -28,9 +28,7 @@ class BrowserLanguage
         arsort($acceptedLanguagesArr);
 
         // Remove quality 0.0
-        $acceptedLanguagesArr = array_filter($acceptedLanguagesArr, function ($value, $key) {
-            return 0.0 !== $value;
-        }, \ARRAY_FILTER_USE_BOTH);
+        $acceptedLanguagesArr = array_filter($acceptedLanguagesArr, fn ($value, $key): bool => 0.0 !== $value, \ARRAY_FILTER_USE_BOTH);
 
         $event->setUserLanguages(array_keys($acceptedLanguagesArr));
     }

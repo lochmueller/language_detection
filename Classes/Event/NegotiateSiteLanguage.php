@@ -16,6 +16,9 @@ final class NegotiateSiteLanguage extends AbstractEvent implements StoppableEven
     private array $userLanguages;
     private ?SiteLanguage $selectedLanguage = null;
 
+    /**
+     * @param array<string> $userLanguages
+     */
     public function __construct(SiteInterface $site, ServerRequestInterface $request, array $userLanguages)
     {
         $this->site = $site;
@@ -33,11 +36,17 @@ final class NegotiateSiteLanguage extends AbstractEvent implements StoppableEven
         return $this->request;
     }
 
+    /**
+     * @return array<string>
+     */
     public function getUserLanguages(): array
     {
         return $this->userLanguages;
     }
 
+    /**
+     * @param array<string> $userLanguages
+     */
     public function setUserLanguages(array $userLanguages): void
     {
         $this->userLanguages = $userLanguages;

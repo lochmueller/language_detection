@@ -19,7 +19,7 @@ class NormalizerTest extends AbstractTest
      * @param mixed $base
      * @param mixed $result
      */
-    public function testNormalize($base, $result): void
+    public function testNormalize(string $base, string $result): void
     {
         $normalizer = new Normalizer();
 
@@ -30,17 +30,16 @@ class NormalizerTest extends AbstractTest
     {
         $normalizer = new Normalizer();
 
-        $base = array_map(function ($item) {
-            return $item[0];
-        }, $this->normalizeProvider());
+        $base = array_map(fn ($item): string => $item[0], $this->normalizeProvider());
 
-        $result = array_map(function ($item) {
-            return $item[1];
-        }, $this->normalizeProvider());
+        $result = array_map(fn ($item): string => $item[1], $this->normalizeProvider());
 
         self::assertEquals($result, $normalizer->normalizeList($base));
     }
 
+    /**
+     * @return array<int, array<string>>
+     */
     public function normalizeProvider(): array
     {
         return [

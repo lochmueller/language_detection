@@ -29,11 +29,17 @@ final class DetectUserLanguages extends AbstractEvent
         return $this->request;
     }
 
+    /**
+     * @return array<string>
+     */
     public function getUserLanguages(): array
     {
         return $this->userLanguages;
     }
 
+    /**
+     * @param array<string> $userLanguages
+     */
     public function setUserLanguages(array $userLanguages): void
     {
         $this->userLanguages = $userLanguages;
