@@ -4,12 +4,13 @@ declare(strict_types=1);
 
 namespace LD\LanguageDetection\Event;
 
+use Psr\EventDispatcher\StoppableEventInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use TYPO3\CMS\Core\Site\Entity\SiteInterface;
 use TYPO3\CMS\Core\Site\Entity\SiteLanguage;
 
-final class BuildResponse extends AbstractEvent
+final class BuildResponse extends AbstractEvent implements StoppableEventInterface
 {
     private SiteInterface $site;
     private ServerRequestInterface $request;
@@ -46,5 +47,10 @@ final class BuildResponse extends AbstractEvent
     public function setResponse(ResponseInterface $response): void
     {
         $this->response = $response;
+    }
+
+    public function isPropagationStopped(): bool
+    {
+        return null !== $this->getResponse();
     }
 }

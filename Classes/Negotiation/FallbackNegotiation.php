@@ -30,7 +30,6 @@ class FallbackNegotiation
             /** @var SiteLanguage $siteLanguage */
             if ($siteLanguage->getLanguageId() === $fallback) {
                 $event->setSelectedLanguage($siteLanguage);
-                $event->stopPropagation();
 
                 return;
             }

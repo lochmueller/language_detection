@@ -6,6 +6,10 @@ namespace LD\LanguageDetection\Tests\Response;
 
 use LD\LanguageDetection\Tests\Unit\AbstractTest;
 
+/**
+ * @internal
+ * @coversNothing
+ */
 class DefaultResponseTest extends AbstractTest
 {
     public function testDummy(): void

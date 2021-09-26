@@ -7,6 +7,10 @@ namespace LD\LanguageDetection\Tests\Service;
 use LD\LanguageDetection\Service\Normalizer;
 use LD\LanguageDetection\Tests\Unit\AbstractTest;
 
+/**
+ * @internal
+ * @coversNothing
+ */
 class NormalizerTest extends AbstractTest
 {
     /**

@@ -26,7 +26,6 @@ class DefaultResponse
             }
 
             $event->setResponse(new RedirectResponse((string)$targetUri, $code));
-            $event->stopPropagation();
         }
     }
 

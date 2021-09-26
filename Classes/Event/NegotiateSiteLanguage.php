@@ -4,11 +4,12 @@ declare(strict_types=1);
 
 namespace LD\LanguageDetection\Event;
 
+use Psr\EventDispatcher\StoppableEventInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use TYPO3\CMS\Core\Site\Entity\SiteInterface;
 use TYPO3\CMS\Core\Site\Entity\SiteLanguage;
 
-final class NegotiateSiteLanguage extends AbstractEvent
+final class NegotiateSiteLanguage extends AbstractEvent implements StoppableEventInterface
 {
     private SiteInterface $site;
     private ServerRequestInterface $request;
@@ -50,5 +51,10 @@ final class NegotiateSiteLanguage extends AbstractEvent
     public function setSelectedLanguage(SiteLanguage $selectedLanguage): void
     {
         $this->selectedLanguage = $selectedLanguage;
+    }
+
+    public function isPropagationStopped(): bool
+    {
+        return null !== $this->selectedLanguage;
     }
 }
