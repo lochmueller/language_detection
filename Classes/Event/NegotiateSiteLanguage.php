@@ -44,14 +44,6 @@ final class NegotiateSiteLanguage extends AbstractEvent implements StoppableEven
         return $this->userLanguages;
     }
 
-    /**
-     * @param array<string> $userLanguages
-     */
-    public function setUserLanguages(array $userLanguages): void
-    {
-        $this->userLanguages = $userLanguages;
-    }
-
     public function getSelectedLanguage(): ?SiteLanguage
     {
         return $this->selectedLanguage;

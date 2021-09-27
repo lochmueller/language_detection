@@ -31,10 +31,12 @@ class BuildResponseTest extends AbstractEventTest
         self::assertEquals($site, $event->getSite());
         self::assertEquals($request, $event->getRequest());
         self::assertEquals($language, $event->getSelectedLanguage());
+        self::assertFalse($event->isPropagationStopped());
 
         $response = $this->createMock(ResponseInterface::class);
 
         $event->setResponse($response);
         self::assertEquals($response, $event->getResponse());
+        self::assertTrue($event->isPropagationStopped());
     }
 }
