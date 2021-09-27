@@ -20,6 +20,6 @@ class BotListener
 
     protected function isBot(ServerRequestInterface $request): bool
     {
-        return preg_match(self::BOT_PATTERN, $request->getHeaderLine('user-agent'));
+        return (bool)preg_match(self::BOT_PATTERN, $request->getHeaderLine('user-agent'));
     }
 }
