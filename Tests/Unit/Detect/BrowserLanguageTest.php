@@ -11,7 +11,8 @@ use TYPO3\CMS\Core\Http\ServerRequest;
 use TYPO3\CMS\Core\Site\Entity\SiteInterface;
 
 /**
- * @covers \LD\LanguageDetection\Detect\BrowserLanguage
+ * @covers BrowserLanguage
+ * @covers DetectUserLanguages
  *
  * @internal
  */
