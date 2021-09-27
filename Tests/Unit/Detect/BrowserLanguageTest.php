@@ -11,10 +11,8 @@ use TYPO3\CMS\Core\Http\ServerRequest;
 use TYPO3\CMS\Core\Site\Entity\SiteInterface;
 
 /**
- * @covers BrowserLanguage
- * @covers DetectUserLanguages
- *
  * @internal
+ * @coversNothing
  */
 class BrowserLanguageTest extends AbstractTest
 {
@@ -26,6 +24,8 @@ class BrowserLanguageTest extends AbstractTest
 
     /**
      * @dataProvider data
+     * @covers \LD\LanguageDetection\Detect\BrowserLanguage
+     * @covers \LD\LanguageDetection\Event\DetectUserLanguages
      *
      * @param mixed[]|string[] $result
      */
