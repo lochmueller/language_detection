@@ -5,3 +5,5 @@
 /composer.lock export-ignore
 /.github/ export-ignore
 /Resources/Private/Build/ export-ignore
+/phpunit.xml
+/.phpunit.cache

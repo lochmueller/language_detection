@@ -65,7 +65,7 @@
 			"phpmetrics --report-html='.Build/Metrics' --exclude='.Build' ."
 		],
 		"test": [
-			"phpunit -c Tests/UnitTests.xml"
+			"phpunit -c phpunit.xml"
 		]
 	}
 }
