@@ -34,7 +34,6 @@ class BotListenerTest extends AbstractTest
         self::assertEquals($result, $event->isLanguageDetectionEnable());
     }
 
-
     /**
      * @covers \LD\LanguageDetection\Check\BotListener
      * @covers \LD\LanguageDetection\Event\CheckLanguageDetection
