@@ -19,6 +19,9 @@ trait RespectLanguageLinkDetailsTrait
 
     protected SiteFinder $languageSiteFinder;
 
+    /**
+     * @return mixed[]
+     */
     public function addLanguageParameterByDetection(array $linkDetails): array
     {
         if (LinkService::TYPE_PAGE === $linkDetails['type']) {

@@ -20,7 +20,12 @@ class BrowserLanguage
         // Set default quality
         $acceptedLanguagesArr = [];
         foreach ($languages as $languageAndQualityStr) {
-            [$languageCode, $quality] = GeneralUtility::trimExplode(';', $languageAndQualityStr, true);
+            if (false !== strpos($languageAndQualityStr, ';')) {
+                [$languageCode, $quality] = GeneralUtility::trimExplode(';', $languageAndQualityStr, true);
+            } else {
+                $languageCode = $languageAndQualityStr;
+                $quality = 'q=1.0';
+            }
             $acceptedLanguagesArr[$languageCode] = $quality ? (float)mb_substr($quality, 2) : 1.0;
         }
 
