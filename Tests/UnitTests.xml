@@ -19,4 +19,13 @@
 			<directory>Unit/</directory>
 		</testsuite>
 	</testsuites>
+
+	<coverage cacheDirectory=".phpunit.cache/code-coverage" processUncoveredFiles="true">
+		<include>
+			<directory suffix=".php">Classes</directory>
+		</include>
+		<report>
+			<clover outputFile="var/clover.xml" />
+		</report>
+	</coverage>
 </phpunit>
