@@ -11,7 +11,6 @@ use Psr\Http\Message\ServerRequestInterface;
 use TYPO3\CMS\Core\Context\Context;
 use TYPO3\CMS\Core\Context\UserAspect;
 use TYPO3\CMS\Core\Site\Entity\Site;
-use TYPO3\CMS\Core\Site\Entity\SiteInterface;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
@@ -20,22 +19,6 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  */
 class BackendUserListenerTest extends AbstractTest
 {
-    /**
-     * @covers \LD\LanguageDetection\Check\BackendUserListener
-     * @covers \LD\LanguageDetection\Event\CheckLanguageDetection
-     */
-    public function testInvalidSiteObject(): void
-    {
-        $site = $this->createMock(SiteInterface::class);
-        $request = $this->createMock(ServerRequestInterface::class);
-        $event = new CheckLanguageDetection($site, $request);
-
-        $backendUserListener = new BackendUserListener();
-        $backendUserListener($event);
-
-        self::assertFalse($event->isLanguageDetectionEnable());
-    }
-
     /**
      * @covers \LD\LanguageDetection\Check\BackendUserListener
      * @covers \LD\LanguageDetection\Event\CheckLanguageDetection
@@ -80,7 +63,7 @@ class BackendUserListenerTest extends AbstractTest
      */
     public function testWithDisableConfigurationInSiteAndActiveBackendUser(): void
     {
-        self::markTestSkipped('Check Aspect');
+        self::markTestSkipped('Have to check how to set the context');
         $site = $this->createStub(Site::class);
         $site->method('getConfiguration')
             ->willReturn(['disableRedirectWithBackendSession' => true])
@@ -98,8 +81,8 @@ class BackendUserListenerTest extends AbstractTest
         $backendUserListener = new BackendUserListener();
         $backendUserListener($event);
 
-        self::assertTrue(GeneralUtility::makeInstance(Context::class)->getAspect('backend.user')->get('isLoggedIn'));
-        self::assertFalse($event->isLanguageDetectionEnable());
+        self::assertTrue(GeneralUtility::makeInstance(Context::class)->getAspect('backend.user')->get('isLoggedIn'), (string)$userAspect->isLoggedIn());
+        self::assertFalse($event->isLanguageDetectionEnable(), (string)$userAspect->isLoggedIn());
     }
 
     /**
@@ -108,7 +91,7 @@ class BackendUserListenerTest extends AbstractTest
      */
     public function testWithDisableConfigurationInSiteAndNoBackendUser(): void
     {
-        self::markTestSkipped('Check Aspect');
+        self::markTestSkipped('Have to check how to set the context');
         $site = $this->createStub(Site::class);
         $site->method('getConfiguration')
             ->willReturn(['disableRedirectWithBackendSession' => true])
@@ -121,12 +104,13 @@ class BackendUserListenerTest extends AbstractTest
             ->willReturn(false)
         ;
 
-        GeneralUtility::makeInstance(Context::class)->setAspect('backend.user', $userAspect);
+        $context = GeneralUtility::makeInstance(Context::class);
+        $context->setAspect('backend.user', $userAspect);
 
         $backendUserListener = new BackendUserListener();
         $backendUserListener($event);
 
-        self::assertFalse(GeneralUtility::makeInstance(Context::class)->getAspect('backend.user')->get('isLoggedIn'));
-        self::assertTrue($event->isLanguageDetectionEnable());
+        self::assertFalse($context->getAspect('backend.user')->get('isLoggedIn'));
+        self::assertTrue($event->isLanguageDetectionEnable(), (string)$userAspect->isLoggedIn());
     }
 }

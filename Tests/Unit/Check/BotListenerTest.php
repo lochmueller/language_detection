@@ -21,7 +21,7 @@ class BotListenerTest extends AbstractTest
      * @covers \LD\LanguageDetection\Event\CheckLanguageDetection
      * @dataProvider data
      */
-    public function testInvalidSiteObject(string $userAgent, bool $result): void
+    public function testUserAgents(string $userAgent, bool $result): void
     {
         $site = $this->createMock(SiteInterface::class);
 
@@ -38,7 +38,7 @@ class BotListenerTest extends AbstractTest
      * @covers \LD\LanguageDetection\Check\BotListener
      * @covers \LD\LanguageDetection\Event\CheckLanguageDetection
      */
-    public function testWithoutUserAgend(): void
+    public function testWithoutUserAgent(): void
     {
         $site = $this->createMock(SiteInterface::class);
 

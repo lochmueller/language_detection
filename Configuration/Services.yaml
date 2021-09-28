@@ -7,39 +7,51 @@ services:
   LD\LanguageDetection\:
     resource: '../Classes/*'
 
+  LD\LanguageDetection\Check\SiteListener:
+    tags:
+      - name: event.listener
+        identifier: 'languageDetectionSite'
+        event: LD\LanguageDetection\Event\CheckLanguageDetection
+
   LD\LanguageDetection\Check\EnableListener:
     tags:
       - name: event.listener
+        after: 'languageDetectionSite'
         identifier: 'languageDetectionEnable'
         event: LD\LanguageDetection\Event\CheckLanguageDetection
 
   LD\LanguageDetection\Check\BotListener:
     tags:
       - name: event.listener
+        after: 'languageDetectionEnable'
         identifier: 'languageDetectionBot'
         event: LD\LanguageDetection\Event\CheckLanguageDetection
 
   LD\LanguageDetection\Check\FromCurrentPageListener:
     tags:
       - name: event.listener
+        after: 'languageDetectionEnable'
         identifier: 'languageDetectionFromCurrentPage'
         event: LD\LanguageDetection\Event\CheckLanguageDetection
 
   LD\LanguageDetection\Check\WorkspacePreviewListener:
     tags:
       - name: event.listener
+        after: 'languageDetectionEnable'
         identifier: 'languageDetectionWorkspacePreview'
         event: LD\LanguageDetection\Event\CheckLanguageDetection
 
   LD\LanguageDetection\Check\PathListener:
     tags:
       - name: event.listener
+        after: 'languageDetectionEnable'
         identifier: 'languageDetectionPath'
         event: LD\LanguageDetection\Event\CheckLanguageDetection
 
   LD\LanguageDetection\Check\BackendUserListener:
     tags:
       - name: event.listener
+        after: 'languageDetectionEnable'
         identifier: 'languageDetectionBackendUser'
         event: LD\LanguageDetection\Event\CheckLanguageDetection
 

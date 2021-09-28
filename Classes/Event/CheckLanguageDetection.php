@@ -4,10 +4,11 @@ declare(strict_types=1);
 
 namespace LD\LanguageDetection\Event;
 
+use Psr\EventDispatcher\StoppableEventInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use TYPO3\CMS\Core\Site\Entity\SiteInterface;
 
-final class CheckLanguageDetection extends AbstractEvent
+final class CheckLanguageDetection extends AbstractEvent implements StoppableEventInterface
 {
     private SiteInterface $site;
     private ServerRequestInterface $request;
@@ -37,5 +38,10 @@ final class CheckLanguageDetection extends AbstractEvent
     public function disableLanguageDetection(): void
     {
         $this->handle = false;
+    }
+
+    public function isPropagationStopped(): bool
+    {
+        return !$this->isLanguageDetectionEnable();
     }
 }

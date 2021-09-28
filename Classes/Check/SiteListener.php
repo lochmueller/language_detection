@@ -5,15 +5,14 @@ declare(strict_types=1);
 namespace LD\LanguageDetection\Check;
 
 use LD\LanguageDetection\Event\CheckLanguageDetection;
+use TYPO3\CMS\Core\Site\Entity\Site;
 
-class EnableListener
+class SiteListener
 {
     public function __invoke(CheckLanguageDetection $event): void
     {
-        $config = $event->getSite()->getConfiguration();
-
-        $enable = !\array_key_exists('enableLanguageDetection', $config) || (bool)$config['enableLanguageDetection'];
-        if (!$enable) {
+        if (!($event->getSite() instanceof Site)) {
+            // Wrong site type e.g. NullSite
             $event->disableLanguageDetection();
         }
     }
