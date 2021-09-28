@@ -4,14 +4,12 @@ declare(strict_types=1);
 
 namespace LD\LanguageDetection\Detect;
 
-use Exception;
 use LD\LanguageDetection\Event\DetectUserLanguages;
+use LD\LanguageDetection\Service\IpLocation;
 use Locale;
 use Psr\Http\Message\ServerRequestInterface;
 use ResourceBundle;
-use TYPO3\CMS\Core\Information\Typo3Version;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Core\Utility\VersionNumberUtility;
 
 /**
  * Location Service.
@@ -49,31 +47,10 @@ class IpLanguage
         $event->setUserLanguages($base);
     }
 
-    public function get(ServerRequestInterface $request): ?array
-    {
-        $params = $request->getServerParams();
-        $ip = $params['REMOTE_ADDR'];
-        try {
-            $urlService = 'http://www.geoplugin.net/php.gp?ip=' . $ip;
-            $version11Branch = VersionNumberUtility::convertVersionNumberToInteger(GeneralUtility::makeInstance(Typo3Version::class)->getBranch()) >= VersionNumberUtility::convertVersionNumberToInteger('11.2');
-            if ($version11Branch) {
-                $content = unserialize(GeneralUtility::getUrl($urlService));
-            } else {
-                $content = unserialize(GeneralUtility::getUrl($urlService, 0, false));
-            }
-            if (!\is_array($content) || empty($content) || '404' === $content['geoplugin_status']) {
-                throw new Exception('Missing information in response', 123781);
-            }
-
-            return $content;
-        } catch (Exception $exc) {
-            return null;
-        }
-    }
-
     public function getLanguage(ServerRequestInterface $request): ?string
     {
-        $data = $this->get($request);
+        $ipLocation = GeneralUtility::makeInstance(IpLocation::class);
+        $data = $ipLocation->get($request->getServerParams()['REMOTE_ADDR']);
         if (null !== $data && !isset($data['geoplugin_countryCode'])) {
             return null;
         }

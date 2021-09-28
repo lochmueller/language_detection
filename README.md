@@ -8,7 +8,7 @@
 
 Use the site configuration module to configure the language detection. Just enable it, and it will works :)
 
-![Configuration](https://raw.githubusercontent.com/lochmueller/language_detection/master/Resources/Public/Configuration.jpg)
+![Configuration](https://raw.githubusercontent.com/lochmueller/language_detection/master/Resources/Public/Configuration.png)
 
 ## Structure
 
@@ -66,6 +66,7 @@ Default-Listener:
 
 ## Troubleshooting
 
-Q: There are missing or wrong languages in the detection process.
-A: Do you check in incognito mode? The browser will not send all languages in incognito mode. So "wrong results" are possible.
+> There are missing or wrong languages in the detection process. Why?
+
+Do you check in incognito mode? The browser will not send all languages in incognito mode. So "wrong results" are possible. Please check the request header to TYPO3 in detail. Otherwise, perhaps the DefaultNegotiation do not handle the "best fitting language" selection process for your needs?
 

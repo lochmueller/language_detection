@@ -52,8 +52,7 @@
 	"scripts": {
 		"code": [
 			"@code:rector",
-			"@code:php-cs-fixer",
-			"@code:metrics"
+			"@code:php-cs-fixer"
 		],
 		"code:rector": [
 			"rector"

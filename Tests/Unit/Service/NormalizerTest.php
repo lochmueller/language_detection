@@ -16,8 +16,7 @@ class NormalizerTest extends AbstractTest
     /**
      * @dataProvider normalizeProvider
      *
-     * @param mixed $base
-     * @param mixed $result
+     * @covers \LD\LanguageDetection\Service\Normalizer
      */
     public function testNormalize(string $base, string $result): void
     {
@@ -26,6 +25,9 @@ class NormalizerTest extends AbstractTest
         self::assertEquals($result, $normalizer->normalize($base));
     }
 
+    /**
+     * @covers \LD\LanguageDetection\Service\Normalizer
+     */
     public function testNormalizeList(): void
     {
         $normalizer = new Normalizer();
@@ -43,23 +45,23 @@ class NormalizerTest extends AbstractTest
     public function normalizeProvider(): array
     {
         return [
-            [
+            'default' => [
                 'de-de',
                 'de_DE',
             ],
-            [
+            'default with encoding' => [
                 'de_DE.UTF-8',
                 'de_DE',
             ],
-            [
+            'lower and upper wrong in country' => [
                 'en-gB',
                 'en_GB',
             ],
-            [
+            'lower and upper wrong in language' => [
                 'EN-us',
                 'en_US',
             ],
-            [
+            'lower and upper wrong in language and language only' => [
                 'EN',
                 'en',
             ],
