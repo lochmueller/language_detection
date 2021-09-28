@@ -73,3 +73,10 @@ Do you check in incognito mode? The browser will not send all languages in incog
 > Why the redirect not work on subpages?
 
 The middleware is early in the middleware stack. There is no concept of links and translations (or page UID). Furthermore it is recommended not redirect on sub pages. A user that call a subpage first bookmark the page or search in a search egine. In both cases the use get already the right languages. I suggest hreflang tags so search engines get the right language of the content https://developers.google.com/search/docs/advanced/crawling/localized-versions 
+
+
+## Dev
+
+Execute tests: 
+
+> docker run --rm -it --volume $(pwd):/app prooph/composer:7.4 test
