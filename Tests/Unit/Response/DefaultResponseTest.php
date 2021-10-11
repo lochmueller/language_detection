@@ -28,6 +28,9 @@ class DefaultResponseTest extends AbstractTest
         $siteLanguage = $this->createStub(SiteLanguage::class);
         $siteLanguage->method('getBase')->willReturn(new Uri('/en/'));
 
+        $request = $this->createStub(ServerRequestInterface::class);
+        $request->method('getUri')->willReturn(new Uri('/?test=1'));
+
         $site = $this->createStub(Site::class);
         $site->method('getConfiguration')->willReturn([
             'forwardRedirectParameters' => '',
@@ -36,7 +39,7 @@ class DefaultResponseTest extends AbstractTest
 
         $event = new BuildResponse(
             $site,
-            $this->createMock(ServerRequestInterface::class),
+            $request,
             $siteLanguage
         );
 
