@@ -59,6 +59,7 @@ class BackendUserListenerTest extends AbstractTest
     /**
      * @covers \LD\LanguageDetection\Check\BackendUserListener
      * @covers \LD\LanguageDetection\Event\CheckLanguageDetection
+     * @dataProvider data
      */
     public function testWithDisableConfigurationInSiteAndActiveBackendUser(bool $isLoginState, bool $disableRedirectWithBackendSession, bool $isEnabled): void
     {
