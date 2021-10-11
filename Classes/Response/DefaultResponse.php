@@ -25,7 +25,9 @@ class DefaultResponse
                 $code = 307;
             }
 
-            $event->setResponse(new RedirectResponse((string)$targetUri, $code));
+            if ((string) $event->getRequest()->getUri() !== (string) $targetUri) {
+                $event->setResponse(new RedirectResponse((string) $targetUri, $code));
+            }
         }
     }
 
