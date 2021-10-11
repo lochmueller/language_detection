@@ -12,7 +12,6 @@ use Psr\EventDispatcher\EventDispatcherInterface;
 use TYPO3\CMS\Core\Http\ServerRequestFactory;
 use TYPO3\CMS\Core\LinkHandling\LinkService;
 use TYPO3\CMS\Core\Site\SiteFinder;
-use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 trait RespectLanguageLinkDetailsTrait
 {
@@ -33,7 +32,7 @@ trait RespectLanguageLinkDetailsTrait
         $request = ServerRequestFactory::fromGlobals();
 
         $check = new CheckLanguageDetection($site, $request);
-        $enableListener = GeneralUtility::makeInstance(EnableListener::class);
+        $enableListener = new EnableListener();
         $enableListener($check);
 
         if (!$check->isLanguageDetectionEnable()) {

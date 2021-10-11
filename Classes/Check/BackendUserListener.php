@@ -5,11 +5,13 @@ declare(strict_types=1);
 namespace LD\LanguageDetection\Check;
 
 use LD\LanguageDetection\Event\CheckLanguageDetection;
-use TYPO3\CMS\Core\Context\Context;
-use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Core\Context\ContextAwareInterface;
+use TYPO3\CMS\Core\Context\ContextAwareTrait;
 
-class BackendUserListener
+class BackendUserListener implements ContextAwareInterface
 {
+    use ContextAwareTrait;
+
     public function __invoke(CheckLanguageDetection $event): void
     {
         $config = $event->getSite()->getConfiguration();
@@ -17,7 +19,7 @@ class BackendUserListener
         if (!$disableForBackendUser) {
             return;
         }
-        if (GeneralUtility::makeInstance(Context::class)->getAspect('backend.user')->get('isLoggedIn')) {
+        if ($this->getContext()->getAspect('backend.user')->get('isLoggedIn')) {
             $event->disableLanguageDetection();
         }
     }

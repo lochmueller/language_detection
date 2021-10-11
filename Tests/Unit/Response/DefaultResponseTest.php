@@ -10,7 +10,6 @@ use LD\LanguageDetection\Tests\Unit\AbstractTest;
 use Psr\Http\Message\ServerRequestInterface;
 use TYPO3\CMS\Core\Http\Uri;
 use TYPO3\CMS\Core\Site\Entity\Site;
-use TYPO3\CMS\Core\Site\Entity\SiteInterface;
 use TYPO3\CMS\Core\Site\Entity\SiteLanguage;
 
 /**

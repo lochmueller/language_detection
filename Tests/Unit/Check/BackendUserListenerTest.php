@@ -11,7 +11,6 @@ use Psr\Http\Message\ServerRequestInterface;
 use TYPO3\CMS\Core\Context\Context;
 use TYPO3\CMS\Core\Context\UserAspect;
 use TYPO3\CMS\Core\Site\Entity\Site;
-use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * @internal
@@ -63,7 +62,6 @@ class BackendUserListenerTest extends AbstractTest
      */
     public function testWithDisableConfigurationInSiteAndActiveBackendUser(): void
     {
-        self::markTestSkipped('Have to check how to set the context');
         $site = $this->createStub(Site::class);
         $site->method('getConfiguration')
             ->willReturn(['disableRedirectWithBackendSession' => true])
@@ -76,12 +74,15 @@ class BackendUserListenerTest extends AbstractTest
             ->willReturn(true)
         ;
 
-        GeneralUtility::makeInstance(Context::class)->setAspect('backend.user', $userAspect);
+        $context = new Context([
+            'backend.user' => $userAspect,
+        ]);
 
         $backendUserListener = new BackendUserListener();
+        $backendUserListener->setContext($context);
         $backendUserListener($event);
 
-        self::assertTrue(GeneralUtility::makeInstance(Context::class)->getAspect('backend.user')->get('isLoggedIn'), (string)$userAspect->isLoggedIn());
+        self::assertTrue($context->getAspect('backend.user')->get('isLoggedIn'), (string)$userAspect->isLoggedIn());
         self::assertFalse($event->isLanguageDetectionEnable(), (string)$userAspect->isLoggedIn());
     }
 
@@ -91,7 +92,6 @@ class BackendUserListenerTest extends AbstractTest
      */
     public function testWithDisableConfigurationInSiteAndNoBackendUser(): void
     {
-        self::markTestSkipped('Have to check how to set the context');
         $site = $this->createStub(Site::class);
         $site->method('getConfiguration')
             ->willReturn(['disableRedirectWithBackendSession' => true])
@@ -104,10 +104,12 @@ class BackendUserListenerTest extends AbstractTest
             ->willReturn(false)
         ;
 
-        $context = GeneralUtility::makeInstance(Context::class);
-        $context->setAspect('backend.user', $userAspect);
+        $context = new Context([
+            'backend.user' => $userAspect,
+        ]);
 
         $backendUserListener = new BackendUserListener();
+        $backendUserListener->setContext($context);
         $backendUserListener($event);
 
         self::assertFalse($context->getAspect('backend.user')->get('isLoggedIn'));

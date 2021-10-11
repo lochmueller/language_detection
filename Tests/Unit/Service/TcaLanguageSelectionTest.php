@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace LD\LanguageDetection\Tests\Service;
 
+use LD\LanguageDetection\Service\TcaLanguageSelection;
 use LD\LanguageDetection\Tests\Unit\AbstractTest;
 
 /**
@@ -12,9 +13,16 @@ use LD\LanguageDetection\Tests\Unit\AbstractTest;
  */
 class TcaLanguageSelectionTest extends AbstractTest
 {
-    public function testDummy(): void
+    /**
+     * @covers \LD\LanguageDetection\Service\TcaLanguageSelection
+     */
+    public function testLanguageSelection(): void
     {
-        // @todo
-        self::assertTrue(true);
+        $tcaLanguageSelection = new TcaLanguageSelection();
+        $configuration = [];
+
+        $tcaLanguageSelection->get($configuration);
+
+        self::assertSame([], $configuration);
     }
 }
