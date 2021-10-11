@@ -55,6 +55,13 @@ services:
         identifier: 'languageDetectionBackendUser'
         event: LD\LanguageDetection\Event\CheckLanguageDetection
 
+  LD\LanguageDetection\Check\RequestMethodListener:
+    tags:
+      - name: event.listener
+        after: 'languageDetectionEnable'
+        identifier: 'languageDetectionRequestMethod'
+        event: LD\LanguageDetection\Event\CheckLanguageDetection
+
   LD\LanguageDetection\Negotiation\DefaultNegotiation:
     tags:
       - name: event.listener
