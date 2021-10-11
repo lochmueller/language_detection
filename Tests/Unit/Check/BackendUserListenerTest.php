@@ -60,18 +60,18 @@ class BackendUserListenerTest extends AbstractTest
      * @covers \LD\LanguageDetection\Check\BackendUserListener
      * @covers \LD\LanguageDetection\Event\CheckLanguageDetection
      */
-    public function testWithDisableConfigurationInSiteAndActiveBackendUser(): void
+    public function testWithDisableConfigurationInSiteAndActiveBackendUser(bool $isLoginState, bool $disableRedirectWithBackendSession, bool $isEnabled): void
     {
         $site = $this->createStub(Site::class);
         $site->method('getConfiguration')
-            ->willReturn(['disableRedirectWithBackendSession' => true])
+            ->willReturn(['disableRedirectWithBackendSession' => $disableRedirectWithBackendSession])
         ;
         $request = $this->createMock(ServerRequestInterface::class);
         $event = new CheckLanguageDetection($site, $request);
 
         $userAspect = $this->createStub(UserAspect::class);
         $userAspect->method('isLoggedIn')
-            ->willReturn(true)
+            ->willReturn($isLoginState)
         ;
 
         $context = new Context([
@@ -82,37 +82,20 @@ class BackendUserListenerTest extends AbstractTest
         $backendUserListener->setContext($context);
         $backendUserListener($event);
 
-        self::assertTrue($context->getAspect('backend.user')->get('isLoggedIn'), (string)$userAspect->isLoggedIn());
-        self::assertFalse($event->isLanguageDetectionEnable(), (string)$userAspect->isLoggedIn());
+        self::assertSame($isLoginState, $context->getAspect('backend.user')->get('isLoggedIn'));
+        self::assertSame($isEnabled, $event->isLanguageDetectionEnable());
     }
 
     /**
-     * @covers \LD\LanguageDetection\Check\BackendUserListener
-     * @covers \LD\LanguageDetection\Event\CheckLanguageDetection
+     * @return array<string, bool[]>
      */
-    public function testWithDisableConfigurationInSiteAndNoBackendUser(): void
+    public function data(): array
     {
-        $site = $this->createStub(Site::class);
-        $site->method('getConfiguration')
-            ->willReturn(['disableRedirectWithBackendSession' => true])
-        ;
-        $request = $this->createMock(ServerRequestInterface::class);
-        $event = new CheckLanguageDetection($site, $request);
-
-        $userAspect = $this->createStub(UserAspect::class);
-        $userAspect->method('isLoggedIn')
-            ->willReturn(false)
-        ;
-
-        $context = new Context([
-            'backend.user' => $userAspect,
-        ]);
-
-        $backendUserListener = new BackendUserListener();
-        $backendUserListener->setContext($context);
-        $backendUserListener($event);
-
-        self::assertFalse($context->getAspect('backend.user')->get('isLoggedIn'));
-        self::assertTrue($event->isLanguageDetectionEnable(), (string)$userAspect->isLoggedIn());
+        return [
+            'Active be user and disableRedirectWithBackendSession' => [true, true, false],
+            'Inactive be user and disableRedirectWithBackendSession' => [false, true, true],
+            'Active be user and no disableRedirectWithBackendSession' => [true, false, true],
+            'Inactive be user and no disableRedirectWithBackendSession' => [false, false, true],
+        ];
     }
 }
