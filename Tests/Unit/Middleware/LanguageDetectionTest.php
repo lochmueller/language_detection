@@ -33,9 +33,9 @@ use TYPO3\CMS\Core\Site\Entity\Site;
 class LanguageDetectionTest extends AbstractTest
 {
     /**
-     * @covers \LD\LanguageDetection\Middleware\LanguageDetection
      * @covers \LD\LanguageDetection\Check\BotListener
      * @covers \LD\LanguageDetection\Event\CheckLanguageDetection
+     * @covers \LD\LanguageDetection\Middleware\LanguageDetection
      * @covers \LD\LanguageDetection\Negotiation\DefaultNegotiation
      */
     public function testBreakAfterCheckLanguageDetectionByAddingBotAgent(): void
@@ -53,11 +53,11 @@ class LanguageDetectionTest extends AbstractTest
     }
 
     /**
-     * @covers \LD\LanguageDetection\Middleware\LanguageDetection
      * @covers \LD\LanguageDetection\Check\BotListener
      * @covers \LD\LanguageDetection\Detect\BrowserLanguage
      * @covers \LD\LanguageDetection\Event\CheckLanguageDetection
      * @covers \LD\LanguageDetection\Event\DetectUserLanguages
+     * @covers \LD\LanguageDetection\Middleware\LanguageDetection
      * @covers \LD\LanguageDetection\Negotiation\DefaultNegotiation
      */
     public function testBreakAfterDetectUserLanguagesByMissingLanguages(): void
@@ -75,9 +75,9 @@ class LanguageDetectionTest extends AbstractTest
     }
 
     /**
-     * @covers \LD\LanguageDetection\Middleware\LanguageDetection
      * @covers \LD\LanguageDetection\Event\CheckLanguageDetection
      * @covers \LD\LanguageDetection\Event\DetectUserLanguages
+     * @covers \LD\LanguageDetection\Middleware\LanguageDetection
      */
     public function testBreakAfterNegotiateSiteLanguageByNotFoundTargetLanguage(): void
     {
@@ -96,9 +96,9 @@ class LanguageDetectionTest extends AbstractTest
     }
 
     /**
-     * @covers \LD\LanguageDetection\Middleware\LanguageDetection
      * @covers \LD\LanguageDetection\Event\CheckLanguageDetection
      * @covers \LD\LanguageDetection\Event\DetectUserLanguages
+     * @covers \LD\LanguageDetection\Middleware\LanguageDetection
      */
     public function testBreakAfterBuildResponseByEmptyResponse(): void
     {
@@ -117,9 +117,9 @@ class LanguageDetectionTest extends AbstractTest
     }
 
     /**
-     * @covers \LD\LanguageDetection\Middleware\LanguageDetection
      * @covers \LD\LanguageDetection\Event\CheckLanguageDetection
      * @covers \LD\LanguageDetection\Event\DetectUserLanguages
+     * @covers \LD\LanguageDetection\Middleware\LanguageDetection
      */
     public function testFullExecution(): void
     {
