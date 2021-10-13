@@ -5,8 +5,8 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        php-versions: ["7.4", "8.0"]
-        typo3-versions: ["10.4", "11.5"]
+        php: ["7.4", "8.0"]
+        typo3: ["10.4", "11.5"]
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -15,7 +15,7 @@ jobs:
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: ${{ matrix.php-versions }}
+          php-version: ${{ matrix.php }}
           tools: composer
 
       - name: Setup problem matchers
