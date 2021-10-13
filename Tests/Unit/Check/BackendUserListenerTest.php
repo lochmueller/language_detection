@@ -11,6 +11,7 @@ use Psr\Http\Message\ServerRequestInterface;
 use TYPO3\CMS\Core\Context\Context;
 use TYPO3\CMS\Core\Context\UserAspect;
 use TYPO3\CMS\Core\Site\Entity\Site;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * @internal
@@ -63,7 +64,6 @@ class BackendUserListenerTest extends AbstractTest
      */
     public function testWithDisableConfigurationInSiteAndActiveBackendUser(bool $isLoginState, bool $disableRedirectWithBackendSession, bool $isEnabled): void
     {
-        self::markTestSkipped('Context handling do not work');
         $site = $this->createStub(Site::class);
         $site->method('getConfiguration')
             ->willReturn(['disableRedirectWithBackendSession' => $disableRedirectWithBackendSession])
@@ -76,12 +76,12 @@ class BackendUserListenerTest extends AbstractTest
             ->willReturn($isLoginState)
         ;
 
-        $context = new Context([
-            'backend.user' => $userAspect,
-        ]);
+        $context = new Context();
+        $context->setAspect('backend.user', $userAspect);
+
+        GeneralUtility::setSingletonInstance(Context::class, $context);
 
         $backendUserListener = new BackendUserListener();
-        $backendUserListener->setContext($context);
         $backendUserListener($event);
 
         self::assertSame($isLoginState, $context->getAspect('backend.user')->get('isLoggedIn'));
