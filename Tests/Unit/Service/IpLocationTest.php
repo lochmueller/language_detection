@@ -12,4 +12,9 @@ use LD\LanguageDetection\Tests\Unit\AbstractTest;
  */
 class IpLocationTest extends AbstractTest
 {
+    public function testDummy(): void
+    {
+        // @todo
+        self::assertTrue(true);
+    }
 }
