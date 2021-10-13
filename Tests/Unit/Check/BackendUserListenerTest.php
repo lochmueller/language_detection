@@ -11,7 +11,6 @@ use Psr\Http\Message\ServerRequestInterface;
 use TYPO3\CMS\Core\Context\Context;
 use TYPO3\CMS\Core\Context\UserAspect;
 use TYPO3\CMS\Core\Site\Entity\Site;
-use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * @internal
@@ -71,17 +70,20 @@ class BackendUserListenerTest extends AbstractTest
         $request = $this->createMock(ServerRequestInterface::class);
         $event = new CheckLanguageDetection($site, $request);
 
-        $userAspect = $this->createStub(UserAspect::class);
-        $userAspect->method('isLoggedIn')
-            ->willReturn($isLoginState)
-        ;
+        $userAspect = new UserAspect();
+        if ($isLoginState) {
+            $user = new \stdClass();
+            $user->user = ['uid' => 1];
+            $propertyReflection = new \ReflectionProperty($userAspect, 'user');
+            $propertyReflection->setAccessible(true);
+            $propertyReflection->setValue($userAspect, $user);
+        }
 
         $context = new Context();
         $context->setAspect('backend.user', $userAspect);
 
-        GeneralUtility::setSingletonInstance(Context::class, $context);
-
         $backendUserListener = new BackendUserListener();
+        $backendUserListener->setContext($context);
         $backendUserListener($event);
 
         self::assertSame($isLoginState, $context->getAspect('backend.user')->get('isLoggedIn'));
