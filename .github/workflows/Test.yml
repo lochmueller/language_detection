@@ -37,9 +37,6 @@ jobs:
           key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
           restore-keys: ${{ runner.os }}-composer-
 
-      - name: Install dependencies
-        run: composer install --prefer-dist --no-progress
-
       - name: Install the right version
         run: composer require "typo3/cms-core:^${{ matrix.typo3 }}" "typo3/cms-frontend:^${{ matrix.typo3 }}" -W
 
