@@ -1,5 +1,14 @@
 # TYPO3 Language Detection
 
+[![Latest Stable Version](https://poser.pugx.org/lochmueller/language-detection/v/stable)](https://packagist.org/packages/lochmueller/language-detection)
+[![Total Downloads](https://poser.pugx.org/lochmueller/language-detection/downloads)](https://packagist.org/packages/lochmueller/language-detection)
+[![License](https://poser.pugx.org/lochmueller/language-detection/license)](https://packagist.org/packages/lochmueller/language-detection)
+[![TYPO3](https://img.shields.io/badge/TYPO3-10-orange.svg)](https://typo3.org/)
+[![TYPO3](https://img.shields.io/badge/TYPO3-11-orange.svg)](https://typo3.org/)
+[![Average time to resolve an issue](http://isitmaintained.com/badge/resolution/lochmueller/language_detection.svg)](http://isitmaintained.com/project/lochmueller/language_detection "Average time to resolve an issue")
+[![Percentage of issues still open](http://isitmaintained.com/badge/open/lochmueller/language_detection.svg)](http://isitmaintained.com/project/lochmueller/language_detection "Percentage of issues still open")
+[![Test](https://github.com/lochmueller/language_detection/actions/workflows/Test.yml/badge.svg)](https://github.com/lochmueller/language_detection/actions/workflows/Test.yml)
+
 ## Installation
 
 > composer require lochmueller/language-detection
