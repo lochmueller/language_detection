@@ -5,9 +5,9 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        operating-system: [ubuntu-latest]
         php-versions: ["7.4", "8.0"]
-    runs-on: ${{ matrix.operating-system }}
+        typo3-versions: ["10.4", "11.5"]
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -36,6 +36,9 @@ jobs:
 
       - name: Install dependencies
         run: composer install --prefer-dist --no-progress
+
+      - name: Install the right version
+        run: composer require "typo3/cms-core:^${{ matrix.typo3 }}"
 
       - name: Unit Tests with phpunit
         run: composer run test
