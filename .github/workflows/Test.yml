@@ -38,7 +38,7 @@ jobs:
         run: composer install --prefer-dist --no-progress
 
       - name: Install the right version
-        run: composer require "typo3/cms-core:^${{ matrix.typo3 }}" "typo3/cms-frontend:^${{ matrix.typo3 }}"
+        run: composer require "typo3/cms-core:^${{ matrix.typo3 }}" "typo3/cms-frontend:^${{ matrix.typo3 }}" -W
 
       - name: Unit Tests with phpunit
         run: composer run test
