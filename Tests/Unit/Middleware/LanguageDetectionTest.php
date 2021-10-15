@@ -15,7 +15,6 @@ use LD\LanguageDetection\Negotiation\DefaultNegotiation;
 use LD\LanguageDetection\Response\DefaultResponse;
 use LD\LanguageDetection\Service\Normalizer;
 use LD\LanguageDetection\Tests\Unit\AbstractTest;
-use Psr\EventDispatcher\EventDispatcherInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 use Symfony\Component\DependencyInjection\Container;
 use TYPO3\CMS\Core\EventDispatcher\EventDispatcher;
@@ -82,12 +81,10 @@ class LanguageDetectionTest extends AbstractTest
         $handler = $this->createStub(RequestHandlerInterface::class);
         $handler->method('handle')->willReturn(new NullResponse());
 
-        $eventDispatcher = $this->createMock(EventDispatcherInterface::class);
-
         $serverRequest = new ServerRequest(null, null, 'php://input', ['accept-language' => 'de,de_DE']);
         $serverRequest = $serverRequest->withAttribute('site', new Site('dummy', 1, []));
 
-        $middleware = new LanguageDetection($eventDispatcher);
+        $middleware = new LanguageDetection($this->getEventListener());
         $response = $middleware->process($serverRequest, $handler);
 
         self::assertInstanceOf(NullResponse::class, $response);
@@ -98,17 +95,32 @@ class LanguageDetectionTest extends AbstractTest
      * @covers \LD\LanguageDetection\Event\DetectUserLanguages
      * @covers \LD\LanguageDetection\Middleware\LanguageDetection
      */
-    public function testBreakAfterBuildResponseByEmptyResponse(): void
+    public function testBreakAfterBuildResponseByEmptyResponseBecauseOfSameUri(): void
     {
         $handler = $this->createStub(RequestHandlerInterface::class);
         $handler->method('handle')->willReturn(new NullResponse());
 
-        $eventDispatcher = $this->createMock(EventDispatcherInterface::class);
+        $serverRequest = new ServerRequest('https://www.dummy.de/', null, 'php://input', ['accept-language' => 'de,de_DE']);
+        $site = new Site('dummy', 1, [
+            'base' => 'https://www.dummy.de/',
+            'forwardRedirectParameters' => '',
+            'languages' => [
+                [
+                    'languageId' => 1,
+                    'base' => '/',
+                    'locale' => 'de_DE',
+                ],
+                [
+                    'languageId' => 2,
+                    'base' => '/en/',
+                    'locale' => 'en_GB',
+                ],
+            ],
+        ]);
 
-        $serverRequest = new ServerRequest(null, null, 'php://input', ['accept-language' => 'de,de_DE']);
-        $serverRequest = $serverRequest->withAttribute('site', new Site('dummy', 1, []));
+        $serverRequest = $serverRequest->withAttribute('site', $site);
 
-        $middleware = new LanguageDetection($eventDispatcher);
+        $middleware = new LanguageDetection($this->getEventListener());
         $response = $middleware->process($serverRequest, $handler);
 
         self::assertInstanceOf(NullResponse::class, $response);
@@ -124,17 +136,30 @@ class LanguageDetectionTest extends AbstractTest
         $handler = $this->createStub(RequestHandlerInterface::class);
         $handler->method('handle')->willReturn(new NullResponse());
 
-        $eventDispatcher = $this->createMock(EventDispatcherInterface::class);
+        $serverRequest = new ServerRequest('https://www.dummy.de/', null, 'php://input', ['accept-language' => 'de,de_DE']);
+        $site = new Site('dummy', 1, [
+            'base' => 'https://www.dummy.de/',
+            'forwardRedirectParameters' => '',
+            'languages' => [
+                [
+                    'languageId' => 1,
+                    'base' => '/de/',
+                    'locale' => 'de_DE',
+                ],
+                [
+                    'languageId' => 2,
+                    'base' => '/en/',
+                    'locale' => 'en_GB',
+                ],
+            ],
+        ]);
 
-        $serverRequest = new ServerRequest(null, null, 'php://input', ['accept-language' => 'de,de_DE']);
-        $serverRequest = $serverRequest->withAttribute('site', new Site('dummy', 1, []));
+        $serverRequest = $serverRequest->withAttribute('site', $site);
 
-        $middleware = new LanguageDetection($eventDispatcher);
+        $middleware = new LanguageDetection($this->getEventListener());
         $response = $middleware->process($serverRequest, $handler);
 
-        // @todo Fix test for full configuration
-        self::assertInstanceOf(NullResponse::class, $response);
-        // self::assertNotInstanceOf(NullResponse::class, $response);
+        self::assertNotInstanceOf(NullResponse::class, $response);
     }
 
     protected function getEventListener(): EventDispatcher
@@ -143,7 +168,7 @@ class LanguageDetectionTest extends AbstractTest
         $container->set(BotListener::class, new BotListener());
         $container->set(BrowserLanguage::class, new BrowserLanguage());
         $container->set(DefaultNegotiation::class, new DefaultNegotiation(new Normalizer()));
-        $container->set(BuildResponse::class, new DefaultResponse());
+        $container->set(DefaultResponse::class, new DefaultResponse());
         $provider = new ListenerProvider($container);
         $provider->addListener(CheckLanguageDetection::class, BotListener::class);
         $provider->addListener(DetectUserLanguages::class, BrowserLanguage::class);

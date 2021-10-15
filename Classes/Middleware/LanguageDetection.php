@@ -29,6 +29,15 @@ class LanguageDetection implements MiddlewareInterface
 
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
+        try {
+            return $this->processLanguageDetection($request);
+        } catch (\Exception $exception) {
+            return $handler->handle($request);
+        }
+    }
+
+    protected function processLanguageDetection(ServerRequestInterface $request): ResponseInterface
+    {
         /** @var Site $site */
         $site = $request->getAttribute('site');
 
@@ -36,30 +45,30 @@ class LanguageDetection implements MiddlewareInterface
         $this->eventDispatcher->dispatch($check);
 
         if (!$check->isLanguageDetectionEnable()) {
-            return $handler->handle($request);
+            throw new \Exception('Language Detection is disabled', 1_236_781);
         }
 
         $detect = new DetectUserLanguages($site, $request);
         $this->eventDispatcher->dispatch($detect);
 
         if (empty($detect->getUserLanguages())) {
-            return $handler->handle($request);
+            throw new \Exception('No user languages', 3_284_924);
         }
 
         $negotiate = new NegotiateSiteLanguage($site, $request, $detect->getUserLanguages());
         $this->eventDispatcher->dispatch($negotiate);
 
         if (null === $negotiate->getSelectedLanguage()) {
-            return $handler->handle($request);
+            throw new \Exception('No selectable language', 2_374_892);
         }
 
         $response = new BuildResponse($site, $request, $negotiate->getSelectedLanguage());
         $this->eventDispatcher->dispatch($response);
 
-        if (null !== $response->getResponse()) {
-            return $response->getResponse();
+        if (null === $response->getResponse()) {
+            throw new \Exception('No response was created', 7_829_342);
         }
 
-        return $handler->handle($request);
+        return $response->getResponse();
     }
 }
