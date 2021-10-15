@@ -5,5 +5,7 @@
 /composer.lock export-ignore
 /.github/ export-ignore
 /Resources/Private/Build/ export-ignore
-/phpunit.xml
-/.phpunit.cache
+/.crowdin.yml export-ignore
+/phpunit.xml export-ignore
+/.phpunit.cache export-ignore
+/rector.php export-ignore

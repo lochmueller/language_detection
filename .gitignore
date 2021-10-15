@@ -2,3 +2,4 @@
 /var
 /.phpunit.cache
 /composer.lock
+/.idea

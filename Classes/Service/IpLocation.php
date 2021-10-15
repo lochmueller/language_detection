@@ -4,27 +4,33 @@ declare(strict_types=1);
 
 namespace LD\LanguageDetection\Service;
 
-use TYPO3\CMS\Core\Information\Typo3Version;
-use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Core\Utility\VersionNumberUtility;
+use Psr\Http\Message\RequestFactoryInterface;
 
 class IpLocation
 {
+    private RequestFactoryInterface $requestFactory;
+
+    public function __construct(RequestFactoryInterface $requestFactory)
+    {
+        $this->requestFactory = $requestFactory;
+    }
+
     public function get(string $ip): ?array
     {
+        $urlService = 'http://www.geoplugin.net/php.gp?ip=' . $ip;
         try {
-            $urlService = 'http://www.geoplugin.net/php.gp?ip=' . $ip;
-            $version11Branch = VersionNumberUtility::convertVersionNumberToInteger(GeneralUtility::makeInstance(Typo3Version::class)->getBranch()) >= VersionNumberUtility::convertVersionNumberToInteger('11.2');
-            if ($version11Branch) {
-                $content = unserialize(GeneralUtility::getUrl($urlService));
-            } else {
-                $content = unserialize(GeneralUtility::getUrl($urlService, 0, false));
-            }
-            if (!\is_array($content) || empty($content) || '404' === $content['geoplugin_status']) {
+            $response = $this->requestFactory->request($urlService);
+
+            if (200 !== $response->getStatusCode()) {
                 throw new \Exception('Missing information in response', 123781);
             }
+            $result = (array)unserialize((string)$response->getBody());
 
-            return $content;
+            if (empty($result) || 404 === (int)$result['geoplugin_status']) {
+                throw new \Exception('No valid data', 162378);
+            }
+
+            return $result;
         } catch (\Exception $exc) {
             return null;
         }
