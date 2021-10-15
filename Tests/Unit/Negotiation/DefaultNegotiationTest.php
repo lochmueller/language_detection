@@ -21,7 +21,7 @@ class DefaultNegotiationTest extends AbstractTest
 {
     /**
      * @covers \LD\LanguageDetection\Negotiation\DefaultNegotiation
-     * @covers \LD\LanguageDetection\Service\Normalize
+     * @covers \LD\LanguageDetection\Service\Normalizer
      */
     public function testNoLanguagesWithEmptyUserLanguages(): void
     {
@@ -37,7 +37,7 @@ class DefaultNegotiationTest extends AbstractTest
 
     /**
      * @covers \LD\LanguageDetection\Negotiation\DefaultNegotiation
-     * @covers \LD\LanguageDetection\Service\Normalize
+     * @covers \LD\LanguageDetection\Service\Normalizer
      */
     public function testSelectedLanguagesWithUserLanguages(): void
     {
