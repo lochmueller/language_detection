@@ -43,6 +43,8 @@ class IpLanguage
             case 'replace':
                 $base = [$language];
                 break;
+            default:
+                return;
         }
         $event->setUserLanguages($base);
     }

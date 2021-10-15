@@ -21,12 +21,14 @@ class BrowserLanguage
         $acceptedLanguagesArr = [];
         foreach ($languages as $languageAndQualityStr) {
             if (false !== strpos($languageAndQualityStr, ';')) {
-                [$languageCode, $quality] = GeneralUtility::trimExplode(';', $languageAndQualityStr, true);
+                $parts = GeneralUtility::trimExplode(';', $languageAndQualityStr, true);
+                $languageCode = $parts[0];
+                $quality = isset($parts[1]) ? (string)$parts[1] : '';
             } else {
                 $languageCode = $languageAndQualityStr;
                 $quality = 'q=1.0';
             }
-            $acceptedLanguagesArr[$languageCode] = $quality ? (float)mb_substr($quality, 2) : 1.0;
+            $acceptedLanguagesArr[$languageCode] = '' !== $quality ? (float)mb_substr($quality, 2) : 1.0;
         }
 
         // Sort

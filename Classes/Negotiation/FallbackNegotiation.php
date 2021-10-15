@@ -10,16 +10,18 @@ use TYPO3\CMS\Core\Utility\MathUtility;
 
 class FallbackNegotiation
 {
+    protected const CONFIG_KEY = 'fallbackDetectionLanguage';
+
     public function __invoke(NegotiateSiteLanguage $event): void
     {
         $site = $event->getSite();
         $configuration = $site->getConfiguration();
 
-        if (!isset($configuration['fallbackDetectionLanguage']) || !MathUtility::canBeInterpretedAsInteger($configuration['fallbackDetectionLanguage'])) {
+        if (!isset($configuration[self::CONFIG_KEY]) || !MathUtility::canBeInterpretedAsInteger($configuration[self::CONFIG_KEY])) {
             return;
         }
 
-        $fallback = (int)$configuration['fallbackDetectionLanguage'];
+        $fallback = (int)$configuration[self::CONFIG_KEY];
 
         foreach ($site->getAllLanguages() as $siteLanguage) {
             /** @var SiteLanguage $siteLanguage */

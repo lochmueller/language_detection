@@ -54,22 +54,22 @@ class PathListenerTest extends AbstractTest
             ],
             'no allowAllPaths and deeplink' => [
                 ['allowAllPaths' => false],
-                'https://www.google.de/deep-link/',
+                'https://www.google.de/deep-link-more/',
                 false,
             ],
             'no allowAllPaths and homepage' => [
                 ['allowAllPaths' => false],
-                'https://www.google.de/',
+                'https://www.home-page.de/',
                 true,
             ],
             'without allowAllPaths and deeplink' => [
                 [],
-                'https://www.google.de/deep-link/',
+                'https://www.google.de/deep-link-next/',
                 false,
             ],
             'without allowAllPaths and homepage' => [
                 [],
-                'https://www.google.de/',
+                'https://www.tester.de/',
                 true,
             ],
         ];

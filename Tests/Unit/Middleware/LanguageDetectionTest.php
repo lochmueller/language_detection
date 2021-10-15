@@ -16,8 +16,6 @@ use LD\LanguageDetection\Response\DefaultResponse;
 use LD\LanguageDetection\Service\Normalizer;
 use LD\LanguageDetection\Tests\Unit\AbstractTest;
 use Psr\EventDispatcher\EventDispatcherInterface;
-use Psr\Http\Message\ResponseInterface;
-use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 use Symfony\Component\DependencyInjection\Container;
 use TYPO3\CMS\Core\EventDispatcher\EventDispatcher;
@@ -153,41 +151,5 @@ class LanguageDetectionTest extends AbstractTest
         $provider->addListener(BuildResponse::class, DefaultResponse::class);
 
         return new EventDispatcher($provider);
-    }
-
-    public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
-    {
-        /** @var Site $site */
-        $site = $request->getAttribute('site');
-
-        $check = new CheckLanguageDetection($site, $request);
-        $this->eventDispatcher->dispatch($check);
-
-        if (!$check->isLanguageDetectionEnable()) {
-            return $handler->handle($request);
-        }
-
-        $detect = new DetectUserLanguages($site, $request);
-        $this->eventDispatcher->dispatch($detect);
-
-        if (empty($detect->getUserLanguages())) {
-            return $handler->handle($request);
-        }
-
-        $negotiate = new NegotiateSiteLanguage($site, $request, $detect->getUserLanguages());
-        $this->eventDispatcher->dispatch($negotiate);
-
-        if (null === $negotiate->getSelectedLanguage()) {
-            return $handler->handle($request);
-        }
-
-        $response = new BuildResponse($site, $request, $negotiate->getSelectedLanguage());
-        $this->eventDispatcher->dispatch($response);
-
-        if (null !== $response->getResponse()) {
-            return $response->getResponse();
-        }
-
-        return $handler->handle($request);
     }
 }
