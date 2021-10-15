@@ -75,6 +75,11 @@ class LanguageDetectionTest extends AbstractTest
      * @covers \LD\LanguageDetection\Event\CheckLanguageDetection
      * @covers \LD\LanguageDetection\Event\DetectUserLanguages
      * @covers \LD\LanguageDetection\Middleware\LanguageDetection
+     * @covers \LD\LanguageDetection\Service\Normalizer
+     * @covers \LD\LanguageDetection\Negotiation\DefaultNegotiation
+     * @covers \LD\LanguageDetection\Event\NegotiateSiteLanguage
+     * @covers \LD\LanguageDetection\Detect\BrowserLanguage
+     * @covers \LD\LanguageDetection\Check\BotListener
      */
     public function testBreakAfterNegotiateSiteLanguageByNotFoundTargetLanguage(): void
     {
@@ -94,6 +99,13 @@ class LanguageDetectionTest extends AbstractTest
      * @covers \LD\LanguageDetection\Event\CheckLanguageDetection
      * @covers \LD\LanguageDetection\Event\DetectUserLanguages
      * @covers \LD\LanguageDetection\Middleware\LanguageDetection
+     * @covers \LD\LanguageDetection\Service\Normalizer
+     * @covers \LD\LanguageDetection\Negotiation\DefaultNegotiation
+     * @covers \LD\LanguageDetection\Event\NegotiateSiteLanguage
+     * @covers \LD\LanguageDetection\Detect\BrowserLanguage
+     * @covers \LD\LanguageDetection\Check\BotListener
+     * @covers \LD\LanguageDetection\Event\BuildResponse
+     * @covers \LD\LanguageDetection\Response\DefaultResponse
      */
     public function testBreakAfterBuildResponseByEmptyResponseBecauseOfSameUri(): void
     {
@@ -130,6 +142,13 @@ class LanguageDetectionTest extends AbstractTest
      * @covers \LD\LanguageDetection\Event\CheckLanguageDetection
      * @covers \LD\LanguageDetection\Event\DetectUserLanguages
      * @covers \LD\LanguageDetection\Middleware\LanguageDetection
+     * @covers \LD\LanguageDetection\Service\Normalizer
+     * @covers \LD\LanguageDetection\Negotiation\DefaultNegotiation
+     * @covers \LD\LanguageDetection\Event\NegotiateSiteLanguage
+     * @covers \LD\LanguageDetection\Detect\BrowserLanguage
+     * @covers \LD\LanguageDetection\Check\BotListener
+     * @covers \LD\LanguageDetection\Event\BuildResponse
+     * @covers \LD\LanguageDetection\Response\DefaultResponse
      */
     public function testFullExecution(): void
     {
