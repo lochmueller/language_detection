@@ -19,6 +19,8 @@ use TYPO3\CMS\Core\Site\Entity\Site;
 class IpLanguageTest extends AbstractTest
 {
     /**
+     * @covers \LD\LanguageDetection\Event\DetectUserLanguages
+     *
      * @dataProvider data
      *
      * @param string[]                      $result
