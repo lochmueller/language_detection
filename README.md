@@ -9,23 +9,29 @@
 [![Percentage of issues still open](http://isitmaintained.com/badge/open/lochmueller/language_detection.svg)](http://isitmaintained.com/project/lochmueller/language_detection "Percentage of issues still open")
 [![Test](https://github.com/lochmueller/language_detection/actions/workflows/Test.yml/badge.svg)](https://github.com/lochmueller/language_detection/actions/workflows/Test.yml)
 
+***
+
+TYPO3 Extension that use a PSR-15/PSR-7 middleware/request to handle a language detection logic via PSR-14 events. Very flexible! Give it a try and checkout the future of language detection!
+
+***
+
 ## Installation
 
 > composer require lochmueller/language-detection
 
 ## Configuration
 
-Use the site configuration module to configure the language detection. Just enable it, and it will works :)
+Use the site configuration module to configure the language detection. Just enable it, and it will work :) There are several configuration options for the Site configuration that handle the control events. The following screenshot show the options of the detection configuration.
 
 ![Configuration](https://raw.githubusercontent.com/lochmueller/language_detection/master/Resources/Public/Configuration.png)
 
 ## Structure
 
-There are a few central PSR-14 events that control the language detection. The attached list explain the different events and the default listener. The events are ordered in the execution order.
+There are four central PSR-14 events that control the language detection. The attached list explain the different events and the default listener. The events are ordered in the execution order.
 
 ### Event: CheckLanguageDetection
 
-Check if the language detection should executed by the extension. You can register listeners for this event and call "disableLanguageDetection" on the event object to disable the language detection.
+Check if the language detection should execute by the extension. You can register listeners for this event and call "disableLanguageDetection" on the event object to disable the language detection.
 
 Default-Listener:
 
@@ -46,7 +52,7 @@ Default-Listener:
 
 | Name            | Description                                                                                                                                         |
 | --------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
-| BrowserLanguage | Get the users "accept-language" langauges                                                                                                           |
+| BrowserLanguage | Get the users "accept-language" languages                                                                                                           |
 | IpLanguage      | Send the IP to geoplugin.net and add the language of the location to the checked languages (respect "addIpLocationToBrowserLanguage" configuration) |
 
 _Please keep data privacy in mind in case of the "IpLanguage" Listener!_
@@ -86,6 +92,17 @@ The middleware is early in the middleware stack. There is no concept of links an
 
 ## Dev
 
-Execute tests: 
+Execute tests with PHP 7.4: 
 
 > docker run --rm -it --volume $(pwd):/app prooph/composer:7.4 test
+
+Execute tests with PHP  8.0:
+
+> docker run --rm -it --volume $(pwd):/app prooph/composer:8.0 test
+
+## Contribution
+
+Thanks all for the great contribution to the project!
+
+![GitHub Contributors Image](https://contrib.rocks/image?repo=lochmueller/language_detection)
+
