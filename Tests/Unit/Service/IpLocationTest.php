@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace LD\LanguageDetection\Tests\Service;
+namespace LD\LanguageDetection\Tests\Unit\Service;
 
 use LD\LanguageDetection\Service\IpLocation;
 use LD\LanguageDetection\Tests\Unit\AbstractTest;
@@ -23,6 +23,16 @@ class IpLocationTest extends AbstractTest
         $result = $locationService->get('8.8.8.8');
 
         self::assertEquals('US', $result['geoplugin_countryCode']);
+    }
+
+    /**
+     * @covers \LD\LanguageDetection\Service\IpLocation
+     */
+    public function testEmptyIpDirectNull(): void
+    {
+        $locationService = new IpLocation(new RequestFactory());
+
+        self::assertNull($locationService->get(''));
     }
 
     /**

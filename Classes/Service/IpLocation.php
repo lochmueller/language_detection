@@ -17,6 +17,9 @@ class IpLocation
 
     public function get(string $ip): ?array
     {
+        if ('' === $ip) {
+            return null;
+        }
         $urlService = 'http://www.geoplugin.net/php.gp?ip=' . $ip;
         try {
             $response = $this->requestFactory->request($urlService);

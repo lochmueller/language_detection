@@ -9,7 +9,6 @@ use LD\LanguageDetection\Service\IpLocation;
 use Locale;
 use Psr\Http\Message\ServerRequestInterface;
 use ResourceBundle;
-use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * Location Service.
@@ -19,6 +18,13 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  */
 class IpLanguage
 {
+    protected IpLocation $ipLocation;
+
+    public function __construct(IpLocation $ipLocation)
+    {
+        $this->ipLocation = $ipLocation;
+    }
+
     public function __invoke(DetectUserLanguages $event): void
     {
         $config = $event->getSite()->getConfiguration();
@@ -51,8 +57,7 @@ class IpLanguage
 
     public function getLanguage(ServerRequestInterface $request): ?string
     {
-        $ipLocation = GeneralUtility::makeInstance(IpLocation::class);
-        $data = $ipLocation->get($request->getServerParams()['REMOTE_ADDR']);
+        $data = $this->ipLocation->get($request->getServerParams()['REMOTE_ADDR'] ?? '');
         if (null !== $data && !isset($data['geoplugin_countryCode'])) {
             return null;
         }

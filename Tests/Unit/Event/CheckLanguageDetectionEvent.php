@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace LD\LanguageDetection\Tests\Event;
+namespace LD\LanguageDetection\Tests\Unit\Event;
 
 use LD\LanguageDetection\Event\CheckLanguageDetection;
 use Psr\Http\Message\ServerRequestInterface;

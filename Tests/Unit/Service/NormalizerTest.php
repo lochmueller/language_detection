@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace LD\LanguageDetection\Tests\Service;
+namespace LD\LanguageDetection\Tests\Unit\Service;
 
 use LD\LanguageDetection\Service\Normalizer;
 use LD\LanguageDetection\Tests\Unit\AbstractTest;

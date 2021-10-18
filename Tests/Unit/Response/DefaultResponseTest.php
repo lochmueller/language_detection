@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace LD\LanguageDetection\Tests\Response;
+namespace LD\LanguageDetection\Tests\Unit\Response;
 
 use LD\LanguageDetection\Event\BuildResponse;
 use LD\LanguageDetection\Response\DefaultResponse;

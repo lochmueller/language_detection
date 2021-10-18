@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace LD\LanguageDetection\Tests\Service;
+namespace LD\LanguageDetection\Tests\Unit\Detect;
 
 use LD\LanguageDetection\Detect\BrowserLanguage;
 use LD\LanguageDetection\Event\DetectUserLanguages;

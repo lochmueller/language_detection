@@ -2,8 +2,9 @@
 
 declare(strict_types=1);
 
-namespace LD\LanguageDetection\Check;
+namespace LD\LanguageDetection\Tests\Unit\Check;
 
+use LD\LanguageDetection\Check\FromCurrentPageListener;
 use LD\LanguageDetection\Event\CheckLanguageDetection;
 use LD\LanguageDetection\Tests\Unit\AbstractTest;
 use TYPO3\CMS\Core\Http\ServerRequest;

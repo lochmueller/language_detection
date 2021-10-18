@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace LD\LanguageDetection\Tests\Check;
+namespace LD\LanguageDetection\Tests\Unit\Check;
 
 use LD\LanguageDetection\Check\BotListener;
 use LD\LanguageDetection\Event\CheckLanguageDetection;

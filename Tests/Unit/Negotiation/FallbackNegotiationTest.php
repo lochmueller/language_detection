@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace LD\LanguageDetection\Tests\Negotiation;
+namespace LD\LanguageDetection\Tests\Unit\Negotiation;
 
 use LD\LanguageDetection\Event\NegotiateSiteLanguage;
 use LD\LanguageDetection\Negotiation\FallbackNegotiation;
