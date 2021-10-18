@@ -56,6 +56,7 @@ class IpLanguageTest extends AbstractTest
             'After LD configuration with DE country result' => ['after', ['default', 'de'], ['geoplugin_countryCode' => 'DE']],
             'Before LD configuration with DE country result' => ['before', ['de', 'default'], ['geoplugin_countryCode' => 'DE']],
             'Replace LD configuration with DE country result' => ['replace', ['de'], ['geoplugin_countryCode' => 'DE']],
+            'Wrong LD configuration with DE country result' => ['wrong', ['default'], ['geoplugin_countryCode' => 'DE']],
         ];
     }
 }
