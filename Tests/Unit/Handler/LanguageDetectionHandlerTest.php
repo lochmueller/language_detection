@@ -35,6 +35,7 @@ class LanguageDetectionHandlerTest extends AbstractTest
     /**
      * @covers \LD\LanguageDetection\Check\BotListener
      * @covers \LD\LanguageDetection\Event\CheckLanguageDetection
+     * @covers \LD\LanguageDetection\Handler\Exception\DisableLanguageDetectionException
      * @covers \LD\LanguageDetection\Handler\LanguageDetectionHandler
      * @covers \LD\LanguageDetection\Negotiation\DefaultNegotiation
      */
@@ -54,6 +55,7 @@ class LanguageDetectionHandlerTest extends AbstractTest
      * @covers \LD\LanguageDetection\Detect\BrowserLanguage
      * @covers \LD\LanguageDetection\Event\CheckLanguageDetection
      * @covers \LD\LanguageDetection\Event\DetectUserLanguages
+     * @covers \LD\LanguageDetection\Handler\Exception\NoUserLanguagesException
      * @covers \LD\LanguageDetection\Handler\LanguageDetectionHandler
      * @covers \LD\LanguageDetection\Negotiation\DefaultNegotiation
      */
@@ -74,6 +76,7 @@ class LanguageDetectionHandlerTest extends AbstractTest
      * @covers \LD\LanguageDetection\Event\CheckLanguageDetection
      * @covers \LD\LanguageDetection\Event\DetectUserLanguages
      * @covers \LD\LanguageDetection\Event\NegotiateSiteLanguage
+     * @covers \LD\LanguageDetection\Handler\Exception\NoSelectedLanguageException
      * @covers \LD\LanguageDetection\Handler\LanguageDetectionHandler
      * @covers \LD\LanguageDetection\Negotiation\DefaultNegotiation
      * @covers \LD\LanguageDetection\Service\Normalizer
@@ -96,6 +99,7 @@ class LanguageDetectionHandlerTest extends AbstractTest
      * @covers \LD\LanguageDetection\Event\CheckLanguageDetection
      * @covers \LD\LanguageDetection\Event\DetectUserLanguages
      * @covers \LD\LanguageDetection\Event\NegotiateSiteLanguage
+     * @covers \LD\LanguageDetection\Handler\Exception\NoResponseException
      * @covers \LD\LanguageDetection\Handler\LanguageDetectionHandler
      * @covers \LD\LanguageDetection\Negotiation\DefaultNegotiation
      * @covers \LD\LanguageDetection\Response\DefaultResponse

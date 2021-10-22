@@ -18,6 +18,9 @@ use TYPO3\CMS\Core\Http\NullResponse;
  */
 class LanguageDetectionTest extends AbstractTest
 {
+    /**
+     * @covers \LD\LanguageDetection\Middleware\LanguageDetection
+     */
     public function testMiddlewareWillExecuteLanguageDetection(): void
     {
         $languageDetectionHandler = $this->createStub(LanguageDetectionHandler::class);
@@ -29,6 +32,9 @@ class LanguageDetectionTest extends AbstractTest
         self::assertInstanceOf(NullResponse::class, $result);
     }
 
+    /**
+     * @covers \LD\LanguageDetection\Middleware\LanguageDetection
+     */
     public function testMiddlewareWillExecuteDefaultHandler(): void
     {
         $languageDetectionHandler = $this->createStub(LanguageDetectionHandler::class);
