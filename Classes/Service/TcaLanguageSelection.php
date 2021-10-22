@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace LD\LanguageDetection\Service;
 
+use TYPO3\CMS\Core\Exception\SiteNotFoundException;
 use TYPO3\CMS\Core\Site\Entity\SiteLanguage;
 use TYPO3\CMS\Core\Site\SiteFinder;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -21,7 +22,7 @@ class TcaLanguageSelection
 
         try {
             $site = $siteFinder->getSiteByIdentifier($configuration['row']['identifier']);
-        } catch (\Exception $exception) {
+        } catch (SiteNotFoundException $exception) {
             return;
         }
 

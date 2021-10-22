@@ -25,16 +25,16 @@ class IpLocation
             $response = $this->requestFactory->request($urlService);
 
             if (200 !== $response->getStatusCode()) {
-                throw new \Exception('Missing information in response', 123781);
+                throw new IpLocationException('Missing information in response', 123781);
             }
             $result = (array)unserialize((string)$response->getBody());
 
             if (empty($result) || 404 === (int)$result['geoplugin_status']) {
-                throw new \Exception('No valid data', 162378);
+                throw new IpLocationException('No valid data', 162378);
             }
 
             return $result;
-        } catch (\Exception $exc) {
+        } catch (IpLocationException $exc) {
             return null;
         }
     }
