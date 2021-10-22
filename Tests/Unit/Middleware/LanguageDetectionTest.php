@@ -33,8 +33,8 @@ class LanguageDetectionTest extends AbstractTest
     }
 
     /**
-     * @covers \LD\LanguageDetection\Middleware\LanguageDetection
      * @covers \LD\LanguageDetection\Handler\Exception\NoSelectedLanguageException
+     * @covers \LD\LanguageDetection\Middleware\LanguageDetection
      */
     public function testMiddlewareWillExecuteDefaultHandler(): void
     {

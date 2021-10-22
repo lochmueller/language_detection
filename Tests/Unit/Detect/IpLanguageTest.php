@@ -7,6 +7,7 @@ namespace LD\LanguageDetection\Tests\Unit\Detect;
 use LD\LanguageDetection\Detect\IpLanguage;
 use LD\LanguageDetection\Event\DetectUserLanguages;
 use LD\LanguageDetection\Service\IpLocation;
+use LD\LanguageDetection\Service\LanguageService;
 use LD\LanguageDetection\Tests\Unit\AbstractTest;
 use TYPO3\CMS\Core\Http\ServerRequest;
 use TYPO3\CMS\Core\Site\Entity\Site;
@@ -20,13 +21,14 @@ class IpLanguageTest extends AbstractTest
 {
     /**
      * @covers \LD\LanguageDetection\Event\DetectUserLanguages
+     * @covers \LD\LanguageDetection\Service\LanguageService
      *
      * @dataProvider data
      *
      * @param string[]                      $result
      * @param array<string, string>|mixed[] $ipLocationConfiguration
      */
-    public function testAddIpLanguageConfiguration(string $addIpLocationToBrowserLanguage, array $result, array $ipLocationConfiguration): void
+    public function testAddIpLanguageConfiguration(string $addIpLocationToBrowserLanguage, array $result, ?array $ipLocationConfiguration): void
     {
         $ipLocation = $this->createStub(IpLocation::class);
         $ipLocation->method('get')->willReturn($ipLocationConfiguration);
@@ -39,7 +41,7 @@ class IpLanguageTest extends AbstractTest
         $event = new DetectUserLanguages($site, $serverRequest);
         $event->setUserLanguages(['default']);
 
-        $ipLanguage = new IpLanguage($ipLocation);
+        $ipLanguage = new IpLanguage($ipLocation, new LanguageService());
         $ipLanguage($event);
 
         self::assertSame($result, $event->getUserLanguages());

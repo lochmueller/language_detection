@@ -11,17 +11,21 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 class TcaLanguageSelection
 {
+    protected SiteFinder $siteFinder;
+
+    public function __construct(?SiteFinder $siteFinder = null)
+    {
+        $this->siteFinder = $siteFinder ?? GeneralUtility::makeInstance(SiteFinder::class);
+    }
+
     public function get(array &$configuration): void
     {
         if (!isset($configuration['row']['identifier'])) {
             return;
         }
 
-        /** @var SiteFinder $siteFinder */
-        $siteFinder = GeneralUtility::makeInstance(SiteFinder::class);
-
         try {
-            $site = $siteFinder->getSiteByIdentifier($configuration['row']['identifier']);
+            $site = $this->siteFinder->getSiteByIdentifier($configuration['row']['identifier']);
         } catch (SiteNotFoundException $exception) {
             return;
         }
