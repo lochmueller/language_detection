@@ -64,6 +64,30 @@ class FallbackNegotiationTest extends AbstractTest
     }
 
     /**
+     * @covers       \LD\LanguageDetection\Event\NegotiateSiteLanguage
+     * @covers       \LD\LanguageDetection\Negotiation\FallbackNegotiation
+     */
+    public function testValidConfigurationButNoFallback(): void
+    {
+        $site = $this->createStub(Site::class);
+        $site->method('getConfiguration')->willReturn(['fallbackDetectionLanguage' => 9]);
+
+        $siteLanguage1 = new SiteLanguage(1, 'de_DE', new Uri('/de/'), []);
+        $siteLanguage2 = new SiteLanguage(2, 'en_GB', new Uri('/en/'), []);
+        $siteLanguage3 = new SiteLanguage(3, 'fr_FR', new Uri('/fr/'), []);
+
+        $site->method('getAllLanguages')->willReturn([$siteLanguage1, $siteLanguage2, $siteLanguage3]);
+
+        $request = new ServerRequest(null, null, 'php://input', []);
+        $event = new NegotiateSiteLanguage($site, $request, []);
+
+        $botListener = new FallbackNegotiation();
+        $botListener($event);
+
+        self::assertNull($event->getSelectedLanguage());
+    }
+
+    /**
      * @return array<int, mixed[]>
      */
     public function dataInvalid(): array

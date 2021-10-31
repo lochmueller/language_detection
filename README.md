@@ -100,9 +100,12 @@ Execute tests with PHP  8.0:
 
 > docker run --rm -it --volume $(pwd):/app prooph/composer:8.0 test
 
+With coverage:
+
+> docker run --rm -it --volume $(pwd):/app prooph/php:7.4-fpm-xdebug /app/.Build/bin/phpunit  -c /app/phpunit.xml --coverage-text --testdox --coverage-html=/app/var/phpunit
+
 ## Contribution
 
 Thanks all for the great contribution to the project!
 
 ![GitHub Contributors Image](https://contrib.rocks/image?repo=lochmueller/language_detection)
-

@@ -6,6 +6,7 @@ namespace LD\LanguageDetection\Tests\Unit\Service;
 
 use LD\LanguageDetection\Service\TcaLanguageSelection;
 use LD\LanguageDetection\Tests\Unit\AbstractTest;
+use TYPO3\CMS\Core\Exception\SiteNotFoundException;
 use TYPO3\CMS\Core\Site\Entity\Site;
 use TYPO3\CMS\Core\Site\SiteFinder;
 
@@ -26,6 +27,30 @@ class TcaLanguageSelectionTest extends AbstractTest
         $tcaLanguageSelection->get($configuration);
 
         self::assertSame([], $configuration);
+    }
+
+    /**
+     * @covers \LD\LanguageDetection\Service\TcaLanguageSelection
+     */
+    public function testLanguageSelectionWithNoFoundedSite(): void
+    {
+        $siteFinder = $this->createStub(SiteFinder::class);
+        $siteFinder->method('getSiteByIdentifier')->willThrowException(new SiteNotFoundException());
+
+        $tcaLanguageSelection = new TcaLanguageSelection($siteFinder);
+        $configuration = [
+            'row' => [
+                'identifier' => '1',
+            ],
+        ];
+
+        $tcaLanguageSelection->get($configuration);
+
+        self::assertSame([
+            'row' => [
+                'identifier' => '1',
+            ],
+        ], $configuration);
     }
 
     /**
