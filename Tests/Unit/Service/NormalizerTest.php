@@ -40,7 +40,7 @@ class NormalizerTest extends AbstractTest
     }
 
     /**
-     * @return array<int, array<string>>
+     * @return array<string, array<int, string>>
      */
     public function normalizeProvider(): array
     {

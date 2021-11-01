@@ -37,7 +37,8 @@
 		"typo3/testing-framework": "^6.1",
 		"phpmetrics/phpmetrics": "^2.4",
 		"friendsofphp/php-cs-fixer": "^2.16",
-		"rector/rector": "^0.11.53"
+		"rector/rector": "dev-main",
+		"phpstan/phpstan": "^1.0"
 	},
 	"config": {
 		"vendor-dir": ".Build/vendor",
@@ -62,6 +63,9 @@
 		],
 		"code:metrics": [
 			"phpmetrics --report-html='.Build/Metrics' --exclude='.Build' --exclude='Tests' ."
+		],
+		"code:phpstan": [
+			"phpstan analyse -l 3 Classes Tests"
 		],
 		"test": [
 			"phpunit -c phpunit.xml --coverage-text --testdox"

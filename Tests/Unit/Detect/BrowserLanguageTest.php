@@ -27,7 +27,7 @@ class BrowserLanguageTest extends AbstractTest
      * @covers \LD\LanguageDetection\Detect\BrowserLanguage
      * @covers \LD\LanguageDetection\Event\DetectUserLanguages
      *
-     * @param mixed[]|string[] $result
+     * @param string[] $result
      */
     public function testFetchLanguageResults(string $acceptLanguage, array $result): void
     {
@@ -42,7 +42,7 @@ class BrowserLanguageTest extends AbstractTest
     }
 
     /**
-     * @return array<int, mixed[]>
+     * @return array<string, array<int, array<int, string>|string>>
      */
     public function data(): array
     {

@@ -8,8 +8,7 @@ use Throwable;
 
 class NoResponseException extends AbstractHandlerException
 {
-    public function __construct($message = '', $code = 0, Throwable $previous = null)
-    {
-        parent::__construct('No response was created', 7_829_342, $previous);
-    }
+    protected $message = 'No response was created';
+
+    protected $code = 7_829_342;
 }

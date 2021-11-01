@@ -8,8 +8,7 @@ use Throwable;
 
 class NoUserLanguagesException extends AbstractHandlerException
 {
-    public function __construct($message = '', $code = 0, Throwable $previous = null)
-    {
-        parent::__construct('No user languages', 3_284_924, $previous);
-    }
+    protected $message = 'No user languages';
+
+    protected $code = 3_284_924;
 }

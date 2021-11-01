@@ -42,6 +42,7 @@ class LanguageDetectionHandlerTest extends AbstractTest
     public function testBreakAfterCheckLanguageDetectionByAddingBotAgent(): void
     {
         self::expectException(DisableLanguageDetectionException::class);
+        self::expectExceptionCode(1_236_781);
 
         $serverRequest = new ServerRequest(null, null, 'php://input', ['user-agent' => 'AdsBot-Google']);
         $serverRequest = $serverRequest->withAttribute('site', new Site('dummy', 1, []));

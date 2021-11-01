@@ -37,7 +37,7 @@ class FromCurrentPageListenerTest extends AbstractTest
     }
 
     /**
-     * @return array<int, array<string|bool>>
+     * @return array<string, array<int, bool|string>>
      */
     public function data(): array
     {

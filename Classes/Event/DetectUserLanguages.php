@@ -11,6 +11,8 @@ final class DetectUserLanguages extends AbstractEvent
 {
     private SiteInterface $site;
     private ServerRequestInterface $request;
+
+    /** @var array<string> */
     private array $userLanguages = [];
 
     public function __construct(SiteInterface $site, ServerRequestInterface $request)
