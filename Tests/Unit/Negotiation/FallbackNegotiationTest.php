@@ -23,7 +23,7 @@ class FallbackNegotiationTest extends AbstractTest
      * @covers       \LD\LanguageDetection\Negotiation\FallbackNegotiation
      * @dataProvider dataInvalid
      *
-     * @param array $configuration
+     * @param mixed[]|array<string, array<int>>|array<string, string> $configuration
      */
     public function testInvalidFallbackLanguages(array $configuration): void
     {

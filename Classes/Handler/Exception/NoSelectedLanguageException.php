@@ -4,11 +4,15 @@ declare(strict_types=1);
 
 namespace LD\LanguageDetection\Handler\Exception;
 
-use Throwable;
-
 class NoSelectedLanguageException extends AbstractHandlerException
 {
+    /**
+     * @var string
+     */
     protected $message = 'No selectable language';
 
+    /**
+     * @var int
+     */
     protected $code = 2_374_892;
 }
