@@ -10,6 +10,7 @@
 [![Percentage of issues still open](http://isitmaintained.com/badge/open/lochmueller/language_detection.svg)](http://isitmaintained.com/project/lochmueller/language_detection "Percentage of issues still open")
 [![Test](https://github.com/lochmueller/language_detection/actions/workflows/Test.yml/badge.svg)](https://github.com/lochmueller/language_detection/actions/workflows/Test.yml)
 [![codecov](https://codecov.io/gh/lochmueller/language_detection/branch/master/graph/badge.svg?token=7VI1WFAX8Z)](https://codecov.io/gh/lochmueller/language_detection)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/lochmueller/language_detection/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/lochmueller/language_detection/?branch=master)
 [![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://github.com/lochmueller/language_detection/issues)
 
 ***
