@@ -9,15 +9,22 @@ use LD\LanguageDetection\Event\CheckLanguageDetection;
 use LD\LanguageDetection\Event\DetectUserLanguages;
 use LD\LanguageDetection\Event\NegotiateSiteLanguage;
 use Psr\EventDispatcher\EventDispatcherInterface;
+use TYPO3\CMS\Core\Http\ServerRequest;
 use TYPO3\CMS\Core\Http\ServerRequestFactory;
 use TYPO3\CMS\Core\LinkHandling\LinkService;
 use TYPO3\CMS\Core\Site\SiteFinder;
 
+/**
+ * Inject the needed services or create it by yourself.
+ * E.g. $languageRequest could be created by ServerRequestFactory::fromGlobals();.
+ */
 trait RespectLanguageLinkDetailsTrait
 {
     protected EventDispatcherInterface $languageEventDispatcher;
 
     protected SiteFinder $languageSiteFinder;
+
+    protected ServerRequest $languageRequest;
 
     /**
      * @return mixed[]
@@ -27,11 +34,9 @@ trait RespectLanguageLinkDetailsTrait
         if (LinkService::TYPE_PAGE !== $linkDetails['type']) {
             return $linkDetails;
         }
+        $site = $this->languageSiteFinder->getSiteByPageId((int)$linkDetails['pageuid'] ?? 0);
 
-        $site = $this->languageSiteFinder->getSiteByPageId((int)$linkDetails['pageuid']);
-        $request = ServerRequestFactory::fromGlobals();
-
-        $check = new CheckLanguageDetection($site, $request);
+        $check = new CheckLanguageDetection($site, $this->languageRequest);
         $enableListener = new EnableListener();
         $enableListener($check);
 
@@ -39,14 +44,14 @@ trait RespectLanguageLinkDetailsTrait
             return $linkDetails;
         }
 
-        $detect = new DetectUserLanguages($site, $request);
+        $detect = new DetectUserLanguages($site, $this->languageRequest);
         $this->languageEventDispatcher->dispatch($detect);
 
         if (empty($detect->getUserLanguages())) {
             return $linkDetails;
         }
 
-        $negotiate = new NegotiateSiteLanguage($site, $request, $detect->getUserLanguages());
+        $negotiate = new NegotiateSiteLanguage($site, $this->languageRequest, $detect->getUserLanguages());
         $this->languageEventDispatcher->dispatch($negotiate);
 
         if (null !== $negotiate->getSelectedLanguage() && $negotiate->getSelectedLanguage()->enabled()) {
