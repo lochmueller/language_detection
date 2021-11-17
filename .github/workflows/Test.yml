@@ -42,3 +42,9 @@ jobs:
 
       - name: Unit Tests with phpunit
         run: composer run test
+
+      - name: Unit Tests with phpunit and clover
+        run: composer run test:clover
+
+      - name: Upload clover
+        run: bash <(curl -s https://codecov.io/bash)
