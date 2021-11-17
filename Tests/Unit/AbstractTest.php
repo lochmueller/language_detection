@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace LD\LanguageDetection\Tests\Unit;
 
-use PHPUnit\Framework\TestCase;
+use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
-abstract class AbstractTest extends TestCase
+abstract class AbstractTest extends UnitTestCase
 {
 }
