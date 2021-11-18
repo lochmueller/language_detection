@@ -35,7 +35,6 @@
 	"license": "GPL-2.0-or-later",
 	"require-dev": {
 		"typo3/testing-framework": "^6.1",
-		"phpmetrics/phpmetrics": "^2.4",
 		"friendsofphp/php-cs-fixer": "^3.1",
 		"rector/rector": "^0.12",
 		"phpstan/phpstan": "^1.1"
@@ -51,9 +50,10 @@
 		}
 	},
 	"scripts": {
-		"code": [
+		"code:all": [
 			"@code:rector",
-			"@code:php-cs-fixer"
+			"@code:php-cs-fixer",
+			"@code:phpstan"
 		],
 		"code:rector": [
 			"rector"
@@ -61,13 +61,10 @@
 		"code:php-cs-fixer": [
 			"php-cs-fixer fix --config Resources/Private/Build/PhpCsFixer.php --cache-file=.Build/phpcs.cache"
 		],
-		"code:metrics": [
-			"phpmetrics --report-html='.Build/Metrics' --exclude='.Build' --exclude='Tests' ."
-		],
 		"code:phpstan": [
-			"phpstan analyse -l 3 Classes Tests"
+			"phpstan analyse -l 6 Classes Tests"
 		],
-		"test": [
+		"test:unit": [
 			"phpunit -c phpunit.xml --coverage-text --testdox"
 		],
 		"test:clover": [
