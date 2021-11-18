@@ -43,8 +43,8 @@ class LanguageDetectionHandlerTest extends AbstractTest
      */
     public function testBreakAfterCheckLanguageDetectionByAddingBotAgent(): void
     {
-        self::expectException(DisableLanguageDetectionException::class);
-        self::expectExceptionCode(1_236_781);
+        $this->expectException(DisableLanguageDetectionException::class);
+        $this->expectExceptionCode(1_236_781);
 
         $serverRequest = new ServerRequest(null, null, 'php://input', ['user-agent' => 'AdsBot-Google']);
         $serverRequest = $serverRequest->withAttribute('site', new Site('dummy', 1, []));
@@ -65,7 +65,7 @@ class LanguageDetectionHandlerTest extends AbstractTest
      */
     public function testBreakAfterDetectUserLanguagesByMissingLanguages(): void
     {
-        self::expectException(NoUserLanguagesException::class);
+        $this->expectException(NoUserLanguagesException::class);
 
         $serverRequest = new ServerRequest();
         $serverRequest = $serverRequest->withAttribute('site', new Site('dummy', 1, []));
@@ -88,7 +88,7 @@ class LanguageDetectionHandlerTest extends AbstractTest
      */
     public function testBreakAfterNegotiateSiteLanguageByNotFoundTargetLanguage(): void
     {
-        self::expectException(NoSelectedLanguageException::class);
+        $this->expectException(NoSelectedLanguageException::class);
 
         $serverRequest = new ServerRequest(null, null, 'php://input', ['accept-language' => 'de,de_DE']);
         $serverRequest = $serverRequest->withAttribute('site', new Site('dummy', 1, []));
@@ -114,7 +114,7 @@ class LanguageDetectionHandlerTest extends AbstractTest
      */
     public function testBreakAfterBuildResponseByEmptyResponseBecauseOfSameUri(): void
     {
-        self::expectException(NoResponseException::class);
+        $this->expectException(NoResponseException::class);
 
         $serverRequest = new ServerRequest('https://www.dummy.de/', null, 'php://input', ['accept-language' => 'de,de_DE']);
         $site = new Site('dummy', 1, [
