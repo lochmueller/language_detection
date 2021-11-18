@@ -10,7 +10,6 @@ use LD\LanguageDetection\Event\DetectUserLanguages;
 use LD\LanguageDetection\Event\NegotiateSiteLanguage;
 use Psr\EventDispatcher\EventDispatcherInterface;
 use TYPO3\CMS\Core\Http\ServerRequest;
-use TYPO3\CMS\Core\Http\ServerRequestFactory;
 use TYPO3\CMS\Core\LinkHandling\LinkService;
 use TYPO3\CMS\Core\Site\SiteFinder;
 
@@ -37,7 +36,7 @@ trait RespectLanguageLinkDetailsTrait
         $site = $this->languageSiteFinder->getSiteByPageId((int)$linkDetails['pageuid'] ?? 0);
 
         $check = new CheckLanguageDetection($site, $this->languageRequest);
-        $enableListener = new EnableListener();
+        $enableListener = new EnableListener(new SiteConfigurationService());
         $enableListener($check);
 
         if (!$check->isLanguageDetectionEnable()) {

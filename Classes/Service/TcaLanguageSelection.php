@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace LD\LanguageDetection\Service;
 
 use TYPO3\CMS\Core\Exception\SiteNotFoundException;
-use TYPO3\CMS\Core\Site\Entity\SiteLanguage;
 use TYPO3\CMS\Core\Site\SiteFinder;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
@@ -32,7 +31,6 @@ class TcaLanguageSelection
 
         $configuration['items'][] = ['', ''];
         foreach ($site->getAllLanguages() as $language) {
-            /* @var $language SiteLanguage */
             $configuration['items'][] = [$language->getTitle(), $language->getLanguageId()];
         }
     }

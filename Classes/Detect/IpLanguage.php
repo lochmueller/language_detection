@@ -7,6 +7,7 @@ namespace LD\LanguageDetection\Detect;
 use LD\LanguageDetection\Event\DetectUserLanguages;
 use LD\LanguageDetection\Service\IpLocation;
 use LD\LanguageDetection\Service\LanguageService;
+use LD\LanguageDetection\Service\SiteConfigurationService;
 use Psr\Http\Message\ServerRequestInterface;
 
 /**
@@ -19,17 +20,18 @@ class IpLanguage
 {
     protected IpLocation $ipLocation;
     protected LanguageService $languageService;
+    protected SiteConfigurationService $siteConfigurationService;
 
-    public function __construct(IpLocation $ipLocation, LanguageService $languageService)
+    public function __construct(IpLocation $ipLocation, LanguageService $languageService, SiteConfigurationService $siteConfigurationService)
     {
         $this->ipLocation = $ipLocation;
         $this->languageService = $languageService;
+        $this->siteConfigurationService = $siteConfigurationService;
     }
 
     public function __invoke(DetectUserLanguages $event): void
     {
-        $config = $event->getSite()->getConfiguration();
-        $addIp = $config['addIpLocationToBrowserLanguage'] ?? '';
+        $addIp = $this->siteConfigurationService->getConfiguration($event->getSite())->getAddIpLocationToBrowserLanguage();
         if (!\in_array($addIp, ['before', 'after', 'replace'])) {
             return;
         }

@@ -5,24 +5,28 @@ declare(strict_types=1);
 namespace LD\LanguageDetection\Negotiation;
 
 use LD\LanguageDetection\Event\NegotiateSiteLanguage;
+use LD\LanguageDetection\Service\SiteConfigurationService;
+use TYPO3\CMS\Core\Site\Entity\Site;
 use TYPO3\CMS\Core\Site\Entity\SiteLanguage;
-use TYPO3\CMS\Core\Utility\MathUtility;
 
 class FallbackNegotiation
 {
-    protected const CONFIG_KEY = 'fallbackDetectionLanguage';
+    protected SiteConfigurationService $siteConfigurationService;
+
+    public function __construct(SiteConfigurationService $siteConfigurationService)
+    {
+        $this->siteConfigurationService = $siteConfigurationService;
+    }
 
     public function __invoke(NegotiateSiteLanguage $event): void
     {
         $site = $event->getSite();
-        $configuration = $site->getConfiguration();
-
-        if (!isset($configuration[self::CONFIG_KEY]) || !MathUtility::canBeInterpretedAsInteger($configuration[self::CONFIG_KEY])) {
+        if (!($site instanceof Site)) {
             return;
         }
+        $configuration = $this->siteConfigurationService->getConfiguration($site);
 
-        $fallback = (int)$configuration[self::CONFIG_KEY];
-
+        $fallback = $configuration->getFallbackDetectionLanguage();
         foreach ($site->getAllLanguages() as $siteLanguage) {
             /** @var SiteLanguage $siteLanguage */
             if ($siteLanguage->getLanguageId() === $fallback) {

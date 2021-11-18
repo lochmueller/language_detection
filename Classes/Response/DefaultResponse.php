@@ -4,23 +4,31 @@ declare(strict_types=1);
 
 namespace LD\LanguageDetection\Response;
 
+use LD\LanguageDetection\Domain\Model\Dto\SiteConfiguration;
 use LD\LanguageDetection\Event\BuildResponse;
+use LD\LanguageDetection\Service\SiteConfigurationService;
 use Psr\Http\Message\ServerRequestInterface;
 use TYPO3\CMS\Core\Http\RedirectResponse;
 use TYPO3\CMS\Core\Http\Uri;
-use TYPO3\CMS\Core\Site\Entity\Site;
 use TYPO3\CMS\Core\Site\Entity\SiteLanguage;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 class DefaultResponse
 {
+    protected SiteConfigurationService $siteConfigurationService;
+
+    public function __construct(SiteConfigurationService $siteConfigurationService)
+    {
+        $this->siteConfigurationService = $siteConfigurationService;
+    }
+
     public function __invoke(BuildResponse $event): void
     {
-        $targetUri = $this->buildRedirectUri($event->getSite(), $event->getRequest(), $event->getSelectedLanguage());
+        $config = $this->siteConfigurationService->getConfiguration($event->getSite());
+        $targetUri = $this->buildRedirectUri($config, $event->getRequest(), $event->getSelectedLanguage());
         if ($this->checkSameUri($event->getRequest(), $targetUri)) {
-            $config = $event->getSite()->getConfiguration();
-            $code = $config['redirectHttpStatusCode'] ?? 307;
-            if ((int)$code <= 0) {
+            $code = $config->getRedirectHttpStatusCode();
+            if ($code <= 0) {
                 $code = 307;
             }
 
@@ -28,12 +36,12 @@ class DefaultResponse
         }
     }
 
-    protected function buildRedirectUri(Site $site, ServerRequestInterface $request, SiteLanguage $language): Uri
+    protected function buildRedirectUri(SiteConfiguration $config, ServerRequestInterface $request, SiteLanguage $language): Uri
     {
         /** @var Uri $target */
         $target = $language->getBase();
 
-        $params = GeneralUtility::trimExplode(',', (string)$site->getConfiguration()['forwardRedirectParameters'] ?? '', true);
+        $params = GeneralUtility::trimExplode(',', $config->getForwardRedirectParameters(), true);
         parse_str($request->getUri()->getQuery(), $requestQuery);
         parse_str($target->getQuery(), $targetQuery);
 

@@ -41,12 +41,14 @@ class RespectLanguageLinkDetailsTraitTest extends AbstractTest
     /**
      * @covers \LD\LanguageDetection\Check\EnableListener
      * @covers \LD\LanguageDetection\Detect\BrowserLanguage
+     * @covers \LD\LanguageDetection\Domain\Model\Dto\SiteConfiguration
      * @covers \LD\LanguageDetection\Event\CheckLanguageDetection
      * @covers \LD\LanguageDetection\Event\DetectUserLanguages
      * @covers \LD\LanguageDetection\Event\NegotiateSiteLanguage
      * @covers \LD\LanguageDetection\Negotiation\DefaultNegotiation
      * @covers \LD\LanguageDetection\Service\Normalizer
      * @covers \LD\LanguageDetection\Service\RespectLanguageLinkDetailsTrait
+     * @covers \LD\LanguageDetection\Service\SiteConfigurationService
      */
     public function testTraitExecutionParameterGeneration(): void
     {

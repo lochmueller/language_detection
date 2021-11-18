@@ -6,6 +6,7 @@ namespace LD\LanguageDetection\Tests\Unit\Check;
 
 use LD\LanguageDetection\Check\EnableListener;
 use LD\LanguageDetection\Event\CheckLanguageDetection;
+use LD\LanguageDetection\Service\SiteConfigurationService;
 use LD\LanguageDetection\Tests\Unit\AbstractTest;
 use Psr\Http\Message\ServerRequestInterface;
 use TYPO3\CMS\Core\Site\Entity\Site;
@@ -18,7 +19,9 @@ class EnableListenerTest extends AbstractTest
 {
     /**
      * @covers       \LD\LanguageDetection\Check\EnableListener
+     * @covers       \LD\LanguageDetection\Domain\Model\Dto\SiteConfiguration
      * @covers       \LD\LanguageDetection\Event\CheckLanguageDetection
+     * @covers       \LD\LanguageDetection\Service\SiteConfigurationService
      * @dataProvider data
      *
      * @param array<string, bool>|array<string, false>|mixed[] $configuration
@@ -30,7 +33,7 @@ class EnableListenerTest extends AbstractTest
         $request = $this->createMock(ServerRequestInterface::class);
         $event = new CheckLanguageDetection($site, $request);
 
-        $backendUserListener = new EnableListener();
+        $backendUserListener = new EnableListener(new SiteConfigurationService());
         $backendUserListener($event);
 
         self::assertEquals($result, $event->isLanguageDetectionEnable());

@@ -6,6 +6,7 @@ namespace LD\LanguageDetection\Tests\Unit\Check;
 
 use LD\LanguageDetection\Check\BackendUserListener;
 use LD\LanguageDetection\Event\CheckLanguageDetection;
+use LD\LanguageDetection\Service\SiteConfigurationService;
 use LD\LanguageDetection\Tests\Unit\AbstractTest;
 use Psr\Http\Message\ServerRequestInterface;
 use TYPO3\CMS\Core\Context\Context;
@@ -26,7 +27,9 @@ class BackendUserListenerTest extends AbstractTest
 
     /**
      * @covers \LD\LanguageDetection\Check\BackendUserListener
+     * @covers       \LD\LanguageDetection\Domain\Model\Dto\SiteConfiguration
      * @covers \LD\LanguageDetection\Event\CheckLanguageDetection
+     * @covers       \LD\LanguageDetection\Service\SiteConfigurationService
      */
     public function testWithoutDisableInSite(): void
     {
@@ -37,7 +40,7 @@ class BackendUserListenerTest extends AbstractTest
         $request = $this->createMock(ServerRequestInterface::class);
         $event = new CheckLanguageDetection($site, $request);
 
-        $backendUserListener = new BackendUserListener();
+        $backendUserListener = new BackendUserListener(new SiteConfigurationService());
         $backendUserListener($event);
 
         self::assertTrue($event->isLanguageDetectionEnable());
@@ -45,7 +48,9 @@ class BackendUserListenerTest extends AbstractTest
 
     /**
      * @covers \LD\LanguageDetection\Check\BackendUserListener
+     * @covers       \LD\LanguageDetection\Domain\Model\Dto\SiteConfiguration
      * @covers \LD\LanguageDetection\Event\CheckLanguageDetection
+     * @covers       \LD\LanguageDetection\Service\SiteConfigurationService
      */
     public function testWithoutConfigurationInSite(): void
     {
@@ -56,7 +61,7 @@ class BackendUserListenerTest extends AbstractTest
         $request = $this->createMock(ServerRequestInterface::class);
         $event = new CheckLanguageDetection($site, $request);
 
-        $backendUserListener = new BackendUserListener();
+        $backendUserListener = new BackendUserListener(new SiteConfigurationService());
         $backendUserListener($event);
 
         self::assertTrue($event->isLanguageDetectionEnable());
@@ -64,7 +69,9 @@ class BackendUserListenerTest extends AbstractTest
 
     /**
      * @covers \LD\LanguageDetection\Check\BackendUserListener
+     * @covers       \LD\LanguageDetection\Domain\Model\Dto\SiteConfiguration
      * @covers \LD\LanguageDetection\Event\CheckLanguageDetection
+     * @covers       \LD\LanguageDetection\Service\SiteConfigurationService
      * @dataProvider data
      */
     public function testWithDisableConfigurationInSiteAndActiveBackendUser(bool $isLoginState, bool $disableRedirectWithBackendSession, bool $isEnabled): void
@@ -90,7 +97,7 @@ class BackendUserListenerTest extends AbstractTest
 
         GeneralUtility::setSingletonInstance(Context::class, $context);
 
-        $backendUserListener = new BackendUserListener();
+        $backendUserListener = new BackendUserListener(new SiteConfigurationService());
         $backendUserListener($event);
 
         self::assertSame($isLoginState, $context->getAspect('backend.user')->get('isLoggedIn'));

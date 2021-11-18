@@ -8,6 +8,7 @@ use LD\LanguageDetection\Detect\IpLanguage;
 use LD\LanguageDetection\Event\DetectUserLanguages;
 use LD\LanguageDetection\Service\IpLocation;
 use LD\LanguageDetection\Service\LanguageService;
+use LD\LanguageDetection\Service\SiteConfigurationService;
 use LD\LanguageDetection\Tests\Unit\AbstractTest;
 use TYPO3\CMS\Core\Http\ServerRequest;
 use TYPO3\CMS\Core\Site\Entity\Site;
@@ -20,8 +21,10 @@ use TYPO3\CMS\Core\Site\Entity\Site;
 class IpLanguageTest extends AbstractTest
 {
     /**
+     * @covers       \LD\LanguageDetection\Domain\Model\Dto\SiteConfiguration
      * @covers \LD\LanguageDetection\Event\DetectUserLanguages
      * @covers \LD\LanguageDetection\Service\LanguageService
+     * @covers \LD\LanguageDetection\Service\SiteConfigurationService
      *
      * @dataProvider data
      *
@@ -41,7 +44,7 @@ class IpLanguageTest extends AbstractTest
         $event = new DetectUserLanguages($site, $serverRequest);
         $event->setUserLanguages(['default']);
 
-        $ipLanguage = new IpLanguage($ipLocation, new LanguageService());
+        $ipLanguage = new IpLanguage($ipLocation, new LanguageService(), new SiteConfigurationService());
         $ipLanguage($event);
 
         self::assertSame($result, $event->getUserLanguages());

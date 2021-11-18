@@ -6,9 +6,11 @@ namespace LD\LanguageDetection\Tests\Unit\Negotiation;
 
 use LD\LanguageDetection\Event\NegotiateSiteLanguage;
 use LD\LanguageDetection\Negotiation\FallbackNegotiation;
+use LD\LanguageDetection\Service\SiteConfigurationService;
 use LD\LanguageDetection\Tests\Unit\AbstractTest;
 use TYPO3\CMS\Core\Http\ServerRequest;
 use TYPO3\CMS\Core\Http\Uri;
+use TYPO3\CMS\Core\Site\Entity\NullSite;
 use TYPO3\CMS\Core\Site\Entity\Site;
 use TYPO3\CMS\Core\Site\Entity\SiteLanguage;
 
@@ -19,8 +21,10 @@ use TYPO3\CMS\Core\Site\Entity\SiteLanguage;
 class FallbackNegotiationTest extends AbstractTest
 {
     /**
+     * @covers \LD\LanguageDetection\Domain\Model\Dto\SiteConfiguration
      * @covers       \LD\LanguageDetection\Event\NegotiateSiteLanguage
      * @covers       \LD\LanguageDetection\Negotiation\FallbackNegotiation
+     * @covers \LD\LanguageDetection\Service\SiteConfigurationService
      * @dataProvider dataInvalid
      *
      * @param mixed[]|array<string, array<int>>|array<string, string> $configuration
@@ -33,15 +37,17 @@ class FallbackNegotiationTest extends AbstractTest
         $request = new ServerRequest(null, null, 'php://input', []);
         $event = new NegotiateSiteLanguage($site, $request, []);
 
-        $botListener = new FallbackNegotiation();
+        $botListener = new FallbackNegotiation(new SiteConfigurationService());
         $botListener($event);
 
         self::assertNull($event->getSelectedLanguage());
     }
 
     /**
+     * @covers \LD\LanguageDetection\Domain\Model\Dto\SiteConfiguration
      * @covers       \LD\LanguageDetection\Event\NegotiateSiteLanguage
      * @covers       \LD\LanguageDetection\Negotiation\FallbackNegotiation
+     * @covers       \LD\LanguageDetection\Service\SiteConfigurationService
      */
     public function testValidFallbackLanguages(): void
     {
@@ -57,15 +63,17 @@ class FallbackNegotiationTest extends AbstractTest
         $request = new ServerRequest(null, null, 'php://input', []);
         $event = new NegotiateSiteLanguage($site, $request, []);
 
-        $botListener = new FallbackNegotiation();
+        $botListener = new FallbackNegotiation(new SiteConfigurationService());
         $botListener($event);
 
         self::assertEquals($siteLanguage2, $event->getSelectedLanguage());
     }
 
     /**
+     * @covers       \LD\LanguageDetection\Domain\Model\Dto\SiteConfiguration
      * @covers       \LD\LanguageDetection\Event\NegotiateSiteLanguage
      * @covers       \LD\LanguageDetection\Negotiation\FallbackNegotiation
+     * @covers       \LD\LanguageDetection\Service\SiteConfigurationService
      */
     public function testValidConfigurationButNoFallback(): void
     {
@@ -81,7 +89,26 @@ class FallbackNegotiationTest extends AbstractTest
         $request = new ServerRequest(null, null, 'php://input', []);
         $event = new NegotiateSiteLanguage($site, $request, []);
 
-        $botListener = new FallbackNegotiation();
+        $botListener = new FallbackNegotiation(new SiteConfigurationService());
+        $botListener($event);
+
+        self::assertNull($event->getSelectedLanguage());
+    }
+
+    /**
+     * @covers       \LD\LanguageDetection\Domain\Model\Dto\SiteConfiguration
+     * @covers       \LD\LanguageDetection\Event\NegotiateSiteLanguage
+     * @covers       \LD\LanguageDetection\Negotiation\FallbackNegotiation
+     * @covers       \LD\LanguageDetection\Service\SiteConfigurationService
+     */
+    public function testCallWithNullSite(): void
+    {
+        $site = $this->createMock(NullSite::class);
+
+        $request = new ServerRequest(null, null, 'php://input', []);
+        $event = new NegotiateSiteLanguage($site, $request, []);
+
+        $botListener = new FallbackNegotiation(new SiteConfigurationService());
         $botListener($event);
 
         self::assertNull($event->getSelectedLanguage());

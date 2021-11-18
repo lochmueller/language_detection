@@ -6,6 +6,7 @@ namespace LD\LanguageDetection\Tests\Unit\Check;
 
 use LD\LanguageDetection\Check\PathListener;
 use LD\LanguageDetection\Event\CheckLanguageDetection;
+use LD\LanguageDetection\Service\SiteConfigurationService;
 use LD\LanguageDetection\Tests\Unit\AbstractTest;
 use TYPO3\CMS\Core\Http\ServerRequest;
 use TYPO3\CMS\Core\Site\Entity\Site;
@@ -18,7 +19,9 @@ class PathListenerTest extends AbstractTest
 {
     /**
      * @covers \LD\LanguageDetection\Check\PathListener
+     * @covers       \LD\LanguageDetection\Domain\Model\Dto\SiteConfiguration
      * @covers \LD\LanguageDetection\Event\CheckLanguageDetection
+     * @covers \LD\LanguageDetection\Service\SiteConfigurationService
      * @dataProvider data
      *
      * @param array<string, bool>|array<string, false>|mixed[] $config
@@ -31,7 +34,7 @@ class PathListenerTest extends AbstractTest
         $request = new ServerRequest($uri, null, 'php://input', []);
         $event = new CheckLanguageDetection($site, $request);
 
-        $botListener = new PathListener();
+        $botListener = new PathListener(new SiteConfigurationService());
         $botListener($event);
 
         self::assertEquals($result, $event->isLanguageDetectionEnable());

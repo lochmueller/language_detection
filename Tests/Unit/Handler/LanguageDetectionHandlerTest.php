@@ -18,6 +18,7 @@ use LD\LanguageDetection\Handler\LanguageDetectionHandler;
 use LD\LanguageDetection\Negotiation\DefaultNegotiation;
 use LD\LanguageDetection\Response\DefaultResponse;
 use LD\LanguageDetection\Service\Normalizer;
+use LD\LanguageDetection\Service\SiteConfigurationService;
 use LD\LanguageDetection\Tests\Unit\AbstractTest;
 use Psr\Http\Message\ResponseInterface;
 use Symfony\Component\DependencyInjection\Container;
@@ -38,6 +39,7 @@ class LanguageDetectionHandlerTest extends AbstractTest
      * @covers \LD\LanguageDetection\Handler\Exception\DisableLanguageDetectionException
      * @covers \LD\LanguageDetection\Handler\LanguageDetectionHandler
      * @covers \LD\LanguageDetection\Negotiation\DefaultNegotiation
+     * @covers \LD\LanguageDetection\Response\DefaultResponse
      */
     public function testBreakAfterCheckLanguageDetectionByAddingBotAgent(): void
     {
@@ -59,6 +61,7 @@ class LanguageDetectionHandlerTest extends AbstractTest
      * @covers \LD\LanguageDetection\Handler\Exception\NoUserLanguagesException
      * @covers \LD\LanguageDetection\Handler\LanguageDetectionHandler
      * @covers \LD\LanguageDetection\Negotiation\DefaultNegotiation
+     * @covers \LD\LanguageDetection\Response\DefaultResponse
      */
     public function testBreakAfterDetectUserLanguagesByMissingLanguages(): void
     {
@@ -80,6 +83,7 @@ class LanguageDetectionHandlerTest extends AbstractTest
      * @covers \LD\LanguageDetection\Handler\Exception\NoSelectedLanguageException
      * @covers \LD\LanguageDetection\Handler\LanguageDetectionHandler
      * @covers \LD\LanguageDetection\Negotiation\DefaultNegotiation
+     * @covers \LD\LanguageDetection\Response\DefaultResponse
      * @covers \LD\LanguageDetection\Service\Normalizer
      */
     public function testBreakAfterNegotiateSiteLanguageByNotFoundTargetLanguage(): void
@@ -96,6 +100,7 @@ class LanguageDetectionHandlerTest extends AbstractTest
     /**
      * @covers \LD\LanguageDetection\Check\BotListener
      * @covers \LD\LanguageDetection\Detect\BrowserLanguage
+     * @covers \LD\LanguageDetection\Domain\Model\Dto\SiteConfiguration
      * @covers \LD\LanguageDetection\Event\BuildResponse
      * @covers \LD\LanguageDetection\Event\CheckLanguageDetection
      * @covers \LD\LanguageDetection\Event\DetectUserLanguages
@@ -105,6 +110,7 @@ class LanguageDetectionHandlerTest extends AbstractTest
      * @covers \LD\LanguageDetection\Negotiation\DefaultNegotiation
      * @covers \LD\LanguageDetection\Response\DefaultResponse
      * @covers \LD\LanguageDetection\Service\Normalizer
+     * @covers \LD\LanguageDetection\Service\SiteConfigurationService
      */
     public function testBreakAfterBuildResponseByEmptyResponseBecauseOfSameUri(): void
     {
@@ -137,6 +143,7 @@ class LanguageDetectionHandlerTest extends AbstractTest
     /**
      * @covers \LD\LanguageDetection\Check\BotListener
      * @covers \LD\LanguageDetection\Detect\BrowserLanguage
+     * @covers \LD\LanguageDetection\Domain\Model\Dto\SiteConfiguration
      * @covers \LD\LanguageDetection\Event\BuildResponse
      * @covers \LD\LanguageDetection\Event\CheckLanguageDetection
      * @covers \LD\LanguageDetection\Event\DetectUserLanguages
@@ -145,6 +152,7 @@ class LanguageDetectionHandlerTest extends AbstractTest
      * @covers \LD\LanguageDetection\Negotiation\DefaultNegotiation
      * @covers \LD\LanguageDetection\Response\DefaultResponse
      * @covers \LD\LanguageDetection\Service\Normalizer
+     * @covers \LD\LanguageDetection\Service\SiteConfigurationService
      */
     public function testFullExecution(): void
     {
@@ -180,7 +188,7 @@ class LanguageDetectionHandlerTest extends AbstractTest
         $container->set(BotListener::class, new BotListener());
         $container->set(BrowserLanguage::class, new BrowserLanguage());
         $container->set(DefaultNegotiation::class, new DefaultNegotiation(new Normalizer()));
-        $container->set(DefaultResponse::class, new DefaultResponse());
+        $container->set(DefaultResponse::class, new DefaultResponse(new SiteConfigurationService()));
         $provider = new ListenerProvider($container);
         $provider->addListener(CheckLanguageDetection::class, BotListener::class);
         $provider->addListener(DetectUserLanguages::class, BrowserLanguage::class);
