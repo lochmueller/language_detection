@@ -25,6 +25,7 @@ class DefaultNegotiation
         ];
         $userLanguages = $this->normalizer->normalizeList($event->getUserLanguages());
         foreach ($userLanguages as $userLanguage) {
+            // Change to $event->getSite()->getLanguages() to respect interface
             foreach ($event->getSite()->getAllLanguages() as $siteLanguage) {
                 foreach ($compareWith as $function) {
                     /** @var SiteLanguage $siteLanguage */

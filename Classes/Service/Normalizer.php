@@ -7,7 +7,7 @@ namespace LD\LanguageDetection\Service;
 class Normalizer
 {
     /**
-     * @return array<string>
+     * @return string[]
      */
     public function normalizeList(array $locales): array
     {

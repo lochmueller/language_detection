@@ -21,21 +21,21 @@ class SiteConfiguration
     protected int $fallbackDetectionLanguage;
 
     public function __construct(
-        $enableLanguageDetection,
-        $disableRedirectWithBackendSession,
-        $addIpLocationToBrowserLanguage,
-        $allowAllPaths,
-        $redirectHttpStatusCode,
-        $forwardRedirectParameters,
-        $fallbackDetectionLanguage
+        bool $enableLanguageDetection,
+        bool $disableRedirectWithBackendSession,
+        string $addIpLocationToBrowserLanguage,
+        bool $allowAllPaths,
+        int $redirectHttpStatusCode,
+        string $forwardRedirectParameters,
+        int $fallbackDetectionLanguage
     ) {
-        $this->enableLanguageDetection = (bool)$enableLanguageDetection;
-        $this->disableRedirectWithBackendSession = (bool)$disableRedirectWithBackendSession;
-        $this->addIpLocationToBrowserLanguage = (string)$addIpLocationToBrowserLanguage;
-        $this->allowAllPaths = (bool)$allowAllPaths;
-        $this->redirectHttpStatusCode = (int)$redirectHttpStatusCode;
-        $this->forwardRedirectParameters = (string)$forwardRedirectParameters;
-        $this->fallbackDetectionLanguage = (int)$fallbackDetectionLanguage;
+        $this->enableLanguageDetection = $enableLanguageDetection;
+        $this->disableRedirectWithBackendSession = $disableRedirectWithBackendSession;
+        $this->addIpLocationToBrowserLanguage = $addIpLocationToBrowserLanguage;
+        $this->allowAllPaths = $allowAllPaths;
+        $this->redirectHttpStatusCode = $redirectHttpStatusCode;
+        $this->forwardRedirectParameters = $forwardRedirectParameters;
+        $this->fallbackDetectionLanguage = $fallbackDetectionLanguage;
     }
 
     public function isEnableLanguageDetection(): bool

@@ -17,6 +17,9 @@ class TcaLanguageSelection
         $this->siteFinder = $siteFinder ?? GeneralUtility::makeInstance(SiteFinder::class);
     }
 
+    /**
+     * @param mixed[] $configuration
+     */
     public function get(array &$configuration): void
     {
         if (!isset($configuration['row']['identifier'])) {

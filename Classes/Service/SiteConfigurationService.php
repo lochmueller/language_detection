@@ -15,13 +15,13 @@ class SiteConfigurationService
         $config = $site instanceof Site ? $site->getConfiguration() : [];
 
         return new SiteConfiguration(
-            !\array_key_exists('enableLanguageDetection', $config) || (bool)$config['enableLanguageDetection'],
-            $config['disableRedirectWithBackendSession'] ?? false,
-            $config['addIpLocationToBrowserLanguage'] ?? '',
-            $config['allowAllPaths'] ?? '',
-            $config['redirectHttpStatusCode'] ?? 307,
-            $config['forwardRedirectParameters'] ?? '',
-            $config['fallbackDetectionLanguage'] ?? 0,
+            !\array_key_exists('enableLanguageDetection', $config) || (bool) $config['enableLanguageDetection'],
+            (bool) ($config['disableRedirectWithBackendSession'] ?? false),
+            (string) ($config['addIpLocationToBrowserLanguage'] ?? ''),
+            (bool) ($config['allowAllPaths'] ?? false),
+            (int) ($config['redirectHttpStatusCode'] ?? 307),
+            (string) ($config['forwardRedirectParameters'] ?? ''),
+            (int) ($config['fallbackDetectionLanguage'] ?? 0),
         );
     }
 }
