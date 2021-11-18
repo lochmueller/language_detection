@@ -4,5 +4,4 @@
 
 Please DO NOT create security relevant issues in the issue tracker.
 
-Please get in contact with [me](https://github.com/lochmueller) so we can check the vulnerability and handle the fixing process.
-
+Please get in contact with the [TYPO3 security team](https://typo3.org/community/teams/security/contact-us) and nobody else.
