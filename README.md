@@ -12,6 +12,7 @@
 [![codecov](https://codecov.io/gh/lochmueller/language_detection/branch/master/graph/badge.svg?token=7VI1WFAX8Z)](https://codecov.io/gh/lochmueller/language_detection)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/lochmueller/language_detection/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/lochmueller/language_detection/?branch=master)
 [![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://github.com/lochmueller/language_detection/issues)
+[![Plant Tree](https://img.shields.io/treeware/trees/lochmueller/language_detection)](https://plant.treeware.earth/lochmueller/language_detection)
 
 ***
 
@@ -115,3 +116,7 @@ With coverage:
 Thanks all for the great contribution to the project!
 
 ![GitHub Contributors Image](https://contrib.rocks/image?repo=lochmueller/language_detection)
+
+## Licence            
+
+This package is [Treeware](https://treeware.earth). If you use it in production, then we ask that you [**buy the world a tree**](https://plant.treeware.earth/lochmueller/language_detection) to thank us for our work. By contributing to the Treeware forest you’ll be creating employment for local families and restoring wildlife habitats.
