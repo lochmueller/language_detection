@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace LD\LanguageDetection\Check;
 
 use LD\LanguageDetection\Event\CheckLanguageDetection;
-use TYPO3\CMS\Core\Utility\StringUtility;
+use LD\LanguageDetection\Utility\CompatibilityUtility;
 
 class FromCurrentPageListener
 {
@@ -15,7 +15,7 @@ class FromCurrentPageListener
 
         $referer = $serverInformation['HTTP_REFERER'] ?? '';
         $baseUri = rtrim((string)$event->getSite()->getBase(), '/');
-        if ('' !== $referer && '' !== $baseUri && StringUtility::beginsWith((string)$referer, $baseUri)) {
+        if ('' !== $referer && '' !== $baseUri && CompatibilityUtility::stringBeginsWith((string)$referer, $baseUri)) {
             $event->disableLanguageDetection();
         }
     }
