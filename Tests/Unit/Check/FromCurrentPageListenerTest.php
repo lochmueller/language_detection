@@ -20,6 +20,7 @@ class FromCurrentPageListenerTest extends AbstractTest
     /**
      * @covers \LD\LanguageDetection\Check\FromCurrentPageListener
      * @covers \LD\LanguageDetection\Event\CheckLanguageDetection
+     * @covers \LD\LanguageDetection\Utility\CompatibilityUtility
      * @dataProvider data
      */
     public function testInvalidReferrer(string $referrer, string $baseUri, bool $isStillEnabled): void
