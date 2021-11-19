@@ -58,11 +58,11 @@ class IpLanguage
 
     public function getLanguage(ServerRequestInterface $request): ?string
     {
-        $data = $this->ipLocation->get($request->getServerParams()['REMOTE_ADDR'] ?? '');
-        if (!isset($data['geoplugin_countryCode'])) {
+        $countryCode = $this->ipLocation->getCountryCode($request->getServerParams()['REMOTE_ADDR'] ?? '');
+        if (null === $countryCode) {
             return null;
         }
 
-        return $this->languageService->getLanguageByCountry((string)$data['geoplugin_countryCode']);
+        return $this->languageService->getLanguageByCountry($countryCode);
     }
 }

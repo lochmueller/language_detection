@@ -49,7 +49,7 @@ class DefaultNegotiationTest extends AbstractTest
         $de = new SiteLanguage(1, 'de_DE', new Uri('/en/'), ['enabled' => true]);
 
         $site = $this->createStub(Site::class);
-        $site->method('getAllLanguages')->willReturn([$en, $de]);
+        $site->method('getLanguages')->willReturn([$en, $de]);
 
         $event = new NegotiateSiteLanguage($site, $this->createMock(ServerRequestInterface::class), ['de_DE', 'en_GB']);
         $negotiation($event);

@@ -62,7 +62,7 @@
 			"php-cs-fixer fix --config Resources/Private/Build/PhpCsFixer.php --cache-file=.Build/phpcs.cache"
 		],
 		"code:phpstan": [
-			"phpstan analyse -l 6 Classes Tests"
+			"phpstan analyse -l 5 Classes Tests"
 		],
 		"test:unit": [
 			"phpunit -c phpunit.xml --coverage-text --testdox"

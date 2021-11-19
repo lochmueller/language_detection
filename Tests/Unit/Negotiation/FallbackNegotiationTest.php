@@ -58,7 +58,7 @@ class FallbackNegotiationTest extends AbstractTest
         $siteLanguage2 = new SiteLanguage(2, 'en_GB', new Uri('/en/'), []);
         $siteLanguage3 = new SiteLanguage(3, 'fr_FR', new Uri('/fr/'), []);
 
-        $site->method('getAllLanguages')->willReturn([$siteLanguage1, $siteLanguage2, $siteLanguage3]);
+        $site->method('getLanguages')->willReturn([$siteLanguage1, $siteLanguage2, $siteLanguage3]);
 
         $request = new ServerRequest(null, null, 'php://input', []);
         $event = new NegotiateSiteLanguage($site, $request, []);
@@ -84,7 +84,7 @@ class FallbackNegotiationTest extends AbstractTest
         $siteLanguage2 = new SiteLanguage(2, 'en_GB', new Uri('/en/'), []);
         $siteLanguage3 = new SiteLanguage(3, 'fr_FR', new Uri('/fr/'), []);
 
-        $site->method('getAllLanguages')->willReturn([$siteLanguage1, $siteLanguage2, $siteLanguage3]);
+        $site->method('getLanguages')->willReturn([$siteLanguage1, $siteLanguage2, $siteLanguage3]);
 
         $request = new ServerRequest(null, null, 'php://input', []);
         $event = new NegotiateSiteLanguage($site, $request, []);

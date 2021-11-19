@@ -6,7 +6,6 @@ namespace LD\LanguageDetection\Negotiation;
 
 use LD\LanguageDetection\Event\NegotiateSiteLanguage;
 use LD\LanguageDetection\Service\Normalizer;
-use TYPO3\CMS\Core\Site\Entity\SiteLanguage;
 
 class DefaultNegotiation
 {
@@ -25,10 +24,8 @@ class DefaultNegotiation
         ];
         $userLanguages = $this->normalizer->normalizeList($event->getUserLanguages());
         foreach ($userLanguages as $userLanguage) {
-            // Change to $event->getSite()->getLanguages() to respect interface
-            foreach ($event->getSite()->getAllLanguages() as $siteLanguage) {
+            foreach ($event->getSite()->getLanguages() as $siteLanguage) {
                 foreach ($compareWith as $function) {
-                    /** @var SiteLanguage $siteLanguage */
                     if ($siteLanguage->enabled() && $userLanguage === $this->normalizer->normalize((string)$siteLanguage->{$function}())) {
                         $event->setSelectedLanguage($siteLanguage);
 

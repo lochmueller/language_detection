@@ -13,6 +13,10 @@ final class NegotiateSiteLanguage extends AbstractEvent implements StoppableEven
 {
     private SiteInterface $site;
     private ServerRequestInterface $request;
+
+    /**
+     * @return array<string>
+     */
     private array $userLanguages;
     private ?SiteLanguage $selectedLanguage = null;
 

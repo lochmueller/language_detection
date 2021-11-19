@@ -120,7 +120,7 @@ class RespectLanguageLinkDetailsTraitTest extends AbstractTest
         $de = new SiteLanguage(1, 'de_DE', new Uri('/en/'), ['enabled' => true]);
 
         $site = $this->createStub(Site::class);
-        $site->method('getAllLanguages')->willReturn([$en, $de]);
+        $site->method('getLanguages')->willReturn([$en, $de]);
 
         $siteFinder = $this->createStub(SiteFinder::class);
         $siteFinder->method('getSiteByPageId')

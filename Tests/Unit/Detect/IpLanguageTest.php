@@ -28,13 +28,13 @@ class IpLanguageTest extends AbstractTest
      *
      * @dataProvider data
      *
-     * @param string[]                      $result
-     * @param array<string, string>|mixed[] $ipLocationConfiguration
+     * @param string[] $result
+     * @param ?string  $ipLocationConfiguration
      */
-    public function testAddIpLanguageConfiguration(string $addIpLocationToBrowserLanguage, array $result, ?array $ipLocationConfiguration): void
+    public function testAddIpLanguageConfiguration(string $addIpLocationToBrowserLanguage, array $result, ?string $ipLocationConfiguration): void
     {
         $ipLocation = $this->createStub(IpLocation::class);
-        $ipLocation->method('get')->willReturn($ipLocationConfiguration);
+        $ipLocation->method('getCountryCode')->willReturn($ipLocationConfiguration);
 
         $serverRequest = new ServerRequest(null, null, 'php://input', ['user-agent' => 'AdsBot-Google']);
 
@@ -51,17 +51,17 @@ class IpLanguageTest extends AbstractTest
     }
 
     /**
-     * @return array<string, array<string|string[]|string[]>>
+     * @return array<string, array<string|string[]|string|null>>
      */
     public function data(): array
     {
         return [
-            'Empty LD configuration with country result' => ['', ['default'], ['geoplugin_countryCode' => 'DE']],
-            'After LD configuration with no country result' => ['after', ['default'], []],
-            'After LD configuration with DE country result' => ['after', ['default', 'de'], ['geoplugin_countryCode' => 'DE']],
-            'Before LD configuration with DE country result' => ['before', ['de', 'default'], ['geoplugin_countryCode' => 'DE']],
-            'Replace LD configuration with DE country result' => ['replace', ['de'], ['geoplugin_countryCode' => 'DE']],
-            'Wrong LD configuration with DE country result' => ['wrong', ['default'], ['geoplugin_countryCode' => 'DE']],
+            'Empty LD configuration with country result' => ['', ['default'], 'DE'],
+            'After LD configuration with no country result' => ['after', ['default'], null],
+            'After LD configuration with DE country result' => ['after', ['default', 'de'], 'DE'],
+            'Before LD configuration with DE country result' => ['before', ['de', 'default'], 'DE'],
+            'Replace LD configuration with DE country result' => ['replace', ['de'], 'DE'],
+            'Wrong LD configuration with DE country result' => ['wrong', ['default'], 'DE'],
         ];
     }
 }

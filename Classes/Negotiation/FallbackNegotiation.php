@@ -7,7 +7,6 @@ namespace LD\LanguageDetection\Negotiation;
 use LD\LanguageDetection\Event\NegotiateSiteLanguage;
 use LD\LanguageDetection\Service\SiteConfigurationService;
 use TYPO3\CMS\Core\Site\Entity\Site;
-use TYPO3\CMS\Core\Site\Entity\SiteLanguage;
 
 class FallbackNegotiation
 {
@@ -27,8 +26,7 @@ class FallbackNegotiation
         $configuration = $this->siteConfigurationService->getConfiguration($site);
 
         $fallback = $configuration->getFallbackDetectionLanguage();
-        foreach ($site->getAllLanguages() as $siteLanguage) {
-            /** @var SiteLanguage $siteLanguage */
+        foreach ($site->getLanguages() as $siteLanguage) {
             if ($siteLanguage->getLanguageId() === $fallback) {
                 $event->setSelectedLanguage($siteLanguage);
 
