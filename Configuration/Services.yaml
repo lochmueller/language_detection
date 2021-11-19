@@ -7,12 +7,6 @@ services:
   LD\LanguageDetection\:
     resource: '../Classes/*'
 
-  LD\LanguageDetection\Check\SiteListener:
-    tags:
-      - name: event.listener
-        identifier: 'languageDetectionSite'
-        event: LD\LanguageDetection\Event\CheckLanguageDetection
-
   LD\LanguageDetection\Check\EnableListener:
     tags:
       - name: event.listener
