@@ -9,3 +9,4 @@
 /phpunit.xml export-ignore
 /.phpunit.cache export-ignore
 /rector.php export-ignore
+/infection.json export-ignore

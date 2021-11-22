@@ -37,7 +37,8 @@
 		"typo3/testing-framework": "^6.1",
 		"friendsofphp/php-cs-fixer": "^3.1",
 		"rector/rector": "^0.12",
-		"phpstan/phpstan": "^1.1"
+		"phpstan/phpstan": "^1.1",
+		"infection/infection": "^0.25.3"
 	},
 	"config": {
 		"vendor-dir": ".Build/vendor",
@@ -69,6 +70,9 @@
 		],
 		"test:clover": [
 			"phpunit -c phpunit.xml --coverage-clover coverage.xml"
+		],
+		"test:infection": [
+			"infection"
 		]
 	}
 }

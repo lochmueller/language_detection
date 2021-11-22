@@ -121,6 +121,10 @@ With coverage:
 
 > docker run --rm -it --volume $(pwd):/app prooph/php:7.4-fpm-xdebug /app/.Build/bin/phpunit  -c /app/phpunit.xml --coverage-text --testdox --coverage-html=/app/var/phpunit
 
+Run Mutation tests:
+
+> docker run --rm -it --workdir=/app/ --volume $(pwd):/app prooph/php:7.4-fpm-xdebug .Build/bin/infection
+
 ## Contribution
 
 Thanks all for the great contribution to the project!
