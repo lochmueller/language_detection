@@ -1,0 +1,92 @@
+paths:
+  - ./Classes
+layers:
+  - name: Check
+    collectors:
+      - type: directory
+        regex: Classes/Check/.*
+  - name: Detect
+    collectors:
+      - type: directory
+        regex: Classes/Detect/.*
+  - name: Domain
+    collectors:
+      - type: directory
+        regex: Classes/Domain/.*
+  - name: Event
+    collectors:
+      - type: directory
+        regex: Classes/Event/.*
+  - name: Handler
+    collectors:
+      - type: directory
+        regex: Classes/Handler/.*
+  - name: Middleware
+    collectors:
+      - type: directory
+        regex: Classes/Middleware/.*
+  - name: Negotiation
+    collectors:
+      - type: directory
+        regex: Classes/Negotiation/.*
+  - name: Response
+    collectors:
+      - type: directory
+        regex: Classes/Response/.*
+  - name: Service
+    collectors:
+      - type: directory
+        regex: Classes/Service/.*
+  - name: Utility
+    collectors:
+      - type: directory
+        regex: Classes/Utility/.*
+  - name: ExternalTypo3Core
+    collectors:
+      - type: className
+        regex: TYPO3\\CMS\\Core\\.*
+  - name: ExternalPsr
+    collectors:
+      - type: className
+        regex: PSR\\
+ruleset:
+  Check:
+    - Service
+    - Event
+    - Utility
+    - ExternalTypo3Core
+    - ExternalPsr
+  Detect:
+    - Service
+    - Event
+    - ExternalTypo3Core
+    - ExternalPsr
+  Handler:
+    - Event
+    - ExternalTypo3Core
+    - ExternalPsr
+  Middleware:
+    - Handler
+    - ExternalPsr
+  Negotiation:
+    - Service
+    - Event
+    - ExternalTypo3Core
+  Response:
+    - Service
+    - Event
+    - Domain
+    - ExternalTypo3Core
+    - ExternalPsr
+  Service:
+    - Domain
+    - ExternalTypo3Core
+    - ExternalPsr
+# @todo Drop this to
+    - Event
+    - Check
+  Event:
+    - ExternalTypo3Core
+    - ExternalPsr
+  Utility:
+    - ExternalTypo3Core

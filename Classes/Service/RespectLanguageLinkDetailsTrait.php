@@ -27,6 +27,8 @@ trait RespectLanguageLinkDetailsTrait
 
     /**
      * @return mixed[]
+     *
+     * @todo move to Handler class
      */
     public function addLanguageParameterByDetection(array $linkDetails): array
     {
