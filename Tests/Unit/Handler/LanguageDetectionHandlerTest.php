@@ -35,11 +35,11 @@ class LanguageDetectionHandlerTest extends AbstractHandlerTest
     /**
      * @covers \LD\LanguageDetection\Check\BotListener
      * @covers \LD\LanguageDetection\Event\CheckLanguageDetection
+     * @covers \LD\LanguageDetection\Handler\AbstractHandler
      * @covers \LD\LanguageDetection\Handler\Exception\DisableLanguageDetectionException
      * @covers \LD\LanguageDetection\Handler\LanguageDetectionHandler
      * @covers \LD\LanguageDetection\Negotiation\DefaultNegotiation
      * @covers \LD\LanguageDetection\Response\DefaultResponse
-     * @covers \LD\LanguageDetection\Handler\AbstractHandler
      */
     public function testBreakAfterCheckLanguageDetectionByAddingBotAgent(): void
     {
@@ -58,11 +58,11 @@ class LanguageDetectionHandlerTest extends AbstractHandlerTest
      * @covers \LD\LanguageDetection\Detect\BrowserLanguage
      * @covers \LD\LanguageDetection\Event\CheckLanguageDetection
      * @covers \LD\LanguageDetection\Event\DetectUserLanguages
+     * @covers \LD\LanguageDetection\Handler\AbstractHandler
      * @covers \LD\LanguageDetection\Handler\Exception\NoUserLanguagesException
      * @covers \LD\LanguageDetection\Handler\LanguageDetectionHandler
      * @covers \LD\LanguageDetection\Negotiation\DefaultNegotiation
      * @covers \LD\LanguageDetection\Response\DefaultResponse
-     * @covers \LD\LanguageDetection\Handler\AbstractHandler
      */
     public function testBreakAfterDetectUserLanguagesByMissingLanguages(): void
     {
@@ -81,12 +81,12 @@ class LanguageDetectionHandlerTest extends AbstractHandlerTest
      * @covers \LD\LanguageDetection\Event\CheckLanguageDetection
      * @covers \LD\LanguageDetection\Event\DetectUserLanguages
      * @covers \LD\LanguageDetection\Event\NegotiateSiteLanguage
+     * @covers \LD\LanguageDetection\Handler\AbstractHandler
      * @covers \LD\LanguageDetection\Handler\Exception\NoSelectedLanguageException
      * @covers \LD\LanguageDetection\Handler\LanguageDetectionHandler
      * @covers \LD\LanguageDetection\Negotiation\DefaultNegotiation
      * @covers \LD\LanguageDetection\Response\DefaultResponse
      * @covers \LD\LanguageDetection\Service\Normalizer
-     * @covers \LD\LanguageDetection\Handler\AbstractHandler
      */
     public function testBreakAfterNegotiateSiteLanguageByNotFoundTargetLanguage(): void
     {
@@ -107,13 +107,13 @@ class LanguageDetectionHandlerTest extends AbstractHandlerTest
      * @covers \LD\LanguageDetection\Event\CheckLanguageDetection
      * @covers \LD\LanguageDetection\Event\DetectUserLanguages
      * @covers \LD\LanguageDetection\Event\NegotiateSiteLanguage
+     * @covers \LD\LanguageDetection\Handler\AbstractHandler
      * @covers \LD\LanguageDetection\Handler\Exception\NoResponseException
      * @covers \LD\LanguageDetection\Handler\LanguageDetectionHandler
      * @covers \LD\LanguageDetection\Negotiation\DefaultNegotiation
      * @covers \LD\LanguageDetection\Response\DefaultResponse
      * @covers \LD\LanguageDetection\Service\Normalizer
      * @covers \LD\LanguageDetection\Service\SiteConfigurationService
-     * @covers \LD\LanguageDetection\Handler\AbstractHandler
      */
     public function testBreakAfterBuildResponseByEmptyResponseBecauseOfSameUri(): void
     {
@@ -151,12 +151,12 @@ class LanguageDetectionHandlerTest extends AbstractHandlerTest
      * @covers \LD\LanguageDetection\Event\CheckLanguageDetection
      * @covers \LD\LanguageDetection\Event\DetectUserLanguages
      * @covers \LD\LanguageDetection\Event\NegotiateSiteLanguage
+     * @covers \LD\LanguageDetection\Handler\AbstractHandler
      * @covers \LD\LanguageDetection\Handler\LanguageDetectionHandler
      * @covers \LD\LanguageDetection\Negotiation\DefaultNegotiation
      * @covers \LD\LanguageDetection\Response\DefaultResponse
      * @covers \LD\LanguageDetection\Service\Normalizer
      * @covers \LD\LanguageDetection\Service\SiteConfigurationService
-     * @covers \LD\LanguageDetection\Handler\AbstractHandler
      */
     public function testFullExecution(): void
     {
