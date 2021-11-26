@@ -52,6 +52,7 @@
 	},
 	"scripts": {
 		"code:all": [
+			"@code:deptrac",
 			"@code:rector",
 			"@code:php-cs-fixer",
 			"@code:phpstan"
@@ -59,7 +60,7 @@
 		"code:rector": [
 			"rector"
 		],
-		"deptrac": [
+		"code:deptrac": [
 			"deptrac"
 		],
 		"code:php-cs-fixer": [

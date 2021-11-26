@@ -80,11 +80,9 @@ ruleset:
     - ExternalPsr
   Service:
     - Domain
+    - Handler
     - ExternalTypo3Core
     - ExternalPsr
-# @todo Drop this to
-    - Event
-    - Check
   Event:
     - ExternalTypo3Core
     - ExternalPsr

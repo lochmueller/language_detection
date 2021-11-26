@@ -19,7 +19,6 @@ use LD\LanguageDetection\Negotiation\DefaultNegotiation;
 use LD\LanguageDetection\Response\DefaultResponse;
 use LD\LanguageDetection\Service\Normalizer;
 use LD\LanguageDetection\Service\SiteConfigurationService;
-use LD\LanguageDetection\Tests\Unit\AbstractTest;
 use Psr\Http\Message\ResponseInterface;
 use Symfony\Component\DependencyInjection\Container;
 use TYPO3\CMS\Core\EventDispatcher\EventDispatcher;
@@ -31,7 +30,7 @@ use TYPO3\CMS\Core\Site\Entity\Site;
  * @internal
  * @coversNothing
  */
-class LanguageDetectionHandlerTest extends AbstractTest
+class LanguageDetectionHandlerTest extends AbstractHandlerTest
 {
     /**
      * @covers \LD\LanguageDetection\Check\BotListener
@@ -40,6 +39,7 @@ class LanguageDetectionHandlerTest extends AbstractTest
      * @covers \LD\LanguageDetection\Handler\LanguageDetectionHandler
      * @covers \LD\LanguageDetection\Negotiation\DefaultNegotiation
      * @covers \LD\LanguageDetection\Response\DefaultResponse
+     * @covers \LD\LanguageDetection\Handler\AbstractHandler
      */
     public function testBreakAfterCheckLanguageDetectionByAddingBotAgent(): void
     {
@@ -62,6 +62,7 @@ class LanguageDetectionHandlerTest extends AbstractTest
      * @covers \LD\LanguageDetection\Handler\LanguageDetectionHandler
      * @covers \LD\LanguageDetection\Negotiation\DefaultNegotiation
      * @covers \LD\LanguageDetection\Response\DefaultResponse
+     * @covers \LD\LanguageDetection\Handler\AbstractHandler
      */
     public function testBreakAfterDetectUserLanguagesByMissingLanguages(): void
     {
@@ -85,6 +86,7 @@ class LanguageDetectionHandlerTest extends AbstractTest
      * @covers \LD\LanguageDetection\Negotiation\DefaultNegotiation
      * @covers \LD\LanguageDetection\Response\DefaultResponse
      * @covers \LD\LanguageDetection\Service\Normalizer
+     * @covers \LD\LanguageDetection\Handler\AbstractHandler
      */
     public function testBreakAfterNegotiateSiteLanguageByNotFoundTargetLanguage(): void
     {
@@ -111,6 +113,7 @@ class LanguageDetectionHandlerTest extends AbstractTest
      * @covers \LD\LanguageDetection\Response\DefaultResponse
      * @covers \LD\LanguageDetection\Service\Normalizer
      * @covers \LD\LanguageDetection\Service\SiteConfigurationService
+     * @covers \LD\LanguageDetection\Handler\AbstractHandler
      */
     public function testBreakAfterBuildResponseByEmptyResponseBecauseOfSameUri(): void
     {
@@ -153,6 +156,7 @@ class LanguageDetectionHandlerTest extends AbstractTest
      * @covers \LD\LanguageDetection\Response\DefaultResponse
      * @covers \LD\LanguageDetection\Service\Normalizer
      * @covers \LD\LanguageDetection\Service\SiteConfigurationService
+     * @covers \LD\LanguageDetection\Handler\AbstractHandler
      */
     public function testFullExecution(): void
     {

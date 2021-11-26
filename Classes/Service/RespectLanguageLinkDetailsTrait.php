@@ -4,61 +4,42 @@ declare(strict_types=1);
 
 namespace LD\LanguageDetection\Service;
 
-use LD\LanguageDetection\Check\EnableListener;
-use LD\LanguageDetection\Event\CheckLanguageDetection;
-use LD\LanguageDetection\Event\DetectUserLanguages;
-use LD\LanguageDetection\Event\NegotiateSiteLanguage;
-use Psr\EventDispatcher\EventDispatcherInterface;
-use TYPO3\CMS\Core\Http\ServerRequest;
+use LD\LanguageDetection\Handler\Exception\AbstractHandlerException;
+use LD\LanguageDetection\Handler\LinkLanguageHandler;
+use TYPO3\CMS\Core\Http\ServerRequestFactory;
 use TYPO3\CMS\Core\LinkHandling\LinkService;
 use TYPO3\CMS\Core\Site\SiteFinder;
 
 /**
  * Inject the needed services or create it by yourself.
- * E.g. $languageRequest could be created by ServerRequestFactory::fromGlobals();.
  */
 trait RespectLanguageLinkDetailsTrait
 {
-    protected EventDispatcherInterface $languageEventDispatcher;
-
     protected SiteFinder $languageSiteFinder;
 
-    protected ServerRequest $languageRequest;
+    protected LinkLanguageHandler $linkLanguageHandler;
 
     /**
      * @return mixed[]
-     *
-     * @todo move to Handler class
      */
     public function addLanguageParameterByDetection(array $linkDetails): array
     {
         if (LinkService::TYPE_PAGE !== $linkDetails['type']) {
             return $linkDetails;
         }
-        $site = $this->languageSiteFinder->getSiteByPageId((int)$linkDetails['pageuid'] ?? 0);
 
-        $check = new CheckLanguageDetection($site, $this->languageRequest);
-        $enableListener = new EnableListener(new SiteConfigurationService());
-        $enableListener($check);
+        $factory = new ServerRequestFactory();
+        $request = $factory->createServerRequest('GET', '/', []);
+        $request = $request->withAttribute('site', $this->languageSiteFinder->getSiteByPageId((int)$linkDetails['pageuid'] ?? 0));
 
-        if (!$check->isLanguageDetectionEnable()) {
+        try {
+            $response = $this->linkLanguageHandler->handle($request);
+
+            $linkDetails['parameters'] = 'L=' . $response->getHeaderLine(LinkLanguageHandler::HEADER_NAME);
+
+            return $linkDetails;
+        } catch (AbstractHandlerException $exception) {
             return $linkDetails;
         }
-
-        $detect = new DetectUserLanguages($site, $this->languageRequest);
-        $this->languageEventDispatcher->dispatch($detect);
-
-        if (empty($detect->getUserLanguages())) {
-            return $linkDetails;
-        }
-
-        $negotiate = new NegotiateSiteLanguage($site, $this->languageRequest, $detect->getUserLanguages());
-        $this->languageEventDispatcher->dispatch($negotiate);
-
-        if (null !== $negotiate->getSelectedLanguage() && $negotiate->getSelectedLanguage()->enabled()) {
-            $linkDetails['parameters'] = 'L=' . $negotiate->getSelectedLanguage()->getLanguageId();
-        }
-
-        return $linkDetails;
     }
 }
