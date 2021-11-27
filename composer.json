@@ -28,12 +28,12 @@
 	"require": {
 		"php": "^7.4||^8.0",
 		"ext-intl": "*",
-		"typo3/cms-core": "^10.4||^11.5"
+		"typo3/cms-core": "^10.4||^11.5||dev-master"
 	},
 	"homepage": "https://github.com/lochmueller/language_detection",
 	"license": "GPL-2.0-or-later",
 	"require-dev": {
-		"typo3/testing-framework": "^6.1",
+		"typo3/testing-framework": "^6.1||dev-master",
 		"friendsofphp/php-cs-fixer": "^3.1",
 		"rector/rector": "^0.12",
 		"phpstan/phpstan": "^1.1",

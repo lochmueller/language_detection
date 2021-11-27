@@ -6,10 +6,10 @@ jobs:
       fail-fast: false
       matrix:
         php: ["7.4", "8.0", "8.1"]
-        typo3: ["11.5", "12.0.x-dev"]
+        typo3: ["^11.5", "dev-master"]
         include:
           - php: "7.4"
-            typo3: "10.4"
+            typo3: "^10.4"
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -38,7 +38,7 @@ jobs:
           restore-keys: ${{ runner.os }}-composer-
 
       - name: Install the right version
-        run: composer require "typo3/cms-core:^${{ matrix.typo3 }}" "typo3/cms-frontend:^${{ matrix.typo3 }}" -W
+        run: composer config minimum-stability dev && composer require "typo3/cms-core:${{ matrix.typo3 }}" "typo3/cms-frontend:${{ matrix.typo3 }}" --update-with-all-dependencies
 
       - name: Unit Tests with phpunit
         run: composer run test:unit
