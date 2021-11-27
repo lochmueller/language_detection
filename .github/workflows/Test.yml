@@ -5,10 +5,10 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        php: ["7.4", "8.0"]
-        typo3: ["10.4", "11.5"]
-        exclude:
-          - php: "8.0"
+        php: ["7.4", "8.0", "8.1"]
+        typo3: ["11.5", "12.0.x-dev"]
+        include:
+          - php: "7.4"
             typo3: "10.4"
     runs-on: ubuntu-latest
     steps:
