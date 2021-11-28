@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace LD\LanguageDetection\Check;
 
 use LD\LanguageDetection\Event\CheckLanguageDetection;
-use LD\LanguageDetection\Utility\CompatibilityUtility;
 
 class FromCurrentPageListener
 {
@@ -15,8 +14,17 @@ class FromCurrentPageListener
 
         $referer = $serverInformation['HTTP_REFERER'] ?? '';
         $baseUri = rtrim((string)$event->getSite()->getBase(), '/');
-        if ('' !== $referer && '' !== $baseUri && CompatibilityUtility::stringBeginsWith((string)$referer, $baseUri)) {
+        if ('' !== $referer && '' !== $baseUri && $this->stringBeginsWith((string)$referer, $baseUri)) {
             $event->disableLanguageDetection();
         }
+    }
+
+    protected function stringBeginsWith(string $haystack, string $needle): bool
+    {
+        if (function_exists('str_starts_with')) {
+            return str_starts_with($haystack, $needle);
+        }
+
+        return '' !== $needle && 0 === strpos($haystack, $needle);
     }
 }

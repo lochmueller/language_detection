@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-$baseDir = dirname(__DIR__, 3);
+$baseDir = \dirname(__DIR__, 3);
 require $baseDir . '/.Build/vendor/autoload.php';
 
 $finder = PhpCsFixer\Finder::create()
@@ -33,6 +33,7 @@ return (new PhpCsFixer\Config())
         'dir_constant' => true,
         'function_typehint_space' => true,
         'lowercase_cast' => true,
+        'native_function_invocation' => ['exclude' => ['function_exists']],
         'method_argument_space' => ['on_multiline' => 'ensure_fully_multiline'],
         'modernize_types_casting' => true,
         'native_function_casing' => true,
