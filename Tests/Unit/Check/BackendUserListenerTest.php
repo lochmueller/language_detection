@@ -20,10 +20,11 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  */
 class BackendUserListenerTest extends AbstractTest
 {
-    /**
-     * @var bool
-     */
-    protected $resetSingletonInstances = true;
+    protected function setUp(): void
+    {
+        $this->resetSingletonInstances = true;
+        parent::setUp();
+    }
 
     /**
      * @covers \LD\LanguageDetection\Check\BackendUserListener
