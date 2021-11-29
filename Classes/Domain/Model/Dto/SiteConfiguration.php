@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace LD\LanguageDetection\Domain\Model\Dto;
+namespace Lochmueller\LanguageDetection\Domain\Model\Dto;
 
 class SiteConfiguration
 {

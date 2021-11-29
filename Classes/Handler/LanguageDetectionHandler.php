@@ -2,16 +2,16 @@
 
 declare(strict_types=1);
 
-namespace LD\LanguageDetection\Handler;
+namespace Lochmueller\LanguageDetection\Handler;
 
-use LD\LanguageDetection\Event\BuildResponse;
-use LD\LanguageDetection\Event\CheckLanguageDetection;
-use LD\LanguageDetection\Event\DetectUserLanguages;
-use LD\LanguageDetection\Event\NegotiateSiteLanguage;
-use LD\LanguageDetection\Handler\Exception\DisableLanguageDetectionException;
-use LD\LanguageDetection\Handler\Exception\NoResponseException;
-use LD\LanguageDetection\Handler\Exception\NoSelectedLanguageException;
-use LD\LanguageDetection\Handler\Exception\NoUserLanguagesException;
+use Lochmueller\LanguageDetection\Event\BuildResponse;
+use Lochmueller\LanguageDetection\Event\CheckLanguageDetection;
+use Lochmueller\LanguageDetection\Event\DetectUserLanguages;
+use Lochmueller\LanguageDetection\Event\NegotiateSiteLanguage;
+use Lochmueller\LanguageDetection\Handler\Exception\DisableLanguageDetectionException;
+use Lochmueller\LanguageDetection\Handler\Exception\NoResponseException;
+use Lochmueller\LanguageDetection\Handler\Exception\NoSelectedLanguageException;
+use Lochmueller\LanguageDetection\Handler\Exception\NoUserLanguagesException;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;

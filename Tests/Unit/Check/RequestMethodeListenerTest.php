@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace LD\LanguageDetection\Tests\Unit\Check;
+namespace Lochmueller\LanguageDetection\Tests\Unit\Check;
 
-use LD\LanguageDetection\Check\RequestMethodListener;
-use LD\LanguageDetection\Event\CheckLanguageDetection;
-use LD\LanguageDetection\Tests\Unit\AbstractTest;
+use Lochmueller\LanguageDetection\Check\RequestMethodListener;
+use Lochmueller\LanguageDetection\Event\CheckLanguageDetection;
+use Lochmueller\LanguageDetection\Tests\Unit\AbstractTest;
 use Psr\Http\Message\ServerRequestInterface;
 use TYPO3\CMS\Core\Site\Entity\Site;
 
@@ -17,8 +17,8 @@ use TYPO3\CMS\Core\Site\Entity\Site;
 class RequestMethodeListenerTest extends AbstractTest
 {
     /**
-     * @covers       \LD\LanguageDetection\Check\RequestMethodListener
-     * @covers       \LD\LanguageDetection\Event\CheckLanguageDetection
+     * @covers       \Lochmueller\LanguageDetection\Check\RequestMethodListener
+     * @covers       \Lochmueller\LanguageDetection\Event\CheckLanguageDetection
      * @dataProvider data
      */
     public function testConfiguration(string $method, bool $result): void

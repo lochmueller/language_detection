@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace LD\LanguageDetection\Tests\Unit\Handler\Exception;
+namespace Lochmueller\LanguageDetection\Tests\Unit\Handler\Exception;
 
-use LD\LanguageDetection\Handler\Exception\NoSelectedLanguageException;
-use LD\LanguageDetection\Tests\Unit\AbstractTest;
+use Lochmueller\LanguageDetection\Handler\Exception\NoSelectedLanguageException;
+use Lochmueller\LanguageDetection\Tests\Unit\AbstractTest;
 
 /**
  * @internal
@@ -14,7 +14,7 @@ use LD\LanguageDetection\Tests\Unit\AbstractTest;
 class NoSelectedLanguageExceptionTest extends AbstractTest
 {
     /**
-     * @covers \LD\LanguageDetection\Handler\Exception\NoSelectedLanguageException
+     * @covers \Lochmueller\LanguageDetection\Handler\Exception\NoSelectedLanguageException
      */
     public function testIfExceptionHasStaticMessageAndCode(): void
     {

@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace LD\LanguageDetection\Tests\Unit\Event;
+namespace Lochmueller\LanguageDetection\Tests\Unit\Event;
 
-use LD\LanguageDetection\Event\BuildResponse;
+use Lochmueller\LanguageDetection\Event\BuildResponse;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use TYPO3\CMS\Core\Site\Entity\SiteInterface;
@@ -17,7 +17,7 @@ use TYPO3\CMS\Core\Site\Entity\SiteLanguage;
 class BuildResponseTest extends AbstractEventTest
 {
     /**
-     * @covers \LD\LanguageDetection\Event\BuildResponse
+     * @covers \Lochmueller\LanguageDetection\Event\BuildResponse
      */
     public function testEventGetterAndSetter(): void
     {

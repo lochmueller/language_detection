@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace LD\LanguageDetection\Tests\Unit\Check;
+namespace Lochmueller\LanguageDetection\Tests\Unit\Check;
 
-use LD\LanguageDetection\Check\PathListener;
-use LD\LanguageDetection\Event\CheckLanguageDetection;
-use LD\LanguageDetection\Service\SiteConfigurationService;
-use LD\LanguageDetection\Tests\Unit\AbstractTest;
+use Lochmueller\LanguageDetection\Check\PathListener;
+use Lochmueller\LanguageDetection\Event\CheckLanguageDetection;
+use Lochmueller\LanguageDetection\Service\SiteConfigurationService;
+use Lochmueller\LanguageDetection\Tests\Unit\AbstractTest;
 use TYPO3\CMS\Core\Http\ServerRequest;
 use TYPO3\CMS\Core\Site\Entity\Site;
 
@@ -18,10 +18,10 @@ use TYPO3\CMS\Core\Site\Entity\Site;
 class PathListenerTest extends AbstractTest
 {
     /**
-     * @covers \LD\LanguageDetection\Check\PathListener
-     * @covers       \LD\LanguageDetection\Domain\Model\Dto\SiteConfiguration
-     * @covers \LD\LanguageDetection\Event\CheckLanguageDetection
-     * @covers \LD\LanguageDetection\Service\SiteConfigurationService
+     * @covers \Lochmueller\LanguageDetection\Check\PathListener
+     * @covers       \Lochmueller\LanguageDetection\Domain\Model\Dto\SiteConfiguration
+     * @covers \Lochmueller\LanguageDetection\Event\CheckLanguageDetection
+     * @covers \Lochmueller\LanguageDetection\Service\SiteConfigurationService
      * @dataProvider data
      *
      * @param array<string, bool>|array<string, false>|mixed[] $config

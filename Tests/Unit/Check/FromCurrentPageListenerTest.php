@@ -2,8 +2,8 @@
 
 declare(strict_types=1);
 
-namespace LD\LanguageDetection\Check {
-    use LD\LanguageDetection\Tests\Unit\Check\FromCurrentPageListenerTest;
+namespace Lochmueller\LanguageDetection\Check {
+    use Lochmueller\LanguageDetection\Tests\Unit\Check\FromCurrentPageListenerTest;
 
     function function_exists(string $function)
     {
@@ -11,10 +11,10 @@ namespace LD\LanguageDetection\Check {
     }
 }
 
-namespace LD\LanguageDetection\Tests\Unit\Check {
-    use LD\LanguageDetection\Check\FromCurrentPageListener;
-    use LD\LanguageDetection\Event\CheckLanguageDetection;
-    use LD\LanguageDetection\Tests\Unit\AbstractTest;
+namespace Lochmueller\LanguageDetection\Tests\Unit\Check {
+    use Lochmueller\LanguageDetection\Check\FromCurrentPageListener;
+    use Lochmueller\LanguageDetection\Event\CheckLanguageDetection;
+    use Lochmueller\LanguageDetection\Tests\Unit\AbstractTest;
     use TYPO3\CMS\Core\Http\ServerRequest;
     use TYPO3\CMS\Core\Http\Uri;
     use TYPO3\CMS\Core\Site\Entity\SiteInterface;
@@ -28,8 +28,8 @@ namespace LD\LanguageDetection\Tests\Unit\Check {
         public static bool $functionExistsState = false;
 
         /**
-         * @covers       \LD\LanguageDetection\Check\FromCurrentPageListener
-         * @covers       \LD\LanguageDetection\Event\CheckLanguageDetection
+         * @covers       \Lochmueller\LanguageDetection\Check\FromCurrentPageListener
+         * @covers       \Lochmueller\LanguageDetection\Event\CheckLanguageDetection
          * @dataProvider data
          * @requires PHP < 8.0
          */
@@ -50,8 +50,8 @@ namespace LD\LanguageDetection\Tests\Unit\Check {
         }
 
         /**
-         * @covers       \LD\LanguageDetection\Check\FromCurrentPageListener
-         * @covers       \LD\LanguageDetection\Event\CheckLanguageDetection
+         * @covers       \Lochmueller\LanguageDetection\Check\FromCurrentPageListener
+         * @covers       \Lochmueller\LanguageDetection\Event\CheckLanguageDetection
          * @dataProvider data
          * @requires PHP >= 8.0
          */

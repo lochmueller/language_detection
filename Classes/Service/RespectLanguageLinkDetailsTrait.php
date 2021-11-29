@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace LD\LanguageDetection\Service;
+namespace Lochmueller\LanguageDetection\Service;
 
-use LD\LanguageDetection\Handler\Exception\AbstractHandlerException;
-use LD\LanguageDetection\Handler\LinkLanguageHandler;
+use Lochmueller\LanguageDetection\Handler\Exception\AbstractHandlerException;
+use Lochmueller\LanguageDetection\Handler\LinkLanguageHandler;
 use TYPO3\CMS\Core\Http\ServerRequestFactory;
 use TYPO3\CMS\Core\LinkHandling\LinkService;
 use TYPO3\CMS\Core\Site\SiteFinder;

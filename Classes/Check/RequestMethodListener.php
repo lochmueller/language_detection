@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace LD\LanguageDetection\Check;
+namespace Lochmueller\LanguageDetection\Check;
 
-use LD\LanguageDetection\Event\CheckLanguageDetection;
+use Lochmueller\LanguageDetection\Event\CheckLanguageDetection;
 
 class RequestMethodListener
 {

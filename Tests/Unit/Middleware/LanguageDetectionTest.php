@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace LD\LanguageDetection\Tests\Unit\Middleware;
+namespace Lochmueller\LanguageDetection\Tests\Unit\Middleware;
 
-use LD\LanguageDetection\Handler\Exception\NoSelectedLanguageException;
-use LD\LanguageDetection\Handler\LanguageDetectionHandler;
-use LD\LanguageDetection\Middleware\LanguageDetection;
-use LD\LanguageDetection\Tests\Unit\AbstractTest;
+use Lochmueller\LanguageDetection\Handler\Exception\NoSelectedLanguageException;
+use Lochmueller\LanguageDetection\Handler\LanguageDetectionHandler;
+use Lochmueller\LanguageDetection\Middleware\LanguageDetection;
+use Lochmueller\LanguageDetection\Tests\Unit\AbstractTest;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 use TYPO3\CMS\Core\Http\NullResponse;
@@ -19,7 +19,7 @@ use TYPO3\CMS\Core\Http\NullResponse;
 class LanguageDetectionTest extends AbstractTest
 {
     /**
-     * @covers \LD\LanguageDetection\Middleware\LanguageDetection
+     * @covers \Lochmueller\LanguageDetection\Middleware\LanguageDetection
      */
     public function testMiddlewareWillExecuteLanguageDetection(): void
     {
@@ -33,8 +33,8 @@ class LanguageDetectionTest extends AbstractTest
     }
 
     /**
-     * @covers \LD\LanguageDetection\Handler\Exception\NoSelectedLanguageException
-     * @covers \LD\LanguageDetection\Middleware\LanguageDetection
+     * @covers \Lochmueller\LanguageDetection\Handler\Exception\NoSelectedLanguageException
+     * @covers \Lochmueller\LanguageDetection\Middleware\LanguageDetection
      */
     public function testMiddlewareWillExecuteDefaultHandler(): void
     {

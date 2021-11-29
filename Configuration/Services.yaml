@@ -4,86 +4,86 @@ services:
     autoconfigure: true
     public: false
 
-  LD\LanguageDetection\:
+  Lochmueller\LanguageDetection\:
     resource: '../Classes/*'
 
-  LD\LanguageDetection\Check\EnableListener:
+  Lochmueller\LanguageDetection\Check\EnableListener:
     tags:
       - name: event.listener
         after: 'languageDetectionSite'
         identifier: 'languageDetectionEnable'
-        event: LD\LanguageDetection\Event\CheckLanguageDetection
+        event: Lochmueller\LanguageDetection\Event\CheckLanguageDetection
 
-  LD\LanguageDetection\Check\BotListener:
+  Lochmueller\LanguageDetection\Check\BotListener:
     tags:
       - name: event.listener
         after: 'languageDetectionEnable'
         identifier: 'languageDetectionBot'
-        event: LD\LanguageDetection\Event\CheckLanguageDetection
+        event: Lochmueller\LanguageDetection\Event\CheckLanguageDetection
 
-  LD\LanguageDetection\Check\FromCurrentPageListener:
+  Lochmueller\LanguageDetection\Check\FromCurrentPageListener:
     tags:
       - name: event.listener
         after: 'languageDetectionEnable'
         identifier: 'languageDetectionFromCurrentPage'
-        event: LD\LanguageDetection\Event\CheckLanguageDetection
+        event: Lochmueller\LanguageDetection\Event\CheckLanguageDetection
 
-  LD\LanguageDetection\Check\WorkspacePreviewListener:
+  Lochmueller\LanguageDetection\Check\WorkspacePreviewListener:
     tags:
       - name: event.listener
         after: 'languageDetectionEnable'
         identifier: 'languageDetectionWorkspacePreview'
-        event: LD\LanguageDetection\Event\CheckLanguageDetection
+        event: Lochmueller\LanguageDetection\Event\CheckLanguageDetection
 
-  LD\LanguageDetection\Check\PathListener:
+  Lochmueller\LanguageDetection\Check\PathListener:
     tags:
       - name: event.listener
         after: 'languageDetectionEnable'
         identifier: 'languageDetectionPath'
-        event: LD\LanguageDetection\Event\CheckLanguageDetection
+        event: Lochmueller\LanguageDetection\Event\CheckLanguageDetection
 
-  LD\LanguageDetection\Check\BackendUserListener:
+  Lochmueller\LanguageDetection\Check\BackendUserListener:
     tags:
       - name: event.listener
         after: 'languageDetectionEnable'
         identifier: 'languageDetectionBackendUser'
-        event: LD\LanguageDetection\Event\CheckLanguageDetection
+        event: Lochmueller\LanguageDetection\Event\CheckLanguageDetection
 
-  LD\LanguageDetection\Check\RequestMethodListener:
+  Lochmueller\LanguageDetection\Check\RequestMethodListener:
     tags:
       - name: event.listener
         after: 'languageDetectionEnable'
         identifier: 'languageDetectionRequestMethod'
-        event: LD\LanguageDetection\Event\CheckLanguageDetection
+        event: Lochmueller\LanguageDetection\Event\CheckLanguageDetection
 
-  LD\LanguageDetection\Negotiation\DefaultNegotiation:
+  Lochmueller\LanguageDetection\Negotiation\DefaultNegotiation:
     tags:
       - name: event.listener
         identifier: 'defaultNegotiation'
-        event: LD\LanguageDetection\Event\NegotiateSiteLanguage
+        event: Lochmueller\LanguageDetection\Event\NegotiateSiteLanguage
 
-  LD\LanguageDetection\Negotiation\FallbackNegotiation:
+  Lochmueller\LanguageDetection\Negotiation\FallbackNegotiation:
     tags:
       - name: event.listener
         identifier: 'fallbackNegotiation'
         after: 'defaultNegotiation'
-        event: LD\LanguageDetection\Event\NegotiateSiteLanguage
+        event: Lochmueller\LanguageDetection\Event\NegotiateSiteLanguage
 
-  LD\LanguageDetection\Detect\BrowserLanguage:
+  Lochmueller\LanguageDetection\Detect\BrowserLanguage:
     tags:
       - name: event.listener
         identifier: 'browserLanguage'
-        event: LD\LanguageDetection\Event\DetectUserLanguages
+        event: Lochmueller\LanguageDetection\Event\DetectUserLanguages
 
-  LD\LanguageDetection\Detect\IpLanguage:
+  Lochmueller\LanguageDetection\Detect\IpLanguage:
     tags:
       - name: event.listener
         identifier: 'ipLanguage'
         after: 'browserLanguage'
-        event: LD\LanguageDetection\Event\DetectUserLanguages
+        event: Lochmueller\LanguageDetection\Event\DetectUserLanguages
 
-  LD\LanguageDetection\Response\DefaultResponse:
+  Lochmueller\LanguageDetection\Response\DefaultResponse:
     tags:
       - name: event.listener
         identifier: 'defaultResponse'
-        event: LD\LanguageDetection\Event\BuildResponse
+        event: Lochmueller\LanguageDetection\Event\BuildResponse

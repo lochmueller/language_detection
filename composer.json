@@ -4,12 +4,12 @@
 	"description": "Modern language detection middleware for TYPO3. Based on PSR-14 & PSR-15.",
 	"autoload": {
 		"psr-4": {
-			"LD\\LanguageDetection\\": "Classes"
+			"Lochmueller\\LanguageDetection\\": "Classes"
 		}
 	},
 	"autoload-dev": {
 		"psr-4": {
-			"LD\\LanguageDetection\\Tests\\": "Tests"
+			"Lochmueller\\LanguageDetection\\Tests\\": "Tests"
 		}
 	},
 	"keywords": [

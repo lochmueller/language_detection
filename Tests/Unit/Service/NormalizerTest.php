@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace LD\LanguageDetection\Tests\Unit\Service;
+namespace Lochmueller\LanguageDetection\Tests\Unit\Service;
 
-use LD\LanguageDetection\Service\Normalizer;
-use LD\LanguageDetection\Tests\Unit\AbstractTest;
+use Lochmueller\LanguageDetection\Service\Normalizer;
+use Lochmueller\LanguageDetection\Tests\Unit\AbstractTest;
 
 /**
  * @internal
@@ -16,7 +16,7 @@ class NormalizerTest extends AbstractTest
     /**
      * @dataProvider normalizeProvider
      *
-     * @covers \LD\LanguageDetection\Service\Normalizer
+     * @covers \Lochmueller\LanguageDetection\Service\Normalizer
      */
     public function testNormalize(string $base, string $result): void
     {
@@ -26,7 +26,7 @@ class NormalizerTest extends AbstractTest
     }
 
     /**
-     * @covers \LD\LanguageDetection\Service\Normalizer
+     * @covers \Lochmueller\LanguageDetection\Service\Normalizer
      */
     public function testNormalizeList(): void
     {

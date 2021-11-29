@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace LD\LanguageDetection\Check;
+namespace Lochmueller\LanguageDetection\Check;
 
-use LD\LanguageDetection\Event\CheckLanguageDetection;
-use LD\LanguageDetection\Service\SiteConfigurationService;
+use Lochmueller\LanguageDetection\Event\CheckLanguageDetection;
+use Lochmueller\LanguageDetection\Service\SiteConfigurationService;
 use TYPO3\CMS\Core\Context\Context;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 

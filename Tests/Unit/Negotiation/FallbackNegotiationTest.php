@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace LD\LanguageDetection\Tests\Unit\Negotiation;
+namespace Lochmueller\LanguageDetection\Tests\Unit\Negotiation;
 
-use LD\LanguageDetection\Event\NegotiateSiteLanguage;
-use LD\LanguageDetection\Negotiation\FallbackNegotiation;
-use LD\LanguageDetection\Service\SiteConfigurationService;
-use LD\LanguageDetection\Tests\Unit\AbstractTest;
+use Lochmueller\LanguageDetection\Event\NegotiateSiteLanguage;
+use Lochmueller\LanguageDetection\Negotiation\FallbackNegotiation;
+use Lochmueller\LanguageDetection\Service\SiteConfigurationService;
+use Lochmueller\LanguageDetection\Tests\Unit\AbstractTest;
 use TYPO3\CMS\Core\Http\ServerRequest;
 use TYPO3\CMS\Core\Http\Uri;
 use TYPO3\CMS\Core\Site\Entity\NullSite;
@@ -21,10 +21,10 @@ use TYPO3\CMS\Core\Site\Entity\SiteLanguage;
 class FallbackNegotiationTest extends AbstractTest
 {
     /**
-     * @covers \LD\LanguageDetection\Domain\Model\Dto\SiteConfiguration
-     * @covers       \LD\LanguageDetection\Event\NegotiateSiteLanguage
-     * @covers       \LD\LanguageDetection\Negotiation\FallbackNegotiation
-     * @covers \LD\LanguageDetection\Service\SiteConfigurationService
+     * @covers \Lochmueller\LanguageDetection\Domain\Model\Dto\SiteConfiguration
+     * @covers       \Lochmueller\LanguageDetection\Event\NegotiateSiteLanguage
+     * @covers       \Lochmueller\LanguageDetection\Negotiation\FallbackNegotiation
+     * @covers \Lochmueller\LanguageDetection\Service\SiteConfigurationService
      * @dataProvider dataInvalid
      *
      * @param mixed[]|array<string, array<int>>|array<string, string> $configuration
@@ -44,10 +44,10 @@ class FallbackNegotiationTest extends AbstractTest
     }
 
     /**
-     * @covers \LD\LanguageDetection\Domain\Model\Dto\SiteConfiguration
-     * @covers       \LD\LanguageDetection\Event\NegotiateSiteLanguage
-     * @covers       \LD\LanguageDetection\Negotiation\FallbackNegotiation
-     * @covers       \LD\LanguageDetection\Service\SiteConfigurationService
+     * @covers \Lochmueller\LanguageDetection\Domain\Model\Dto\SiteConfiguration
+     * @covers       \Lochmueller\LanguageDetection\Event\NegotiateSiteLanguage
+     * @covers       \Lochmueller\LanguageDetection\Negotiation\FallbackNegotiation
+     * @covers       \Lochmueller\LanguageDetection\Service\SiteConfigurationService
      */
     public function testValidFallbackLanguages(): void
     {
@@ -70,10 +70,10 @@ class FallbackNegotiationTest extends AbstractTest
     }
 
     /**
-     * @covers       \LD\LanguageDetection\Domain\Model\Dto\SiteConfiguration
-     * @covers       \LD\LanguageDetection\Event\NegotiateSiteLanguage
-     * @covers       \LD\LanguageDetection\Negotiation\FallbackNegotiation
-     * @covers       \LD\LanguageDetection\Service\SiteConfigurationService
+     * @covers       \Lochmueller\LanguageDetection\Domain\Model\Dto\SiteConfiguration
+     * @covers       \Lochmueller\LanguageDetection\Event\NegotiateSiteLanguage
+     * @covers       \Lochmueller\LanguageDetection\Negotiation\FallbackNegotiation
+     * @covers       \Lochmueller\LanguageDetection\Service\SiteConfigurationService
      */
     public function testValidConfigurationButNoFallback(): void
     {
@@ -96,10 +96,10 @@ class FallbackNegotiationTest extends AbstractTest
     }
 
     /**
-     * @covers       \LD\LanguageDetection\Domain\Model\Dto\SiteConfiguration
-     * @covers       \LD\LanguageDetection\Event\NegotiateSiteLanguage
-     * @covers       \LD\LanguageDetection\Negotiation\FallbackNegotiation
-     * @covers       \LD\LanguageDetection\Service\SiteConfigurationService
+     * @covers       \Lochmueller\LanguageDetection\Domain\Model\Dto\SiteConfiguration
+     * @covers       \Lochmueller\LanguageDetection\Event\NegotiateSiteLanguage
+     * @covers       \Lochmueller\LanguageDetection\Negotiation\FallbackNegotiation
+     * @covers       \Lochmueller\LanguageDetection\Service\SiteConfigurationService
      */
     public function testCallWithNullSite(): void
     {

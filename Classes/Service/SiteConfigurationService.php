@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace LD\LanguageDetection\Service;
+namespace Lochmueller\LanguageDetection\Service;
 
-use LD\LanguageDetection\Domain\Model\Dto\SiteConfiguration;
+use Lochmueller\LanguageDetection\Domain\Model\Dto\SiteConfiguration;
 use TYPO3\CMS\Core\Site\Entity\Site;
 use TYPO3\CMS\Core\Site\Entity\SiteInterface;
 

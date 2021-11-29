@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace LD\LanguageDetection\Tests\Unit\Service;
+namespace Lochmueller\LanguageDetection\Tests\Unit\Service;
 
-use LD\LanguageDetection\Service\SiteConfigurationService;
-use LD\LanguageDetection\Tests\Unit\AbstractTest;
+use Lochmueller\LanguageDetection\Service\SiteConfigurationService;
+use Lochmueller\LanguageDetection\Tests\Unit\AbstractTest;
 use TYPO3\CMS\Core\Site\Entity\SiteInterface;
 
 /**
@@ -15,8 +15,8 @@ use TYPO3\CMS\Core\Site\Entity\SiteInterface;
 class SiteConfigurationServiceTest extends AbstractTest
 {
     /**
-     * @covers       \LD\LanguageDetection\Domain\Model\Dto\SiteConfiguration
-     * @covers       \LD\LanguageDetection\Service\SiteConfigurationService
+     * @covers       \Lochmueller\LanguageDetection\Domain\Model\Dto\SiteConfiguration
+     * @covers       \Lochmueller\LanguageDetection\Service\SiteConfigurationService
      */
     public function testCreationOfConfigurationDto(): void
     {

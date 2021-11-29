@@ -16,6 +16,6 @@ $EM_CONF[$_EXTKEY] = [
         ],
     ],
     'autoload' => [
-        'psr-4' => ['LD\\LanguageDetection\\' => 'Classes']
+        'psr-4' => ['Lochmueller\\LanguageDetection\\' => 'Classes']
     ],
 ];

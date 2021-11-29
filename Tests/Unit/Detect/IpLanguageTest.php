@@ -2,29 +2,29 @@
 
 declare(strict_types=1);
 
-namespace LD\LanguageDetection\Tests\Unit\Detect;
+namespace Lochmueller\LanguageDetection\Tests\Unit\Detect;
 
-use LD\LanguageDetection\Detect\IpLanguage;
-use LD\LanguageDetection\Event\DetectUserLanguages;
-use LD\LanguageDetection\Service\IpLocation;
-use LD\LanguageDetection\Service\LanguageService;
-use LD\LanguageDetection\Service\SiteConfigurationService;
-use LD\LanguageDetection\Tests\Unit\AbstractTest;
+use Lochmueller\LanguageDetection\Detect\IpLanguage;
+use Lochmueller\LanguageDetection\Event\DetectUserLanguages;
+use Lochmueller\LanguageDetection\Service\IpLocation;
+use Lochmueller\LanguageDetection\Service\LanguageService;
+use Lochmueller\LanguageDetection\Service\SiteConfigurationService;
+use Lochmueller\LanguageDetection\Tests\Unit\AbstractTest;
 use TYPO3\CMS\Core\Http\ServerRequest;
 use TYPO3\CMS\Core\Site\Entity\Site;
 
 /**
- * @covers \LD\LanguageDetection\Detect\IpLanguage
+ * @covers \Lochmueller\LanguageDetection\Detect\IpLanguage
  *
  * @internal
  */
 class IpLanguageTest extends AbstractTest
 {
     /**
-     * @covers       \LD\LanguageDetection\Domain\Model\Dto\SiteConfiguration
-     * @covers \LD\LanguageDetection\Event\DetectUserLanguages
-     * @covers \LD\LanguageDetection\Service\LanguageService
-     * @covers \LD\LanguageDetection\Service\SiteConfigurationService
+     * @covers       \Lochmueller\LanguageDetection\Domain\Model\Dto\SiteConfiguration
+     * @covers \Lochmueller\LanguageDetection\Event\DetectUserLanguages
+     * @covers \Lochmueller\LanguageDetection\Service\LanguageService
+     * @covers \Lochmueller\LanguageDetection\Service\SiteConfigurationService
      *
      * @dataProvider data
      *

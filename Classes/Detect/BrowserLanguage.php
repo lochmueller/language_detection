@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace LD\LanguageDetection\Detect;
+namespace Lochmueller\LanguageDetection\Detect;
 
-use LD\LanguageDetection\Event\DetectUserLanguages;
+use Lochmueller\LanguageDetection\Event\DetectUserLanguages;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 class BrowserLanguage

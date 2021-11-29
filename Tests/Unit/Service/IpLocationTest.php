@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace LD\LanguageDetection\Tests\Unit\Service;
+namespace Lochmueller\LanguageDetection\Tests\Unit\Service;
 
-use LD\LanguageDetection\Service\IpLocation;
-use LD\LanguageDetection\Tests\Unit\AbstractTest;
+use Lochmueller\LanguageDetection\Service\IpLocation;
+use Lochmueller\LanguageDetection\Tests\Unit\AbstractTest;
 use TYPO3\CMS\Core\Http\RequestFactory;
 
 /**
@@ -15,7 +15,7 @@ use TYPO3\CMS\Core\Http\RequestFactory;
 class IpLocationTest extends AbstractTest
 {
     /**
-     * @covers \LD\LanguageDetection\Service\IpLocation
+     * @covers \Lochmueller\LanguageDetection\Service\IpLocation
      */
     public function testGetLocationForValidIp(): void
     {
@@ -26,7 +26,7 @@ class IpLocationTest extends AbstractTest
     }
 
     /**
-     * @covers \LD\LanguageDetection\Service\IpLocation
+     * @covers \Lochmueller\LanguageDetection\Service\IpLocation
      */
     public function testEmptyIpDirectNull(): void
     {
@@ -36,7 +36,7 @@ class IpLocationTest extends AbstractTest
     }
 
     /**
-     * @covers \LD\LanguageDetection\Service\IpLocation
+     * @covers \Lochmueller\LanguageDetection\Service\IpLocation
      */
     public function testGetLocationForInvalidIp(): void
     {

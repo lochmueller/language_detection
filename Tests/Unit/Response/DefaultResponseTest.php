@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace LD\LanguageDetection\Tests\Unit\Response;
+namespace Lochmueller\LanguageDetection\Tests\Unit\Response;
 
-use LD\LanguageDetection\Event\BuildResponse;
-use LD\LanguageDetection\Response\DefaultResponse;
-use LD\LanguageDetection\Service\SiteConfigurationService;
-use LD\LanguageDetection\Tests\Unit\AbstractTest;
+use Lochmueller\LanguageDetection\Event\BuildResponse;
+use Lochmueller\LanguageDetection\Response\DefaultResponse;
+use Lochmueller\LanguageDetection\Service\SiteConfigurationService;
+use Lochmueller\LanguageDetection\Tests\Unit\AbstractTest;
 use Psr\Http\Message\ServerRequestInterface;
 use TYPO3\CMS\Core\Http\Uri;
 use TYPO3\CMS\Core\Site\Entity\Site;
@@ -20,10 +20,10 @@ use TYPO3\CMS\Core\Site\Entity\SiteLanguage;
 class DefaultResponseTest extends AbstractTest
 {
     /**
-     * @covers       \LD\LanguageDetection\Domain\Model\Dto\SiteConfiguration
-     * @covers       \LD\LanguageDetection\Event\BuildResponse
-     * @covers       \LD\LanguageDetection\Response\DefaultResponse
-     * @covers \LD\LanguageDetection\Service\SiteConfigurationService
+     * @covers       \Lochmueller\LanguageDetection\Domain\Model\Dto\SiteConfiguration
+     * @covers       \Lochmueller\LanguageDetection\Event\BuildResponse
+     * @covers       \Lochmueller\LanguageDetection\Response\DefaultResponse
+     * @covers \Lochmueller\LanguageDetection\Service\SiteConfigurationService
      */
     public function testConfiguration(): void
     {
@@ -52,10 +52,10 @@ class DefaultResponseTest extends AbstractTest
     }
 
     /**
-     * @covers       \LD\LanguageDetection\Domain\Model\Dto\SiteConfiguration
-     * @covers       \LD\LanguageDetection\Event\BuildResponse
-     * @covers       \LD\LanguageDetection\Response\DefaultResponse
-     * @covers \LD\LanguageDetection\Service\SiteConfigurationService
+     * @covers       \Lochmueller\LanguageDetection\Domain\Model\Dto\SiteConfiguration
+     * @covers       \Lochmueller\LanguageDetection\Event\BuildResponse
+     * @covers       \Lochmueller\LanguageDetection\Response\DefaultResponse
+     * @covers \Lochmueller\LanguageDetection\Service\SiteConfigurationService
      */
     public function testConfigurationWithWrongErrorCode(): void
     {
@@ -85,10 +85,10 @@ class DefaultResponseTest extends AbstractTest
     }
 
     /**
-     * @covers       \LD\LanguageDetection\Domain\Model\Dto\SiteConfiguration
-     * @covers       \LD\LanguageDetection\Event\BuildResponse
-     * @covers       \LD\LanguageDetection\Response\DefaultResponse
-     * @covers \LD\LanguageDetection\Service\SiteConfigurationService
+     * @covers       \Lochmueller\LanguageDetection\Domain\Model\Dto\SiteConfiguration
+     * @covers       \Lochmueller\LanguageDetection\Event\BuildResponse
+     * @covers       \Lochmueller\LanguageDetection\Response\DefaultResponse
+     * @covers \Lochmueller\LanguageDetection\Service\SiteConfigurationService
      */
     public function testConfigurationWithRedirectParams(): void
     {
@@ -119,10 +119,10 @@ class DefaultResponseTest extends AbstractTest
     }
 
     /**
-     * @covers       \LD\LanguageDetection\Domain\Model\Dto\SiteConfiguration
-     * @covers       \LD\LanguageDetection\Event\BuildResponse
-     * @covers       \LD\LanguageDetection\Response\DefaultResponse
-     * @covers \LD\LanguageDetection\Service\SiteConfigurationService
+     * @covers       \Lochmueller\LanguageDetection\Domain\Model\Dto\SiteConfiguration
+     * @covers       \Lochmueller\LanguageDetection\Event\BuildResponse
+     * @covers       \Lochmueller\LanguageDetection\Response\DefaultResponse
+     * @covers \Lochmueller\LanguageDetection\Service\SiteConfigurationService
      */
     public function testConfigurationWithSameUrl(): void
     {

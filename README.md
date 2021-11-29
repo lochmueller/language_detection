@@ -12,6 +12,7 @@
 **Compatibility:**
 [![TYPO3](https://img.shields.io/badge/TYPO3-10-orange.svg)](https://get.typo3.org/version/10)
 [![TYPO3](https://img.shields.io/badge/TYPO3-11-orange.svg)](https://get.typo3.org/version/11)
+[![TYPO3](https://img.shields.io/badge/TYPO3-12-orange.svg)](https://get.typo3.org/version/12)
 
 **Quality:**
 [![Test](https://github.com/lochmueller/language_detection/actions/workflows/Test.yml/badge.svg)](https://github.com/lochmueller/language_detection/actions/workflows/Test.yml)

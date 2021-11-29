@@ -2,19 +2,19 @@
 
 declare(strict_types=1);
 
-namespace LD\LanguageDetection\Tests\Unit\Handler;
+namespace Lochmueller\LanguageDetection\Tests\Unit\Handler;
 
-use LD\LanguageDetection\Check\BotListener;
-use LD\LanguageDetection\Detect\BrowserLanguage;
-use LD\LanguageDetection\Event\BuildResponse;
-use LD\LanguageDetection\Event\CheckLanguageDetection;
-use LD\LanguageDetection\Event\DetectUserLanguages;
-use LD\LanguageDetection\Event\NegotiateSiteLanguage;
-use LD\LanguageDetection\Negotiation\DefaultNegotiation;
-use LD\LanguageDetection\Response\DefaultResponse;
-use LD\LanguageDetection\Service\Normalizer;
-use LD\LanguageDetection\Service\SiteConfigurationService;
-use LD\LanguageDetection\Tests\Unit\AbstractTest;
+use Lochmueller\LanguageDetection\Check\BotListener;
+use Lochmueller\LanguageDetection\Detect\BrowserLanguage;
+use Lochmueller\LanguageDetection\Event\BuildResponse;
+use Lochmueller\LanguageDetection\Event\CheckLanguageDetection;
+use Lochmueller\LanguageDetection\Event\DetectUserLanguages;
+use Lochmueller\LanguageDetection\Event\NegotiateSiteLanguage;
+use Lochmueller\LanguageDetection\Negotiation\DefaultNegotiation;
+use Lochmueller\LanguageDetection\Response\DefaultResponse;
+use Lochmueller\LanguageDetection\Service\Normalizer;
+use Lochmueller\LanguageDetection\Service\SiteConfigurationService;
+use Lochmueller\LanguageDetection\Tests\Unit\AbstractTest;
 use Symfony\Component\DependencyInjection\Container;
 use TYPO3\CMS\Core\EventDispatcher\EventDispatcher;
 use TYPO3\CMS\Core\EventDispatcher\ListenerProvider;

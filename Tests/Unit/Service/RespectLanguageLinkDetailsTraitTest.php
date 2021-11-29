@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace LD\LanguageDetection\Tests\Unit\Service;
+namespace Lochmueller\LanguageDetection\Tests\Unit\Service;
 
-use LD\LanguageDetection\Handler\Exception\DisableLanguageDetectionException;
-use LD\LanguageDetection\Handler\LinkLanguageHandler;
-use LD\LanguageDetection\Service\RespectLanguageLinkDetailsTrait;
-use LD\LanguageDetection\Tests\Unit\AbstractTest;
+use Lochmueller\LanguageDetection\Handler\Exception\DisableLanguageDetectionException;
+use Lochmueller\LanguageDetection\Handler\LinkLanguageHandler;
+use Lochmueller\LanguageDetection\Service\RespectLanguageLinkDetailsTrait;
+use Lochmueller\LanguageDetection\Tests\Unit\AbstractTest;
 use TYPO3\CMS\Core\Http\NullResponse;
 use TYPO3\CMS\Core\LinkHandling\LinkService;
 use TYPO3\CMS\Core\Site\Entity\Site;
@@ -22,7 +22,7 @@ use TYPO3\CMS\Core\Site\SiteFinder;
 class RespectLanguageLinkDetailsTraitTest extends AbstractTest
 {
     /**
-     * @covers \LD\LanguageDetection\Service\RespectLanguageLinkDetailsTrait
+     * @covers \Lochmueller\LanguageDetection\Service\RespectLanguageLinkDetailsTrait
      */
     public function testTraitExecutionWithWrongType(): void
     {
@@ -32,16 +32,16 @@ class RespectLanguageLinkDetailsTraitTest extends AbstractTest
     }
 
     /**
-     * @covers \LD\LanguageDetection\Check\EnableListener
-     * @covers \LD\LanguageDetection\Detect\BrowserLanguage
-     * @covers \LD\LanguageDetection\Domain\Model\Dto\SiteConfiguration
-     * @covers \LD\LanguageDetection\Event\CheckLanguageDetection
-     * @covers \LD\LanguageDetection\Event\DetectUserLanguages
-     * @covers \LD\LanguageDetection\Event\NegotiateSiteLanguage
-     * @covers \LD\LanguageDetection\Negotiation\DefaultNegotiation
-     * @covers \LD\LanguageDetection\Service\Normalizer
-     * @covers \LD\LanguageDetection\Service\RespectLanguageLinkDetailsTrait
-     * @covers \LD\LanguageDetection\Service\SiteConfigurationService
+     * @covers \Lochmueller\LanguageDetection\Check\EnableListener
+     * @covers \Lochmueller\LanguageDetection\Detect\BrowserLanguage
+     * @covers \Lochmueller\LanguageDetection\Domain\Model\Dto\SiteConfiguration
+     * @covers \Lochmueller\LanguageDetection\Event\CheckLanguageDetection
+     * @covers \Lochmueller\LanguageDetection\Event\DetectUserLanguages
+     * @covers \Lochmueller\LanguageDetection\Event\NegotiateSiteLanguage
+     * @covers \Lochmueller\LanguageDetection\Negotiation\DefaultNegotiation
+     * @covers \Lochmueller\LanguageDetection\Service\Normalizer
+     * @covers \Lochmueller\LanguageDetection\Service\RespectLanguageLinkDetailsTrait
+     * @covers \Lochmueller\LanguageDetection\Service\SiteConfigurationService
      */
     public function testTraitExecutionWithDisabledLanguageDetection(): void
     {
@@ -64,16 +64,16 @@ class RespectLanguageLinkDetailsTraitTest extends AbstractTest
     }
 
     /**
-     * @covers \LD\LanguageDetection\Check\EnableListener
-     * @covers \LD\LanguageDetection\Detect\BrowserLanguage
-     * @covers \LD\LanguageDetection\Domain\Model\Dto\SiteConfiguration
-     * @covers \LD\LanguageDetection\Event\CheckLanguageDetection
-     * @covers \LD\LanguageDetection\Event\DetectUserLanguages
-     * @covers \LD\LanguageDetection\Event\NegotiateSiteLanguage
-     * @covers \LD\LanguageDetection\Negotiation\DefaultNegotiation
-     * @covers \LD\LanguageDetection\Service\Normalizer
-     * @covers \LD\LanguageDetection\Service\RespectLanguageLinkDetailsTrait
-     * @covers \LD\LanguageDetection\Service\SiteConfigurationService
+     * @covers \Lochmueller\LanguageDetection\Check\EnableListener
+     * @covers \Lochmueller\LanguageDetection\Detect\BrowserLanguage
+     * @covers \Lochmueller\LanguageDetection\Domain\Model\Dto\SiteConfiguration
+     * @covers \Lochmueller\LanguageDetection\Event\CheckLanguageDetection
+     * @covers \Lochmueller\LanguageDetection\Event\DetectUserLanguages
+     * @covers \Lochmueller\LanguageDetection\Event\NegotiateSiteLanguage
+     * @covers \Lochmueller\LanguageDetection\Negotiation\DefaultNegotiation
+     * @covers \Lochmueller\LanguageDetection\Service\Normalizer
+     * @covers \Lochmueller\LanguageDetection\Service\RespectLanguageLinkDetailsTrait
+     * @covers \Lochmueller\LanguageDetection\Service\SiteConfigurationService
      */
     public function testTraitExecutionWithNoUserLanguages(): void
     {

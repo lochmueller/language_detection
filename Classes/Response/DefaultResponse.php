@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace LD\LanguageDetection\Response;
+namespace Lochmueller\LanguageDetection\Response;
 
-use LD\LanguageDetection\Domain\Model\Dto\SiteConfiguration;
-use LD\LanguageDetection\Event\BuildResponse;
-use LD\LanguageDetection\Service\SiteConfigurationService;
+use Lochmueller\LanguageDetection\Domain\Model\Dto\SiteConfiguration;
+use Lochmueller\LanguageDetection\Event\BuildResponse;
+use Lochmueller\LanguageDetection\Service\SiteConfigurationService;
 use Psr\Http\Message\ServerRequestInterface;
 use TYPO3\CMS\Core\Http\RedirectResponse;
 use TYPO3\CMS\Core\Http\Uri;

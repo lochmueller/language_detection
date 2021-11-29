@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace LD\LanguageDetection\Tests\Unit\Negotiation;
+namespace Lochmueller\LanguageDetection\Tests\Unit\Negotiation;
 
-use LD\LanguageDetection\Event\NegotiateSiteLanguage;
-use LD\LanguageDetection\Negotiation\DefaultNegotiation;
-use LD\LanguageDetection\Service\Normalizer;
-use LD\LanguageDetection\Tests\Unit\AbstractTest;
+use Lochmueller\LanguageDetection\Event\NegotiateSiteLanguage;
+use Lochmueller\LanguageDetection\Negotiation\DefaultNegotiation;
+use Lochmueller\LanguageDetection\Service\Normalizer;
+use Lochmueller\LanguageDetection\Tests\Unit\AbstractTest;
 use Psr\Http\Message\ServerRequestInterface;
 use TYPO3\CMS\Core\Http\Uri;
 use TYPO3\CMS\Core\Site\Entity\Site;
@@ -20,9 +20,9 @@ use TYPO3\CMS\Core\Site\Entity\SiteLanguage;
 class DefaultNegotiationTest extends AbstractTest
 {
     /**
-     * @covers \LD\LanguageDetection\Event\NegotiateSiteLanguage
-     * @covers \LD\LanguageDetection\Negotiation\DefaultNegotiation
-     * @covers \LD\LanguageDetection\Service\Normalizer
+     * @covers \Lochmueller\LanguageDetection\Event\NegotiateSiteLanguage
+     * @covers \Lochmueller\LanguageDetection\Negotiation\DefaultNegotiation
+     * @covers \Lochmueller\LanguageDetection\Service\Normalizer
      */
     public function testNoLanguagesWithEmptyUserLanguages(): void
     {
@@ -37,9 +37,9 @@ class DefaultNegotiationTest extends AbstractTest
     }
 
     /**
-     * @covers \LD\LanguageDetection\Event\NegotiateSiteLanguage
-     * @covers \LD\LanguageDetection\Negotiation\DefaultNegotiation
-     * @covers \LD\LanguageDetection\Service\Normalizer
+     * @covers \Lochmueller\LanguageDetection\Event\NegotiateSiteLanguage
+     * @covers \Lochmueller\LanguageDetection\Negotiation\DefaultNegotiation
+     * @covers \Lochmueller\LanguageDetection\Service\Normalizer
      */
     public function testSelectedLanguagesWithUserLanguages(): void
     {

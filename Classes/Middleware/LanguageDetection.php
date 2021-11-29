@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace LD\LanguageDetection\Middleware;
+namespace Lochmueller\LanguageDetection\Middleware;
 
-use LD\LanguageDetection\Handler\Exception\AbstractHandlerException;
-use LD\LanguageDetection\Handler\LanguageDetectionHandler;
+use Lochmueller\LanguageDetection\Handler\Exception\AbstractHandlerException;
+use Lochmueller\LanguageDetection\Handler\LanguageDetectionHandler;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;

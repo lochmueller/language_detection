@@ -1,7 +1,7 @@
 <?php
 
 declare(strict_types=1);
-use LD\LanguageDetection\Service\TcaLanguageSelection;
+use Lochmueller\LanguageDetection\Service\TcaLanguageSelection;
 use TYPO3\CMS\Core\Information\Typo3Version;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Core\Utility\HttpUtility;

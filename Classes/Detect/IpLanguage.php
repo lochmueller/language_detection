@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace LD\LanguageDetection\Detect;
+namespace Lochmueller\LanguageDetection\Detect;
 
-use LD\LanguageDetection\Event\DetectUserLanguages;
-use LD\LanguageDetection\Service\IpLocation;
-use LD\LanguageDetection\Service\LanguageService;
-use LD\LanguageDetection\Service\SiteConfigurationService;
+use Lochmueller\LanguageDetection\Event\DetectUserLanguages;
+use Lochmueller\LanguageDetection\Service\IpLocation;
+use Lochmueller\LanguageDetection\Service\LanguageService;
+use Lochmueller\LanguageDetection\Service\SiteConfigurationService;
 use Psr\Http\Message\ServerRequestInterface;
 
 /**

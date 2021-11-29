@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace LD\LanguageDetection\Tests\Unit\Check;
+namespace Lochmueller\LanguageDetection\Tests\Unit\Check;
 
-use LD\LanguageDetection\Check\BackendUserListener;
-use LD\LanguageDetection\Event\CheckLanguageDetection;
-use LD\LanguageDetection\Service\SiteConfigurationService;
-use LD\LanguageDetection\Tests\Unit\AbstractTest;
+use Lochmueller\LanguageDetection\Check\BackendUserListener;
+use Lochmueller\LanguageDetection\Event\CheckLanguageDetection;
+use Lochmueller\LanguageDetection\Service\SiteConfigurationService;
+use Lochmueller\LanguageDetection\Tests\Unit\AbstractTest;
 use Psr\Http\Message\ServerRequestInterface;
 use TYPO3\CMS\Core\Context\Context;
 use TYPO3\CMS\Core\Context\UserAspect;
@@ -27,10 +27,10 @@ class BackendUserListenerTest extends AbstractTest
     }
 
     /**
-     * @covers \LD\LanguageDetection\Check\BackendUserListener
-     * @covers       \LD\LanguageDetection\Domain\Model\Dto\SiteConfiguration
-     * @covers \LD\LanguageDetection\Event\CheckLanguageDetection
-     * @covers       \LD\LanguageDetection\Service\SiteConfigurationService
+     * @covers \Lochmueller\LanguageDetection\Check\BackendUserListener
+     * @covers       \Lochmueller\LanguageDetection\Domain\Model\Dto\SiteConfiguration
+     * @covers \Lochmueller\LanguageDetection\Event\CheckLanguageDetection
+     * @covers       \Lochmueller\LanguageDetection\Service\SiteConfigurationService
      */
     public function testWithoutDisableInSite(): void
     {
@@ -48,10 +48,10 @@ class BackendUserListenerTest extends AbstractTest
     }
 
     /**
-     * @covers \LD\LanguageDetection\Check\BackendUserListener
-     * @covers       \LD\LanguageDetection\Domain\Model\Dto\SiteConfiguration
-     * @covers \LD\LanguageDetection\Event\CheckLanguageDetection
-     * @covers       \LD\LanguageDetection\Service\SiteConfigurationService
+     * @covers \Lochmueller\LanguageDetection\Check\BackendUserListener
+     * @covers       \Lochmueller\LanguageDetection\Domain\Model\Dto\SiteConfiguration
+     * @covers \Lochmueller\LanguageDetection\Event\CheckLanguageDetection
+     * @covers       \Lochmueller\LanguageDetection\Service\SiteConfigurationService
      */
     public function testWithoutConfigurationInSite(): void
     {
@@ -69,10 +69,10 @@ class BackendUserListenerTest extends AbstractTest
     }
 
     /**
-     * @covers \LD\LanguageDetection\Check\BackendUserListener
-     * @covers       \LD\LanguageDetection\Domain\Model\Dto\SiteConfiguration
-     * @covers \LD\LanguageDetection\Event\CheckLanguageDetection
-     * @covers       \LD\LanguageDetection\Service\SiteConfigurationService
+     * @covers \Lochmueller\LanguageDetection\Check\BackendUserListener
+     * @covers       \Lochmueller\LanguageDetection\Domain\Model\Dto\SiteConfiguration
+     * @covers \Lochmueller\LanguageDetection\Event\CheckLanguageDetection
+     * @covers       \Lochmueller\LanguageDetection\Service\SiteConfigurationService
      * @dataProvider data
      */
     public function testWithDisableConfigurationInSiteAndActiveBackendUser(bool $isLoginState, bool $disableRedirectWithBackendSession, bool $isEnabled): void

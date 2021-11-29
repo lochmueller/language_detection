@@ -1,6 +1,6 @@
 <?php
 
-use LD\LanguageDetection\Middleware\LanguageDetection;
+use Lochmueller\LanguageDetection\Middleware\LanguageDetection;
 
 return [
     'frontend' => [

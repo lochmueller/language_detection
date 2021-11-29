@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace LD\LanguageDetection\Handler\Exception;
+namespace Lochmueller\LanguageDetection\Handler\Exception;
 
 class NoUserLanguagesException extends AbstractHandlerException
 {

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace LD\LanguageDetection\Event;
+namespace Lochmueller\LanguageDetection\Event;
 
 abstract class AbstractEvent
 {

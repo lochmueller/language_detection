@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace LD\LanguageDetection\Tests\Unit\Domain\Model\Dto;
+namespace Lochmueller\LanguageDetection\Tests\Unit\Domain\Model\Dto;
 
-use LD\LanguageDetection\Domain\Model\Dto\SiteConfiguration;
-use LD\LanguageDetection\Tests\Unit\AbstractTest;
+use Lochmueller\LanguageDetection\Domain\Model\Dto\SiteConfiguration;
+use Lochmueller\LanguageDetection\Tests\Unit\AbstractTest;
 
 /**
  * @internal
@@ -14,7 +14,7 @@ use LD\LanguageDetection\Tests\Unit\AbstractTest;
 class SiteConfigurationTest extends AbstractTest
 {
     /**
-     * @covers \LD\LanguageDetection\Domain\Model\Dto\SiteConfiguration
+     * @covers \Lochmueller\LanguageDetection\Domain\Model\Dto\SiteConfiguration
      */
     public function testGetterOfDto(): void
     {

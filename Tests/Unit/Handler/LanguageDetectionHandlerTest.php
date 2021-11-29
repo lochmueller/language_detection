@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace LD\LanguageDetection\Tests\Unit\Handler;
+namespace Lochmueller\LanguageDetection\Tests\Unit\Handler;
 
-use LD\LanguageDetection\Handler\Exception\DisableLanguageDetectionException;
-use LD\LanguageDetection\Handler\Exception\NoResponseException;
-use LD\LanguageDetection\Handler\Exception\NoSelectedLanguageException;
-use LD\LanguageDetection\Handler\Exception\NoUserLanguagesException;
-use LD\LanguageDetection\Handler\LanguageDetectionHandler;
+use Lochmueller\LanguageDetection\Handler\Exception\DisableLanguageDetectionException;
+use Lochmueller\LanguageDetection\Handler\Exception\NoResponseException;
+use Lochmueller\LanguageDetection\Handler\Exception\NoSelectedLanguageException;
+use Lochmueller\LanguageDetection\Handler\Exception\NoUserLanguagesException;
+use Lochmueller\LanguageDetection\Handler\LanguageDetectionHandler;
 use Psr\Http\Message\ResponseInterface;
 use TYPO3\CMS\Core\Http\ServerRequest;
 use TYPO3\CMS\Core\Site\Entity\Site;
@@ -20,13 +20,13 @@ use TYPO3\CMS\Core\Site\Entity\Site;
 class LanguageDetectionHandlerTest extends AbstractHandlerTest
 {
     /**
-     * @covers \LD\LanguageDetection\Check\BotListener
-     * @covers \LD\LanguageDetection\Event\CheckLanguageDetection
-     * @covers \LD\LanguageDetection\Handler\AbstractHandler
-     * @covers \LD\LanguageDetection\Handler\Exception\DisableLanguageDetectionException
-     * @covers \LD\LanguageDetection\Handler\LanguageDetectionHandler
-     * @covers \LD\LanguageDetection\Negotiation\DefaultNegotiation
-     * @covers \LD\LanguageDetection\Response\DefaultResponse
+     * @covers \Lochmueller\LanguageDetection\Check\BotListener
+     * @covers \Lochmueller\LanguageDetection\Event\CheckLanguageDetection
+     * @covers \Lochmueller\LanguageDetection\Handler\AbstractHandler
+     * @covers \Lochmueller\LanguageDetection\Handler\Exception\DisableLanguageDetectionException
+     * @covers \Lochmueller\LanguageDetection\Handler\LanguageDetectionHandler
+     * @covers \Lochmueller\LanguageDetection\Negotiation\DefaultNegotiation
+     * @covers \Lochmueller\LanguageDetection\Response\DefaultResponse
      */
     public function testBreakAfterCheckLanguageDetectionByAddingBotAgent(): void
     {
@@ -41,15 +41,15 @@ class LanguageDetectionHandlerTest extends AbstractHandlerTest
     }
 
     /**
-     * @covers \LD\LanguageDetection\Check\BotListener
-     * @covers \LD\LanguageDetection\Detect\BrowserLanguage
-     * @covers \LD\LanguageDetection\Event\CheckLanguageDetection
-     * @covers \LD\LanguageDetection\Event\DetectUserLanguages
-     * @covers \LD\LanguageDetection\Handler\AbstractHandler
-     * @covers \LD\LanguageDetection\Handler\Exception\NoUserLanguagesException
-     * @covers \LD\LanguageDetection\Handler\LanguageDetectionHandler
-     * @covers \LD\LanguageDetection\Negotiation\DefaultNegotiation
-     * @covers \LD\LanguageDetection\Response\DefaultResponse
+     * @covers \Lochmueller\LanguageDetection\Check\BotListener
+     * @covers \Lochmueller\LanguageDetection\Detect\BrowserLanguage
+     * @covers \Lochmueller\LanguageDetection\Event\CheckLanguageDetection
+     * @covers \Lochmueller\LanguageDetection\Event\DetectUserLanguages
+     * @covers \Lochmueller\LanguageDetection\Handler\AbstractHandler
+     * @covers \Lochmueller\LanguageDetection\Handler\Exception\NoUserLanguagesException
+     * @covers \Lochmueller\LanguageDetection\Handler\LanguageDetectionHandler
+     * @covers \Lochmueller\LanguageDetection\Negotiation\DefaultNegotiation
+     * @covers \Lochmueller\LanguageDetection\Response\DefaultResponse
      */
     public function testBreakAfterDetectUserLanguagesByMissingLanguages(): void
     {
@@ -63,17 +63,17 @@ class LanguageDetectionHandlerTest extends AbstractHandlerTest
     }
 
     /**
-     * @covers \LD\LanguageDetection\Check\BotListener
-     * @covers \LD\LanguageDetection\Detect\BrowserLanguage
-     * @covers \LD\LanguageDetection\Event\CheckLanguageDetection
-     * @covers \LD\LanguageDetection\Event\DetectUserLanguages
-     * @covers \LD\LanguageDetection\Event\NegotiateSiteLanguage
-     * @covers \LD\LanguageDetection\Handler\AbstractHandler
-     * @covers \LD\LanguageDetection\Handler\Exception\NoSelectedLanguageException
-     * @covers \LD\LanguageDetection\Handler\LanguageDetectionHandler
-     * @covers \LD\LanguageDetection\Negotiation\DefaultNegotiation
-     * @covers \LD\LanguageDetection\Response\DefaultResponse
-     * @covers \LD\LanguageDetection\Service\Normalizer
+     * @covers \Lochmueller\LanguageDetection\Check\BotListener
+     * @covers \Lochmueller\LanguageDetection\Detect\BrowserLanguage
+     * @covers \Lochmueller\LanguageDetection\Event\CheckLanguageDetection
+     * @covers \Lochmueller\LanguageDetection\Event\DetectUserLanguages
+     * @covers \Lochmueller\LanguageDetection\Event\NegotiateSiteLanguage
+     * @covers \Lochmueller\LanguageDetection\Handler\AbstractHandler
+     * @covers \Lochmueller\LanguageDetection\Handler\Exception\NoSelectedLanguageException
+     * @covers \Lochmueller\LanguageDetection\Handler\LanguageDetectionHandler
+     * @covers \Lochmueller\LanguageDetection\Negotiation\DefaultNegotiation
+     * @covers \Lochmueller\LanguageDetection\Response\DefaultResponse
+     * @covers \Lochmueller\LanguageDetection\Service\Normalizer
      */
     public function testBreakAfterNegotiateSiteLanguageByNotFoundTargetLanguage(): void
     {
@@ -87,20 +87,20 @@ class LanguageDetectionHandlerTest extends AbstractHandlerTest
     }
 
     /**
-     * @covers \LD\LanguageDetection\Check\BotListener
-     * @covers \LD\LanguageDetection\Detect\BrowserLanguage
-     * @covers \LD\LanguageDetection\Domain\Model\Dto\SiteConfiguration
-     * @covers \LD\LanguageDetection\Event\BuildResponse
-     * @covers \LD\LanguageDetection\Event\CheckLanguageDetection
-     * @covers \LD\LanguageDetection\Event\DetectUserLanguages
-     * @covers \LD\LanguageDetection\Event\NegotiateSiteLanguage
-     * @covers \LD\LanguageDetection\Handler\AbstractHandler
-     * @covers \LD\LanguageDetection\Handler\Exception\NoResponseException
-     * @covers \LD\LanguageDetection\Handler\LanguageDetectionHandler
-     * @covers \LD\LanguageDetection\Negotiation\DefaultNegotiation
-     * @covers \LD\LanguageDetection\Response\DefaultResponse
-     * @covers \LD\LanguageDetection\Service\Normalizer
-     * @covers \LD\LanguageDetection\Service\SiteConfigurationService
+     * @covers \Lochmueller\LanguageDetection\Check\BotListener
+     * @covers \Lochmueller\LanguageDetection\Detect\BrowserLanguage
+     * @covers \Lochmueller\LanguageDetection\Domain\Model\Dto\SiteConfiguration
+     * @covers \Lochmueller\LanguageDetection\Event\BuildResponse
+     * @covers \Lochmueller\LanguageDetection\Event\CheckLanguageDetection
+     * @covers \Lochmueller\LanguageDetection\Event\DetectUserLanguages
+     * @covers \Lochmueller\LanguageDetection\Event\NegotiateSiteLanguage
+     * @covers \Lochmueller\LanguageDetection\Handler\AbstractHandler
+     * @covers \Lochmueller\LanguageDetection\Handler\Exception\NoResponseException
+     * @covers \Lochmueller\LanguageDetection\Handler\LanguageDetectionHandler
+     * @covers \Lochmueller\LanguageDetection\Negotiation\DefaultNegotiation
+     * @covers \Lochmueller\LanguageDetection\Response\DefaultResponse
+     * @covers \Lochmueller\LanguageDetection\Service\Normalizer
+     * @covers \Lochmueller\LanguageDetection\Service\SiteConfigurationService
      */
     public function testBreakAfterBuildResponseByEmptyResponseBecauseOfSameUri(): void
     {
@@ -131,19 +131,19 @@ class LanguageDetectionHandlerTest extends AbstractHandlerTest
     }
 
     /**
-     * @covers \LD\LanguageDetection\Check\BotListener
-     * @covers \LD\LanguageDetection\Detect\BrowserLanguage
-     * @covers \LD\LanguageDetection\Domain\Model\Dto\SiteConfiguration
-     * @covers \LD\LanguageDetection\Event\BuildResponse
-     * @covers \LD\LanguageDetection\Event\CheckLanguageDetection
-     * @covers \LD\LanguageDetection\Event\DetectUserLanguages
-     * @covers \LD\LanguageDetection\Event\NegotiateSiteLanguage
-     * @covers \LD\LanguageDetection\Handler\AbstractHandler
-     * @covers \LD\LanguageDetection\Handler\LanguageDetectionHandler
-     * @covers \LD\LanguageDetection\Negotiation\DefaultNegotiation
-     * @covers \LD\LanguageDetection\Response\DefaultResponse
-     * @covers \LD\LanguageDetection\Service\Normalizer
-     * @covers \LD\LanguageDetection\Service\SiteConfigurationService
+     * @covers \Lochmueller\LanguageDetection\Check\BotListener
+     * @covers \Lochmueller\LanguageDetection\Detect\BrowserLanguage
+     * @covers \Lochmueller\LanguageDetection\Domain\Model\Dto\SiteConfiguration
+     * @covers \Lochmueller\LanguageDetection\Event\BuildResponse
+     * @covers \Lochmueller\LanguageDetection\Event\CheckLanguageDetection
+     * @covers \Lochmueller\LanguageDetection\Event\DetectUserLanguages
+     * @covers \Lochmueller\LanguageDetection\Event\NegotiateSiteLanguage
+     * @covers \Lochmueller\LanguageDetection\Handler\AbstractHandler
+     * @covers \Lochmueller\LanguageDetection\Handler\LanguageDetectionHandler
+     * @covers \Lochmueller\LanguageDetection\Negotiation\DefaultNegotiation
+     * @covers \Lochmueller\LanguageDetection\Response\DefaultResponse
+     * @covers \Lochmueller\LanguageDetection\Service\Normalizer
+     * @covers \Lochmueller\LanguageDetection\Service\SiteConfigurationService
      */
     public function testFullExecution(): void
     {

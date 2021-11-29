@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace LD\LanguageDetection\Negotiation;
+namespace Lochmueller\LanguageDetection\Negotiation;
 
-use LD\LanguageDetection\Event\NegotiateSiteLanguage;
-use LD\LanguageDetection\Service\Normalizer;
+use Lochmueller\LanguageDetection\Event\NegotiateSiteLanguage;
+use Lochmueller\LanguageDetection\Service\Normalizer;
 
 class DefaultNegotiation
 {

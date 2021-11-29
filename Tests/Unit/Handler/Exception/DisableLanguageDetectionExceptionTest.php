@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace LD\LanguageDetection\Tests\Unit\Handler\Exception;
+namespace Lochmueller\LanguageDetection\Tests\Unit\Handler\Exception;
 
-use LD\LanguageDetection\Handler\Exception\DisableLanguageDetectionException;
-use LD\LanguageDetection\Tests\Unit\AbstractTest;
+use Lochmueller\LanguageDetection\Handler\Exception\DisableLanguageDetectionException;
+use Lochmueller\LanguageDetection\Tests\Unit\AbstractTest;
 
 /**
  * @internal
@@ -14,7 +14,7 @@ use LD\LanguageDetection\Tests\Unit\AbstractTest;
 class DisableLanguageDetectionExceptionTest extends AbstractTest
 {
     /**
-     * @covers \LD\LanguageDetection\Handler\Exception\DisableLanguageDetectionException
+     * @covers \Lochmueller\LanguageDetection\Handler\Exception\DisableLanguageDetectionException
      */
     public function testIfExceptionHasStaticMessageAndCode(): void
     {

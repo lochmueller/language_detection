@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace LD\LanguageDetection\Negotiation;
+namespace Lochmueller\LanguageDetection\Negotiation;
 
-use LD\LanguageDetection\Event\NegotiateSiteLanguage;
-use LD\LanguageDetection\Service\SiteConfigurationService;
+use Lochmueller\LanguageDetection\Event\NegotiateSiteLanguage;
+use Lochmueller\LanguageDetection\Service\SiteConfigurationService;
 use TYPO3\CMS\Core\Site\Entity\Site;
 
 class FallbackNegotiation

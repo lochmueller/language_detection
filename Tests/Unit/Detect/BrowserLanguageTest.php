@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace LD\LanguageDetection\Tests\Unit\Detect;
+namespace Lochmueller\LanguageDetection\Tests\Unit\Detect;
 
-use LD\LanguageDetection\Detect\BrowserLanguage;
-use LD\LanguageDetection\Event\DetectUserLanguages;
-use LD\LanguageDetection\Tests\Unit\AbstractTest;
+use Lochmueller\LanguageDetection\Detect\BrowserLanguage;
+use Lochmueller\LanguageDetection\Event\DetectUserLanguages;
+use Lochmueller\LanguageDetection\Tests\Unit\AbstractTest;
 use TYPO3\CMS\Core\Http\ServerRequest;
 use TYPO3\CMS\Core\Site\Entity\SiteInterface;
 
@@ -24,8 +24,8 @@ class BrowserLanguageTest extends AbstractTest
 
     /**
      * @dataProvider data
-     * @covers \LD\LanguageDetection\Detect\BrowserLanguage
-     * @covers \LD\LanguageDetection\Event\DetectUserLanguages
+     * @covers \Lochmueller\LanguageDetection\Detect\BrowserLanguage
+     * @covers \Lochmueller\LanguageDetection\Event\DetectUserLanguages
      *
      * @param string[] $result
      */

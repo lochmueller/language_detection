@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace LD\LanguageDetection\Tests\Unit;
+namespace Lochmueller\LanguageDetection\Tests\Unit;
 
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 

@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace LD\LanguageDetection\Tests\Unit\Event;
+namespace Lochmueller\LanguageDetection\Tests\Unit\Event;
 
-use LD\LanguageDetection\Event\CheckLanguageDetection;
+use Lochmueller\LanguageDetection\Event\CheckLanguageDetection;
 use Psr\Http\Message\ServerRequestInterface;
 use TYPO3\CMS\Core\Site\Entity\SiteInterface;
 
@@ -15,7 +15,7 @@ use TYPO3\CMS\Core\Site\Entity\SiteInterface;
 class CheckLanguageDetectionEvent extends AbstractEventTest
 {
     /**
-     * @covers \LD\LanguageDetection\Event\CheckLanguageDetection
+     * @covers \Lochmueller\LanguageDetection\Event\CheckLanguageDetection
      */
     public function testEventGetterAndSetter(): void
     {

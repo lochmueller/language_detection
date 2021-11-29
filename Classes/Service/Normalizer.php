@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace LD\LanguageDetection\Service;
+namespace Lochmueller\LanguageDetection\Service;
 
 class Normalizer
 {

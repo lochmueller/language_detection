@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace LD\LanguageDetection\Tests\Unit\Check;
+namespace Lochmueller\LanguageDetection\Tests\Unit\Check;
 
-use LD\LanguageDetection\Check\BotListener;
-use LD\LanguageDetection\Event\CheckLanguageDetection;
-use LD\LanguageDetection\Tests\Unit\AbstractTest;
+use Lochmueller\LanguageDetection\Check\BotListener;
+use Lochmueller\LanguageDetection\Event\CheckLanguageDetection;
+use Lochmueller\LanguageDetection\Tests\Unit\AbstractTest;
 use TYPO3\CMS\Core\Http\ServerRequest;
 use TYPO3\CMS\Core\Site\Entity\SiteInterface;
 
@@ -17,8 +17,8 @@ use TYPO3\CMS\Core\Site\Entity\SiteInterface;
 class BotListenerTest extends AbstractTest
 {
     /**
-     * @covers \LD\LanguageDetection\Check\BotListener
-     * @covers \LD\LanguageDetection\Event\CheckLanguageDetection
+     * @covers \Lochmueller\LanguageDetection\Check\BotListener
+     * @covers \Lochmueller\LanguageDetection\Event\CheckLanguageDetection
      * @dataProvider data
      */
     public function testUserAgents(string $userAgent, bool $result): void
@@ -35,8 +35,8 @@ class BotListenerTest extends AbstractTest
     }
 
     /**
-     * @covers \LD\LanguageDetection\Check\BotListener
-     * @covers \LD\LanguageDetection\Event\CheckLanguageDetection
+     * @covers \Lochmueller\LanguageDetection\Check\BotListener
+     * @covers \Lochmueller\LanguageDetection\Event\CheckLanguageDetection
      */
     public function testWithoutUserAgent(): void
     {
