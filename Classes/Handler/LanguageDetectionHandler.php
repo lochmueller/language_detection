@@ -18,6 +18,7 @@ use Psr\Http\Server\RequestHandlerInterface;
 
 /**
  * Core handler for handling the language detection, with all 4 core events.
+ * Called via regular main middleware and check all page settings.
  */
 class LanguageDetectionHandler extends AbstractHandler implements RequestHandlerInterface
 {

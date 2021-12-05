@@ -5,28 +5,25 @@ declare(strict_types=1);
 namespace Lochmueller\LanguageDetection\Middleware;
 
 use Lochmueller\LanguageDetection\Handler\Exception\AbstractHandlerException;
-use Lochmueller\LanguageDetection\Handler\LanguageDetectionHandler;
+use Lochmueller\LanguageDetection\Handler\JsonDetectionHandler;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 
-/**
- * LanguageDetection.
- */
-class LanguageDetection implements MiddlewareInterface
+class JsonDetectionMiddleware implements MiddlewareInterface
 {
-    protected LanguageDetectionHandler $languageDetectionHandler;
+    protected JsonDetectionHandler $jsonDetectionHandler;
 
-    public function __construct(LanguageDetectionHandler $languageDetectionHandler)
+    public function __construct(JsonDetectionHandler $jsonDetectionHandler)
     {
-        $this->languageDetectionHandler = $languageDetectionHandler;
+        $this->jsonDetectionHandler = $jsonDetectionHandler;
     }
 
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
         try {
-            return $this->languageDetectionHandler->handle($request);
+            return $this->jsonDetectionHandler->handle($request);
         } catch (AbstractHandlerException $exception) {
             return $handler->handle($request);
         }

@@ -6,7 +6,7 @@ namespace Lochmueller\LanguageDetection\Tests\Unit\Middleware;
 
 use Lochmueller\LanguageDetection\Handler\Exception\NoSelectedLanguageException;
 use Lochmueller\LanguageDetection\Handler\LanguageDetectionHandler;
-use Lochmueller\LanguageDetection\Middleware\LanguageDetection;
+use Lochmueller\LanguageDetection\Middleware\LanguageDetectionMiddleware;
 use Lochmueller\LanguageDetection\Tests\Unit\AbstractTest;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
@@ -16,17 +16,17 @@ use TYPO3\CMS\Core\Http\NullResponse;
  * @internal
  * @coversNothing
  */
-class LanguageDetectionTest extends AbstractTest
+class LanguageDetectionMiddlewareTest extends AbstractTest
 {
     /**
-     * @covers \Lochmueller\LanguageDetection\Middleware\LanguageDetection
+     * @covers \Lochmueller\LanguageDetection\Middleware\LanguageDetectionMiddleware
      */
     public function testMiddlewareWillExecuteLanguageDetection(): void
     {
         $languageDetectionHandler = $this->createStub(LanguageDetectionHandler::class);
         $languageDetectionHandler->method('handle')->willReturn(new NullResponse());
 
-        $middleware = new LanguageDetection($languageDetectionHandler);
+        $middleware = new LanguageDetectionMiddleware($languageDetectionHandler);
         $result = $middleware->process($this->createMock(ServerRequestInterface::class), $this->createMock(RequestHandlerInterface::class));
 
         self::assertInstanceOf(NullResponse::class, $result);
@@ -34,7 +34,7 @@ class LanguageDetectionTest extends AbstractTest
 
     /**
      * @covers \Lochmueller\LanguageDetection\Handler\Exception\NoSelectedLanguageException
-     * @covers \Lochmueller\LanguageDetection\Middleware\LanguageDetection
+     * @covers \Lochmueller\LanguageDetection\Middleware\LanguageDetectionMiddleware
      */
     public function testMiddlewareWillExecuteDefaultHandler(): void
     {
@@ -44,7 +44,7 @@ class LanguageDetectionTest extends AbstractTest
         $defaultHandler = $this->createStub(RequestHandlerInterface::class);
         $defaultHandler->method('handle')->willReturn(new NullResponse());
 
-        $middleware = new LanguageDetection($languageDetectionHandler);
+        $middleware = new LanguageDetectionMiddleware($languageDetectionHandler);
         $result = $middleware->process($this->createMock(ServerRequestInterface::class), $defaultHandler);
 
         self::assertInstanceOf(NullResponse::class, $result);
