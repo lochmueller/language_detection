@@ -27,11 +27,23 @@
 
 ***
 
+# Table of Contents
+1. [Why?](#why)
+2. [Installation](#installation)
+3. [Configuration](#configuration)
+4. [Structure](#structure)
+   1. [Event: CheckLanguageDetection](#event-checklanguagedetection)
+   2. [Event: DetectUserLanguages](#event-detectuserlanguages)
+   3. [Event: NegotiateSiteLanguage](#event-negotiatesitelanguage)
+   4. [Event: BuildResponse](#event-buildresponse)
+5. [Troubleshooting](#troubleshooting)
+6. [Dev](#dev)
+7. [Contribution](#contribution)
+8. [Licence](#licence)
+
 ## Why?
 
 TYPO3 Extension that use a PSR-15/PSR-7 middleware/request to handle a language detection logic via PSR-14 events. Very flexible! Give it a try and checkout the future of language detection! Language Detection should be easy and simple to integrate and powerfull in development!
-
-***
 
 ## Installation
 
@@ -77,7 +89,7 @@ _Please keep data privacy in mind in case of the "IpLanguage" Listener!_
 
 ### Event: NegotiateSiteLanguage
 
-This event calculate the best matching page language for the user. If you build your own listener. Please use "setSelectedLanguage" on the event. If a language is already selected the default listener will be skipped.
+This event calculates the best matching page language for the user. If you build your own listener. Please use "setSelectedLanguage" on the event. If a language is already selected the default listener will be skipped.
 
 Default-Listener:
 
