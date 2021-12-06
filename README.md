@@ -66,7 +66,7 @@ Check if the language detection should execute by the extension. You can registe
 Default-Listener:
 
 | Name                     | Description                                                                                                                       |
-| ------------------------ | --------------------------------------------------------------------------------------------------------------------------------- |
+|--------------------------|-----------------------------------------------------------------------------------------------------------------------------------|
 | BackendUserListener      | Check if a backend user call the language detection and disable the redirect (respect "disableRedirectWithBackendSession" config) |
 | BotListener              | Check if a bot call the language detection and disable the redirect                                                               |
 | EnableListener           | Check if the Language Detection is enabled in the current Site                                                                    |
@@ -81,7 +81,7 @@ This event collect user information to get the user languages. You can register 
 Default-Listener:
 
 | Name            | Description                                                                                                                                         |
-| --------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
+|-----------------|-----------------------------------------------------------------------------------------------------------------------------------------------------|
 | BrowserLanguage | Get the users "accept-language" languages                                                                                                           |
 | IpLanguage      | Send the IP to geoplugin.net and add the language of the location to the checked languages (respect "addIpLocationToBrowserLanguage" configuration) |
 
@@ -94,7 +94,7 @@ This event calculates the best matching page language for the user. If you build
 Default-Listener:
 
 | Name                | Description                                                                                               |
-| ------------------- | --------------------------------------------------------------------------------------------------------- |
+|---------------------|-----------------------------------------------------------------------------------------------------------|
 | DefaultNegotiation  | Check the Locale and TwoLetterIso of the TYPO3 languages against the user languages of the previous event |
 | FallbackNegotiation | Handle a fallback, if there are no matches by the default negotiation                                     |
 
@@ -105,7 +105,7 @@ The last event build the middleware response. You can overwrite this step. You h
 Default-Listener:
 
 | Name            | Description                                                               |
-| --------------- | ------------------------------------------------------------------------- |
+|-----------------|---------------------------------------------------------------------------|
 | DefaultResponse | Build the repsonse object and respect the "redirectHttpStatusCode" config |
 
 
