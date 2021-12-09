@@ -4,11 +4,8 @@ declare(strict_types=1);
 
 namespace Lochmueller\LanguageDetection\Tests\Unit\Middleware;
 
-use Lochmueller\LanguageDetection\Handler\Exception\NoSelectedLanguageException;
 use Lochmueller\LanguageDetection\Handler\JsonDetectionHandler;
-use Lochmueller\LanguageDetection\Handler\LanguageDetectionHandler;
 use Lochmueller\LanguageDetection\Middleware\JsonDetectionMiddleware;
-use Lochmueller\LanguageDetection\Middleware\LanguageDetectionMiddleware;
 use Lochmueller\LanguageDetection\Tests\Unit\AbstractTest;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
