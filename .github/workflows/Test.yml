@@ -6,10 +6,13 @@ jobs:
       fail-fast: false
       matrix:
         php: ["7.4", "8.0", "8.1"]
-        typo3: ["^11.5", "^12.0@dev"]
+        typo3: ["^11.5"]
         include:
           - php: "7.4"
             typo3: "^10.4"
+          - php: "8.0"
+            typo3: "^12.0@dev"
+            experimental: true
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
