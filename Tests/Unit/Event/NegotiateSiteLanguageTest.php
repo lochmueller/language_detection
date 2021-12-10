@@ -17,6 +17,8 @@ use TYPO3\CMS\Core\Site\Entity\SiteLanguage;
 class NegotiateSiteLanguageTest extends AbstractEventTest
 {
     /**
+     * @covers \Lochmueller\LanguageDetection\Domain\Collection\LocaleCollection
+     * @covers \Lochmueller\LanguageDetection\Domain\Model\Dto\LocaleValueObject
      * @covers \Lochmueller\LanguageDetection\Event\NegotiateSiteLanguage
      */
     public function testEventGetterAndSetter(): void

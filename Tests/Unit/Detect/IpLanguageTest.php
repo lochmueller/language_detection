@@ -22,7 +22,9 @@ use TYPO3\CMS\Core\Site\Entity\Site;
 class IpLanguageTest extends AbstractTest
 {
     /**
-     * @covers       \Lochmueller\LanguageDetection\Domain\Model\Dto\SiteConfiguration
+     * @covers \Lochmueller\LanguageDetection\Domain\Collection\LocaleCollection
+     * @covers \Lochmueller\LanguageDetection\Domain\Model\Dto\LocaleValueObject
+     * @covers \Lochmueller\LanguageDetection\Domain\Model\Dto\SiteConfiguration
      * @covers \Lochmueller\LanguageDetection\Event\DetectUserLanguages
      * @covers \Lochmueller\LanguageDetection\Service\LanguageService
      * @covers \Lochmueller\LanguageDetection\Service\SiteConfigurationService

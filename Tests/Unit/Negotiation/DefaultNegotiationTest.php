@@ -21,6 +21,7 @@ use TYPO3\CMS\Core\Site\Entity\SiteLanguage;
 class DefaultNegotiationTest extends AbstractTest
 {
     /**
+     * @covers \Lochmueller\LanguageDetection\Domain\Collection\LocaleCollection
      * @covers \Lochmueller\LanguageDetection\Event\NegotiateSiteLanguage
      * @covers \Lochmueller\LanguageDetection\Negotiation\DefaultNegotiation
      * @covers \Lochmueller\LanguageDetection\Service\Normalizer
@@ -38,6 +39,8 @@ class DefaultNegotiationTest extends AbstractTest
     }
 
     /**
+     * @covers \Lochmueller\LanguageDetection\Domain\Collection\LocaleCollection
+     * @covers \Lochmueller\LanguageDetection\Domain\Model\Dto\LocaleValueObject
      * @covers \Lochmueller\LanguageDetection\Event\NegotiateSiteLanguage
      * @covers \Lochmueller\LanguageDetection\Negotiation\DefaultNegotiation
      * @covers \Lochmueller\LanguageDetection\Service\Normalizer

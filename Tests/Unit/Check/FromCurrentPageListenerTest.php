@@ -28,8 +28,8 @@ namespace Lochmueller\LanguageDetection\Tests\Unit\Check {
         public static bool $functionExistsState = false;
 
         /**
-         * @covers       \Lochmueller\LanguageDetection\Check\FromCurrentPageListener
-         * @covers       \Lochmueller\LanguageDetection\Event\CheckLanguageDetection
+         * @covers \Lochmueller\LanguageDetection\Check\FromCurrentPageListener
+         * @covers \Lochmueller\LanguageDetection\Event\CheckLanguageDetection
          * @dataProvider data
          * @requires PHP < 8.0
          */
@@ -50,8 +50,8 @@ namespace Lochmueller\LanguageDetection\Tests\Unit\Check {
         }
 
         /**
-         * @covers       \Lochmueller\LanguageDetection\Check\FromCurrentPageListener
-         * @covers       \Lochmueller\LanguageDetection\Event\CheckLanguageDetection
+         * @covers \Lochmueller\LanguageDetection\Check\FromCurrentPageListener
+         * @covers \Lochmueller\LanguageDetection\Event\CheckLanguageDetection
          * @dataProvider data
          * @requires PHP >= 8.0
          */

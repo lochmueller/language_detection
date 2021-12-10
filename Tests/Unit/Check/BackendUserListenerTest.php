@@ -28,9 +28,9 @@ class BackendUserListenerTest extends AbstractTest
 
     /**
      * @covers \Lochmueller\LanguageDetection\Check\BackendUserListener
-     * @covers       \Lochmueller\LanguageDetection\Domain\Model\Dto\SiteConfiguration
+     * @covers \Lochmueller\LanguageDetection\Domain\Model\Dto\SiteConfiguration
      * @covers \Lochmueller\LanguageDetection\Event\CheckLanguageDetection
-     * @covers       \Lochmueller\LanguageDetection\Service\SiteConfigurationService
+     * @covers \Lochmueller\LanguageDetection\Service\SiteConfigurationService
      */
     public function testWithoutDisableInSite(): void
     {
@@ -49,9 +49,9 @@ class BackendUserListenerTest extends AbstractTest
 
     /**
      * @covers \Lochmueller\LanguageDetection\Check\BackendUserListener
-     * @covers       \Lochmueller\LanguageDetection\Domain\Model\Dto\SiteConfiguration
+     * @covers \Lochmueller\LanguageDetection\Domain\Model\Dto\SiteConfiguration
      * @covers \Lochmueller\LanguageDetection\Event\CheckLanguageDetection
-     * @covers       \Lochmueller\LanguageDetection\Service\SiteConfigurationService
+     * @covers \Lochmueller\LanguageDetection\Service\SiteConfigurationService
      */
     public function testWithoutConfigurationInSite(): void
     {
@@ -70,9 +70,9 @@ class BackendUserListenerTest extends AbstractTest
 
     /**
      * @covers \Lochmueller\LanguageDetection\Check\BackendUserListener
-     * @covers       \Lochmueller\LanguageDetection\Domain\Model\Dto\SiteConfiguration
+     * @covers \Lochmueller\LanguageDetection\Domain\Model\Dto\SiteConfiguration
      * @covers \Lochmueller\LanguageDetection\Event\CheckLanguageDetection
-     * @covers       \Lochmueller\LanguageDetection\Service\SiteConfigurationService
+     * @covers \Lochmueller\LanguageDetection\Service\SiteConfigurationService
      * @dataProvider data
      */
     public function testWithDisableConfigurationInSiteAndActiveBackendUser(bool $isLoginState, bool $disableRedirectWithBackendSession, bool $isEnabled): void

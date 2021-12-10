@@ -15,8 +15,8 @@ use TYPO3\CMS\Core\Site\Entity\SiteInterface;
 class SiteConfigurationServiceTest extends AbstractTest
 {
     /**
-     * @covers       \Lochmueller\LanguageDetection\Domain\Model\Dto\SiteConfiguration
-     * @covers       \Lochmueller\LanguageDetection\Service\SiteConfigurationService
+     * @covers \Lochmueller\LanguageDetection\Domain\Model\Dto\SiteConfiguration
+     * @covers \Lochmueller\LanguageDetection\Service\SiteConfigurationService
      */
     public function testCreationOfConfigurationDto(): void
     {

@@ -25,6 +25,8 @@ class BrowserLanguageTest extends AbstractTest
     /**
      * @dataProvider data
      * @covers \Lochmueller\LanguageDetection\Detect\BrowserLanguage
+     * @covers \Lochmueller\LanguageDetection\Domain\Collection\LocaleCollection
+     * @covers \Lochmueller\LanguageDetection\Domain\Model\Dto\LocaleValueObject
      * @covers \Lochmueller\LanguageDetection\Event\DetectUserLanguages
      *
      * @param string[] $result

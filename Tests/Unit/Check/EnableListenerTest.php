@@ -18,10 +18,10 @@ use TYPO3\CMS\Core\Site\Entity\Site;
 class EnableListenerTest extends AbstractTest
 {
     /**
-     * @covers       \Lochmueller\LanguageDetection\Check\EnableListener
-     * @covers       \Lochmueller\LanguageDetection\Domain\Model\Dto\SiteConfiguration
-     * @covers       \Lochmueller\LanguageDetection\Event\CheckLanguageDetection
-     * @covers       \Lochmueller\LanguageDetection\Service\SiteConfigurationService
+     * @covers \Lochmueller\LanguageDetection\Check\EnableListener
+     * @covers \Lochmueller\LanguageDetection\Domain\Model\Dto\SiteConfiguration
+     * @covers \Lochmueller\LanguageDetection\Event\CheckLanguageDetection
+     * @covers \Lochmueller\LanguageDetection\Service\SiteConfigurationService
      * @dataProvider data
      *
      * @param array<string, bool>|array<string, false>|mixed[] $configuration

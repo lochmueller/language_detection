@@ -6,7 +6,7 @@
         ]
     },
     "phpUnit": {
-        "customPath": "/app/.Build/bin/phpunit"
+        "customPath": "./.Build/bin/phpunit"
     },
     "mutators": {
         "@default": true

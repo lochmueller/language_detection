@@ -20,9 +20,9 @@ use TYPO3\CMS\Core\Site\Entity\SiteLanguage;
 class DefaultResponseTest extends AbstractTest
 {
     /**
-     * @covers       \Lochmueller\LanguageDetection\Domain\Model\Dto\SiteConfiguration
-     * @covers       \Lochmueller\LanguageDetection\Event\BuildResponse
-     * @covers       \Lochmueller\LanguageDetection\Response\DefaultResponse
+     * @covers \Lochmueller\LanguageDetection\Domain\Model\Dto\SiteConfiguration
+     * @covers \Lochmueller\LanguageDetection\Event\BuildResponse
+     * @covers \Lochmueller\LanguageDetection\Response\DefaultResponse
      * @covers \Lochmueller\LanguageDetection\Service\SiteConfigurationService
      */
     public function testConfiguration(): void
@@ -52,9 +52,9 @@ class DefaultResponseTest extends AbstractTest
     }
 
     /**
-     * @covers       \Lochmueller\LanguageDetection\Domain\Model\Dto\SiteConfiguration
-     * @covers       \Lochmueller\LanguageDetection\Event\BuildResponse
-     * @covers       \Lochmueller\LanguageDetection\Response\DefaultResponse
+     * @covers \Lochmueller\LanguageDetection\Domain\Model\Dto\SiteConfiguration
+     * @covers \Lochmueller\LanguageDetection\Event\BuildResponse
+     * @covers \Lochmueller\LanguageDetection\Response\DefaultResponse
      * @covers \Lochmueller\LanguageDetection\Service\SiteConfigurationService
      */
     public function testConfigurationWithWrongErrorCode(): void
@@ -85,9 +85,9 @@ class DefaultResponseTest extends AbstractTest
     }
 
     /**
-     * @covers       \Lochmueller\LanguageDetection\Domain\Model\Dto\SiteConfiguration
-     * @covers       \Lochmueller\LanguageDetection\Event\BuildResponse
-     * @covers       \Lochmueller\LanguageDetection\Response\DefaultResponse
+     * @covers \Lochmueller\LanguageDetection\Domain\Model\Dto\SiteConfiguration
+     * @covers \Lochmueller\LanguageDetection\Event\BuildResponse
+     * @covers \Lochmueller\LanguageDetection\Response\DefaultResponse
      * @covers \Lochmueller\LanguageDetection\Service\SiteConfigurationService
      */
     public function testConfigurationWithRedirectParams(): void
@@ -119,9 +119,9 @@ class DefaultResponseTest extends AbstractTest
     }
 
     /**
-     * @covers       \Lochmueller\LanguageDetection\Domain\Model\Dto\SiteConfiguration
-     * @covers       \Lochmueller\LanguageDetection\Event\BuildResponse
-     * @covers       \Lochmueller\LanguageDetection\Response\DefaultResponse
+     * @covers \Lochmueller\LanguageDetection\Domain\Model\Dto\SiteConfiguration
+     * @covers \Lochmueller\LanguageDetection\Event\BuildResponse
+     * @covers \Lochmueller\LanguageDetection\Response\DefaultResponse
      * @covers \Lochmueller\LanguageDetection\Service\SiteConfigurationService
      */
     public function testConfigurationWithSameUrl(): void

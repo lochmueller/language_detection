@@ -17,8 +17,8 @@ use TYPO3\CMS\Core\Site\Entity\Site;
 class RequestMethodeListenerTest extends AbstractTest
 {
     /**
-     * @covers       \Lochmueller\LanguageDetection\Check\RequestMethodListener
-     * @covers       \Lochmueller\LanguageDetection\Event\CheckLanguageDetection
+     * @covers \Lochmueller\LanguageDetection\Check\RequestMethodListener
+     * @covers \Lochmueller\LanguageDetection\Event\CheckLanguageDetection
      * @dataProvider data
      */
     public function testConfiguration(string $method, bool $result): void

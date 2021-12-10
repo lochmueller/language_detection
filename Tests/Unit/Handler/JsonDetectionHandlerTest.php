@@ -40,6 +40,7 @@ class JsonDetectionHandlerTest extends AbstractHandlerTest
     /**
      * @covers \Lochmueller\LanguageDetection\Check\BotListener
      * @covers \Lochmueller\LanguageDetection\Detect\BrowserLanguage
+     * @covers \Lochmueller\LanguageDetection\Domain\Collection\LocaleCollection
      * @covers \Lochmueller\LanguageDetection\Event\CheckLanguageDetection
      * @covers \Lochmueller\LanguageDetection\Event\DetectUserLanguages
      * @covers \Lochmueller\LanguageDetection\Handler\AbstractHandler
@@ -62,6 +63,8 @@ class JsonDetectionHandlerTest extends AbstractHandlerTest
     /**
      * @covers \Lochmueller\LanguageDetection\Check\BotListener
      * @covers \Lochmueller\LanguageDetection\Detect\BrowserLanguage
+     * @covers \Lochmueller\LanguageDetection\Domain\Collection\LocaleCollection
+     * @covers \Lochmueller\LanguageDetection\Domain\Model\Dto\LocaleValueObject
      * @covers \Lochmueller\LanguageDetection\Domain\Model\Dto\SiteConfiguration
      * @covers \Lochmueller\LanguageDetection\Event\BuildResponse
      * @covers \Lochmueller\LanguageDetection\Event\CheckLanguageDetection

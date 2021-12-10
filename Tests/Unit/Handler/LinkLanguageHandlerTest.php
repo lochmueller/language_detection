@@ -32,12 +32,15 @@ class LinkLanguageHandlerTest extends AbstractHandlerTest
 
     /**
      * @covers \Lochmueller\LanguageDetection\Check\BotListener
+     * @covers \Lochmueller\LanguageDetection\Check\EnableListener
+     * @covers \Lochmueller\LanguageDetection\Domain\Model\Dto\SiteConfiguration
      * @covers \Lochmueller\LanguageDetection\Event\CheckLanguageDetection
      * @covers \Lochmueller\LanguageDetection\Handler\AbstractHandler
      * @covers \Lochmueller\LanguageDetection\Handler\Exception\DisableLanguageDetectionException
      * @covers \Lochmueller\LanguageDetection\Handler\LinkLanguageHandler
      * @covers \Lochmueller\LanguageDetection\Negotiation\DefaultNegotiation
      * @covers \Lochmueller\LanguageDetection\Response\DefaultResponse
+     * @covers \Lochmueller\LanguageDetection\Service\SiteConfigurationService
      */
     public function testBreakAfterCheckLanguageDetectionByAddingBotAgent(): void
     {
@@ -53,7 +56,10 @@ class LinkLanguageHandlerTest extends AbstractHandlerTest
 
     /**
      * @covers \Lochmueller\LanguageDetection\Check\BotListener
+     * @covers \Lochmueller\LanguageDetection\Check\EnableListener
      * @covers \Lochmueller\LanguageDetection\Detect\BrowserLanguage
+     * @covers \Lochmueller\LanguageDetection\Domain\Collection\LocaleCollection
+     * @covers \Lochmueller\LanguageDetection\Domain\Model\Dto\SiteConfiguration
      * @covers \Lochmueller\LanguageDetection\Event\CheckLanguageDetection
      * @covers \Lochmueller\LanguageDetection\Event\DetectUserLanguages
      * @covers \Lochmueller\LanguageDetection\Handler\AbstractHandler
@@ -61,6 +67,7 @@ class LinkLanguageHandlerTest extends AbstractHandlerTest
      * @covers \Lochmueller\LanguageDetection\Handler\LinkLanguageHandler
      * @covers \Lochmueller\LanguageDetection\Negotiation\DefaultNegotiation
      * @covers \Lochmueller\LanguageDetection\Response\DefaultResponse
+     * @covers \Lochmueller\LanguageDetection\Service\SiteConfigurationService
      */
     public function testBreakAfterDetectUserLanguagesByMissingLanguages(): void
     {
@@ -75,7 +82,11 @@ class LinkLanguageHandlerTest extends AbstractHandlerTest
 
     /**
      * @covers \Lochmueller\LanguageDetection\Check\BotListener
+     * @covers \Lochmueller\LanguageDetection\Check\EnableListener
      * @covers \Lochmueller\LanguageDetection\Detect\BrowserLanguage
+     * @covers \Lochmueller\LanguageDetection\Domain\Collection\LocaleCollection
+     * @covers \Lochmueller\LanguageDetection\Domain\Model\Dto\LocaleValueObject
+     * @covers \Lochmueller\LanguageDetection\Domain\Model\Dto\SiteConfiguration
      * @covers \Lochmueller\LanguageDetection\Event\CheckLanguageDetection
      * @covers \Lochmueller\LanguageDetection\Event\DetectUserLanguages
      * @covers \Lochmueller\LanguageDetection\Event\NegotiateSiteLanguage
@@ -85,6 +96,7 @@ class LinkLanguageHandlerTest extends AbstractHandlerTest
      * @covers \Lochmueller\LanguageDetection\Negotiation\DefaultNegotiation
      * @covers \Lochmueller\LanguageDetection\Response\DefaultResponse
      * @covers \Lochmueller\LanguageDetection\Service\Normalizer
+     * @covers \Lochmueller\LanguageDetection\Service\SiteConfigurationService
      */
     public function testBreakAfterNegotiateSiteLanguageByNotFoundTargetLanguage(): void
     {
@@ -99,7 +111,10 @@ class LinkLanguageHandlerTest extends AbstractHandlerTest
 
     /**
      * @covers \Lochmueller\LanguageDetection\Check\BotListener
+     * @covers \Lochmueller\LanguageDetection\Check\EnableListener
      * @covers \Lochmueller\LanguageDetection\Detect\BrowserLanguage
+     * @covers \Lochmueller\LanguageDetection\Domain\Collection\LocaleCollection
+     * @covers \Lochmueller\LanguageDetection\Domain\Model\Dto\LocaleValueObject
      * @covers \Lochmueller\LanguageDetection\Domain\Model\Dto\SiteConfiguration
      * @covers \Lochmueller\LanguageDetection\Event\BuildResponse
      * @covers \Lochmueller\LanguageDetection\Event\CheckLanguageDetection

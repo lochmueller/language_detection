@@ -27,6 +27,8 @@ class NormalizerTest extends AbstractTest
     }
 
     /**
+     * @covers \Lochmueller\LanguageDetection\Domain\Collection\LocaleCollection
+     * @covers \Lochmueller\LanguageDetection\Domain\Model\Dto\LocaleValueObject
      * @covers \Lochmueller\LanguageDetection\Service\Normalizer
      */
     public function testNormalizeList(): void
