@@ -4,12 +4,14 @@ declare(strict_types=1);
 
 namespace Lochmueller\LanguageDetection\Handler;
 
+use Lochmueller\LanguageDetection\Check\EnableListener;
 use Lochmueller\LanguageDetection\Event\CheckLanguageDetection;
 use Lochmueller\LanguageDetection\Event\DetectUserLanguages;
 use Lochmueller\LanguageDetection\Event\NegotiateSiteLanguage;
 use Lochmueller\LanguageDetection\Handler\Exception\DisableLanguageDetectionException;
 use Lochmueller\LanguageDetection\Handler\Exception\NoSelectedLanguageException;
 use Lochmueller\LanguageDetection\Handler\Exception\NoUserLanguagesException;
+use Lochmueller\LanguageDetection\Service\SiteConfigurationService;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
@@ -28,13 +30,9 @@ class LinkLanguageHandler extends AbstractHandler implements RequestHandlerInter
     {
         $site = $this->getSiteFromRequest($request);
 
-        // @todo check same as:
-        //$check = new CheckLanguageDetection($site, $this->languageRequest);
-        //$enableListener = new EnableListener(new SiteConfigurationService());
-        //$enableListener($check);
-
         $check = new CheckLanguageDetection($site, $request);
-        $this->eventDispatcher->dispatch($check);
+        $enableListener = new EnableListener(new SiteConfigurationService());
+        $enableListener($check);
 
         if (!$check->isLanguageDetectionEnable()) {
             throw new DisableLanguageDetectionException();
@@ -43,7 +41,7 @@ class LinkLanguageHandler extends AbstractHandler implements RequestHandlerInter
         $detect = new DetectUserLanguages($site, $request);
         $this->eventDispatcher->dispatch($detect);
 
-        if (empty($detect->getUserLanguages())) {
+        if ($detect->getUserLanguages()->isEmpty()) {
             throw new NoUserLanguagesException();
         }
 

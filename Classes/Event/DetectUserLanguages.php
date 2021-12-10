@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Lochmueller\LanguageDetection\Event;
 
+use Lochmueller\LanguageDetection\Domain\Collection\LocaleCollection;
+use Lochmueller\LanguageDetection\Domain\Model\Dto\LocaleValueObject;
 use Psr\Http\Message\ServerRequestInterface;
 use TYPO3\CMS\Core\Site\Entity\SiteInterface;
 
@@ -11,14 +13,13 @@ final class DetectUserLanguages extends AbstractEvent
 {
     private SiteInterface $site;
     private ServerRequestInterface $request;
-
-    /** @var array<string> */
-    private array $userLanguages = [];
+    private LocaleCollection $userLanguages;
 
     public function __construct(SiteInterface $site, ServerRequestInterface $request)
     {
         $this->site = $site;
         $this->request = $request;
+        $this->userLanguages = new LocaleCollection();
     }
 
     public function getSite(): SiteInterface
@@ -31,19 +32,18 @@ final class DetectUserLanguages extends AbstractEvent
         return $this->request;
     }
 
-    /**
-     * @return array<string>
-     */
-    public function getUserLanguages(): array
+    public function getUserLanguages(): LocaleCollection
     {
         return $this->userLanguages;
     }
 
-    /**
-     * @param array<string> $userLanguages
-     */
-    public function setUserLanguages(array $userLanguages): void
+    public function setUserLanguages(LocaleCollection $userLanguages): void
     {
         $this->userLanguages = $userLanguages;
+    }
+
+    public function addUserLanguage(LocaleValueObject $userLanguage): void
+    {
+        $this->userLanguages->add($userLanguage);
     }
 }

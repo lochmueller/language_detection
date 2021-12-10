@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Lochmueller\LanguageDetection\Event;
 
+use Lochmueller\LanguageDetection\Domain\Collection\LocaleCollection;
 use Psr\EventDispatcher\StoppableEventInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use TYPO3\CMS\Core\Site\Entity\SiteInterface;
@@ -13,17 +14,10 @@ final class NegotiateSiteLanguage extends AbstractEvent implements StoppableEven
 {
     private SiteInterface $site;
     private ServerRequestInterface $request;
-
-    /**
-     * @return array<string>
-     */
-    private array $userLanguages;
+    private LocaleCollection $userLanguages;
     private ?SiteLanguage $selectedLanguage = null;
 
-    /**
-     * @param array<string> $userLanguages
-     */
-    public function __construct(SiteInterface $site, ServerRequestInterface $request, array $userLanguages)
+    public function __construct(SiteInterface $site, ServerRequestInterface $request, LocaleCollection $userLanguages)
     {
         $this->site = $site;
         $this->request = $request;
@@ -40,10 +34,7 @@ final class NegotiateSiteLanguage extends AbstractEvent implements StoppableEven
         return $this->request;
     }
 
-    /**
-     * @return array<string>
-     */
-    public function getUserLanguages(): array
+    public function getUserLanguages(): LocaleCollection
     {
         return $this->userLanguages;
     }

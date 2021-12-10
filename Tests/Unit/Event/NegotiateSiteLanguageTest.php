@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Lochmueller\LanguageDetection\Tests\Unit\Event;
 
+use Lochmueller\LanguageDetection\Domain\Collection\LocaleCollection;
 use Lochmueller\LanguageDetection\Event\NegotiateSiteLanguage;
 use Psr\Http\Message\ServerRequestInterface;
 use TYPO3\CMS\Core\Site\Entity\SiteInterface;
@@ -22,7 +23,7 @@ class NegotiateSiteLanguageTest extends AbstractEventTest
     {
         $site = $this->createMock(SiteInterface::class);
         $request = $this->createMock(ServerRequestInterface::class);
-        $userLanguages = ['de-DE'];
+        $userLanguages = LocaleCollection::fromArray(['de-DE']);
 
         $event = new NegotiateSiteLanguage($site, $request, $userLanguages);
 

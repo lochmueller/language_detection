@@ -30,7 +30,7 @@ class JsonDetectionHandler extends AbstractHandler implements RequestHandlerInte
         $detect = new DetectUserLanguages($site, $request);
         $this->eventDispatcher->dispatch($detect);
 
-        if (empty($detect->getUserLanguages())) {
+        if ($detect->getUserLanguages()->isEmpty()) {
             throw new NoUserLanguagesException();
         }
 

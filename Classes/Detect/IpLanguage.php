@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Lochmueller\LanguageDetection\Detect;
 
+use Lochmueller\LanguageDetection\Domain\Collection\LocaleCollection;
 use Lochmueller\LanguageDetection\Event\DetectUserLanguages;
 use Lochmueller\LanguageDetection\Service\IpLocation;
 use Lochmueller\LanguageDetection\Service\LanguageService;
@@ -41,7 +42,7 @@ class IpLanguage
             return;
         }
 
-        $base = $event->getUserLanguages();
+        $base = $event->getUserLanguages()->toArray();
         switch ($addIp) {
             case 'before':
                 array_unshift($base, $language);
@@ -53,7 +54,7 @@ class IpLanguage
                 $base = [$language];
                 break;
         }
-        $event->setUserLanguages($base);
+        $event->setUserLanguages(LocaleCollection::fromArray(array_map(fn ($item): string => (string)$item, $base)));
     }
 
     public function getLanguage(ServerRequestInterface $request): ?string

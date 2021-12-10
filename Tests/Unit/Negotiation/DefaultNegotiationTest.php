@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Lochmueller\LanguageDetection\Tests\Unit\Negotiation;
 
+use Lochmueller\LanguageDetection\Domain\Collection\LocaleCollection;
 use Lochmueller\LanguageDetection\Event\NegotiateSiteLanguage;
 use Lochmueller\LanguageDetection\Negotiation\DefaultNegotiation;
 use Lochmueller\LanguageDetection\Service\Normalizer;
@@ -30,7 +31,7 @@ class DefaultNegotiationTest extends AbstractTest
 
         $site = $this->createMock(Site::class);
 
-        $event = new NegotiateSiteLanguage($site, $this->createMock(ServerRequestInterface::class), []);
+        $event = new NegotiateSiteLanguage($site, $this->createMock(ServerRequestInterface::class), LocaleCollection::fromArray([]));
         $negotiation($event);
 
         self::assertNull($event->getSelectedLanguage());
@@ -51,7 +52,7 @@ class DefaultNegotiationTest extends AbstractTest
         $site = $this->createStub(Site::class);
         $site->method('getLanguages')->willReturn([$en, $de]);
 
-        $event = new NegotiateSiteLanguage($site, $this->createMock(ServerRequestInterface::class), ['de_DE', 'en_GB']);
+        $event = new NegotiateSiteLanguage($site, $this->createMock(ServerRequestInterface::class), LocaleCollection::fromArray(['de_DE', 'en_GB']));
         $negotiation($event);
 
         self::assertSame($de, $event->getSelectedLanguage());

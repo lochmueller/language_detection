@@ -38,7 +38,7 @@ class BrowserLanguageTest extends AbstractTest
         $class = new BrowserLanguage();
         $class($event);
 
-        self::assertEquals($result, $event->getUserLanguages());
+        self::assertEquals($result, $event->getUserLanguages()->toArray());
     }
 
     /**

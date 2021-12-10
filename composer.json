@@ -26,7 +26,7 @@
 		}
 	],
 	"require": {
-		"php": "^7.4||^8.0||^8.1",
+		"php": "^7.4||^8.0",
 		"ext-intl": "*",
 		"typo3/cms-core": "^10.4||^11.5||^12.0@dev"
 	},
@@ -34,7 +34,7 @@
 	"license": "GPL-2.0-or-later",
 	"require-dev": {
 		"typo3/testing-framework": "^6.1||dev-main",
-		"friendsofphp/php-cs-fixer": "^3.1",
+		"friendsofphp/php-cs-fixer": "^3.3",
 		"rector/rector": "^0.12",
 		"phpstan/phpstan": "^1.1",
 		"infection/infection": "^0.25.3",
@@ -67,7 +67,7 @@
 			"php-cs-fixer fix --config Resources/Private/Build/PhpCsFixer.php --cache-file=.Build/phpcs.cache"
 		],
 		"code:phpstan": [
-			"phpstan analyse -l 5 Classes Tests"
+			"phpstan analyse -l 6 Classes Tests"
 		],
 		"test:unit": [
 			"phpunit -c phpunit.xml --coverage-text --testdox"

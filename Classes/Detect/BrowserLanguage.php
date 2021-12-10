@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Lochmueller\LanguageDetection\Detect;
 
+use Lochmueller\LanguageDetection\Domain\Collection\LocaleCollection;
 use Lochmueller\LanguageDetection\Event\DetectUserLanguages;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
@@ -37,6 +38,6 @@ class BrowserLanguage
         // Remove quality 0.0
         $acceptedLanguagesArr = array_filter($acceptedLanguagesArr, fn ($value, $key): bool => 0.0 !== $value, \ARRAY_FILTER_USE_BOTH);
 
-        $event->setUserLanguages(array_keys($acceptedLanguagesArr));
+        $event->setUserLanguages(LocaleCollection::fromArray(array_keys($acceptedLanguagesArr)));
     }
 }

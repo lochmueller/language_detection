@@ -45,7 +45,7 @@ class LinkLanguageHandlerTest extends AbstractHandlerTest
         $this->expectExceptionCode(1_236_781);
 
         $serverRequest = new ServerRequest(null, null, 'php://input', ['user-agent' => 'AdsBot-Google']);
-        $serverRequest = $serverRequest->withAttribute('site', new Site('dummy', 1, []));
+        $serverRequest = $serverRequest->withAttribute('site', new Site('dummy', 1, ['enableLanguageDetection' => false]));
 
         $handler = new LinkLanguageHandler($this->getSmallEventListenerStack());
         $handler->handle($serverRequest);

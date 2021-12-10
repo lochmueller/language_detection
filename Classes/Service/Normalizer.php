@@ -4,14 +4,16 @@ declare(strict_types=1);
 
 namespace Lochmueller\LanguageDetection\Service;
 
+use Lochmueller\LanguageDetection\Domain\Collection\LocaleCollection;
+use Lochmueller\LanguageDetection\Domain\Model\Dto\LocaleValueObject;
+
 class Normalizer
 {
-    /**
-     * @return string[]
-     */
-    public function normalizeList(array $locales): array
+    public function normalizeList(LocaleCollection $locales): LocaleCollection
     {
-        return array_map(fn (string $locale): string => $this->normalize($locale), $locales);
+        $result = array_map(fn (LocaleValueObject $locale): string => $this->normalize((string)$locale), $locales->toArray());
+
+        return LocaleCollection::fromArray($result);
     }
 
     public function normalize(string $locale): string

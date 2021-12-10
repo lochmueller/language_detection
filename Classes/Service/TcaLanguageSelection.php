@@ -20,7 +20,7 @@ class TcaLanguageSelection
     /**
      * @param mixed[] $configuration
      */
-    public function get(array &$configuration): void
+    public function get(array & $configuration): void
     {
         if (!isset($configuration['row']['identifier'])) {
             return;

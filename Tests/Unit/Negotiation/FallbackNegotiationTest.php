@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Lochmueller\LanguageDetection\Tests\Unit\Negotiation;
 
+use Lochmueller\LanguageDetection\Domain\Collection\LocaleCollection;
 use Lochmueller\LanguageDetection\Event\NegotiateSiteLanguage;
 use Lochmueller\LanguageDetection\Negotiation\FallbackNegotiation;
 use Lochmueller\LanguageDetection\Service\SiteConfigurationService;
@@ -35,7 +36,7 @@ class FallbackNegotiationTest extends AbstractTest
         $site->method('getConfiguration')->willReturn($configuration);
 
         $request = new ServerRequest(null, null, 'php://input', []);
-        $event = new NegotiateSiteLanguage($site, $request, []);
+        $event = new NegotiateSiteLanguage($site, $request, LocaleCollection::fromArray([]));
 
         $botListener = new FallbackNegotiation(new SiteConfigurationService());
         $botListener($event);
@@ -61,7 +62,7 @@ class FallbackNegotiationTest extends AbstractTest
         $site->method('getLanguages')->willReturn([$siteLanguage1, $siteLanguage2, $siteLanguage3]);
 
         $request = new ServerRequest(null, null, 'php://input', []);
-        $event = new NegotiateSiteLanguage($site, $request, []);
+        $event = new NegotiateSiteLanguage($site, $request, LocaleCollection::fromArray([]));
 
         $botListener = new FallbackNegotiation(new SiteConfigurationService());
         $botListener($event);
@@ -87,7 +88,7 @@ class FallbackNegotiationTest extends AbstractTest
         $site->method('getLanguages')->willReturn([$siteLanguage1, $siteLanguage2, $siteLanguage3]);
 
         $request = new ServerRequest(null, null, 'php://input', []);
-        $event = new NegotiateSiteLanguage($site, $request, []);
+        $event = new NegotiateSiteLanguage($site, $request, LocaleCollection::fromArray([]));
 
         $botListener = new FallbackNegotiation(new SiteConfigurationService());
         $botListener($event);
@@ -106,7 +107,7 @@ class FallbackNegotiationTest extends AbstractTest
         $site = $this->createMock(NullSite::class);
 
         $request = new ServerRequest(null, null, 'php://input', []);
-        $event = new NegotiateSiteLanguage($site, $request, []);
+        $event = new NegotiateSiteLanguage($site, $request, LocaleCollection::fromArray([]));
 
         $botListener = new FallbackNegotiation(new SiteConfigurationService());
         $botListener($event);

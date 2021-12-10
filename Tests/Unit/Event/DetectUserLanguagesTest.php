@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Lochmueller\LanguageDetection\Tests\Unit\Event;
 
+use Lochmueller\LanguageDetection\Domain\Collection\LocaleCollection;
 use Lochmueller\LanguageDetection\Event\DetectUserLanguages;
 use Psr\Http\Message\ServerRequestInterface;
 use TYPO3\CMS\Core\Site\Entity\SiteInterface;
@@ -26,9 +27,9 @@ class DetectUserLanguagesTest extends AbstractEventTest
 
         self::assertEquals($site, $event->getSite());
         self::assertEquals($request, $event->getRequest());
-        self::assertEmpty($event->getUserLanguages());
+        self::assertTrue($event->getUserLanguages()->isEmpty());
 
-        $userLanguage = ['here', 'is', 'stuff'];
+        $userLanguage = LocaleCollection::fromArray(['here', 'is', 'stuff']);
 
         $event->setUserLanguages($userLanguage);
 

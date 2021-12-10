@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Lochmueller\LanguageDetection\Tests\Unit\Service;
 
+use Lochmueller\LanguageDetection\Domain\Collection\LocaleCollection;
 use Lochmueller\LanguageDetection\Service\Normalizer;
 use Lochmueller\LanguageDetection\Tests\Unit\AbstractTest;
 
@@ -36,7 +37,7 @@ class NormalizerTest extends AbstractTest
 
         $result = array_map(fn ($item): string => $item[1], $this->normalizeProvider());
 
-        self::assertEquals($result, $normalizer->normalizeList($base));
+        self::assertEquals(array_values($result), $normalizer->normalizeList(LocaleCollection::fromArray(array_values($base)))->toArray());
     }
 
     /**

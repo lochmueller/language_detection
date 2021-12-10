@@ -57,11 +57,14 @@ ruleset:
     - ExternalTypo3Core
     - ExternalPsr
   Detect:
+    - Domain
     - Service
     - Event
     - ExternalTypo3Core
     - ExternalPsr
   Handler:
+    - Service
+    - Check
     - Event
     - ExternalTypo3Core
     - ExternalPsr
@@ -84,6 +87,7 @@ ruleset:
     - ExternalTypo3Core
     - ExternalPsr
   Event:
+    - Domain
     - ExternalTypo3Core
     - ExternalPsr
   Utility:

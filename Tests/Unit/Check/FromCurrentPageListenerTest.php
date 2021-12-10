@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Lochmueller\LanguageDetection\Check {
     use Lochmueller\LanguageDetection\Tests\Unit\Check\FromCurrentPageListenerTest;
 
-    function function_exists(string $function)
+    function function_exists(string $function): bool
     {
         return FromCurrentPageListenerTest::$functionExistsState;
     }

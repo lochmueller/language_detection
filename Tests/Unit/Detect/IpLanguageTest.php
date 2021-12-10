@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Lochmueller\LanguageDetection\Tests\Unit\Detect;
 
 use Lochmueller\LanguageDetection\Detect\IpLanguage;
+use Lochmueller\LanguageDetection\Domain\Collection\LocaleCollection;
 use Lochmueller\LanguageDetection\Event\DetectUserLanguages;
 use Lochmueller\LanguageDetection\Service\IpLocation;
 use Lochmueller\LanguageDetection\Service\LanguageService;
@@ -42,12 +43,12 @@ class IpLanguageTest extends AbstractTest
         $site->method('getConfiguration')->willReturn(['addIpLocationToBrowserLanguage' => $addIpLocationToBrowserLanguage]);
 
         $event = new DetectUserLanguages($site, $serverRequest);
-        $event->setUserLanguages(['default']);
+        $event->setUserLanguages(LocaleCollection::fromArray(['default']));
 
         $ipLanguage = new IpLanguage($ipLocation, new LanguageService(), new SiteConfigurationService());
         $ipLanguage($event);
 
-        self::assertSame($result, $event->getUserLanguages());
+        self::assertSame($result, array_map(fn ($locale): string => (string)$locale, $event->getUserLanguages()->toArray()));
     }
 
     /**
