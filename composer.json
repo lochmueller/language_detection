@@ -28,7 +28,7 @@
 	"require": {
 		"php": "^7.4||^8.0",
 		"ext-intl": "*",
-		"typo3/cms-core": "^10.4||^11.5||^12.0@dev"
+		"typo3/cms-core": "^10.4||^11.5"
 	},
 	"homepage": "https://github.com/lochmueller/language_detection",
 	"license": "GPL-2.0-or-later",
