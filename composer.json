@@ -33,13 +33,15 @@
 	"homepage": "https://github.com/lochmueller/language_detection",
 	"license": "GPL-2.0-or-later",
 	"require-dev": {
+		"ext-json": "*",
 		"typo3/testing-framework": "^6.1||dev-main",
-		"friendsofphp/php-cs-fixer": "^3.3",
+		"friendsofphp/php-cs-fixer": "^3.4",
 		"rector/rector": "^0.12",
-		"phpstan/phpstan": "^1.1",
-		"infection/infection": "^0.25.3",
-		"qossmic/deptrac-shim": "^0.18.0"
+		"phpstan/phpstan": "^1.2",
+		"infection/infection": "^0.25",
+		"qossmic/deptrac-shim": "^0.18"
 	},
+	"optimize-autoloader": true,
 	"config": {
 		"vendor-dir": ".Build/vendor",
 		"bin-dir": ".Build/bin"

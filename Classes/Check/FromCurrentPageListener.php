@@ -19,12 +19,11 @@ class FromCurrentPageListener
         }
     }
 
+    /**
+     * @note Migrate to str_starts_with if PHP 7.4 support is dropped
+     */
     protected function stringBeginsWith(string $haystack, string $needle): bool
     {
-        if (function_exists('str_starts_with')) {
-            return str_starts_with($haystack, $needle);
-        }
-
         return '' !== $needle && 0 === strpos($haystack, $needle);
     }
 }
