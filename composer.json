@@ -34,7 +34,7 @@
 	"license": "GPL-2.0-or-later",
 	"require-dev": {
 		"ext-json": "*",
-		"typo3/testing-framework": "^6.1||dev-main",
+		"typo3/testing-framework": "^6.15",
 		"friendsofphp/php-cs-fixer": "^3.4",
 		"rector/rector": "^0.12",
 		"phpstan/phpstan": "^1.2",
@@ -53,6 +53,9 @@
 		}
 	},
 	"scripts": {
+        "post-autoload-dump": [
+            "TYPO3\\TestingFramework\\Composer\\ExtensionTestEnvironment::prepare"
+        ],
 		"code:all": [
 			"@code:deptrac",
 			"@code:rector",
