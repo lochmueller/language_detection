@@ -82,6 +82,13 @@ services:
         after: 'browserLanguage'
         event: Lochmueller\LanguageDetection\Event\DetectUserLanguages
 
+  Lochmueller\LanguageDetection\Detect\MaxMindDetect:
+    tags:
+      - name: event.listener
+        identifier: 'maxMindDetect'
+        after: 'ipLanguage'
+        event: Lochmueller\LanguageDetection\Event\DetectUserLanguages
+
   Lochmueller\LanguageDetection\Response\DefaultResponse:
     tags:
       - name: event.listener

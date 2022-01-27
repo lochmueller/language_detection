@@ -39,12 +39,21 @@
 		"rector/rector": "^0.12",
 		"phpstan/phpstan": "^1.2",
 		"infection/infection": "^0.25",
-		"qossmic/deptrac-shim": "^0.18"
+		"qossmic/deptrac-shim": "^0.18",
+		"geoip2/geoip2": "^2.12"
 	},
 	"optimize-autoloader": true,
 	"config": {
 		"vendor-dir": ".Build/vendor",
-		"bin-dir": ".Build/bin"
+		"bin-dir": ".Build/bin",
+		"allow-plugins": {
+			"infection/extension-installer": true,
+			"typo3/class-alias-loader": true,
+			"typo3/cms-composer-installers": true
+		}
+	},
+	"suggest": {
+		"geoip2/geoip2": "Allows to use local MaxMind IP database or webservice"
 	},
 	"extra": {
 		"typo3/cms": {
