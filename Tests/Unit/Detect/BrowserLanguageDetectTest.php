@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Lochmueller\LanguageDetection\Tests\Unit\Detect;
 
-use Lochmueller\LanguageDetection\Detect\BrowserLanguage;
+use Lochmueller\LanguageDetection\Detect\BrowserLanguageDetect;
 use Lochmueller\LanguageDetection\Event\DetectUserLanguages;
 use Lochmueller\LanguageDetection\Tests\Unit\AbstractTest;
 use TYPO3\CMS\Core\Http\ServerRequest;
@@ -14,17 +14,17 @@ use TYPO3\CMS\Core\Site\Entity\SiteInterface;
  * @internal
  * @coversNothing
  */
-class BrowserLanguageTest extends AbstractTest
+class BrowserLanguageDetectTest extends AbstractTest
 {
     public function testClassIsInvokable(): void
     {
-        $class = new BrowserLanguage();
+        $class = new BrowserLanguageDetect();
         self::assertIsCallable($class);
     }
 
     /**
      * @dataProvider data
-     * @covers \Lochmueller\LanguageDetection\Detect\BrowserLanguage
+     * @covers \Lochmueller\LanguageDetection\Detect\BrowserLanguageDetect
      * @covers \Lochmueller\LanguageDetection\Domain\Collection\LocaleCollection
      * @covers \Lochmueller\LanguageDetection\Domain\Model\Dto\LocaleValueObject
      * @covers \Lochmueller\LanguageDetection\Event\DetectUserLanguages
@@ -37,7 +37,7 @@ class BrowserLanguageTest extends AbstractTest
         $serverRequest = new ServerRequest(null, null, 'php://input', ['accept-language' => $acceptLanguage]);
         $event = new DetectUserLanguages($siteMock, $serverRequest);
 
-        $class = new BrowserLanguage();
+        $class = new BrowserLanguageDetect();
         $class($event);
 
         self::assertEquals($result, $event->getUserLanguages()->toArray());

@@ -19,7 +19,7 @@ class JsonDetectionHandlerTest extends AbstractHandlerTest
 {
     /**
      * @covers \Lochmueller\LanguageDetection\Check\BotAgentCheck
-     * @covers \Lochmueller\LanguageDetection\Detect\BrowserLanguage
+     * @covers \Lochmueller\LanguageDetection\Detect\BrowserLanguageDetect
      * @covers \Lochmueller\LanguageDetection\Event\CheckLanguageDetection
      * @covers \Lochmueller\LanguageDetection\Event\DetectUserLanguages
      * @covers \Lochmueller\LanguageDetection\Handler\AbstractHandler
@@ -39,7 +39,7 @@ class JsonDetectionHandlerTest extends AbstractHandlerTest
 
     /**
      * @covers \Lochmueller\LanguageDetection\Check\BotAgentCheck
-     * @covers \Lochmueller\LanguageDetection\Detect\BrowserLanguage
+     * @covers \Lochmueller\LanguageDetection\Detect\BrowserLanguageDetect
      * @covers \Lochmueller\LanguageDetection\Domain\Collection\LocaleCollection
      * @covers \Lochmueller\LanguageDetection\Event\CheckLanguageDetection
      * @covers \Lochmueller\LanguageDetection\Event\DetectUserLanguages
@@ -62,7 +62,7 @@ class JsonDetectionHandlerTest extends AbstractHandlerTest
 
     /**
      * @covers \Lochmueller\LanguageDetection\Check\BotAgentCheck
-     * @covers \Lochmueller\LanguageDetection\Detect\BrowserLanguage
+     * @covers \Lochmueller\LanguageDetection\Detect\BrowserLanguageDetect
      * @covers \Lochmueller\LanguageDetection\Domain\Collection\LocaleCollection
      * @covers \Lochmueller\LanguageDetection\Domain\Model\Dto\LocaleValueObject
      * @covers \Lochmueller\LanguageDetection\Domain\Model\Dto\SiteConfiguration
@@ -115,7 +115,7 @@ class JsonDetectionHandlerTest extends AbstractHandlerTest
 
     /**
      * @covers \Lochmueller\LanguageDetection\Check\BotAgentCheck
-     * @covers \Lochmueller\LanguageDetection\Detect\BrowserLanguage
+     * @covers \Lochmueller\LanguageDetection\Detect\BrowserLanguageDetect
      * @covers \Lochmueller\LanguageDetection\Domain\Collection\LocaleCollection
      * @covers \Lochmueller\LanguageDetection\Domain\Model\Dto\LocaleValueObject
      * @covers \Lochmueller\LanguageDetection\Domain\Model\Dto\SiteConfiguration

@@ -57,7 +57,7 @@ class LinkLanguageHandlerTest extends AbstractHandlerTest
     /**
      * @covers \Lochmueller\LanguageDetection\Check\BotAgentCheck
      * @covers \Lochmueller\LanguageDetection\Check\EnableCheck
-     * @covers \Lochmueller\LanguageDetection\Detect\BrowserLanguage
+     * @covers \Lochmueller\LanguageDetection\Detect\BrowserLanguageDetect
      * @covers \Lochmueller\LanguageDetection\Domain\Collection\LocaleCollection
      * @covers \Lochmueller\LanguageDetection\Domain\Model\Dto\SiteConfiguration
      * @covers \Lochmueller\LanguageDetection\Event\CheckLanguageDetection
@@ -83,7 +83,7 @@ class LinkLanguageHandlerTest extends AbstractHandlerTest
     /**
      * @covers \Lochmueller\LanguageDetection\Check\BotAgentCheck
      * @covers \Lochmueller\LanguageDetection\Check\EnableCheck
-     * @covers \Lochmueller\LanguageDetection\Detect\BrowserLanguage
+     * @covers \Lochmueller\LanguageDetection\Detect\BrowserLanguageDetect
      * @covers \Lochmueller\LanguageDetection\Domain\Collection\LocaleCollection
      * @covers \Lochmueller\LanguageDetection\Domain\Model\Dto\LocaleValueObject
      * @covers \Lochmueller\LanguageDetection\Domain\Model\Dto\SiteConfiguration
@@ -112,7 +112,7 @@ class LinkLanguageHandlerTest extends AbstractHandlerTest
     /**
      * @covers \Lochmueller\LanguageDetection\Check\BotAgentCheck
      * @covers \Lochmueller\LanguageDetection\Check\EnableCheck
-     * @covers \Lochmueller\LanguageDetection\Detect\BrowserLanguage
+     * @covers \Lochmueller\LanguageDetection\Detect\BrowserLanguageDetect
      * @covers \Lochmueller\LanguageDetection\Domain\Collection\LocaleCollection
      * @covers \Lochmueller\LanguageDetection\Domain\Model\Dto\LocaleValueObject
      * @covers \Lochmueller\LanguageDetection\Domain\Model\Dto\SiteConfiguration

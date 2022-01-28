@@ -17,7 +17,7 @@ use Psr\Http\Message\ServerRequestInterface;
  * Get the Location based on the IP.
  * Use the geoplugin.net API.
  */
-class IpLanguage
+class GeoPluginDetect
 {
     protected IpLocation $ipLocation;
     protected LanguageService $languageService;

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Lochmueller\LanguageDetection\Tests\Unit\Detect;
 
-use Lochmueller\LanguageDetection\Detect\IpLanguage;
+use Lochmueller\LanguageDetection\Detect\GeoPluginDetect;
 use Lochmueller\LanguageDetection\Domain\Collection\LocaleCollection;
 use Lochmueller\LanguageDetection\Event\DetectUserLanguages;
 use Lochmueller\LanguageDetection\Service\IpLocation;
@@ -15,11 +15,11 @@ use TYPO3\CMS\Core\Http\ServerRequest;
 use TYPO3\CMS\Core\Site\Entity\Site;
 
 /**
- * @covers \Lochmueller\LanguageDetection\Detect\IpLanguage
+ * @covers \Lochmueller\LanguageDetection\Detect\GeoPluginDetect
  *
  * @internal
  */
-class IpLanguageTest extends AbstractTest
+class GeoPluginDetectTest extends AbstractTest
 {
     /**
      * @covers \Lochmueller\LanguageDetection\Domain\Collection\LocaleCollection
@@ -47,7 +47,7 @@ class IpLanguageTest extends AbstractTest
         $event = new DetectUserLanguages($site, $serverRequest);
         $event->setUserLanguages(LocaleCollection::fromArray(['default']));
 
-        $ipLanguage = new IpLanguage($ipLocation, new LanguageService(), new SiteConfigurationService());
+        $ipLanguage = new GeoPluginDetect($ipLocation, new LanguageService(), new SiteConfigurationService());
         $ipLanguage($event);
 
         self::assertSame($result, array_map(fn ($locale): string => (string)$locale, $event->getUserLanguages()->toArray()));

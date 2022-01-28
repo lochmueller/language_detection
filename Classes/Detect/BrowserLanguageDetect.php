@@ -8,7 +8,7 @@ use Lochmueller\LanguageDetection\Domain\Collection\LocaleCollection;
 use Lochmueller\LanguageDetection\Event\DetectUserLanguages;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
-class BrowserLanguage
+class BrowserLanguageDetect
 {
     public function __invoke(DetectUserLanguages $event): void
     {

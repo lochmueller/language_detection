@@ -69,13 +69,13 @@ services:
         after: 'defaultNegotiation'
         event: Lochmueller\LanguageDetection\Event\NegotiateSiteLanguage
 
-  Lochmueller\LanguageDetection\Detect\BrowserLanguage:
+  Lochmueller\LanguageDetection\Detect\BrowserLanguageDetect:
     tags:
       - name: event.listener
         identifier: 'browserLanguage'
         event: Lochmueller\LanguageDetection\Event\DetectUserLanguages
 
-  Lochmueller\LanguageDetection\Detect\IpLanguage:
+  Lochmueller\LanguageDetection\Detect\GeoPluginDetect:
     tags:
       - name: event.listener
         identifier: 'ipLanguage'
