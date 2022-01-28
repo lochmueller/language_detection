@@ -20,7 +20,7 @@ use TYPO3\CMS\Core\Site\Entity\Site;
 class LanguageDetectionHandlerTest extends AbstractHandlerTest
 {
     /**
-     * @covers \Lochmueller\LanguageDetection\Check\BotListener
+     * @covers \Lochmueller\LanguageDetection\Check\BotAgentCheck
      * @covers \Lochmueller\LanguageDetection\Event\CheckLanguageDetection
      * @covers \Lochmueller\LanguageDetection\Handler\AbstractHandler
      * @covers \Lochmueller\LanguageDetection\Handler\Exception\DisableLanguageDetectionException
@@ -41,7 +41,7 @@ class LanguageDetectionHandlerTest extends AbstractHandlerTest
     }
 
     /**
-     * @covers \Lochmueller\LanguageDetection\Check\BotListener
+     * @covers \Lochmueller\LanguageDetection\Check\BotAgentCheck
      * @covers \Lochmueller\LanguageDetection\Detect\BrowserLanguage
      * @covers \Lochmueller\LanguageDetection\Domain\Collection\LocaleCollection
      * @covers \Lochmueller\LanguageDetection\Event\CheckLanguageDetection
@@ -64,7 +64,7 @@ class LanguageDetectionHandlerTest extends AbstractHandlerTest
     }
 
     /**
-     * @covers \Lochmueller\LanguageDetection\Check\BotListener
+     * @covers \Lochmueller\LanguageDetection\Check\BotAgentCheck
      * @covers \Lochmueller\LanguageDetection\Detect\BrowserLanguage
      * @covers \Lochmueller\LanguageDetection\Domain\Collection\LocaleCollection
      * @covers \Lochmueller\LanguageDetection\Domain\Model\Dto\LocaleValueObject
@@ -90,7 +90,7 @@ class LanguageDetectionHandlerTest extends AbstractHandlerTest
     }
 
     /**
-     * @covers \Lochmueller\LanguageDetection\Check\BotListener
+     * @covers \Lochmueller\LanguageDetection\Check\BotAgentCheck
      * @covers \Lochmueller\LanguageDetection\Detect\BrowserLanguage
      * @covers \Lochmueller\LanguageDetection\Domain\Collection\LocaleCollection
      * @covers \Lochmueller\LanguageDetection\Domain\Model\Dto\LocaleValueObject
@@ -136,7 +136,7 @@ class LanguageDetectionHandlerTest extends AbstractHandlerTest
     }
 
     /**
-     * @covers \Lochmueller\LanguageDetection\Check\BotListener
+     * @covers \Lochmueller\LanguageDetection\Check\BotAgentCheck
      * @covers \Lochmueller\LanguageDetection\Detect\BrowserLanguage
      * @covers \Lochmueller\LanguageDetection\Domain\Collection\LocaleCollection
      * @covers \Lochmueller\LanguageDetection\Domain\Model\Dto\LocaleValueObject

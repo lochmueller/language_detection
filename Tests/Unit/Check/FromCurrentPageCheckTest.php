@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Lochmueller\LanguageDetection\Tests\Unit\Check;
 
-use Lochmueller\LanguageDetection\Check\FromCurrentPageListener;
+use Lochmueller\LanguageDetection\Check\FromCurrentPageCheck;
 use Lochmueller\LanguageDetection\Event\CheckLanguageDetection;
 use Lochmueller\LanguageDetection\Tests\Unit\AbstractTest;
 use TYPO3\CMS\Core\Http\ServerRequest;
@@ -15,10 +15,10 @@ use TYPO3\CMS\Core\Site\Entity\SiteInterface;
  * @internal
  * @coversNothing
  */
-class FromCurrentPageListenerTest extends AbstractTest
+class FromCurrentPageCheckTest extends AbstractTest
 {
     /**
-     * @covers       \Lochmueller\LanguageDetection\Check\FromCurrentPageListener
+     * @covers       \Lochmueller\LanguageDetection\Check\FromCurrentPageCheck
      * @covers       \Lochmueller\LanguageDetection\Event\CheckLanguageDetection
      * @dataProvider data
      */
@@ -30,8 +30,8 @@ class FromCurrentPageListenerTest extends AbstractTest
         $request = new ServerRequest(null, null, 'php://input', [], ['HTTP_REFERER' => $referrer]);
         $event = new CheckLanguageDetection($site, $request);
 
-        $botListener = new FromCurrentPageListener();
-        $botListener($event);
+        $fromCurrentPageCheck = new FromCurrentPageCheck();
+        $fromCurrentPageCheck($event);
 
         self::assertEquals($isStillEnabled, $event->isLanguageDetectionEnable());
     }

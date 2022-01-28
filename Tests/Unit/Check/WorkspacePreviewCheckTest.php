@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Lochmueller\LanguageDetection\Tests\Unit\Check;
 
 use GuzzleHttp\Psr7\Query;
-use Lochmueller\LanguageDetection\Check\WorkspacePreviewListener;
+use Lochmueller\LanguageDetection\Check\WorkspacePreviewCheck;
 use Lochmueller\LanguageDetection\Event\CheckLanguageDetection;
 use Lochmueller\LanguageDetection\Tests\Unit\AbstractTest;
 use TYPO3\CMS\Core\Http\ServerRequest;
@@ -15,10 +15,10 @@ use TYPO3\CMS\Core\Site\Entity\SiteInterface;
  * @internal
  * @coversNothing
  */
-class WorkspacePreviewListenerTest extends AbstractTest
+class WorkspacePreviewCheckTest extends AbstractTest
 {
     /**
-     * @covers \Lochmueller\LanguageDetection\Check\WorkspacePreviewListener
+     * @covers \Lochmueller\LanguageDetection\Check\WorkspacePreviewCheck
      * @covers \Lochmueller\LanguageDetection\Event\CheckLanguageDetection
      * @dataProvider data
      *
@@ -33,8 +33,8 @@ class WorkspacePreviewListenerTest extends AbstractTest
 
         $event = new CheckLanguageDetection($site, $request);
 
-        $backendUserListener = new WorkspacePreviewListener();
-        $backendUserListener($event);
+        $workspacePreviewCheck = new WorkspacePreviewCheck();
+        $workspacePreviewCheck($event);
 
         self::assertEquals($result, $event->isLanguageDetectionEnable());
     }

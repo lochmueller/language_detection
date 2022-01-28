@@ -45,8 +45,8 @@ class DefaultResponseTest extends AbstractTest
             $siteLanguage
         );
 
-        $backendUserListener = new DefaultResponse(new SiteConfigurationService());
-        $backendUserListener($event);
+        $defaultResponse = new DefaultResponse(new SiteConfigurationService());
+        $defaultResponse($event);
 
         self::assertNotNull($event->getResponse());
     }
@@ -77,8 +77,8 @@ class DefaultResponseTest extends AbstractTest
             $siteLanguage
         );
 
-        $backendUserListener = new DefaultResponse(new SiteConfigurationService());
-        $backendUserListener($event);
+        $defaultResponse = new DefaultResponse(new SiteConfigurationService());
+        $defaultResponse($event);
 
         self::assertNotNull($event->getResponse());
         self::assertEquals(307, $event->getResponse()->getStatusCode());
@@ -110,8 +110,8 @@ class DefaultResponseTest extends AbstractTest
             $siteLanguage
         );
 
-        $backendUserListener = new DefaultResponse(new SiteConfigurationService());
-        $backendUserListener($event);
+        $defaultResponse = new DefaultResponse(new SiteConfigurationService());
+        $defaultResponse($event);
 
         self::assertNotNull($event->getResponse());
         self::assertEquals(307, $event->getResponse()->getStatusCode());
@@ -144,8 +144,8 @@ class DefaultResponseTest extends AbstractTest
             $siteLanguage
         );
 
-        $backendUserListener = new DefaultResponse(new SiteConfigurationService());
-        $backendUserListener($event);
+        $defaultResponse = new DefaultResponse(new SiteConfigurationService());
+        $defaultResponse($event);
 
         self::assertNull($event->getResponse());
     }

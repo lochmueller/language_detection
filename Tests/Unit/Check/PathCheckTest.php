@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Lochmueller\LanguageDetection\Tests\Unit\Check;
 
-use Lochmueller\LanguageDetection\Check\PathListener;
+use Lochmueller\LanguageDetection\Check\PathCheck;
 use Lochmueller\LanguageDetection\Event\CheckLanguageDetection;
 use Lochmueller\LanguageDetection\Service\SiteConfigurationService;
 use Lochmueller\LanguageDetection\Tests\Unit\AbstractTest;
@@ -15,10 +15,10 @@ use TYPO3\CMS\Core\Site\Entity\Site;
  * @internal
  * @coversNothing
  */
-class PathListenerTest extends AbstractTest
+class PathCheckTest extends AbstractTest
 {
     /**
-     * @covers \Lochmueller\LanguageDetection\Check\PathListener
+     * @covers \Lochmueller\LanguageDetection\Check\PathCheck
      * @covers \Lochmueller\LanguageDetection\Domain\Model\Dto\SiteConfiguration
      * @covers \Lochmueller\LanguageDetection\Event\CheckLanguageDetection
      * @covers \Lochmueller\LanguageDetection\Service\SiteConfigurationService
@@ -34,8 +34,8 @@ class PathListenerTest extends AbstractTest
         $request = new ServerRequest($uri, null, 'php://input', []);
         $event = new CheckLanguageDetection($site, $request);
 
-        $botListener = new PathListener(new SiteConfigurationService());
-        $botListener($event);
+        $pathCheck = new PathCheck(new SiteConfigurationService());
+        $pathCheck($event);
 
         self::assertEquals($result, $event->isLanguageDetectionEnable());
     }

@@ -18,7 +18,7 @@ use TYPO3\CMS\Core\Site\Entity\Site;
 class JsonDetectionHandlerTest extends AbstractHandlerTest
 {
     /**
-     * @covers \Lochmueller\LanguageDetection\Check\BotListener
+     * @covers \Lochmueller\LanguageDetection\Check\BotAgentCheck
      * @covers \Lochmueller\LanguageDetection\Detect\BrowserLanguage
      * @covers \Lochmueller\LanguageDetection\Event\CheckLanguageDetection
      * @covers \Lochmueller\LanguageDetection\Event\DetectUserLanguages
@@ -38,7 +38,7 @@ class JsonDetectionHandlerTest extends AbstractHandlerTest
     }
 
     /**
-     * @covers \Lochmueller\LanguageDetection\Check\BotListener
+     * @covers \Lochmueller\LanguageDetection\Check\BotAgentCheck
      * @covers \Lochmueller\LanguageDetection\Detect\BrowserLanguage
      * @covers \Lochmueller\LanguageDetection\Domain\Collection\LocaleCollection
      * @covers \Lochmueller\LanguageDetection\Event\CheckLanguageDetection
@@ -61,7 +61,7 @@ class JsonDetectionHandlerTest extends AbstractHandlerTest
     }
 
     /**
-     * @covers \Lochmueller\LanguageDetection\Check\BotListener
+     * @covers \Lochmueller\LanguageDetection\Check\BotAgentCheck
      * @covers \Lochmueller\LanguageDetection\Detect\BrowserLanguage
      * @covers \Lochmueller\LanguageDetection\Domain\Collection\LocaleCollection
      * @covers \Lochmueller\LanguageDetection\Domain\Model\Dto\LocaleValueObject
@@ -114,7 +114,7 @@ class JsonDetectionHandlerTest extends AbstractHandlerTest
     }
 
     /**
-     * @covers \Lochmueller\LanguageDetection\Check\BotListener
+     * @covers \Lochmueller\LanguageDetection\Check\BotAgentCheck
      * @covers \Lochmueller\LanguageDetection\Detect\BrowserLanguage
      * @covers \Lochmueller\LanguageDetection\Domain\Collection\LocaleCollection
      * @covers \Lochmueller\LanguageDetection\Domain\Model\Dto\LocaleValueObject

@@ -39,8 +39,8 @@ class FallbackNegotiationTest extends AbstractTest
         $request = new ServerRequest(null, null, 'php://input', []);
         $event = new NegotiateSiteLanguage($site, $request, LocaleCollection::fromArray([]));
 
-        $botListener = new FallbackNegotiation(new SiteConfigurationService());
-        $botListener($event);
+        $fallbackNegotiation = new FallbackNegotiation(new SiteConfigurationService());
+        $fallbackNegotiation($event);
 
         self::assertNull($event->getSelectedLanguage());
     }
@@ -66,8 +66,8 @@ class FallbackNegotiationTest extends AbstractTest
         $request = new ServerRequest(null, null, 'php://input', []);
         $event = new NegotiateSiteLanguage($site, $request, LocaleCollection::fromArray([]));
 
-        $botListener = new FallbackNegotiation(new SiteConfigurationService());
-        $botListener($event);
+        $fallbackNegotiation = new FallbackNegotiation(new SiteConfigurationService());
+        $fallbackNegotiation($event);
 
         self::assertEquals($siteLanguage2, $event->getSelectedLanguage());
     }
@@ -93,8 +93,8 @@ class FallbackNegotiationTest extends AbstractTest
         $request = new ServerRequest(null, null, 'php://input', []);
         $event = new NegotiateSiteLanguage($site, $request, LocaleCollection::fromArray([]));
 
-        $botListener = new FallbackNegotiation(new SiteConfigurationService());
-        $botListener($event);
+        $fallbackNegotiation = new FallbackNegotiation(new SiteConfigurationService());
+        $fallbackNegotiation($event);
 
         self::assertNull($event->getSelectedLanguage());
     }
@@ -113,8 +113,8 @@ class FallbackNegotiationTest extends AbstractTest
         $request = new ServerRequest(null, null, 'php://input', []);
         $event = new NegotiateSiteLanguage($site, $request, LocaleCollection::fromArray([]));
 
-        $botListener = new FallbackNegotiation(new SiteConfigurationService());
-        $botListener($event);
+        $fallbackNegotiation = new FallbackNegotiation(new SiteConfigurationService());
+        $fallbackNegotiation($event);
 
         self::assertNull($event->getSelectedLanguage());
     }

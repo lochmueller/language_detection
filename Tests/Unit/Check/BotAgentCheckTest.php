@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Lochmueller\LanguageDetection\Tests\Unit\Check;
 
-use Lochmueller\LanguageDetection\Check\BotListener;
+use Lochmueller\LanguageDetection\Check\BotAgentCheck;
 use Lochmueller\LanguageDetection\Event\CheckLanguageDetection;
 use Lochmueller\LanguageDetection\Tests\Unit\AbstractTest;
 use TYPO3\CMS\Core\Http\ServerRequest;
@@ -14,10 +14,10 @@ use TYPO3\CMS\Core\Site\Entity\SiteInterface;
  * @internal
  * @coversNothing
  */
-class BotListenerTest extends AbstractTest
+class BotAgentCheckTest extends AbstractTest
 {
     /**
-     * @covers \Lochmueller\LanguageDetection\Check\BotListener
+     * @covers \Lochmueller\LanguageDetection\Check\BotAgentCheck
      * @covers \Lochmueller\LanguageDetection\Event\CheckLanguageDetection
      * @dataProvider data
      */
@@ -28,14 +28,14 @@ class BotListenerTest extends AbstractTest
         $request = new ServerRequest(null, null, 'php://input', ['user-agent' => $userAgent]);
         $event = new CheckLanguageDetection($site, $request);
 
-        $botListener = new BotListener();
-        $botListener($event);
+        $botAgentCheck = new BotAgentCheck();
+        $botAgentCheck($event);
 
         self::assertEquals($result, $event->isLanguageDetectionEnable());
     }
 
     /**
-     * @covers \Lochmueller\LanguageDetection\Check\BotListener
+     * @covers \Lochmueller\LanguageDetection\Check\BotAgentCheck
      * @covers \Lochmueller\LanguageDetection\Event\CheckLanguageDetection
      */
     public function testWithoutUserAgent(): void
@@ -45,8 +45,8 @@ class BotListenerTest extends AbstractTest
         $request = new ServerRequest();
         $event = new CheckLanguageDetection($site, $request);
 
-        $botListener = new BotListener();
-        $botListener($event);
+        $botAgentCheck = new BotAgentCheck();
+        $botAgentCheck($event);
 
         self::assertTrue($event->isLanguageDetectionEnable());
     }

@@ -6,7 +6,7 @@ namespace Lochmueller\LanguageDetection\Check;
 
 use Lochmueller\LanguageDetection\Event\CheckLanguageDetection;
 
-class WorkspacePreviewListener
+class WorkspacePreviewCheck
 {
     public function __invoke(CheckLanguageDetection $event): void
     {

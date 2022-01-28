@@ -7,7 +7,7 @@ namespace Lochmueller\LanguageDetection\Check;
 use Lochmueller\LanguageDetection\Event\CheckLanguageDetection;
 use Lochmueller\LanguageDetection\Service\SiteConfigurationService;
 
-class EnableListener
+class PathCheck
 {
     protected SiteConfigurationService $siteConfigurationService;
 
@@ -18,7 +18,11 @@ class EnableListener
 
     public function __invoke(CheckLanguageDetection $event): void
     {
-        if (!$this->siteConfigurationService->getConfiguration($event->getSite())->isEnableLanguageDetection()) {
+        if ($this->siteConfigurationService->getConfiguration($event->getSite())->isAllowAllPaths()) {
+            return;
+        }
+
+        if ('/' !== $event->getRequest()->getUri()->getPath()) {
             $event->disableLanguageDetection();
         }
     }

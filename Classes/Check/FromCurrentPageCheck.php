@@ -6,7 +6,7 @@ namespace Lochmueller\LanguageDetection\Check;
 
 use Lochmueller\LanguageDetection\Event\CheckLanguageDetection;
 
-class FromCurrentPageListener
+class FromCurrentPageCheck
 {
     public function __invoke(CheckLanguageDetection $event): void
     {

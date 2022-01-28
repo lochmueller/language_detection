@@ -7,49 +7,49 @@ services:
   Lochmueller\LanguageDetection\:
     resource: '../Classes/*'
 
-  Lochmueller\LanguageDetection\Check\EnableListener:
+  Lochmueller\LanguageDetection\Check\EnableCheck:
     tags:
       - name: event.listener
         after: 'languageDetectionSite'
         identifier: 'languageDetectionEnable'
         event: Lochmueller\LanguageDetection\Event\CheckLanguageDetection
 
-  Lochmueller\LanguageDetection\Check\BotListener:
+  Lochmueller\LanguageDetection\Check\BotAgentCheck:
     tags:
       - name: event.listener
         after: 'languageDetectionEnable'
         identifier: 'languageDetectionBot'
         event: Lochmueller\LanguageDetection\Event\CheckLanguageDetection
 
-  Lochmueller\LanguageDetection\Check\FromCurrentPageListener:
+  Lochmueller\LanguageDetection\Check\FromCurrentPageCheck:
     tags:
       - name: event.listener
         after: 'languageDetectionEnable'
         identifier: 'languageDetectionFromCurrentPage'
         event: Lochmueller\LanguageDetection\Event\CheckLanguageDetection
 
-  Lochmueller\LanguageDetection\Check\WorkspacePreviewListener:
+  Lochmueller\LanguageDetection\Check\WorkspacePreviewCheck:
     tags:
       - name: event.listener
         after: 'languageDetectionEnable'
         identifier: 'languageDetectionWorkspacePreview'
         event: Lochmueller\LanguageDetection\Event\CheckLanguageDetection
 
-  Lochmueller\LanguageDetection\Check\PathListener:
+  Lochmueller\LanguageDetection\Check\PathCheck:
     tags:
       - name: event.listener
         after: 'languageDetectionEnable'
         identifier: 'languageDetectionPath'
         event: Lochmueller\LanguageDetection\Event\CheckLanguageDetection
 
-  Lochmueller\LanguageDetection\Check\BackendUserListener:
+  Lochmueller\LanguageDetection\Check\BackendUserCheck:
     tags:
       - name: event.listener
         after: 'languageDetectionEnable'
         identifier: 'languageDetectionBackendUser'
         event: Lochmueller\LanguageDetection\Event\CheckLanguageDetection
 
-  Lochmueller\LanguageDetection\Check\RequestMethodListener:
+  Lochmueller\LanguageDetection\Check\RequestMethodCheck:
     tags:
       - name: event.listener
         after: 'languageDetectionEnable'

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Lochmueller\LanguageDetection\Tests\Unit\Check;
 
-use Lochmueller\LanguageDetection\Check\BackendUserListener;
+use Lochmueller\LanguageDetection\Check\BackendUserCheck;
 use Lochmueller\LanguageDetection\Event\CheckLanguageDetection;
 use Lochmueller\LanguageDetection\Service\SiteConfigurationService;
 use Lochmueller\LanguageDetection\Tests\Unit\AbstractTest;
@@ -18,7 +18,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  * @internal
  * @coversNothing
  */
-class BackendUserListenerTest extends AbstractTest
+class BackendUserCheckTest extends AbstractTest
 {
     protected function setUp(): void
     {
@@ -27,7 +27,7 @@ class BackendUserListenerTest extends AbstractTest
     }
 
     /**
-     * @covers \Lochmueller\LanguageDetection\Check\BackendUserListener
+     * @covers \Lochmueller\LanguageDetection\Check\BackendUserCheck
      * @covers \Lochmueller\LanguageDetection\Domain\Model\Dto\SiteConfiguration
      * @covers \Lochmueller\LanguageDetection\Event\CheckLanguageDetection
      * @covers \Lochmueller\LanguageDetection\Service\SiteConfigurationService
@@ -41,14 +41,14 @@ class BackendUserListenerTest extends AbstractTest
         $request = $this->createMock(ServerRequestInterface::class);
         $event = new CheckLanguageDetection($site, $request);
 
-        $backendUserListener = new BackendUserListener(new SiteConfigurationService());
-        $backendUserListener($event);
+        $backendUserCheck = new BackendUserCheck(new SiteConfigurationService());
+        $backendUserCheck($event);
 
         self::assertTrue($event->isLanguageDetectionEnable());
     }
 
     /**
-     * @covers \Lochmueller\LanguageDetection\Check\BackendUserListener
+     * @covers \Lochmueller\LanguageDetection\Check\BackendUserCheck
      * @covers \Lochmueller\LanguageDetection\Domain\Model\Dto\SiteConfiguration
      * @covers \Lochmueller\LanguageDetection\Event\CheckLanguageDetection
      * @covers \Lochmueller\LanguageDetection\Service\SiteConfigurationService
@@ -62,14 +62,14 @@ class BackendUserListenerTest extends AbstractTest
         $request = $this->createMock(ServerRequestInterface::class);
         $event = new CheckLanguageDetection($site, $request);
 
-        $backendUserListener = new BackendUserListener(new SiteConfigurationService());
-        $backendUserListener($event);
+        $backendUserCheck = new BackendUserCheck(new SiteConfigurationService());
+        $backendUserCheck($event);
 
         self::assertTrue($event->isLanguageDetectionEnable());
     }
 
     /**
-     * @covers \Lochmueller\LanguageDetection\Check\BackendUserListener
+     * @covers \Lochmueller\LanguageDetection\Check\BackendUserCheck
      * @covers \Lochmueller\LanguageDetection\Domain\Model\Dto\SiteConfiguration
      * @covers \Lochmueller\LanguageDetection\Event\CheckLanguageDetection
      * @covers \Lochmueller\LanguageDetection\Service\SiteConfigurationService
@@ -98,8 +98,8 @@ class BackendUserListenerTest extends AbstractTest
 
         GeneralUtility::setSingletonInstance(Context::class, $context);
 
-        $backendUserListener = new BackendUserListener(new SiteConfigurationService());
-        $backendUserListener($event);
+        $backendUserCheck = new BackendUserCheck(new SiteConfigurationService());
+        $backendUserCheck($event);
 
         self::assertSame($isLoginState, $context->getAspect('backend.user')->get('isLoggedIn'));
         self::assertSame($isEnabled, $event->isLanguageDetectionEnable());

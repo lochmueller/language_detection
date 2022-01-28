@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Lochmueller\LanguageDetection\Handler;
 
-use Lochmueller\LanguageDetection\Check\EnableListener;
+use Lochmueller\LanguageDetection\Check\EnableCheck;
 use Lochmueller\LanguageDetection\Event\CheckLanguageDetection;
 use Lochmueller\LanguageDetection\Event\DetectUserLanguages;
 use Lochmueller\LanguageDetection\Event\NegotiateSiteLanguage;
@@ -31,8 +31,8 @@ class LinkLanguageHandler extends AbstractHandler implements RequestHandlerInter
         $site = $this->getSiteFromRequest($request);
 
         $check = new CheckLanguageDetection($site, $request);
-        $enableListener = new EnableListener(new SiteConfigurationService());
-        $enableListener($check);
+        $enableCheck = new EnableCheck(new SiteConfigurationService());
+        $enableCheck($check);
 
         if (!$check->isLanguageDetectionEnable()) {
             throw new DisableLanguageDetectionException();

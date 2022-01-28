@@ -9,7 +9,7 @@ use Lochmueller\LanguageDetection\Service\SiteConfigurationService;
 use TYPO3\CMS\Core\Context\Context;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
-class BackendUserListener
+class BackendUserCheck
 {
     protected SiteConfigurationService $siteConfigurationService;
 

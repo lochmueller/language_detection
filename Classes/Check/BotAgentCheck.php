@@ -7,7 +7,7 @@ namespace Lochmueller\LanguageDetection\Check;
 use Lochmueller\LanguageDetection\Event\CheckLanguageDetection;
 use Psr\Http\Message\ServerRequestInterface;
 
-class BotListener
+class BotAgentCheck
 {
     protected const BOT_PATTERN = '/bot|google|baidu|bing|msn|teoma|slurp|yandex/i';
 

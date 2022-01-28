@@ -65,14 +65,14 @@ Check if the language detection should execute by the extension. You can registe
 
 Default-Listener:
 
-| Name                     | Description                                                                                                                       |
-|--------------------------|-----------------------------------------------------------------------------------------------------------------------------------|
-| BackendUserListener      | Check if a backend user call the language detection and disable the redirect (respect "disableRedirectWithBackendSession" config) |
-| BotListener              | Check if a bot call the language detection and disable the redirect                                                               |
-| EnableListener           | Check if the Language Detection is enabled in the current Site                                                                    |
-| FromCurrentPageListener  | Check the referrer and disable the redirect if the user comes from the current site                                               |
-| PathListener             | Check if the user call "/" and disable the redirect for other paths (respect "allowAllPaths" configuration)                       |
-| WorkspacePreviewListener | Check if the page is a workspace preview and disable the redirect                                                                 |
+| Name                  | Description                                                                                                                       |
+|-----------------------|-----------------------------------------------------------------------------------------------------------------------------------|
+| BackendUserCheck      | Check if a backend user call the language detection and disable the redirect (respect "disableRedirectWithBackendSession" config) |
+| BotAgentCheck         | Check if a bot call the language detection and disable the redirect                                                               |
+| EnableCheck           | Check if the Language Detection is enabled in the current Site                                                                    |
+| FromCurrentPageCheck  | Check the referrer and disable the redirect if the user comes from the current site                                               |
+| PathCheck             | Check if the user call "/" and disable the redirect for other paths (respect "allowAllPaths" configuration)                       |
+| WorkspacePreviewCheck | Check if the page is a workspace preview and disable the redirect                                                                 |
 
 ### Event: DetectUserLanguages
 

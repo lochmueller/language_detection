@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Lochmueller\LanguageDetection\Tests\Unit\Handler;
 
-use Lochmueller\LanguageDetection\Check\BotListener;
+use Lochmueller\LanguageDetection\Check\BotAgentCheck;
 use Lochmueller\LanguageDetection\Detect\BrowserLanguage;
 use Lochmueller\LanguageDetection\Event\BuildResponse;
 use Lochmueller\LanguageDetection\Event\CheckLanguageDetection;
@@ -28,12 +28,12 @@ abstract class AbstractHandlerTest extends AbstractTest
     protected function getSmallEventListenerStack(): EventDispatcher
     {
         $container = new Container();
-        $container->set(BotListener::class, new BotListener());
+        $container->set(BotAgentCheck::class, new BotAgentCheck());
         $container->set(BrowserLanguage::class, new BrowserLanguage());
         $container->set(DefaultNegotiation::class, new DefaultNegotiation(new Normalizer()));
         $container->set(DefaultResponse::class, new DefaultResponse(new SiteConfigurationService()));
         $provider = new ListenerProvider($container);
-        $provider->addListener(CheckLanguageDetection::class, BotListener::class);
+        $provider->addListener(CheckLanguageDetection::class, BotAgentCheck::class);
         $provider->addListener(DetectUserLanguages::class, BrowserLanguage::class);
         $provider->addListener(NegotiateSiteLanguage::class, DefaultNegotiation::class);
         $provider->addListener(BuildResponse::class, DefaultResponse::class);

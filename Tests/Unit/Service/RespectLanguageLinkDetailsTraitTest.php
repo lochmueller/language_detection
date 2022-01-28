@@ -30,7 +30,7 @@ class RespectLanguageLinkDetailsTraitTest extends AbstractTest
     }
 
     /**
-     * @covers \Lochmueller\LanguageDetection\Check\EnableListener
+     * @covers \Lochmueller\LanguageDetection\Check\EnableCheck
      * @covers \Lochmueller\LanguageDetection\Detect\BrowserLanguage
      * @covers \Lochmueller\LanguageDetection\Domain\Model\Dto\SiteConfiguration
      * @covers \Lochmueller\LanguageDetection\Event\CheckLanguageDetection
@@ -62,7 +62,7 @@ class RespectLanguageLinkDetailsTraitTest extends AbstractTest
     }
 
     /**
-     * @covers \Lochmueller\LanguageDetection\Check\EnableListener
+     * @covers \Lochmueller\LanguageDetection\Check\EnableCheck
      * @covers \Lochmueller\LanguageDetection\Detect\BrowserLanguage
      * @covers \Lochmueller\LanguageDetection\Domain\Model\Dto\SiteConfiguration
      * @covers \Lochmueller\LanguageDetection\Event\CheckLanguageDetection
