@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Lochmueller\LanguageDetection\Negotiation;
 
-use Lochmueller\LanguageDetection\Event\NegotiateSiteLanguage;
+use Lochmueller\LanguageDetection\Event\NegotiateSiteLanguageEvent;
 use Lochmueller\LanguageDetection\Service\SiteConfigurationService;
 use TYPO3\CMS\Core\Site\Entity\Site;
 
@@ -17,7 +17,7 @@ class FallbackNegotiation
         $this->siteConfigurationService = $siteConfigurationService;
     }
 
-    public function __invoke(NegotiateSiteLanguage $event): void
+    public function __invoke(NegotiateSiteLanguageEvent $event): void
     {
         $site = $event->getSite();
         if (!($site instanceof Site)) {

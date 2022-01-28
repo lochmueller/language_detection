@@ -4,22 +4,20 @@ declare(strict_types=1);
 
 namespace Lochmueller\LanguageDetection\Event;
 
-use Lochmueller\LanguageDetection\Domain\Collection\LocaleCollection;
-use Lochmueller\LanguageDetection\Domain\Model\Dto\LocaleValueObject;
+use Psr\EventDispatcher\StoppableEventInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use TYPO3\CMS\Core\Site\Entity\SiteInterface;
 
-final class DetectUserLanguages extends AbstractEvent
+final class CheckLanguageDetectionEvent extends AbstractEvent implements StoppableEventInterface
 {
     private SiteInterface $site;
     private ServerRequestInterface $request;
-    private LocaleCollection $userLanguages;
+    private bool $handle = true;
 
     public function __construct(SiteInterface $site, ServerRequestInterface $request)
     {
         $this->site = $site;
         $this->request = $request;
-        $this->userLanguages = new LocaleCollection();
     }
 
     public function getSite(): SiteInterface
@@ -32,18 +30,18 @@ final class DetectUserLanguages extends AbstractEvent
         return $this->request;
     }
 
-    public function getUserLanguages(): LocaleCollection
+    public function isLanguageDetectionEnable(): bool
     {
-        return $this->userLanguages;
+        return $this->handle;
     }
 
-    public function setUserLanguages(LocaleCollection $userLanguages): void
+    public function disableLanguageDetection(): void
     {
-        $this->userLanguages = $userLanguages;
+        $this->handle = false;
     }
 
-    public function addUserLanguage(LocaleValueObject $userLanguage): void
+    public function isPropagationStopped(): bool
     {
-        $this->userLanguages->add($userLanguage);
+        return !$this->isLanguageDetectionEnable();
     }
 }

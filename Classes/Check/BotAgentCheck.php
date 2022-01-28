@@ -4,14 +4,14 @@ declare(strict_types=1);
 
 namespace Lochmueller\LanguageDetection\Check;
 
-use Lochmueller\LanguageDetection\Event\CheckLanguageDetection;
+use Lochmueller\LanguageDetection\Event\CheckLanguageDetectionEvent;
 use Psr\Http\Message\ServerRequestInterface;
 
 class BotAgentCheck
 {
     protected const BOT_PATTERN = '/bot|google|baidu|bing|msn|teoma|slurp|yandex/i';
 
-    public function __invoke(CheckLanguageDetection $event): void
+    public function __invoke(CheckLanguageDetectionEvent $event): void
     {
         if ($this->isBot($event->getRequest())) {
             $event->disableLanguageDetection();

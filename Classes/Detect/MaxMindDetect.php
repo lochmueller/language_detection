@@ -8,7 +8,7 @@ use GeoIp2\Database\Reader;
 use GeoIp2\ProviderInterface;
 use GeoIp2\WebService\Client;
 use Lochmueller\LanguageDetection\Domain\Model\Dto\LocaleValueObject;
-use Lochmueller\LanguageDetection\Event\DetectUserLanguages;
+use Lochmueller\LanguageDetection\Event\DetectUserLanguagesEvent;
 use Lochmueller\LanguageDetection\Service\LanguageService;
 use Lochmueller\LanguageDetection\Service\SiteConfigurationService;
 
@@ -23,7 +23,7 @@ class MaxMindDetect
         $this->siteConfigurationService = $siteConfigurationService;
     }
 
-    public function __invoke(DetectUserLanguages $event): void
+    public function __invoke(DetectUserLanguagesEvent $event): void
     {
         $provider = $this->getProvider();
         if (!$provider instanceof ProviderInterface) {

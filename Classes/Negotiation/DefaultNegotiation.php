@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Lochmueller\LanguageDetection\Negotiation;
 
-use Lochmueller\LanguageDetection\Event\NegotiateSiteLanguage;
+use Lochmueller\LanguageDetection\Event\NegotiateSiteLanguageEvent;
 use Lochmueller\LanguageDetection\Service\Normalizer;
 
 class DefaultNegotiation
@@ -16,7 +16,7 @@ class DefaultNegotiation
         $this->normalizer = $normalizer;
     }
 
-    public function __invoke(NegotiateSiteLanguage $event): void
+    public function __invoke(NegotiateSiteLanguageEvent $event): void
     {
         $compareWith = [
             'getLocale',

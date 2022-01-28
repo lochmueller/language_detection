@@ -6,7 +6,7 @@ namespace Lochmueller\LanguageDetection\Tests\Unit\Event;
 
 use Lochmueller\LanguageDetection\Domain\Collection\LocaleCollection;
 use Lochmueller\LanguageDetection\Domain\Model\Dto\LocaleValueObject;
-use Lochmueller\LanguageDetection\Event\DetectUserLanguages;
+use Lochmueller\LanguageDetection\Event\DetectUserLanguagesEvent;
 use Psr\Http\Message\ServerRequestInterface;
 use TYPO3\CMS\Core\Site\Entity\SiteInterface;
 
@@ -14,19 +14,19 @@ use TYPO3\CMS\Core\Site\Entity\SiteInterface;
  * @internal
  * @coversNothing
  */
-class DetectUserLanguagesTest extends AbstractEventTest
+class DetectUserLanguagesEventTest extends AbstractEventTest
 {
     /**
      * @covers \Lochmueller\LanguageDetection\Domain\Collection\LocaleCollection
      * @covers \Lochmueller\LanguageDetection\Domain\Model\Dto\LocaleValueObject
-     * @covers \Lochmueller\LanguageDetection\Event\DetectUserLanguages
+     * @covers \Lochmueller\LanguageDetection\Event\DetectUserLanguagesEvent
      */
     public function testEventGetterAndSetter(): void
     {
         $site = $this->createMock(SiteInterface::class);
         $request = $this->createMock(ServerRequestInterface::class);
 
-        $event = new DetectUserLanguages($site, $request);
+        $event = new DetectUserLanguagesEvent($site, $request);
 
         self::assertEquals($site, $event->getSite());
         self::assertEquals($request, $event->getRequest());

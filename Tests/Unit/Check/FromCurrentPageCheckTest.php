@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Lochmueller\LanguageDetection\Tests\Unit\Check;
 
 use Lochmueller\LanguageDetection\Check\FromCurrentPageCheck;
-use Lochmueller\LanguageDetection\Event\CheckLanguageDetection;
+use Lochmueller\LanguageDetection\Event\CheckLanguageDetectionEvent;
 use Lochmueller\LanguageDetection\Tests\Unit\AbstractTest;
 use TYPO3\CMS\Core\Http\ServerRequest;
 use TYPO3\CMS\Core\Http\Uri;
@@ -19,7 +19,7 @@ class FromCurrentPageCheckTest extends AbstractTest
 {
     /**
      * @covers       \Lochmueller\LanguageDetection\Check\FromCurrentPageCheck
-     * @covers       \Lochmueller\LanguageDetection\Event\CheckLanguageDetection
+     * @covers       \Lochmueller\LanguageDetection\Event\CheckLanguageDetectionEvent
      * @dataProvider data
      */
     public function testInvalidReferrer(string $referrer, string $baseUri, bool $isStillEnabled): void
@@ -28,7 +28,7 @@ class FromCurrentPageCheckTest extends AbstractTest
         $site->method('getBase')->willReturn(new Uri($baseUri));
 
         $request = new ServerRequest(null, null, 'php://input', [], ['HTTP_REFERER' => $referrer]);
-        $event = new CheckLanguageDetection($site, $request);
+        $event = new CheckLanguageDetectionEvent($site, $request);
 
         $fromCurrentPageCheck = new FromCurrentPageCheck();
         $fromCurrentPageCheck($event);

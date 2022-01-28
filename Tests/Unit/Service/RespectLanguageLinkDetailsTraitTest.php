@@ -33,9 +33,9 @@ class RespectLanguageLinkDetailsTraitTest extends AbstractTest
      * @covers \Lochmueller\LanguageDetection\Check\EnableCheck
      * @covers \Lochmueller\LanguageDetection\Detect\BrowserLanguageDetect
      * @covers \Lochmueller\LanguageDetection\Domain\Model\Dto\SiteConfiguration
-     * @covers \Lochmueller\LanguageDetection\Event\CheckLanguageDetection
-     * @covers \Lochmueller\LanguageDetection\Event\DetectUserLanguages
-     * @covers \Lochmueller\LanguageDetection\Event\NegotiateSiteLanguage
+     * @covers \Lochmueller\LanguageDetection\Event\CheckLanguageDetectionEvent
+     * @covers \Lochmueller\LanguageDetection\Event\DetectUserLanguagesEvent
+     * @covers \Lochmueller\LanguageDetection\Event\NegotiateSiteLanguageEvent
      * @covers \Lochmueller\LanguageDetection\Negotiation\DefaultNegotiation
      * @covers \Lochmueller\LanguageDetection\Service\Normalizer
      * @covers \Lochmueller\LanguageDetection\Service\RespectLanguageLinkDetailsTrait
@@ -65,9 +65,9 @@ class RespectLanguageLinkDetailsTraitTest extends AbstractTest
      * @covers \Lochmueller\LanguageDetection\Check\EnableCheck
      * @covers \Lochmueller\LanguageDetection\Detect\BrowserLanguageDetect
      * @covers \Lochmueller\LanguageDetection\Domain\Model\Dto\SiteConfiguration
-     * @covers \Lochmueller\LanguageDetection\Event\CheckLanguageDetection
-     * @covers \Lochmueller\LanguageDetection\Event\DetectUserLanguages
-     * @covers \Lochmueller\LanguageDetection\Event\NegotiateSiteLanguage
+     * @covers \Lochmueller\LanguageDetection\Event\CheckLanguageDetectionEvent
+     * @covers \Lochmueller\LanguageDetection\Event\DetectUserLanguagesEvent
+     * @covers \Lochmueller\LanguageDetection\Event\NegotiateSiteLanguageEvent
      * @covers \Lochmueller\LanguageDetection\Negotiation\DefaultNegotiation
      * @covers \Lochmueller\LanguageDetection\Service\Normalizer
      * @covers \Lochmueller\LanguageDetection\Service\RespectLanguageLinkDetailsTrait

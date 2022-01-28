@@ -10,87 +10,86 @@ services:
   Lochmueller\LanguageDetection\Check\EnableCheck:
     tags:
       - name: event.listener
-        after: 'languageDetectionSite'
-        identifier: 'languageDetectionEnable'
-        event: Lochmueller\LanguageDetection\Event\CheckLanguageDetection
+        identifier: 'languageDetectionEnableCheck'
+        event: Lochmueller\LanguageDetection\Event\CheckLanguageDetectionEvent
 
   Lochmueller\LanguageDetection\Check\BotAgentCheck:
     tags:
       - name: event.listener
-        after: 'languageDetectionEnable'
-        identifier: 'languageDetectionBot'
-        event: Lochmueller\LanguageDetection\Event\CheckLanguageDetection
+        identifier: 'languageDetectionBotAgentCheck'
+        after: 'languageDetectionEnableCheck'
+        event: Lochmueller\LanguageDetection\Event\CheckLanguageDetectionEvent
 
   Lochmueller\LanguageDetection\Check\FromCurrentPageCheck:
     tags:
       - name: event.listener
-        after: 'languageDetectionEnable'
-        identifier: 'languageDetectionFromCurrentPage'
-        event: Lochmueller\LanguageDetection\Event\CheckLanguageDetection
+        identifier: 'languageDetectionFromCurrentPageCheck'
+        after: 'languageDetectionEnableCheck'
+        event: Lochmueller\LanguageDetection\Event\CheckLanguageDetectionEvent
 
   Lochmueller\LanguageDetection\Check\WorkspacePreviewCheck:
     tags:
       - name: event.listener
-        after: 'languageDetectionEnable'
-        identifier: 'languageDetectionWorkspacePreview'
-        event: Lochmueller\LanguageDetection\Event\CheckLanguageDetection
+        identifier: 'languageDetectionWorkspacePreviewCheck'
+        after: 'languageDetectionEnableCheck'
+        event: Lochmueller\LanguageDetection\Event\CheckLanguageDetectionEvent
 
   Lochmueller\LanguageDetection\Check\PathCheck:
     tags:
       - name: event.listener
-        after: 'languageDetectionEnable'
-        identifier: 'languageDetectionPath'
-        event: Lochmueller\LanguageDetection\Event\CheckLanguageDetection
+        identifier: 'languageDetectionPathCheck'
+        after: 'languageDetectionEnableCheck'
+        event: Lochmueller\LanguageDetection\Event\CheckLanguageDetectionEvent
 
   Lochmueller\LanguageDetection\Check\BackendUserCheck:
     tags:
       - name: event.listener
-        after: 'languageDetectionEnable'
-        identifier: 'languageDetectionBackendUser'
-        event: Lochmueller\LanguageDetection\Event\CheckLanguageDetection
+        identifier: 'languageDetectionBackendUserCheck'
+        after: 'languageDetectionEnableCheck'
+        event: Lochmueller\LanguageDetection\Event\CheckLanguageDetectionEvent
 
   Lochmueller\LanguageDetection\Check\RequestMethodCheck:
     tags:
       - name: event.listener
-        after: 'languageDetectionEnable'
-        identifier: 'languageDetectionRequestMethod'
-        event: Lochmueller\LanguageDetection\Event\CheckLanguageDetection
+        identifier: 'languageDetectionRequestMethodCheck'
+        after: 'languageDetectionEnableCheck'
+        event: Lochmueller\LanguageDetection\Event\CheckLanguageDetectionEvent
 
   Lochmueller\LanguageDetection\Negotiation\DefaultNegotiation:
     tags:
       - name: event.listener
-        identifier: 'defaultNegotiation'
-        event: Lochmueller\LanguageDetection\Event\NegotiateSiteLanguage
+        identifier: 'languageDetectionDefaultNegotiation'
+        event: Lochmueller\LanguageDetection\Event\NegotiateSiteLanguageEvent
 
   Lochmueller\LanguageDetection\Negotiation\FallbackNegotiation:
     tags:
       - name: event.listener
-        identifier: 'fallbackNegotiation'
-        after: 'defaultNegotiation'
-        event: Lochmueller\LanguageDetection\Event\NegotiateSiteLanguage
+        identifier: 'languageDetectionFallbackNegotiation'
+        after: 'languageDetectionDefaultNegotiation'
+        event: Lochmueller\LanguageDetection\Event\NegotiateSiteLanguageEvent
 
   Lochmueller\LanguageDetection\Detect\BrowserLanguageDetect:
     tags:
       - name: event.listener
-        identifier: 'browserLanguage'
-        event: Lochmueller\LanguageDetection\Event\DetectUserLanguages
+        identifier: 'languageDetectionBrowserLanguageDetect'
+        event: Lochmueller\LanguageDetection\Event\DetectUserLanguagesEvent
 
   Lochmueller\LanguageDetection\Detect\GeoPluginDetect:
     tags:
       - name: event.listener
-        identifier: 'ipLanguage'
-        after: 'browserLanguage'
-        event: Lochmueller\LanguageDetection\Event\DetectUserLanguages
+        identifier: 'languageDetectionGeoPluginDetect'
+        after: 'languageDetectionBrowserLanguageDetect'
+        event: Lochmueller\LanguageDetection\Event\DetectUserLanguagesEvent
 
   Lochmueller\LanguageDetection\Detect\MaxMindDetect:
     tags:
       - name: event.listener
-        identifier: 'maxMindDetect'
-        after: 'ipLanguage'
-        event: Lochmueller\LanguageDetection\Event\DetectUserLanguages
+        identifier: 'languageDetectionMaxMindDetect'
+        after: 'languageDetectionBrowserLanguageDetect'
+        event: Lochmueller\LanguageDetection\Event\DetectUserLanguagesEvent
 
   Lochmueller\LanguageDetection\Response\DefaultResponse:
     tags:
       - name: event.listener
-        identifier: 'defaultResponse'
-        event: Lochmueller\LanguageDetection\Event\BuildResponse
+        identifier: 'languageDetectionDefaultResponse'
+        event: Lochmueller\LanguageDetection\Event\BuildResponseEvent

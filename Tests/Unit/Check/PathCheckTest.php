@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Lochmueller\LanguageDetection\Tests\Unit\Check;
 
 use Lochmueller\LanguageDetection\Check\PathCheck;
-use Lochmueller\LanguageDetection\Event\CheckLanguageDetection;
+use Lochmueller\LanguageDetection\Event\CheckLanguageDetectionEvent;
 use Lochmueller\LanguageDetection\Service\SiteConfigurationService;
 use Lochmueller\LanguageDetection\Tests\Unit\AbstractTest;
 use TYPO3\CMS\Core\Http\ServerRequest;
@@ -20,7 +20,7 @@ class PathCheckTest extends AbstractTest
     /**
      * @covers \Lochmueller\LanguageDetection\Check\PathCheck
      * @covers \Lochmueller\LanguageDetection\Domain\Model\Dto\SiteConfiguration
-     * @covers \Lochmueller\LanguageDetection\Event\CheckLanguageDetection
+     * @covers \Lochmueller\LanguageDetection\Event\CheckLanguageDetectionEvent
      * @covers \Lochmueller\LanguageDetection\Service\SiteConfigurationService
      * @dataProvider data
      *
@@ -32,7 +32,7 @@ class PathCheckTest extends AbstractTest
         $site->method('getConfiguration')->willReturn($config);
 
         $request = new ServerRequest($uri, null, 'php://input', []);
-        $event = new CheckLanguageDetection($site, $request);
+        $event = new CheckLanguageDetectionEvent($site, $request);
 
         $pathCheck = new PathCheck(new SiteConfigurationService());
         $pathCheck($event);

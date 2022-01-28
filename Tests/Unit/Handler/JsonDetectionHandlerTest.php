@@ -20,8 +20,8 @@ class JsonDetectionHandlerTest extends AbstractHandlerTest
     /**
      * @covers \Lochmueller\LanguageDetection\Check\BotAgentCheck
      * @covers \Lochmueller\LanguageDetection\Detect\BrowserLanguageDetect
-     * @covers \Lochmueller\LanguageDetection\Event\CheckLanguageDetection
-     * @covers \Lochmueller\LanguageDetection\Event\DetectUserLanguages
+     * @covers \Lochmueller\LanguageDetection\Event\CheckLanguageDetectionEvent
+     * @covers \Lochmueller\LanguageDetection\Event\DetectUserLanguagesEvent
      * @covers \Lochmueller\LanguageDetection\Handler\AbstractHandler
      * @covers \Lochmueller\LanguageDetection\Handler\Exception\DisableLanguageDetectionException
      * @covers \Lochmueller\LanguageDetection\Handler\JsonDetectionHandler
@@ -41,8 +41,8 @@ class JsonDetectionHandlerTest extends AbstractHandlerTest
      * @covers \Lochmueller\LanguageDetection\Check\BotAgentCheck
      * @covers \Lochmueller\LanguageDetection\Detect\BrowserLanguageDetect
      * @covers \Lochmueller\LanguageDetection\Domain\Collection\LocaleCollection
-     * @covers \Lochmueller\LanguageDetection\Event\CheckLanguageDetection
-     * @covers \Lochmueller\LanguageDetection\Event\DetectUserLanguages
+     * @covers \Lochmueller\LanguageDetection\Event\CheckLanguageDetectionEvent
+     * @covers \Lochmueller\LanguageDetection\Event\DetectUserLanguagesEvent
      * @covers \Lochmueller\LanguageDetection\Handler\AbstractHandler
      * @covers \Lochmueller\LanguageDetection\Handler\Exception\NoUserLanguagesException
      * @covers \Lochmueller\LanguageDetection\Handler\JsonDetectionHandler
@@ -66,10 +66,10 @@ class JsonDetectionHandlerTest extends AbstractHandlerTest
      * @covers \Lochmueller\LanguageDetection\Domain\Collection\LocaleCollection
      * @covers \Lochmueller\LanguageDetection\Domain\Model\Dto\LocaleValueObject
      * @covers \Lochmueller\LanguageDetection\Domain\Model\Dto\SiteConfiguration
-     * @covers \Lochmueller\LanguageDetection\Event\BuildResponse
-     * @covers \Lochmueller\LanguageDetection\Event\CheckLanguageDetection
-     * @covers \Lochmueller\LanguageDetection\Event\DetectUserLanguages
-     * @covers \Lochmueller\LanguageDetection\Event\NegotiateSiteLanguage
+     * @covers \Lochmueller\LanguageDetection\Event\BuildResponseEvent
+     * @covers \Lochmueller\LanguageDetection\Event\CheckLanguageDetectionEvent
+     * @covers \Lochmueller\LanguageDetection\Event\DetectUserLanguagesEvent
+     * @covers \Lochmueller\LanguageDetection\Event\NegotiateSiteLanguageEvent
      * @covers \Lochmueller\LanguageDetection\Handler\AbstractHandler
      * @covers \Lochmueller\LanguageDetection\Handler\JsonDetectionHandler
      * @covers \Lochmueller\LanguageDetection\Negotiation\DefaultNegotiation
@@ -119,10 +119,10 @@ class JsonDetectionHandlerTest extends AbstractHandlerTest
      * @covers \Lochmueller\LanguageDetection\Domain\Collection\LocaleCollection
      * @covers \Lochmueller\LanguageDetection\Domain\Model\Dto\LocaleValueObject
      * @covers \Lochmueller\LanguageDetection\Domain\Model\Dto\SiteConfiguration
-     * @covers \Lochmueller\LanguageDetection\Event\BuildResponse
-     * @covers \Lochmueller\LanguageDetection\Event\CheckLanguageDetection
-     * @covers \Lochmueller\LanguageDetection\Event\DetectUserLanguages
-     * @covers \Lochmueller\LanguageDetection\Event\NegotiateSiteLanguage
+     * @covers \Lochmueller\LanguageDetection\Event\BuildResponseEvent
+     * @covers \Lochmueller\LanguageDetection\Event\CheckLanguageDetectionEvent
+     * @covers \Lochmueller\LanguageDetection\Event\DetectUserLanguagesEvent
+     * @covers \Lochmueller\LanguageDetection\Event\NegotiateSiteLanguageEvent
      * @covers \Lochmueller\LanguageDetection\Handler\AbstractHandler
      * @covers \Lochmueller\LanguageDetection\Handler\JsonDetectionHandler
      * @covers \Lochmueller\LanguageDetection\Negotiation\DefaultNegotiation

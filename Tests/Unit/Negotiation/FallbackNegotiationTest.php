@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Lochmueller\LanguageDetection\Tests\Unit\Negotiation;
 
 use Lochmueller\LanguageDetection\Domain\Collection\LocaleCollection;
-use Lochmueller\LanguageDetection\Event\NegotiateSiteLanguage;
+use Lochmueller\LanguageDetection\Event\NegotiateSiteLanguageEvent;
 use Lochmueller\LanguageDetection\Negotiation\FallbackNegotiation;
 use Lochmueller\LanguageDetection\Service\SiteConfigurationService;
 use Lochmueller\LanguageDetection\Tests\Unit\AbstractTest;
@@ -24,7 +24,7 @@ class FallbackNegotiationTest extends AbstractTest
     /**
      * @covers \Lochmueller\LanguageDetection\Domain\Collection\LocaleCollection
      * @covers \Lochmueller\LanguageDetection\Domain\Model\Dto\SiteConfiguration
-     * @covers \Lochmueller\LanguageDetection\Event\NegotiateSiteLanguage
+     * @covers \Lochmueller\LanguageDetection\Event\NegotiateSiteLanguageEvent
      * @covers \Lochmueller\LanguageDetection\Negotiation\FallbackNegotiation
      * @covers \Lochmueller\LanguageDetection\Service\SiteConfigurationService
      * @dataProvider dataInvalid
@@ -37,7 +37,7 @@ class FallbackNegotiationTest extends AbstractTest
         $site->method('getConfiguration')->willReturn($configuration);
 
         $request = new ServerRequest(null, null, 'php://input', []);
-        $event = new NegotiateSiteLanguage($site, $request, LocaleCollection::fromArray([]));
+        $event = new NegotiateSiteLanguageEvent($site, $request, LocaleCollection::fromArray([]));
 
         $fallbackNegotiation = new FallbackNegotiation(new SiteConfigurationService());
         $fallbackNegotiation($event);
@@ -48,7 +48,7 @@ class FallbackNegotiationTest extends AbstractTest
     /**
      * @covers \Lochmueller\LanguageDetection\Domain\Collection\LocaleCollection
      * @covers \Lochmueller\LanguageDetection\Domain\Model\Dto\SiteConfiguration
-     * @covers \Lochmueller\LanguageDetection\Event\NegotiateSiteLanguage
+     * @covers \Lochmueller\LanguageDetection\Event\NegotiateSiteLanguageEvent
      * @covers \Lochmueller\LanguageDetection\Negotiation\FallbackNegotiation
      * @covers \Lochmueller\LanguageDetection\Service\SiteConfigurationService
      */
@@ -64,7 +64,7 @@ class FallbackNegotiationTest extends AbstractTest
         $site->method('getLanguages')->willReturn([$siteLanguage1, $siteLanguage2, $siteLanguage3]);
 
         $request = new ServerRequest(null, null, 'php://input', []);
-        $event = new NegotiateSiteLanguage($site, $request, LocaleCollection::fromArray([]));
+        $event = new NegotiateSiteLanguageEvent($site, $request, LocaleCollection::fromArray([]));
 
         $fallbackNegotiation = new FallbackNegotiation(new SiteConfigurationService());
         $fallbackNegotiation($event);
@@ -75,7 +75,7 @@ class FallbackNegotiationTest extends AbstractTest
     /**
      * @covers \Lochmueller\LanguageDetection\Domain\Collection\LocaleCollection
      * @covers \Lochmueller\LanguageDetection\Domain\Model\Dto\SiteConfiguration
-     * @covers \Lochmueller\LanguageDetection\Event\NegotiateSiteLanguage
+     * @covers \Lochmueller\LanguageDetection\Event\NegotiateSiteLanguageEvent
      * @covers \Lochmueller\LanguageDetection\Negotiation\FallbackNegotiation
      * @covers \Lochmueller\LanguageDetection\Service\SiteConfigurationService
      */
@@ -91,7 +91,7 @@ class FallbackNegotiationTest extends AbstractTest
         $site->method('getLanguages')->willReturn([$siteLanguage1, $siteLanguage2, $siteLanguage3]);
 
         $request = new ServerRequest(null, null, 'php://input', []);
-        $event = new NegotiateSiteLanguage($site, $request, LocaleCollection::fromArray([]));
+        $event = new NegotiateSiteLanguageEvent($site, $request, LocaleCollection::fromArray([]));
 
         $fallbackNegotiation = new FallbackNegotiation(new SiteConfigurationService());
         $fallbackNegotiation($event);
@@ -102,7 +102,7 @@ class FallbackNegotiationTest extends AbstractTest
     /**
      * @covers \Lochmueller\LanguageDetection\Domain\Collection\LocaleCollection
      * @covers \Lochmueller\LanguageDetection\Domain\Model\Dto\SiteConfiguration
-     * @covers \Lochmueller\LanguageDetection\Event\NegotiateSiteLanguage
+     * @covers \Lochmueller\LanguageDetection\Event\NegotiateSiteLanguageEvent
      * @covers \Lochmueller\LanguageDetection\Negotiation\FallbackNegotiation
      * @covers \Lochmueller\LanguageDetection\Service\SiteConfigurationService
      */
@@ -111,7 +111,7 @@ class FallbackNegotiationTest extends AbstractTest
         $site = $this->createMock(NullSite::class);
 
         $request = new ServerRequest(null, null, 'php://input', []);
-        $event = new NegotiateSiteLanguage($site, $request, LocaleCollection::fromArray([]));
+        $event = new NegotiateSiteLanguageEvent($site, $request, LocaleCollection::fromArray([]));
 
         $fallbackNegotiation = new FallbackNegotiation(new SiteConfigurationService());
         $fallbackNegotiation($event);

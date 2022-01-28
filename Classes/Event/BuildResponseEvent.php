@@ -10,7 +10,7 @@ use Psr\Http\Message\ServerRequestInterface;
 use TYPO3\CMS\Core\Site\Entity\SiteInterface;
 use TYPO3\CMS\Core\Site\Entity\SiteLanguage;
 
-final class BuildResponse extends AbstractEvent implements StoppableEventInterface
+final class BuildResponseEvent extends AbstractEvent implements StoppableEventInterface
 {
     private SiteInterface $site;
     private ServerRequestInterface $request;

@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Lochmueller\LanguageDetection\Detect;
 
 use Lochmueller\LanguageDetection\Domain\Collection\LocaleCollection;
-use Lochmueller\LanguageDetection\Event\DetectUserLanguages;
+use Lochmueller\LanguageDetection\Event\DetectUserLanguagesEvent;
 use Lochmueller\LanguageDetection\Service\IpLocation;
 use Lochmueller\LanguageDetection\Service\LanguageService;
 use Lochmueller\LanguageDetection\Service\SiteConfigurationService;
@@ -30,7 +30,7 @@ class GeoPluginDetect
         $this->siteConfigurationService = $siteConfigurationService;
     }
 
-    public function __invoke(DetectUserLanguages $event): void
+    public function __invoke(DetectUserLanguagesEvent $event): void
     {
         $addIp = $this->siteConfigurationService->getConfiguration($event->getSite())->getAddIpLocationToBrowserLanguage();
         if (!\in_array($addIp, ['before', 'after', 'replace'])) {

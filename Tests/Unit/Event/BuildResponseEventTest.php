@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Lochmueller\LanguageDetection\Tests\Unit\Event;
 
-use Lochmueller\LanguageDetection\Event\BuildResponse;
+use Lochmueller\LanguageDetection\Event\BuildResponseEvent;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use TYPO3\CMS\Core\Site\Entity\SiteInterface;
@@ -14,10 +14,10 @@ use TYPO3\CMS\Core\Site\Entity\SiteLanguage;
  * @internal
  * @coversNothing
  */
-class BuildResponseTest extends AbstractEventTest
+class BuildResponseEventTest extends AbstractEventTest
 {
     /**
-     * @covers \Lochmueller\LanguageDetection\Event\BuildResponse
+     * @covers \Lochmueller\LanguageDetection\Event\BuildResponseEvent
      */
     public function testEventGetterAndSetter(): void
     {
@@ -25,7 +25,7 @@ class BuildResponseTest extends AbstractEventTest
         $request = $this->createMock(ServerRequestInterface::class);
         $language = $this->createMock(SiteLanguage::class);
 
-        $event = new BuildResponse($site, $request, $language);
+        $event = new BuildResponseEvent($site, $request, $language);
 
         self::assertNull($event->getResponse());
         self::assertEquals($site, $event->getSite());

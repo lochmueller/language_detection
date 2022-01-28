@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace Lochmueller\LanguageDetection\Handler;
 
-use Lochmueller\LanguageDetection\Event\BuildResponse;
-use Lochmueller\LanguageDetection\Event\CheckLanguageDetection;
-use Lochmueller\LanguageDetection\Event\DetectUserLanguages;
-use Lochmueller\LanguageDetection\Event\NegotiateSiteLanguage;
+use Lochmueller\LanguageDetection\Event\BuildResponseEvent;
+use Lochmueller\LanguageDetection\Event\CheckLanguageDetectionEvent;
+use Lochmueller\LanguageDetection\Event\DetectUserLanguagesEvent;
+use Lochmueller\LanguageDetection\Event\NegotiateSiteLanguageEvent;
 use Lochmueller\LanguageDetection\Handler\Exception\DisableLanguageDetectionException;
 use Lochmueller\LanguageDetection\Handler\Exception\NoResponseException;
 use Lochmueller\LanguageDetection\Handler\Exception\NoSelectedLanguageException;
@@ -26,28 +26,28 @@ class LanguageDetectionHandler extends AbstractHandler implements RequestHandler
     {
         $site = $this->getSiteFromRequest($request);
 
-        $check = new CheckLanguageDetection($site, $request);
+        $check = new CheckLanguageDetectionEvent($site, $request);
         $this->eventDispatcher->dispatch($check);
 
         if (!$check->isLanguageDetectionEnable()) {
             throw new DisableLanguageDetectionException();
         }
 
-        $detect = new DetectUserLanguages($site, $request);
+        $detect = new DetectUserLanguagesEvent($site, $request);
         $this->eventDispatcher->dispatch($detect);
 
         if ($detect->getUserLanguages()->isEmpty()) {
             throw new NoUserLanguagesException();
         }
 
-        $negotiate = new NegotiateSiteLanguage($site, $request, $detect->getUserLanguages());
+        $negotiate = new NegotiateSiteLanguageEvent($site, $request, $detect->getUserLanguages());
         $this->eventDispatcher->dispatch($negotiate);
 
         if (null === $negotiate->getSelectedLanguage()) {
             throw new NoSelectedLanguageException();
         }
 
-        $response = new BuildResponse($site, $request, $negotiate->getSelectedLanguage());
+        $response = new BuildResponseEvent($site, $request, $negotiate->getSelectedLanguage());
         $this->eventDispatcher->dispatch($response);
 
         if (null === $response->getResponse()) {

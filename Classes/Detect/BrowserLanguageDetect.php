@@ -5,12 +5,12 @@ declare(strict_types=1);
 namespace Lochmueller\LanguageDetection\Detect;
 
 use Lochmueller\LanguageDetection\Domain\Collection\LocaleCollection;
-use Lochmueller\LanguageDetection\Event\DetectUserLanguages;
+use Lochmueller\LanguageDetection\Event\DetectUserLanguagesEvent;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 class BrowserLanguageDetect
 {
-    public function __invoke(DetectUserLanguages $event): void
+    public function __invoke(DetectUserLanguagesEvent $event): void
     {
         $languages = GeneralUtility::trimExplode(
             ',',

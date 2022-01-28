@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Lochmueller\LanguageDetection\Tests\Unit\Detect;
 
 use Lochmueller\LanguageDetection\Detect\BrowserLanguageDetect;
-use Lochmueller\LanguageDetection\Event\DetectUserLanguages;
+use Lochmueller\LanguageDetection\Event\DetectUserLanguagesEvent;
 use Lochmueller\LanguageDetection\Tests\Unit\AbstractTest;
 use TYPO3\CMS\Core\Http\ServerRequest;
 use TYPO3\CMS\Core\Site\Entity\SiteInterface;
@@ -27,7 +27,7 @@ class BrowserLanguageDetectTest extends AbstractTest
      * @covers \Lochmueller\LanguageDetection\Detect\BrowserLanguageDetect
      * @covers \Lochmueller\LanguageDetection\Domain\Collection\LocaleCollection
      * @covers \Lochmueller\LanguageDetection\Domain\Model\Dto\LocaleValueObject
-     * @covers \Lochmueller\LanguageDetection\Event\DetectUserLanguages
+     * @covers \Lochmueller\LanguageDetection\Event\DetectUserLanguagesEvent
      *
      * @param string[] $result
      */
@@ -35,7 +35,7 @@ class BrowserLanguageDetectTest extends AbstractTest
     {
         $siteMock = $this->createMock(SiteInterface::class);
         $serverRequest = new ServerRequest(null, null, 'php://input', ['accept-language' => $acceptLanguage]);
-        $event = new DetectUserLanguages($siteMock, $serverRequest);
+        $event = new DetectUserLanguagesEvent($siteMock, $serverRequest);
 
         $class = new BrowserLanguageDetect();
         $class($event);

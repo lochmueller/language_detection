@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Lochmueller\LanguageDetection\Handler;
 
-use Lochmueller\LanguageDetection\Event\DetectUserLanguages;
-use Lochmueller\LanguageDetection\Event\NegotiateSiteLanguage;
+use Lochmueller\LanguageDetection\Event\DetectUserLanguagesEvent;
+use Lochmueller\LanguageDetection\Event\NegotiateSiteLanguageEvent;
 use Lochmueller\LanguageDetection\Handler\Exception\DisableLanguageDetectionException;
 use Lochmueller\LanguageDetection\Handler\Exception\NoUserLanguagesException;
 use Psr\Http\Message\ResponseInterface;
@@ -27,14 +27,14 @@ class JsonDetectionHandler extends AbstractHandler implements RequestHandlerInte
 
         $site = $this->getSiteFromRequest($request);
 
-        $detect = new DetectUserLanguages($site, $request);
+        $detect = new DetectUserLanguagesEvent($site, $request);
         $this->eventDispatcher->dispatch($detect);
 
         if ($detect->getUserLanguages()->isEmpty()) {
             throw new NoUserLanguagesException();
         }
 
-        $negotiate = new NegotiateSiteLanguage($site, $request, $detect->getUserLanguages());
+        $negotiate = new NegotiateSiteLanguageEvent($site, $request, $detect->getUserLanguages());
         $this->eventDispatcher->dispatch($negotiate);
 
         if (null === $negotiate->getSelectedLanguage()) {

@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Lochmueller\LanguageDetection\Tests\Unit\Check;
 
 use Lochmueller\LanguageDetection\Check\BackendUserCheck;
-use Lochmueller\LanguageDetection\Event\CheckLanguageDetection;
+use Lochmueller\LanguageDetection\Event\CheckLanguageDetectionEvent;
 use Lochmueller\LanguageDetection\Service\SiteConfigurationService;
 use Lochmueller\LanguageDetection\Tests\Unit\AbstractTest;
 use Psr\Http\Message\ServerRequestInterface;
@@ -29,7 +29,7 @@ class BackendUserCheckTest extends AbstractTest
     /**
      * @covers \Lochmueller\LanguageDetection\Check\BackendUserCheck
      * @covers \Lochmueller\LanguageDetection\Domain\Model\Dto\SiteConfiguration
-     * @covers \Lochmueller\LanguageDetection\Event\CheckLanguageDetection
+     * @covers \Lochmueller\LanguageDetection\Event\CheckLanguageDetectionEvent
      * @covers \Lochmueller\LanguageDetection\Service\SiteConfigurationService
      */
     public function testWithoutDisableInSite(): void
@@ -39,7 +39,7 @@ class BackendUserCheckTest extends AbstractTest
             ->willReturn(['disableRedirectWithBackendSession' => false])
         ;
         $request = $this->createMock(ServerRequestInterface::class);
-        $event = new CheckLanguageDetection($site, $request);
+        $event = new CheckLanguageDetectionEvent($site, $request);
 
         $backendUserCheck = new BackendUserCheck(new SiteConfigurationService());
         $backendUserCheck($event);
@@ -50,7 +50,7 @@ class BackendUserCheckTest extends AbstractTest
     /**
      * @covers \Lochmueller\LanguageDetection\Check\BackendUserCheck
      * @covers \Lochmueller\LanguageDetection\Domain\Model\Dto\SiteConfiguration
-     * @covers \Lochmueller\LanguageDetection\Event\CheckLanguageDetection
+     * @covers \Lochmueller\LanguageDetection\Event\CheckLanguageDetectionEvent
      * @covers \Lochmueller\LanguageDetection\Service\SiteConfigurationService
      */
     public function testWithoutConfigurationInSite(): void
@@ -60,7 +60,7 @@ class BackendUserCheckTest extends AbstractTest
             ->willReturn([])
         ;
         $request = $this->createMock(ServerRequestInterface::class);
-        $event = new CheckLanguageDetection($site, $request);
+        $event = new CheckLanguageDetectionEvent($site, $request);
 
         $backendUserCheck = new BackendUserCheck(new SiteConfigurationService());
         $backendUserCheck($event);
@@ -71,7 +71,7 @@ class BackendUserCheckTest extends AbstractTest
     /**
      * @covers \Lochmueller\LanguageDetection\Check\BackendUserCheck
      * @covers \Lochmueller\LanguageDetection\Domain\Model\Dto\SiteConfiguration
-     * @covers \Lochmueller\LanguageDetection\Event\CheckLanguageDetection
+     * @covers \Lochmueller\LanguageDetection\Event\CheckLanguageDetectionEvent
      * @covers \Lochmueller\LanguageDetection\Service\SiteConfigurationService
      * @dataProvider data
      */
@@ -82,7 +82,7 @@ class BackendUserCheckTest extends AbstractTest
             ->willReturn(['disableRedirectWithBackendSession' => $disableRedirectWithBackendSession])
         ;
         $request = $this->createMock(ServerRequestInterface::class);
-        $event = new CheckLanguageDetection($site, $request);
+        $event = new CheckLanguageDetectionEvent($site, $request);
 
         $userAspect = new UserAspect();
         if ($isLoginState) {

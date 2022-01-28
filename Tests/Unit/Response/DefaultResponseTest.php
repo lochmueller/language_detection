@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Lochmueller\LanguageDetection\Tests\Unit\Response;
 
-use Lochmueller\LanguageDetection\Event\BuildResponse;
+use Lochmueller\LanguageDetection\Event\BuildResponseEvent;
 use Lochmueller\LanguageDetection\Response\DefaultResponse;
 use Lochmueller\LanguageDetection\Service\SiteConfigurationService;
 use Lochmueller\LanguageDetection\Tests\Unit\AbstractTest;
@@ -21,7 +21,7 @@ class DefaultResponseTest extends AbstractTest
 {
     /**
      * @covers \Lochmueller\LanguageDetection\Domain\Model\Dto\SiteConfiguration
-     * @covers \Lochmueller\LanguageDetection\Event\BuildResponse
+     * @covers \Lochmueller\LanguageDetection\Event\BuildResponseEvent
      * @covers \Lochmueller\LanguageDetection\Response\DefaultResponse
      * @covers \Lochmueller\LanguageDetection\Service\SiteConfigurationService
      */
@@ -39,7 +39,7 @@ class DefaultResponseTest extends AbstractTest
             'redirectHttpStatusCode' => 307,
         ]);
 
-        $event = new BuildResponse(
+        $event = new BuildResponseEvent(
             $site,
             $request,
             $siteLanguage
@@ -53,7 +53,7 @@ class DefaultResponseTest extends AbstractTest
 
     /**
      * @covers \Lochmueller\LanguageDetection\Domain\Model\Dto\SiteConfiguration
-     * @covers \Lochmueller\LanguageDetection\Event\BuildResponse
+     * @covers \Lochmueller\LanguageDetection\Event\BuildResponseEvent
      * @covers \Lochmueller\LanguageDetection\Response\DefaultResponse
      * @covers \Lochmueller\LanguageDetection\Service\SiteConfigurationService
      */
@@ -71,7 +71,7 @@ class DefaultResponseTest extends AbstractTest
             'redirectHttpStatusCode' => 0,
         ]);
 
-        $event = new BuildResponse(
+        $event = new BuildResponseEvent(
             $site,
             $request,
             $siteLanguage
@@ -86,7 +86,7 @@ class DefaultResponseTest extends AbstractTest
 
     /**
      * @covers \Lochmueller\LanguageDetection\Domain\Model\Dto\SiteConfiguration
-     * @covers \Lochmueller\LanguageDetection\Event\BuildResponse
+     * @covers \Lochmueller\LanguageDetection\Event\BuildResponseEvent
      * @covers \Lochmueller\LanguageDetection\Response\DefaultResponse
      * @covers \Lochmueller\LanguageDetection\Service\SiteConfigurationService
      */
@@ -104,7 +104,7 @@ class DefaultResponseTest extends AbstractTest
             'redirectHttpStatusCode' => 307,
         ]);
 
-        $event = new BuildResponse(
+        $event = new BuildResponseEvent(
             $site,
             $request,
             $siteLanguage
@@ -120,7 +120,7 @@ class DefaultResponseTest extends AbstractTest
 
     /**
      * @covers \Lochmueller\LanguageDetection\Domain\Model\Dto\SiteConfiguration
-     * @covers \Lochmueller\LanguageDetection\Event\BuildResponse
+     * @covers \Lochmueller\LanguageDetection\Event\BuildResponseEvent
      * @covers \Lochmueller\LanguageDetection\Response\DefaultResponse
      * @covers \Lochmueller\LanguageDetection\Service\SiteConfigurationService
      */
@@ -138,7 +138,7 @@ class DefaultResponseTest extends AbstractTest
             'redirectHttpStatusCode' => 307,
         ]);
 
-        $event = new BuildResponse(
+        $event = new BuildResponseEvent(
             $site,
             $request,
             $siteLanguage

@@ -6,7 +6,7 @@ namespace Lochmueller\LanguageDetection\Tests\Unit\Detect;
 
 use Lochmueller\LanguageDetection\Detect\GeoPluginDetect;
 use Lochmueller\LanguageDetection\Domain\Collection\LocaleCollection;
-use Lochmueller\LanguageDetection\Event\DetectUserLanguages;
+use Lochmueller\LanguageDetection\Event\DetectUserLanguagesEvent;
 use Lochmueller\LanguageDetection\Service\IpLocation;
 use Lochmueller\LanguageDetection\Service\LanguageService;
 use Lochmueller\LanguageDetection\Service\SiteConfigurationService;
@@ -25,7 +25,7 @@ class GeoPluginDetectTest extends AbstractTest
      * @covers \Lochmueller\LanguageDetection\Domain\Collection\LocaleCollection
      * @covers \Lochmueller\LanguageDetection\Domain\Model\Dto\LocaleValueObject
      * @covers \Lochmueller\LanguageDetection\Domain\Model\Dto\SiteConfiguration
-     * @covers \Lochmueller\LanguageDetection\Event\DetectUserLanguages
+     * @covers \Lochmueller\LanguageDetection\Event\DetectUserLanguagesEvent
      * @covers \Lochmueller\LanguageDetection\Service\LanguageService
      * @covers \Lochmueller\LanguageDetection\Service\SiteConfigurationService
      *
@@ -44,7 +44,7 @@ class GeoPluginDetectTest extends AbstractTest
         $site = $this->createStub(Site::class);
         $site->method('getConfiguration')->willReturn(['addIpLocationToBrowserLanguage' => $addIpLocationToBrowserLanguage]);
 
-        $event = new DetectUserLanguages($site, $serverRequest);
+        $event = new DetectUserLanguagesEvent($site, $serverRequest);
         $event->setUserLanguages(LocaleCollection::fromArray(['default']));
 
         $ipLanguage = new GeoPluginDetect($ipLocation, new LanguageService(), new SiteConfigurationService());

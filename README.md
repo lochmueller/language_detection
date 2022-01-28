@@ -59,7 +59,7 @@ Use the site configuration module to configure the language detection. Just enab
 
 There are four central PSR-14 events that control the language detection. The attached list explain the different events and the default listener. The events are ordered in the execution order.
 
-### Event: CheckLanguageDetection
+### Event: CheckLanguageDetectionEvent
 
 Check if the language detection should execute by the extension. You can register listeners for this event and call "disableLanguageDetection" on the event object to disable the language detection.
 
@@ -74,7 +74,7 @@ Default-Listener:
 | PathCheck             | Check if the user call "/" and disable the redirect for other paths (respect "allowAllPaths" configuration)                       |
 | WorkspacePreviewCheck | Check if the page is a workspace preview and disable the redirect                                                                 |
 
-### Event: DetectUserLanguages
+### Event: DetectUserLanguagesEvent
 
 This event collect user information to get the user languages. You can register your own detections and manipulate the data via "getUserLanguages" and "setUserLanguages".
 
@@ -88,7 +88,7 @@ Default-Listener:
 
 _Please keep data privacy in mind in case of the "IpLanguage" Listener!_
 
-### Event: NegotiateSiteLanguage
+### Event: NegotiateSiteLanguageEvent
 
 This event calculates the best matching page language for the user. If you build your own listener. Please use "setSelectedLanguage" on the event. If a language is already selected the default listener will be skipped.
 
@@ -99,7 +99,7 @@ Default-Listener:
 | DefaultNegotiation  | Check the Locale and TwoLetterIso of the TYPO3 languages against the user languages of the previous event |
 | FallbackNegotiation | Handle a fallback, if there are no matches by the default negotiation                                     |
 
-### Event: BuildResponse
+### Event: BuildResponseEvent
 
 The last event build the middleware response. You can overwrite this step. You have to use "setResponse" to set the response.
 

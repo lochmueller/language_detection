@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace Lochmueller\LanguageDetection\Check;
 
-use Lochmueller\LanguageDetection\Event\CheckLanguageDetection;
+use Lochmueller\LanguageDetection\Event\CheckLanguageDetectionEvent;
 
 class FromCurrentPageCheck
 {
-    public function __invoke(CheckLanguageDetection $event): void
+    public function __invoke(CheckLanguageDetectionEvent $event): void
     {
         $serverInformation = $event->getRequest()->getServerParams();
 

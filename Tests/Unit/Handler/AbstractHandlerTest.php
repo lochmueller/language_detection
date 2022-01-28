@@ -6,10 +6,10 @@ namespace Lochmueller\LanguageDetection\Tests\Unit\Handler;
 
 use Lochmueller\LanguageDetection\Check\BotAgentCheck;
 use Lochmueller\LanguageDetection\Detect\BrowserLanguageDetect;
-use Lochmueller\LanguageDetection\Event\BuildResponse;
-use Lochmueller\LanguageDetection\Event\CheckLanguageDetection;
-use Lochmueller\LanguageDetection\Event\DetectUserLanguages;
-use Lochmueller\LanguageDetection\Event\NegotiateSiteLanguage;
+use Lochmueller\LanguageDetection\Event\BuildResponseEvent;
+use Lochmueller\LanguageDetection\Event\CheckLanguageDetectionEvent;
+use Lochmueller\LanguageDetection\Event\DetectUserLanguagesEvent;
+use Lochmueller\LanguageDetection\Event\NegotiateSiteLanguageEvent;
 use Lochmueller\LanguageDetection\Negotiation\DefaultNegotiation;
 use Lochmueller\LanguageDetection\Response\DefaultResponse;
 use Lochmueller\LanguageDetection\Service\Normalizer;
@@ -33,10 +33,10 @@ abstract class AbstractHandlerTest extends AbstractTest
         $container->set(DefaultNegotiation::class, new DefaultNegotiation(new Normalizer()));
         $container->set(DefaultResponse::class, new DefaultResponse(new SiteConfigurationService()));
         $provider = new ListenerProvider($container);
-        $provider->addListener(CheckLanguageDetection::class, BotAgentCheck::class);
-        $provider->addListener(DetectUserLanguages::class, BrowserLanguageDetect::class);
-        $provider->addListener(NegotiateSiteLanguage::class, DefaultNegotiation::class);
-        $provider->addListener(BuildResponse::class, DefaultResponse::class);
+        $provider->addListener(CheckLanguageDetectionEvent::class, BotAgentCheck::class);
+        $provider->addListener(DetectUserLanguagesEvent::class, BrowserLanguageDetect::class);
+        $provider->addListener(NegotiateSiteLanguageEvent::class, DefaultNegotiation::class);
+        $provider->addListener(BuildResponseEvent::class, DefaultResponse::class);
 
         return new EventDispatcher($provider);
     }

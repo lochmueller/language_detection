@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Lochmueller\LanguageDetection\Tests\Unit\Check;
 
 use Lochmueller\LanguageDetection\Check\EnableCheck;
-use Lochmueller\LanguageDetection\Event\CheckLanguageDetection;
+use Lochmueller\LanguageDetection\Event\CheckLanguageDetectionEvent;
 use Lochmueller\LanguageDetection\Service\SiteConfigurationService;
 use Lochmueller\LanguageDetection\Tests\Unit\AbstractTest;
 use Psr\Http\Message\ServerRequestInterface;
@@ -20,7 +20,7 @@ class EnableCheckTest extends AbstractTest
     /**
      * @covers \Lochmueller\LanguageDetection\Check\EnableCheck
      * @covers \Lochmueller\LanguageDetection\Domain\Model\Dto\SiteConfiguration
-     * @covers \Lochmueller\LanguageDetection\Event\CheckLanguageDetection
+     * @covers \Lochmueller\LanguageDetection\Event\CheckLanguageDetectionEvent
      * @covers \Lochmueller\LanguageDetection\Service\SiteConfigurationService
      * @dataProvider data
      *
@@ -31,7 +31,7 @@ class EnableCheckTest extends AbstractTest
         $site = $this->createStub(Site::class);
         $site->method('getConfiguration')->willReturn($configuration);
         $request = $this->createMock(ServerRequestInterface::class);
-        $event = new CheckLanguageDetection($site, $request);
+        $event = new CheckLanguageDetectionEvent($site, $request);
 
         $enableCheck = new EnableCheck(new SiteConfigurationService());
         $enableCheck($event);

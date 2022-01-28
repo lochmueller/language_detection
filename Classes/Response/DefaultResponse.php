@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Lochmueller\LanguageDetection\Response;
 
 use Lochmueller\LanguageDetection\Domain\Model\Dto\SiteConfiguration;
-use Lochmueller\LanguageDetection\Event\BuildResponse;
+use Lochmueller\LanguageDetection\Event\BuildResponseEvent;
 use Lochmueller\LanguageDetection\Service\SiteConfigurationService;
 use Psr\Http\Message\ServerRequestInterface;
 use TYPO3\CMS\Core\Http\RedirectResponse;
@@ -22,7 +22,7 @@ class DefaultResponse
         $this->siteConfigurationService = $siteConfigurationService;
     }
 
-    public function __invoke(BuildResponse $event): void
+    public function __invoke(BuildResponseEvent $event): void
     {
         $config = $this->siteConfigurationService->getConfiguration($event->getSite());
         $targetUri = $this->buildRedirectUri($config, $event->getRequest(), $event->getSelectedLanguage());

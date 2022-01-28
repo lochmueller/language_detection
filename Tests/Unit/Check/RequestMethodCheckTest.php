@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Lochmueller\LanguageDetection\Tests\Unit\Check;
 
 use Lochmueller\LanguageDetection\Check\RequestMethodCheck;
-use Lochmueller\LanguageDetection\Event\CheckLanguageDetection;
+use Lochmueller\LanguageDetection\Event\CheckLanguageDetectionEvent;
 use Lochmueller\LanguageDetection\Tests\Unit\AbstractTest;
 use Psr\Http\Message\ServerRequestInterface;
 use TYPO3\CMS\Core\Site\Entity\Site;
@@ -18,7 +18,7 @@ class RequestMethodCheckTest extends AbstractTest
 {
     /**
      * @covers \Lochmueller\LanguageDetection\Check\RequestMethodCheck
-     * @covers \Lochmueller\LanguageDetection\Event\CheckLanguageDetection
+     * @covers \Lochmueller\LanguageDetection\Event\CheckLanguageDetectionEvent
      * @dataProvider data
      */
     public function testConfiguration(string $method, bool $result): void
@@ -26,7 +26,7 @@ class RequestMethodCheckTest extends AbstractTest
         $request = $this->createStub(ServerRequestInterface::class);
         $request->method('getMethod')->willReturn($method);
 
-        $event = new CheckLanguageDetection($this->createMock(Site::class), $request);
+        $event = new CheckLanguageDetectionEvent($this->createMock(Site::class), $request);
 
         $requestMethodCheck = new RequestMethodCheck();
         $requestMethodCheck($event);
