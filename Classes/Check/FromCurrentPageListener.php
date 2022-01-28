@@ -14,16 +14,8 @@ class FromCurrentPageListener
 
         $referer = $serverInformation['HTTP_REFERER'] ?? '';
         $baseUri = rtrim((string)$event->getSite()->getBase(), '/');
-        if ('' !== $referer && '' !== $baseUri && $this->stringBeginsWith((string)$referer, $baseUri)) {
+        if ('' !== $referer && '' !== $baseUri && str_starts_with((string)$referer, $baseUri)) {
             $event->disableLanguageDetection();
         }
-    }
-
-    /**
-     * @note Migrate to str_starts_with if PHP 7.4 support is dropped
-     */
-    protected function stringBeginsWith(string $haystack, string $needle): bool
-    {
-        return '' !== $needle && 0 === strpos($haystack, $needle);
     }
 }
