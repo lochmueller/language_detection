@@ -31,11 +31,11 @@
 1. [Why?](#why)
 2. [Installation](#installation)
 3. [Configuration](#configuration)
-4. [Structure](#structure)
-   1. [Event: CheckLanguageDetection](#event-checklanguagedetection)
-   2. [Event: DetectUserLanguages](#event-detectuserlanguages)
-   3. [Event: NegotiateSiteLanguage](#event-negotiatesitelanguage)
-   4. [Event: BuildResponse](#event-buildresponse)
+4. [Event Structure](#event-structure)
+   1. [CheckLanguageDetectionEvent](#checklanguagedetectionevent)
+   2. [DetectUserLanguagesEvent](#detectuserlanguagesevent)
+   3. [NegotiateSiteLanguageEvent](#negotiatesitelanguageevent)
+   4. [BuildResponseEvent](#buildresponseevent)
 5. [Troubleshooting](#troubleshooting)
 6. [Dev](#dev)
 7. [Contribution](#contribution)
@@ -55,11 +55,11 @@ Use the site configuration module to configure the language detection. Just enab
 
 ![Configuration](https://raw.githubusercontent.com/lochmueller/language_detection/master/Resources/Public/Configuration.png)
 
-## Structure
+## Event Structure
 
 There are four central PSR-14 events that control the language detection. The attached list explain the different events and the default listener. The events are ordered in the execution order.
 
-### Event: CheckLanguageDetectionEvent
+### CheckLanguageDetectionEvent
 
 Check if the language detection should execute by the extension. You can register listeners for this event and call "disableLanguageDetection" on the event object to disable the language detection.
 
@@ -74,7 +74,7 @@ Default-Listener:
 | PathCheck             | Check if the user call "/" and disable the redirect for other paths (respect "allowAllPaths" configuration)                       |
 | WorkspacePreviewCheck | Check if the page is a workspace preview and disable the redirect                                                                 |
 
-### Event: DetectUserLanguagesEvent
+### DetectUserLanguagesEvent
 
 This event collect user information to get the user languages. You can register your own detections and manipulate the data via "getUserLanguages" and "setUserLanguages".
 
@@ -88,7 +88,7 @@ Default-Listener:
 
 _Please keep data privacy in mind in case of the "IpLanguage" Listener!_
 
-### Event: NegotiateSiteLanguageEvent
+### NegotiateSiteLanguageEvent
 
 This event calculates the best matching page language for the user. If you build your own listener. Please use "setSelectedLanguage" on the event. If a language is already selected the default listener will be skipped.
 
@@ -99,7 +99,7 @@ Default-Listener:
 | DefaultNegotiation  | Check the Locale and TwoLetterIso of the TYPO3 languages against the user languages of the previous event |
 | FallbackNegotiation | Handle a fallback, if there are no matches by the default negotiation                                     |
 
-### Event: BuildResponseEvent
+### BuildResponseEvent
 
 The last event build the middleware response. You can overwrite this step. You have to use "setResponse" to set the response.
 
@@ -107,7 +107,7 @@ Default-Listener:
 
 | Name            | Description                                                               |
 |-----------------|---------------------------------------------------------------------------|
-| DefaultResponse | Build the repsonse object and respect the "redirectHttpStatusCode" config |
+| DefaultResponse | Build the response object and respect the "redirectHttpStatusCode" config |
 
 
 ## Troubleshooting
@@ -118,7 +118,7 @@ Do you check in incognito mode? The browser will not send all languages in incog
 
 > Why the redirect not work on subpages?
 
-The middleware is early in the middleware stack. There is no concept of links and translations (or page UID). Furthermore it is recommended not redirect on sub pages. A user that call a subpage first bookmark the page or search in a search egine. In both cases the use get already the right languages. I suggest hreflang tags so search engines get the right language of the content https://developers.google.com/search/docs/advanced/crawling/localized-versions 
+The middleware is early in the middleware stack. There is no concept of links and translations (or even page UID). Furthermore, it is recommended not redirect on subpages. A user that call a subpage first bookmark the page or search in a search engine. In both cases the user already get the right language. I suggest hreflang tags so search engines get the right language of the content https://developers.google.com/search/docs/advanced/crawling/localized-versions 
 
 
 ## Dev

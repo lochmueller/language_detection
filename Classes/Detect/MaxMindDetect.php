@@ -30,7 +30,11 @@ class MaxMindDetect
             return;
         }
 
-        $result = $provider->country($event->getRequest()->getServerParams()['REMOTE_ADDR'] ?? '');
+        try {
+            $result = $provider->country($event->getRequest()->getServerParams()['REMOTE_ADDR'] ?? '');
+        } catch (\Exception $exception) {
+            return;
+        }
         $locale = $this->languageService->getLanguageByCountry($result->country->isoCode) . '_' . $result->country->isoCode;
 
         $event->addUserLanguage(new LocaleValueObject($locale));
@@ -46,7 +50,8 @@ class MaxMindDetect
 
         //$reader = new Reader('/usr/local/share/GeoIP/GeoIP2-City.mmdb');
 
-        //$client = new Client(42, 'abcdef123456');
+        // $client = new Client(42, 'abcdef123456');
+
         return null;
     }
 }

@@ -1,6 +1,8 @@
 <?php
 
 declare(strict_types=1);
+
+use Lochmueller\LanguageDetection\Service\LocaleCollectionSortService;
 use Lochmueller\LanguageDetection\Service\TcaLanguageSelection;
 use TYPO3\CMS\Core\Information\Typo3Version;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -22,9 +24,9 @@ $GLOBALS['SiteConfiguration']['site']['columns']['addIpLocationToBrowserLanguage
         'renderType' => 'selectSingle',
         'items' => [
             ['No', ''],
-            ['Before', 'before'],
-            ['After', 'after'],
-            ['Replace', 'replace'],
+            ['Before', LocaleCollectionSortService::SORT_BEFORE],
+            ['After', LocaleCollectionSortService::SORT_AFTER],
+            ['Replace', LocaleCollectionSortService::SORT_REPLACE],
         ],
     ],
 ];

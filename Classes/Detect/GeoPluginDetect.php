@@ -8,6 +8,7 @@ use Lochmueller\LanguageDetection\Domain\Collection\LocaleCollection;
 use Lochmueller\LanguageDetection\Event\DetectUserLanguagesEvent;
 use Lochmueller\LanguageDetection\Service\IpLocation;
 use Lochmueller\LanguageDetection\Service\LanguageService;
+use Lochmueller\LanguageDetection\Service\LocaleCollectionSortService;
 use Lochmueller\LanguageDetection\Service\SiteConfigurationService;
 use Psr\Http\Message\ServerRequestInterface;
 
@@ -22,21 +23,24 @@ class GeoPluginDetect
     protected IpLocation $ipLocation;
     protected LanguageService $languageService;
     protected SiteConfigurationService $siteConfigurationService;
+    protected LocaleCollectionSortService $localeCollectionSortService;
 
-    public function __construct(IpLocation $ipLocation, LanguageService $languageService, SiteConfigurationService $siteConfigurationService)
+    public function __construct(IpLocation $ipLocation, LanguageService $languageService, SiteConfigurationService $siteConfigurationService, LocaleCollectionSortService $localeCollectionSortService)
     {
         $this->ipLocation = $ipLocation;
         $this->languageService = $languageService;
         $this->siteConfigurationService = $siteConfigurationService;
+        $this->localeCollectionSortService = $localeCollectionSortService;
     }
 
     public function __invoke(DetectUserLanguagesEvent $event): void
     {
         $addIp = $this->siteConfigurationService->getConfiguration($event->getSite())->getAddIpLocationToBrowserLanguage();
-        if (!\in_array($addIp, ['before', 'after', 'replace'])) {
+        if (!\in_array($addIp, [LocaleCollectionSortService::SORT_BEFORE, LocaleCollectionSortService::SORT_AFTER, LocaleCollectionSortService::SORT_REPLACE])) {
             return;
         }
 
+        // @todo move to sort option
         $language = $this->getLanguage($event->getRequest());
         if (null === $language) {
             return;
@@ -44,13 +48,13 @@ class GeoPluginDetect
 
         $base = $event->getUserLanguages()->toArray();
         switch ($addIp) {
-            case 'before':
+            case LocaleCollectionSortService::SORT_BEFORE:
                 array_unshift($base, $language);
                 break;
-            case 'after':
+            case LocaleCollectionSortService::SORT_AFTER:
                 $base[] = $language;
                 break;
-            case 'replace':
+            case LocaleCollectionSortService::SORT_REPLACE:
                 $base = [$language];
                 break;
         }

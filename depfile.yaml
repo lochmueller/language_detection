@@ -49,6 +49,10 @@ layers:
     collectors:
       - type: className
         regex: PSR\\
+  - name: ExternalMaxMind
+    collectors:
+      - type: className
+        regex: GeoIp2\\
 ruleset:
   Check:
     - Service
@@ -62,6 +66,7 @@ ruleset:
     - Event
     - ExternalTypo3Core
     - ExternalPsr
+    - ExternalMaxMind
   Handler:
     - Service
     - Check
@@ -92,3 +97,6 @@ ruleset:
     - ExternalPsr
   Utility:
     - ExternalTypo3Core
+  ExternalTypo3Core: ~
+  ExternalPsr: ~
+  ExternalMaxMind: ~

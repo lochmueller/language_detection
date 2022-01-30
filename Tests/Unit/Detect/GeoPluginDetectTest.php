@@ -9,6 +9,7 @@ use Lochmueller\LanguageDetection\Domain\Collection\LocaleCollection;
 use Lochmueller\LanguageDetection\Event\DetectUserLanguagesEvent;
 use Lochmueller\LanguageDetection\Service\IpLocation;
 use Lochmueller\LanguageDetection\Service\LanguageService;
+use Lochmueller\LanguageDetection\Service\LocaleCollectionSortService;
 use Lochmueller\LanguageDetection\Service\SiteConfigurationService;
 use Lochmueller\LanguageDetection\Tests\Unit\AbstractTest;
 use TYPO3\CMS\Core\Http\ServerRequest;
@@ -47,7 +48,7 @@ class GeoPluginDetectTest extends AbstractTest
         $event = new DetectUserLanguagesEvent($site, $serverRequest);
         $event->setUserLanguages(LocaleCollection::fromArray(['default']));
 
-        $ipLanguage = new GeoPluginDetect($ipLocation, new LanguageService(), new SiteConfigurationService());
+        $ipLanguage = new GeoPluginDetect($ipLocation, new LanguageService(), new SiteConfigurationService(), new LocaleCollectionSortService());
         $ipLanguage($event);
 
         self::assertSame($result, array_map(fn ($locale): string => (string)$locale, $event->getUserLanguages()->toArray()));
