@@ -43,4 +43,17 @@ class LocaleCollection
 
         return $collection;
     }
+
+    /**
+     * @param array<LocaleValueObject> $locales
+     */
+    public static function fromArrayLocales(array $locales): self
+    {
+        $collection = new self();
+        foreach ($locales as $item) {
+            $collection->add($item);
+        }
+
+        return $collection;
+    }
 }

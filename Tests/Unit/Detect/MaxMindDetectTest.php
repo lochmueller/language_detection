@@ -8,6 +8,7 @@ use Lochmueller\LanguageDetection\Detect\MaxMindDetect;
 use Lochmueller\LanguageDetection\Domain\Collection\LocaleCollection;
 use Lochmueller\LanguageDetection\Event\DetectUserLanguagesEvent;
 use Lochmueller\LanguageDetection\Service\LanguageService;
+use Lochmueller\LanguageDetection\Service\LocaleCollectionSortService;
 use Lochmueller\LanguageDetection\Service\SiteConfigurationService;
 use Lochmueller\LanguageDetection\Tests\Unit\AbstractUnitTest;
 use TYPO3\CMS\Core\Http\ServerRequest;
@@ -38,7 +39,7 @@ class MaxMindDetectTest extends AbstractUnitTest
         $event = new DetectUserLanguagesEvent($site, $serverRequest);
         $event->setUserLanguages(LocaleCollection::fromArray(['default']));
 
-        $maxMindDetect = new MaxMindDetect(new LanguageService(), new SiteConfigurationService());
+        $maxMindDetect = new MaxMindDetect(new LanguageService(), new SiteConfigurationService(), new LocaleCollectionSortService());
         $maxMindDetect($event);
 
         self::assertCount(1, $event->getUserLanguages()->toArray());

@@ -10,17 +10,20 @@ use GeoIp2\WebService\Client;
 use Lochmueller\LanguageDetection\Domain\Model\Dto\LocaleValueObject;
 use Lochmueller\LanguageDetection\Event\DetectUserLanguagesEvent;
 use Lochmueller\LanguageDetection\Service\LanguageService;
+use Lochmueller\LanguageDetection\Service\LocaleCollectionSortService;
 use Lochmueller\LanguageDetection\Service\SiteConfigurationService;
 
 class MaxMindDetect
 {
     protected LanguageService $languageService;
     protected SiteConfigurationService $siteConfigurationService;
+    protected LocaleCollectionSortService $localeCollectionSortService;
 
-    public function __construct(LanguageService $languageService, SiteConfigurationService $siteConfigurationService)
+    public function __construct(LanguageService $languageService, SiteConfigurationService $siteConfigurationService, LocaleCollectionSortService $localeCollectionSortService)
     {
         $this->languageService = $languageService;
         $this->siteConfigurationService = $siteConfigurationService;
+        $this->localeCollectionSortService = $localeCollectionSortService;
     }
 
     public function __invoke(DetectUserLanguagesEvent $event): void
@@ -36,8 +39,7 @@ class MaxMindDetect
             return;
         }
         $locale = $this->languageService->getLanguageByCountry($result->country->isoCode) . '_' . $result->country->isoCode;
-
-        $event->addUserLanguage(new LocaleValueObject($locale));
+        $event->setUserLanguages($this->localeCollectionSortService->addLocaleByMode($event->getUserLanguages(), new LocaleValueObject($locale)));
     }
 
     protected function getProvider(): ?ProviderInterface

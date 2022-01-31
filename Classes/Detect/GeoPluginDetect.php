@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Lochmueller\LanguageDetection\Detect;
 
-use Lochmueller\LanguageDetection\Domain\Collection\LocaleCollection;
+use Lochmueller\LanguageDetection\Domain\Model\Dto\LocaleValueObject;
 use Lochmueller\LanguageDetection\Event\DetectUserLanguagesEvent;
 use Lochmueller\LanguageDetection\Service\IpLocation;
 use Lochmueller\LanguageDetection\Service\LanguageService;
@@ -40,25 +40,12 @@ class GeoPluginDetect
             return;
         }
 
-        // @todo move to sort option
         $language = $this->getLanguage($event->getRequest());
         if (null === $language) {
             return;
         }
 
-        $base = $event->getUserLanguages()->toArray();
-        switch ($addIp) {
-            case LocaleCollectionSortService::SORT_BEFORE:
-                array_unshift($base, $language);
-                break;
-            case LocaleCollectionSortService::SORT_AFTER:
-                $base[] = $language;
-                break;
-            case LocaleCollectionSortService::SORT_REPLACE:
-                $base = [$language];
-                break;
-        }
-        $event->setUserLanguages(LocaleCollection::fromArray(array_map(fn ($item): string => (string)$item, $base)));
+        $event->setUserLanguages($this->localeCollectionSortService->addLocaleByMode($event->getUserLanguages(), new LocaleValueObject($language), $addIp));
     }
 
     public function getLanguage(ServerRequestInterface $request): ?string
