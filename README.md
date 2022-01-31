@@ -16,8 +16,8 @@
 
 **Quality:**
 [![Test](https://github.com/lochmueller/language_detection/actions/workflows/Test.yml/badge.svg)](https://github.com/lochmueller/language_detection/actions/workflows/Test.yml)
-[![codecov](https://codecov.io/gh/lochmueller/language_detection/branch/master/graph/badge.svg?token=7VI1WFAX8Z)](https://codecov.io/gh/lochmueller/language_detection)
-[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/lochmueller/language_detection/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/lochmueller/language_detection/?branch=master)
+[![codecov](https://codecov.io/gh/lochmueller/language_detection/branch/main/graph/badge.svg?token=7VI1WFAX8Z)](https://codecov.io/gh/lochmueller/language_detection)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/lochmueller/language_detection/badges/quality-score.png?b=main)](https://scrutinizer-ci.com/g/lochmueller/language_detection/?branch=main)
 [![PHPStan](https://img.shields.io/badge/PHPStan-level%206-brightgreen.svg?style=flat)](https://github.com/lochmueller/language_detection/actions)
 
 **Support:**
@@ -53,7 +53,7 @@ TYPO3 Extension that use a PSR-15/PSR-7 middleware/request to handle a language 
 
 Use the site configuration module to configure the language detection. Just enable it, and it will work :) There are several configuration options for the Site configuration that handle the control events. The following screenshot show the options of the detection configuration.
 
-![Configuration](https://raw.githubusercontent.com/lochmueller/language_detection/master/Resources/Public/Configuration.png)
+![Configuration](https://raw.githubusercontent.com/lochmueller/language_detection/main/Resources/Public/Configuration.png)
 
 ## Event Structure
 
