@@ -17,6 +17,31 @@ $GLOBALS['SiteConfiguration']['site']['columns']['enableLanguageDetection'] = [
     ],
 ];
 
+$GLOBALS['SiteConfiguration']['site']['palettes']['languageDetectionMaxMind'] = [
+    'showitem' => 'languageDetectionMaxMindDatabasePath, --linebreak--, languageDetectionMaxMindAccountId, languageDetectionMaxMindLicenseKey',
+];
+
+$GLOBALS['SiteConfiguration']['site']['columns']['languageDetectionMaxMindDatabasePath'] = [
+    'label' => 'LLL:EXT:language_detection/Resources/Private/Language/locallang.xlf:languageDetectionMaxMindDatabasePath',
+    'config' => [
+        'type' => 'input',
+    ],
+];
+
+$GLOBALS['SiteConfiguration']['site']['columns']['languageDetectionMaxMindAccountId'] = [
+    'label' => 'LLL:EXT:language_detection/Resources/Private/Language/locallang.xlf:languageDetectionMaxMindAccountId',
+    'config' => [
+        'type' => 'input',
+    ],
+];
+
+$GLOBALS['SiteConfiguration']['site']['columns']['languageDetectionMaxMindLicenseKey'] = [
+    'label' => 'LLL:EXT:language_detection/Resources/Private/Language/locallang.xlf:languageDetectionMaxMindLicenseKey',
+    'config' => [
+        'type' => 'input',
+    ],
+];
+
 $GLOBALS['SiteConfiguration']['site']['columns']['addIpLocationToBrowserLanguage'] = [
     'label' => 'LLL:EXT:language_detection/Resources/Private/Language/locallang.xlf:ip.location.to.language',
     'config' => [
@@ -96,7 +121,7 @@ $GLOBALS['SiteConfiguration']['site']['columns']['forwardRedirectParameters'] = 
 
 $GLOBALS['SiteConfiguration']['site']['types']['0']['showitem'] = str_replace(
     'base,',
-    'base,--div--;LLL:EXT:language_detection/Resources/Private/Language/locallang.xlf:language.detection,enableLanguageDetection,allowAllPaths,fallbackDetectionLanguage,addIpLocationToBrowserLanguage,redirectHttpStatusCode,disableRedirectWithBackendSession,forwardRedirectParameters,',
+    'base,--div--;LLL:EXT:language_detection/Resources/Private/Language/locallang.xlf:language.detection,enableLanguageDetection,allowAllPaths,fallbackDetectionLanguage,addIpLocationToBrowserLanguage,redirectHttpStatusCode,disableRedirectWithBackendSession,forwardRedirectParameters,--palette--;MaxMind;languageDetectionMaxMind,',
     $GLOBALS['SiteConfiguration']['site']['types']['0']['showitem']
 );
 

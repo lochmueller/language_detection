@@ -28,6 +28,7 @@ class GeoPluginDetectTest extends AbstractUnitTest
      * @covers \Lochmueller\LanguageDetection\Domain\Model\Dto\SiteConfiguration
      * @covers \Lochmueller\LanguageDetection\Event\DetectUserLanguagesEvent
      * @covers \Lochmueller\LanguageDetection\Service\LanguageService
+     * @covers \Lochmueller\LanguageDetection\Service\LocaleCollectionSortService
      * @covers \Lochmueller\LanguageDetection\Service\SiteConfigurationService
      *
      * @dataProvider data

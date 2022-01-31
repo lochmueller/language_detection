@@ -125,11 +125,7 @@ The middleware is early in the middleware stack. There is no concept of links an
 
 Run all code standards
 
-> docker run --rm -it --volume $(pwd):/app prooph/composer:7.4 code:all
-
-Execute tests with PHP 7.4: 
-
-> docker run --rm -it --volume $(pwd):/app prooph/composer:7.4 test:unit
+> docker run --rm -it --volume $(pwd):/app prooph/composer:8.0 code:all
 
 Execute tests with PHP  8.0:
 
@@ -137,11 +133,11 @@ Execute tests with PHP  8.0:
 
 With coverage:
 
-> docker run --rm -it --volume $(pwd):/app prooph/php:7.4-fpm-xdebug /app/.Build/bin/phpunit  -c /app/phpunit.xml --coverage-text --testdox --coverage-html=/app/var/phpunit
+> docker run --rm -it --volume $(pwd):/app cicnavi/dap:80 /app/.Build/bin/phpunit  -c /app/phpunit.xml --coverage-text --testdox --coverage-html=/app/var/phpunit
 
 Run Mutation tests:
 
-> docker run --rm -it --workdir=/app/ --volume $(pwd):/app prooph/php:7.4-fpm-xdebug .Build/bin/infection
+> docker run --rm -it --workdir=/app/ --volume $(pwd):/app cicnavi/dap:80 .Build/bin/infection
 
 ## Contribution
 

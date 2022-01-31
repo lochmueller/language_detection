@@ -20,6 +20,12 @@ class SiteConfiguration
 
     protected int $fallbackDetectionLanguage;
 
+    protected string $maxMindDatabasePath;
+
+    protected int $maxMindAccountId;
+
+    protected string $maxMindLicenseKey;
+
     public function __construct(
         bool $enableLanguageDetection,
         bool $disableRedirectWithBackendSession,
@@ -27,7 +33,10 @@ class SiteConfiguration
         bool $allowAllPaths,
         int $redirectHttpStatusCode,
         string $forwardRedirectParameters,
-        int $fallbackDetectionLanguage
+        int $fallbackDetectionLanguage,
+        string $maxMindDatabasePath,
+        int $maxMindAccountId,
+        string $maxMindLicenseKey
     ) {
         $this->enableLanguageDetection = $enableLanguageDetection;
         $this->disableRedirectWithBackendSession = $disableRedirectWithBackendSession;
@@ -36,6 +45,9 @@ class SiteConfiguration
         $this->redirectHttpStatusCode = $redirectHttpStatusCode;
         $this->forwardRedirectParameters = $forwardRedirectParameters;
         $this->fallbackDetectionLanguage = $fallbackDetectionLanguage;
+        $this->maxMindDatabasePath = $maxMindDatabasePath;
+        $this->maxMindAccountId = $maxMindAccountId;
+        $this->maxMindLicenseKey = $maxMindLicenseKey;
     }
 
     public function isEnableLanguageDetection(): bool
@@ -71,5 +83,20 @@ class SiteConfiguration
     public function getFallbackDetectionLanguage(): int
     {
         return $this->fallbackDetectionLanguage;
+    }
+
+    public function getMaxMindDatabasePath(): string
+    {
+        return $this->maxMindDatabasePath;
+    }
+
+    public function getMaxMindAccountId(): int
+    {
+        return $this->maxMindAccountId;
+    }
+
+    public function getMaxMindLicenseKey(): string
+    {
+        return $this->maxMindLicenseKey;
     }
 }

@@ -22,6 +22,9 @@ class SiteConfigurationService
             (int)($config['redirectHttpStatusCode'] ?? 307),
             (string)($config['forwardRedirectParameters'] ?? ''),
             (int)($config['fallbackDetectionLanguage'] ?? 0),
+            (string)($config['languageDetectionMaxMindDatabasePath'] ?? ''),
+            (int)($config['languageDetectionMaxMindAccountId'] ?? ''),
+            (string)($config['languageDetectionMaxMindLicenseKey'] ?? ''),
         );
     }
 }

@@ -35,6 +35,15 @@
 			<trans-unit id="allow.all.paths">
 				<source>Allow all paths (otherwise the detection works only on "/")</source>
 			</trans-unit>
+			<trans-unit id="languageDetectionMaxMindDatabasePath">
+				<source>MaxMind database file path</source>
+			</trans-unit>
+			<trans-unit id="languageDetectionMaxMindAccountId">
+				<source>Or MaxMind web service account ID and...</source>
+			</trans-unit>
+			<trans-unit id="languageDetectionMaxMindLicenseKey">
+				<source>... license key.</source>
+			</trans-unit>
 		</body>
 	</file>
 </xliff>

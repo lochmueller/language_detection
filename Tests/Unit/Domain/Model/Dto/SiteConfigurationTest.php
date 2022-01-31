@@ -25,7 +25,10 @@ class SiteConfigurationTest extends AbstractUnitTest
             false,
             102,
             'none',
-            5
+            5,
+            'path.mmdb',
+            42,
+            'abcd',
         );
 
         self::assertTrue($dto->isEnableLanguageDetection());
@@ -35,5 +38,8 @@ class SiteConfigurationTest extends AbstractUnitTest
         self::assertEquals(102, $dto->getRedirectHttpStatusCode());
         self::assertEquals('none', $dto->getForwardRedirectParameters());
         self::assertEquals(5, $dto->getFallbackDetectionLanguage());
+        self::assertEquals('path.mmdb', $dto->getMaxMindDatabasePath());
+        self::assertEquals(42, $dto->getMaxMindAccountId());
+        self::assertEquals('abcd', $dto->getMaxMindLicenseKey());
     }
 }

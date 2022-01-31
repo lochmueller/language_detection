@@ -8,10 +8,12 @@ use GeoIp2\Database\Reader;
 use GeoIp2\ProviderInterface;
 use GeoIp2\WebService\Client;
 use Lochmueller\LanguageDetection\Domain\Model\Dto\LocaleValueObject;
+use Lochmueller\LanguageDetection\Domain\Model\Dto\SiteConfiguration;
 use Lochmueller\LanguageDetection\Event\DetectUserLanguagesEvent;
 use Lochmueller\LanguageDetection\Service\LanguageService;
 use Lochmueller\LanguageDetection\Service\LocaleCollectionSortService;
 use Lochmueller\LanguageDetection\Service\SiteConfigurationService;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 class MaxMindDetect
 {
@@ -28,7 +30,8 @@ class MaxMindDetect
 
     public function __invoke(DetectUserLanguagesEvent $event): void
     {
-        $provider = $this->getProvider();
+        $configuration = $this->siteConfigurationService->getConfiguration($event->getSite());
+        $provider = $this->getProvider($configuration);
         if (!$provider instanceof ProviderInterface) {
             return;
         }
@@ -42,17 +45,22 @@ class MaxMindDetect
         $event->setUserLanguages($this->localeCollectionSortService->addLocaleByMode($event->getUserLanguages(), new LocaleValueObject($locale)));
     }
 
-    protected function getProvider(): ?ProviderInterface
+    protected function getProvider(SiteConfiguration $siteConfiguration): ?ProviderInterface
     {
         if (!class_exists(ProviderInterface::class)) {
             return null;
         }
 
-        // @todo build up via configuration and Reader or a Client Object
+        if ($siteConfiguration->getMaxMindAccountId() && $siteConfiguration->getMaxMindLicenseKey()) {
+            return new Client($siteConfiguration->getMaxMindAccountId(), $siteConfiguration->getMaxMindLicenseKey());
+        }
 
-        //$reader = new Reader('/usr/local/share/GeoIP/GeoIP2-City.mmdb');
-
-        // $client = new Client(42, 'abcdef123456');
+        if ('' !== $siteConfiguration->getMaxMindDatabasePath()) {
+            $dbPath = GeneralUtility::getFileAbsFileName($siteConfiguration->getMaxMindDatabasePath());
+            if (is_file($dbPath)) {
+                return new Reader($dbPath);
+            }
+        }
 
         return null;
     }
