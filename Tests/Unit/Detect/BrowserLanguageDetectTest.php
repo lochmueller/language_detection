@@ -6,7 +6,7 @@ namespace Lochmueller\LanguageDetection\Tests\Unit\Detect;
 
 use Lochmueller\LanguageDetection\Detect\BrowserLanguageDetect;
 use Lochmueller\LanguageDetection\Event\DetectUserLanguagesEvent;
-use Lochmueller\LanguageDetection\Tests\Unit\AbstractTest;
+use Lochmueller\LanguageDetection\Tests\Unit\AbstractUnitTest;
 use TYPO3\CMS\Core\Http\ServerRequest;
 use TYPO3\CMS\Core\Site\Entity\SiteInterface;
 
@@ -14,7 +14,7 @@ use TYPO3\CMS\Core\Site\Entity\SiteInterface;
  * @internal
  * @coversNothing
  */
-class BrowserLanguageDetectTest extends AbstractTest
+class BrowserLanguageDetectTest extends AbstractUnitTest
 {
     public function testClassIsInvokable(): void
     {

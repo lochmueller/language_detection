@@ -1,0 +1,17 @@
+= 001 Class name pattern
+
+== Status
+
+accepted
+
+== Context
+
+The application manage all logical business logic in the "Classes" folder.
+
+== Decision
+
+Classes should have a Folder based suffix to identify the class type easily in development.
+
+== Consequences
+
+All classes should use the right name. DepTrac should check the classes in the right scheme.

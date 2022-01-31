@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Lochmueller\LanguageDetection\Tests\Unit\Service;
 
 use Lochmueller\LanguageDetection\Service\TcaLanguageSelection;
-use Lochmueller\LanguageDetection\Tests\Unit\AbstractTest;
+use Lochmueller\LanguageDetection\Tests\Unit\AbstractUnitTest;
 use TYPO3\CMS\Core\Exception\SiteNotFoundException;
 use TYPO3\CMS\Core\Site\Entity\Site;
 use TYPO3\CMS\Core\Site\SiteFinder;
@@ -14,7 +14,7 @@ use TYPO3\CMS\Core\Site\SiteFinder;
  * @internal
  * @coversNothing
  */
-class TcaLanguageSelectionTest extends AbstractTest
+class TcaLanguageSelectionTest extends AbstractUnitTest
 {
     /**
      * @covers \Lochmueller\LanguageDetection\Service\TcaLanguageSelection

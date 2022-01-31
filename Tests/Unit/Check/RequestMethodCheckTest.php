@@ -6,7 +6,7 @@ namespace Lochmueller\LanguageDetection\Tests\Unit\Check;
 
 use Lochmueller\LanguageDetection\Check\RequestMethodCheck;
 use Lochmueller\LanguageDetection\Event\CheckLanguageDetectionEvent;
-use Lochmueller\LanguageDetection\Tests\Unit\AbstractTest;
+use Lochmueller\LanguageDetection\Tests\Unit\AbstractUnitTest;
 use Psr\Http\Message\ServerRequestInterface;
 use TYPO3\CMS\Core\Site\Entity\Site;
 
@@ -14,7 +14,7 @@ use TYPO3\CMS\Core\Site\Entity\Site;
  * @internal
  * @coversNothing
  */
-class RequestMethodCheckTest extends AbstractTest
+class RequestMethodCheckTest extends AbstractUnitTest
 {
     /**
      * @covers \Lochmueller\LanguageDetection\Check\RequestMethodCheck

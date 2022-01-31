@@ -7,7 +7,7 @@ namespace Lochmueller\LanguageDetection\Tests\Unit\Check;
 use Lochmueller\LanguageDetection\Check\BackendUserCheck;
 use Lochmueller\LanguageDetection\Event\CheckLanguageDetectionEvent;
 use Lochmueller\LanguageDetection\Service\SiteConfigurationService;
-use Lochmueller\LanguageDetection\Tests\Unit\AbstractTest;
+use Lochmueller\LanguageDetection\Tests\Unit\AbstractUnitTest;
 use Psr\Http\Message\ServerRequestInterface;
 use TYPO3\CMS\Core\Context\Context;
 use TYPO3\CMS\Core\Context\UserAspect;
@@ -18,7 +18,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  * @internal
  * @coversNothing
  */
-class BackendUserCheckTest extends AbstractTest
+class BackendUserCheckTest extends AbstractUnitTest
 {
     protected function setUp(): void
     {

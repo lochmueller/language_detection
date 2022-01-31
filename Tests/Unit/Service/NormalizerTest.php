@@ -6,13 +6,13 @@ namespace Lochmueller\LanguageDetection\Tests\Unit\Service;
 
 use Lochmueller\LanguageDetection\Domain\Collection\LocaleCollection;
 use Lochmueller\LanguageDetection\Service\Normalizer;
-use Lochmueller\LanguageDetection\Tests\Unit\AbstractTest;
+use Lochmueller\LanguageDetection\Tests\Unit\AbstractUnitTest;
 
 /**
  * @internal
  * @coversNothing
  */
-class NormalizerTest extends AbstractTest
+class NormalizerTest extends AbstractUnitTest
 {
     /**
      * @dataProvider normalizeProvider

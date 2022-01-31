@@ -9,7 +9,7 @@ use Lochmueller\LanguageDetection\Domain\Collection\LocaleCollection;
 use Lochmueller\LanguageDetection\Event\DetectUserLanguagesEvent;
 use Lochmueller\LanguageDetection\Service\LanguageService;
 use Lochmueller\LanguageDetection\Service\SiteConfigurationService;
-use Lochmueller\LanguageDetection\Tests\Unit\AbstractTest;
+use Lochmueller\LanguageDetection\Tests\Unit\AbstractUnitTest;
 use TYPO3\CMS\Core\Http\ServerRequest;
 use TYPO3\CMS\Core\Site\Entity\Site;
 
@@ -18,7 +18,7 @@ use TYPO3\CMS\Core\Site\Entity\Site;
  *
  * @internal
  */
-class MaxMindDetectTest extends AbstractTest
+class MaxMindDetectTest extends AbstractUnitTest
 {
     /**
      * @covers \Lochmueller\LanguageDetection\Domain\Collection\LocaleCollection

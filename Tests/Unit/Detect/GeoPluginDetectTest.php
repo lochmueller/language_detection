@@ -11,7 +11,7 @@ use Lochmueller\LanguageDetection\Service\IpLocation;
 use Lochmueller\LanguageDetection\Service\LanguageService;
 use Lochmueller\LanguageDetection\Service\LocaleCollectionSortService;
 use Lochmueller\LanguageDetection\Service\SiteConfigurationService;
-use Lochmueller\LanguageDetection\Tests\Unit\AbstractTest;
+use Lochmueller\LanguageDetection\Tests\Unit\AbstractUnitTest;
 use TYPO3\CMS\Core\Http\ServerRequest;
 use TYPO3\CMS\Core\Site\Entity\Site;
 
@@ -20,7 +20,7 @@ use TYPO3\CMS\Core\Site\Entity\Site;
  *
  * @internal
  */
-class GeoPluginDetectTest extends AbstractTest
+class GeoPluginDetectTest extends AbstractUnitTest
 {
     /**
      * @covers \Lochmueller\LanguageDetection\Domain\Collection\LocaleCollection

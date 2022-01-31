@@ -5,13 +5,13 @@ declare(strict_types=1);
 namespace Lochmueller\LanguageDetection\Tests\Unit\Service;
 
 use Lochmueller\LanguageDetection\Service\LanguageService;
-use Lochmueller\LanguageDetection\Tests\Unit\AbstractTest;
+use Lochmueller\LanguageDetection\Tests\Unit\AbstractUnitTest;
 
 /**
  * @internal
  * @coversNothing
  */
-class LanguageServiceTest extends AbstractTest
+class LanguageServiceTest extends AbstractUnitTest
 {
     /**
      * @covers \Lochmueller\LanguageDetection\Service\LanguageService

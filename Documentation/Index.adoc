@@ -1,0 +1,19 @@
+= Documentation
+
+== ADR
+
+:leveloffset: +1
+
+include::ArchitectureDecisionRecord/001-ClassNamePattern.adoc[]
+
+include::ArchitectureDecisionRecord/002-PsrEventsInsteadOfHooksAndSlots.adoc[]
+
+:leveloffset: -1
+
+== ADR Template
+
+:leveloffset: +1
+
+include::ArchitectureDecisionRecordTemplate.adoc[]
+
+:leveloffset: -1

@@ -6,7 +6,7 @@ namespace Lochmueller\LanguageDetection\Tests\Unit\Check;
 
 use Lochmueller\LanguageDetection\Check\BotAgentCheck;
 use Lochmueller\LanguageDetection\Event\CheckLanguageDetectionEvent;
-use Lochmueller\LanguageDetection\Tests\Unit\AbstractTest;
+use Lochmueller\LanguageDetection\Tests\Unit\AbstractUnitTest;
 use TYPO3\CMS\Core\Http\ServerRequest;
 use TYPO3\CMS\Core\Site\Entity\SiteInterface;
 
@@ -14,7 +14,7 @@ use TYPO3\CMS\Core\Site\Entity\SiteInterface;
  * @internal
  * @coversNothing
  */
-class BotAgentCheckTest extends AbstractTest
+class BotAgentCheckTest extends AbstractUnitTest
 {
     /**
      * @covers \Lochmueller\LanguageDetection\Check\BotAgentCheck

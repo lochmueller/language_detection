@@ -7,7 +7,7 @@ namespace Lochmueller\LanguageDetection\Tests\Unit\Check;
 use Lochmueller\LanguageDetection\Check\PathCheck;
 use Lochmueller\LanguageDetection\Event\CheckLanguageDetectionEvent;
 use Lochmueller\LanguageDetection\Service\SiteConfigurationService;
-use Lochmueller\LanguageDetection\Tests\Unit\AbstractTest;
+use Lochmueller\LanguageDetection\Tests\Unit\AbstractUnitTest;
 use TYPO3\CMS\Core\Http\ServerRequest;
 use TYPO3\CMS\Core\Site\Entity\Site;
 
@@ -15,7 +15,7 @@ use TYPO3\CMS\Core\Site\Entity\Site;
  * @internal
  * @coversNothing
  */
-class PathCheckTest extends AbstractTest
+class PathCheckTest extends AbstractUnitTest
 {
     /**
      * @covers \Lochmueller\LanguageDetection\Check\PathCheck

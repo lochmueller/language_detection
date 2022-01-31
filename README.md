@@ -1,13 +1,13 @@
 # TYPO3 Language Detection
 
 **Meta:**
-[![start with why](https://img.shields.io/badge/start%20with-why%3F-brightgreen.svg?style=flat)](http://www.ted.com/talks/simon_sinek_how_great_leaders_inspire_action)
+[![start with why](https://img.shields.io/badge/start%20with-why%3F-brightgreen.svg?style=flat)](https://www.ted.com/talks/simon_sinek_how_great_leaders_inspire_action)
 [![Latest Stable Version](https://poser.pugx.org/lochmueller/language-detection/v/stable)](https://packagist.org/packages/lochmueller/language-detection)
 [![Total Downloads](https://poser.pugx.org/lochmueller/language-detection/downloads)](https://packagist.org/packages/lochmueller/language-detection)
 [![License](https://poser.pugx.org/lochmueller/language-detection/license)](https://packagist.org/packages/lochmueller/language-detection)
 [![Crowdin](https://badges.crowdin.net/typo3-extension-languagedetect/localized.svg)](https://crowdin.com/project/typo3-extension-languagedetect)
-[![Average time to resolve an issue](http://isitmaintained.com/badge/resolution/lochmueller/language_detection.svg)](http://isitmaintained.com/project/lochmueller/language_detection "Average time to resolve an issue")
-[![Percentage of issues still open](http://isitmaintained.com/badge/open/lochmueller/language_detection.svg)](http://isitmaintained.com/project/lochmueller/language_detection "Percentage of issues still open")
+[![Average time to resolve an issue](https://isitmaintained.com/badge/resolution/lochmueller/language_detection.svg)](https://isitmaintained.com/project/lochmueller/language_detection "Average time to resolve an issue")
+[![Percentage of issues still open](https://isitmaintained.com/badge/open/lochmueller/language_detection.svg)](https://isitmaintained.com/project/lochmueller/language_detection "Percentage of issues still open")
 
 **Compatibility:**
 [![TYPO3](https://img.shields.io/badge/TYPO3-10-orange.svg)](https://get.typo3.org/version/10)

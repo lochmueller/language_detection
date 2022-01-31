@@ -14,7 +14,7 @@ use Lochmueller\LanguageDetection\Negotiation\DefaultNegotiation;
 use Lochmueller\LanguageDetection\Response\DefaultResponse;
 use Lochmueller\LanguageDetection\Service\Normalizer;
 use Lochmueller\LanguageDetection\Service\SiteConfigurationService;
-use Lochmueller\LanguageDetection\Tests\Unit\AbstractTest;
+use Lochmueller\LanguageDetection\Tests\Unit\AbstractUnitTest;
 use Symfony\Component\DependencyInjection\Container;
 use TYPO3\CMS\Core\EventDispatcher\EventDispatcher;
 use TYPO3\CMS\Core\EventDispatcher\ListenerProvider;
@@ -23,7 +23,7 @@ use TYPO3\CMS\Core\EventDispatcher\ListenerProvider;
  * @internal
  * @coversNothing
  */
-abstract class AbstractHandlerTest extends AbstractTest
+abstract class AbstractHandlerTest extends AbstractUnitTest
 {
     protected function getSmallEventListenerStack(): EventDispatcher
     {

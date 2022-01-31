@@ -7,7 +7,7 @@ namespace Lochmueller\LanguageDetection\Tests\Unit\Service;
 use Lochmueller\LanguageDetection\Handler\Exception\DisableLanguageDetectionException;
 use Lochmueller\LanguageDetection\Handler\LinkLanguageHandler;
 use Lochmueller\LanguageDetection\Service\RespectLanguageLinkDetailsTrait;
-use Lochmueller\LanguageDetection\Tests\Unit\AbstractTest;
+use Lochmueller\LanguageDetection\Tests\Unit\AbstractUnitTest;
 use TYPO3\CMS\Core\Http\NullResponse;
 use TYPO3\CMS\Core\LinkHandling\LinkService;
 use TYPO3\CMS\Core\Site\Entity\Site;
@@ -17,7 +17,7 @@ use TYPO3\CMS\Core\Site\SiteFinder;
  * @internal
  * @coversNothing
  */
-class RespectLanguageLinkDetailsTraitTest extends AbstractTest
+class RespectLanguageLinkDetailsTraitTest extends AbstractUnitTest
 {
     /**
      * @covers \Lochmueller\LanguageDetection\Service\RespectLanguageLinkDetailsTrait

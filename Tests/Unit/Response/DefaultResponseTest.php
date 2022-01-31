@@ -7,7 +7,7 @@ namespace Lochmueller\LanguageDetection\Tests\Unit\Response;
 use Lochmueller\LanguageDetection\Event\BuildResponseEvent;
 use Lochmueller\LanguageDetection\Response\DefaultResponse;
 use Lochmueller\LanguageDetection\Service\SiteConfigurationService;
-use Lochmueller\LanguageDetection\Tests\Unit\AbstractTest;
+use Lochmueller\LanguageDetection\Tests\Unit\AbstractUnitTest;
 use Psr\Http\Message\ServerRequestInterface;
 use TYPO3\CMS\Core\Http\Uri;
 use TYPO3\CMS\Core\Site\Entity\Site;
@@ -17,7 +17,7 @@ use TYPO3\CMS\Core\Site\Entity\SiteLanguage;
  * @internal
  * @coversNothing
  */
-class DefaultResponseTest extends AbstractTest
+class DefaultResponseTest extends AbstractUnitTest
 {
     /**
      * @covers \Lochmueller\LanguageDetection\Domain\Model\Dto\SiteConfiguration

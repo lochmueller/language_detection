@@ -7,7 +7,7 @@ namespace Lochmueller\LanguageDetection\Tests\Unit\Check;
 use GuzzleHttp\Psr7\Query;
 use Lochmueller\LanguageDetection\Check\WorkspacePreviewCheck;
 use Lochmueller\LanguageDetection\Event\CheckLanguageDetectionEvent;
-use Lochmueller\LanguageDetection\Tests\Unit\AbstractTest;
+use Lochmueller\LanguageDetection\Tests\Unit\AbstractUnitTest;
 use TYPO3\CMS\Core\Http\ServerRequest;
 use TYPO3\CMS\Core\Site\Entity\SiteInterface;
 
@@ -15,7 +15,7 @@ use TYPO3\CMS\Core\Site\Entity\SiteInterface;
  * @internal
  * @coversNothing
  */
-class WorkspacePreviewCheckTest extends AbstractTest
+class WorkspacePreviewCheckTest extends AbstractUnitTest
 {
     /**
      * @covers \Lochmueller\LanguageDetection\Check\WorkspacePreviewCheck

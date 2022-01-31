@@ -7,7 +7,7 @@ namespace Lochmueller\LanguageDetection\Tests\Unit\Middleware;
 use Lochmueller\LanguageDetection\Handler\Exception\NoSelectedLanguageException;
 use Lochmueller\LanguageDetection\Handler\LanguageDetectionHandler;
 use Lochmueller\LanguageDetection\Middleware\LanguageDetectionMiddleware;
-use Lochmueller\LanguageDetection\Tests\Unit\AbstractTest;
+use Lochmueller\LanguageDetection\Tests\Unit\AbstractUnitTest;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 use TYPO3\CMS\Core\Http\NullResponse;
@@ -16,7 +16,7 @@ use TYPO3\CMS\Core\Http\NullResponse;
  * @internal
  * @coversNothing
  */
-class LanguageDetectionMiddlewareTest extends AbstractTest
+class LanguageDetectionMiddlewareTest extends AbstractUnitTest
 {
     /**
      * @covers \Lochmueller\LanguageDetection\Middleware\LanguageDetectionMiddleware

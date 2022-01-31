@@ -3,32 +3,32 @@ paths:
 layers:
   - name: Check
     collectors:
-      - type: directory
-        regex: Classes/Check/.*
+      - type: className
+        regex: ^Lochmueller\\LanguageDetection\\Check\\[^\\]*Check$
   - name: Detect
     collectors:
-      - type: directory
-        regex: Classes/Detect/.*
+      - type: className
+        regex: ^Lochmueller\\LanguageDetection\\Detect\\[^\\]*Detect$
   - name: Domain
     collectors:
       - type: directory
         regex: Classes/Domain/.*
   - name: Event
     collectors:
-      - type: directory
-        regex: Classes/Event/.*
+      - type: className
+        regex: ^Lochmueller\\LanguageDetection\\Event\\[^\\]*Event$
   - name: Handler
     collectors:
-      - type: directory
-        regex: Classes/Handler/.*
+      - type: className
+        regex: ^Lochmueller\\LanguageDetection\\Handler\\.*
   - name: Middleware
     collectors:
-      - type: directory
-        regex: Classes/Middleware/.*
+      - type: className
+        regex: ^Lochmueller\\LanguageDetection\\Middleware\\[^\\]*Middleware$
   - name: Negotiation
     collectors:
-      - type: directory
-        regex: Classes/Negotiation/.*
+      - type: className
+        regex: ^Lochmueller\\LanguageDetection\\Negotiation\\[^\\]*Negotiation$
   - name: Response
     collectors:
       - type: directory
@@ -53,6 +53,10 @@ layers:
     collectors:
       - type: className
         regex: GeoIp2\\
+  - name: NotUsedSlotDispatcher
+    collectors:
+      - type: className
+        regex: TYPO3\\CMS\\Extbase\\SignalSlot.*
 ruleset:
   Check:
     - Service

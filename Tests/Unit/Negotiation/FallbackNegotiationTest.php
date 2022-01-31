@@ -8,7 +8,7 @@ use Lochmueller\LanguageDetection\Domain\Collection\LocaleCollection;
 use Lochmueller\LanguageDetection\Event\NegotiateSiteLanguageEvent;
 use Lochmueller\LanguageDetection\Negotiation\FallbackNegotiation;
 use Lochmueller\LanguageDetection\Service\SiteConfigurationService;
-use Lochmueller\LanguageDetection\Tests\Unit\AbstractTest;
+use Lochmueller\LanguageDetection\Tests\Unit\AbstractUnitTest;
 use TYPO3\CMS\Core\Http\ServerRequest;
 use TYPO3\CMS\Core\Http\Uri;
 use TYPO3\CMS\Core\Site\Entity\NullSite;
@@ -19,7 +19,7 @@ use TYPO3\CMS\Core\Site\Entity\SiteLanguage;
  * @internal
  * @coversNothing
  */
-class FallbackNegotiationTest extends AbstractTest
+class FallbackNegotiationTest extends AbstractUnitTest
 {
     /**
      * @covers \Lochmueller\LanguageDetection\Domain\Collection\LocaleCollection

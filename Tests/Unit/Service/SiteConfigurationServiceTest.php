@@ -5,14 +5,14 @@ declare(strict_types=1);
 namespace Lochmueller\LanguageDetection\Tests\Unit\Service;
 
 use Lochmueller\LanguageDetection\Service\SiteConfigurationService;
-use Lochmueller\LanguageDetection\Tests\Unit\AbstractTest;
+use Lochmueller\LanguageDetection\Tests\Unit\AbstractUnitTest;
 use TYPO3\CMS\Core\Site\Entity\SiteInterface;
 
 /**
  * @internal
  * @coversNothing
  */
-class SiteConfigurationServiceTest extends AbstractTest
+class SiteConfigurationServiceTest extends AbstractUnitTest
 {
     /**
      * @covers \Lochmueller\LanguageDetection\Domain\Model\Dto\SiteConfiguration

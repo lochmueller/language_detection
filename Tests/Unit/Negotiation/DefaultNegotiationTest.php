@@ -8,7 +8,7 @@ use Lochmueller\LanguageDetection\Domain\Collection\LocaleCollection;
 use Lochmueller\LanguageDetection\Event\NegotiateSiteLanguageEvent;
 use Lochmueller\LanguageDetection\Negotiation\DefaultNegotiation;
 use Lochmueller\LanguageDetection\Service\Normalizer;
-use Lochmueller\LanguageDetection\Tests\Unit\AbstractTest;
+use Lochmueller\LanguageDetection\Tests\Unit\AbstractUnitTest;
 use Psr\Http\Message\ServerRequestInterface;
 use TYPO3\CMS\Core\Http\Uri;
 use TYPO3\CMS\Core\Site\Entity\Site;
@@ -18,7 +18,7 @@ use TYPO3\CMS\Core\Site\Entity\SiteLanguage;
  * @internal
  * @coversNothing
  */
-class DefaultNegotiationTest extends AbstractTest
+class DefaultNegotiationTest extends AbstractUnitTest
 {
     /**
      * @covers \Lochmueller\LanguageDetection\Domain\Collection\LocaleCollection

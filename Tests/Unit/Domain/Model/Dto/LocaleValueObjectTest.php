@@ -5,13 +5,13 @@ declare(strict_types=1);
 namespace Lochmueller\LanguageDetection\Tests\Unit\Domain\Model\Dto;
 
 use Lochmueller\LanguageDetection\Domain\Model\Dto\LocaleValueObject;
-use Lochmueller\LanguageDetection\Tests\Unit\AbstractTest;
+use Lochmueller\LanguageDetection\Tests\Unit\AbstractUnitTest;
 
 /**
  * @internal
  * @coversNothing
  */
-class LocaleValueObjectTest extends AbstractTest
+class LocaleValueObjectTest extends AbstractUnitTest
 {
     /**
      * @covers \Lochmueller\LanguageDetection\Domain\Model\Dto\LocaleValueObject

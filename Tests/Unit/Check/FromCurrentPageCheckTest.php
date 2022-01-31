@@ -6,7 +6,7 @@ namespace Lochmueller\LanguageDetection\Tests\Unit\Check;
 
 use Lochmueller\LanguageDetection\Check\FromCurrentPageCheck;
 use Lochmueller\LanguageDetection\Event\CheckLanguageDetectionEvent;
-use Lochmueller\LanguageDetection\Tests\Unit\AbstractTest;
+use Lochmueller\LanguageDetection\Tests\Unit\AbstractUnitTest;
 use TYPO3\CMS\Core\Http\ServerRequest;
 use TYPO3\CMS\Core\Http\Uri;
 use TYPO3\CMS\Core\Site\Entity\SiteInterface;
@@ -15,7 +15,7 @@ use TYPO3\CMS\Core\Site\Entity\SiteInterface;
  * @internal
  * @coversNothing
  */
-class FromCurrentPageCheckTest extends AbstractTest
+class FromCurrentPageCheckTest extends AbstractUnitTest
 {
     /**
      * @covers       \Lochmueller\LanguageDetection\Check\FromCurrentPageCheck

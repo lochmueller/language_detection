@@ -1,0 +1,17 @@
+= 002 PSR Events instead of hooks and slots
+
+== Status
+
+accepted
+
+== Context
+
+TYPO3 support the mechanisms of hooks (very old), SignalSlots (old) and modern PSR Events.
+
+== Decision
+
+This extension should NOT use Hooks and SignalSlots. The extension is based on PSR Events.
+
+== Consequences
+
+Do not the old tech stack. There is a DepTrac rule, that check the usage of SignalSlot Disptachers.

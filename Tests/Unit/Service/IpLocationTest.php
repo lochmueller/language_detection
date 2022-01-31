@@ -5,14 +5,14 @@ declare(strict_types=1);
 namespace Lochmueller\LanguageDetection\Tests\Unit\Service;
 
 use Lochmueller\LanguageDetection\Service\IpLocation;
-use Lochmueller\LanguageDetection\Tests\Unit\AbstractTest;
+use Lochmueller\LanguageDetection\Tests\Unit\AbstractUnitTest;
 use TYPO3\CMS\Core\Http\RequestFactory;
 
 /**
  * @internal
  * @coversNothing
  */
-class IpLocationTest extends AbstractTest
+class IpLocationTest extends AbstractUnitTest
 {
     /**
      * @covers \Lochmueller\LanguageDetection\Service\IpLocation
