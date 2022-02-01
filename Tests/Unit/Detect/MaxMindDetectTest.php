@@ -44,4 +44,45 @@ class MaxMindDetectTest extends AbstractUnitTest
 
         self::assertCount(1, $event->getUserLanguages()->toArray());
     }
+
+    public function testMemoryConsumptionAndExecutionTimeOfMaxMindDatabaseFileUploadInclSiteConfigurationsStructure(): void
+    {
+        $serverRequest = new ServerRequest(
+            null,
+            null,
+            'php://input',
+            [],
+            [
+                'REMOTE_ADDR' => '172.217.0.0', // Google services in US
+            ]
+        );
+
+        $dbFile = \dirname(__FILE__, 3) . '/Fixtures/GeoIP2-Country.mmdb';
+        if (!is_file($dbFile)) {
+            self::markTestIncomplete('No local GEO IP 2 database is found');
+        }
+
+        $site = $this->createStub(Site::class);
+        $site->method('getConfiguration')->willReturn([
+            'languageDetectionMaxMindDatabasePath' => $dbFile,
+        ]);
+
+        $event = new DetectUserLanguagesEvent($site, $serverRequest);
+        $event->setUserLanguages(LocaleCollection::fromArray([]));
+
+        $beforeMemory = memory_get_usage();
+        $beforeTime = microtime(true);
+
+        $maxMindDetect = new MaxMindDetect(new LanguageService(), new SiteConfigurationService(), new LocaleCollectionSortService());
+        $maxMindDetect($event);
+
+        $memoryUsage = memory_get_usage() - $beforeMemory;
+        $timeUsage = microtime(true) - $beforeTime;
+
+        self::assertLessThanOrEqual(1024 * 200, $memoryUsage);
+        self::assertLessThanOrEqual(0.02, $timeUsage);
+        $languages = $event->getUserLanguages()->toArray();
+        self::assertCount(1, $languages);
+        self::assertEquals('en_US', (string)$languages[0]);
+    }
 }

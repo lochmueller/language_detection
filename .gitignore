@@ -4,3 +4,4 @@
 /composer.lock
 /.idea
 /.deptrac.cache
+/Tests/Fixtures/GeoIP2-Country.mmdb

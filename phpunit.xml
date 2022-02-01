@@ -10,6 +10,7 @@
          beStrictAboutTodoAnnotatedTests="true"
          convertDeprecationsToExceptions="false"
          failOnRisky="true"
+         stopOnSkipped="false"
          failOnWarning="true"
          colors="true"
          verbose="true">

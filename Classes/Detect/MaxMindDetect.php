@@ -32,6 +32,7 @@ class MaxMindDetect
     {
         $configuration = $this->siteConfigurationService->getConfiguration($event->getSite());
         $provider = $this->getProvider($configuration);
+
         if (!$provider instanceof ProviderInterface) {
             return;
         }
@@ -47,7 +48,7 @@ class MaxMindDetect
 
     protected function getProvider(SiteConfiguration $siteConfiguration): ?ProviderInterface
     {
-        if (!class_exists(ProviderInterface::class)) {
+        if (!interface_exists(ProviderInterface::class)) {
             return null;
         }
 
