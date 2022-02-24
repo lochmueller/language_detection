@@ -26,9 +26,10 @@ class DefaultNegotiation
         foreach ($userLanguages->toArray() as $userLanguage) {
             foreach ($event->getSite()->getLanguages() as $siteLanguage) {
                 foreach ($compareWith as $function) {
-                    if ($siteLanguage->enabled() && 
-                        $siteLanguage->toArray()['excludeFromLanguageDetection'] !== true &&
-                        (string)$userLanguage === $this->normalizer->normalize((string)$siteLanguage->{$function}())
+                    $config = $siteLanguage->toArray();
+                    if ($siteLanguage->enabled()
+                        && ($config['excludeFromLanguageDetection'] ?? false) !== true
+                        && (string)$userLanguage === $this->normalizer->normalize((string)$siteLanguage->{$function}())
                     ) {
                         $event->setSelectedLanguage($siteLanguage);
 

@@ -80,7 +80,7 @@ class MaxMindDetectTest extends AbstractUnitTest
         $timeUsage = microtime(true) - $beforeTime;
 
         self::assertLessThanOrEqual(1024 * 200, $memoryUsage);
-        self::assertLessThanOrEqual(0.02, $timeUsage);
+        self::assertLessThanOrEqual(0.08, $timeUsage);
         $languages = $event->getUserLanguages()->toArray();
         self::assertCount(1, $languages);
         self::assertEquals('en_US', (string)$languages[0]);
