@@ -32,7 +32,10 @@ class DefaultResponse
                 $code = 307;
             }
 
-            $event->setResponse(new RedirectResponse((string)$targetUri, $code));
+            $response = new RedirectResponse((string)$targetUri, $code);
+            $response = $response->withHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
+
+            $event->setResponse($response);
         }
     }
 
