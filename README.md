@@ -43,7 +43,7 @@
 
 ## Why?
 
-TYPO3 Extension that use a PSR-15/PSR-7 middleware/request to handle a language detection logic via PSR-14 events. Very flexible! Give it a try and checkout the future of language detection! Language Detection should be easy and simple to integrate and powerfull in development!
+TYPO3 Core do not handle language detection via client information. EXT:languag_detection use a PSR-15/PSR-7 middleware/request ([TYPO3 Documentation](https://docs.typo3.org/m/typo3/reference-coreapi/main/en-us/ApiOverview/RequestHandling/Index.html)) to handle a language detection logic via PSR-14 events([TYPO3 Documentation](https://docs.typo3.org/m/typo3/reference-coreapi/main/en-us/Events/EventDispatcher/Index.html)). Very flexible! Give it a try and checkout the future of language detection! Language Detection should be easy & simple to integrate and powerfull in development!
 
 ## Installation
 
@@ -58,6 +58,9 @@ Use the site configuration module to configure the language detection. Just enab
 ## Event Structure
 
 There are four central PSR-14 events that control the language detection. The attached list explain the different events and the default listener. The events are ordered in the execution order.
+
+[Diagram](https://sequencediagram.org/index.html#initialData=C4S2BsFMAICVII4FdIGdjQGbgPYHcAoIgYXBEgDtgBaAPgBUBNABQHkBmALmgHEBRetADkAeiEEmbdnT4A3ShgDKwAIYBjANbcAEiooATKNGIALSJoAyegOZIV1yABFIwc6BwU5Cgl6rRl6hrUdJIc3Mo4AA7Q+i5uIB4ANNAgmNBqZpopqFgq4KiQEiwcMvJ+AZo6eoYwzq5qwACqBQBOVhS29mi+wD5lSqqawQzFXP7AUTFxDQkUyanQ4DZ2DjkqLTCYOEgGKRTpZArQG6iRHgVFUqVHFVrQugZGAHKQ1jigKq6KYJDtnQ49Po3QZBEKjcITaKxeruOYpNIUHDQAC2nwykH0i2WXTWGyw2wMlxKtB640CVUeMAAQkgQOB9PBTudIIDSbdhqRyFRuPB9OQGtAJliOitIPM0iczhQCultvToAAjGAK2n0gichTDUJjYh5cCCszQCiQPDC-4wRqwACSBERrmgOHkLWg2p5ryQS2dGwMkBaIA6ROktA13P8lEx2ugzC6sqoCiAA)
+![Request flow](https://github.com/lochmueller/language_detection/blob/main/Documentation/Images/Diagram.svg?raw=true)
 
 ### CheckLanguageDetectionEvent
 
