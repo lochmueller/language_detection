@@ -29,7 +29,7 @@ class IpLocation
             if (200 !== $response->getStatusCode()) {
                 throw new IpLocationException('Missing information in response', 123781);
             }
-            $result = (array)unserialize((string)$response->getBody());
+            $result = (array)unserialize((string)$response->getBody(), ['allowed_classes' => false]);
 
             if (empty($result) || 404 === (int)$result['geoplugin_status']) {
                 throw new IpLocationException('No valid data', 162378);
