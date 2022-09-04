@@ -16,6 +16,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * @internal
+ *
  * @coversNothing
  */
 class BackendUserCheckTest extends AbstractUnitTest
@@ -73,6 +74,7 @@ class BackendUserCheckTest extends AbstractUnitTest
      * @covers \Lochmueller\LanguageDetection\Domain\Model\Dto\SiteConfiguration
      * @covers \Lochmueller\LanguageDetection\Event\CheckLanguageDetectionEvent
      * @covers \Lochmueller\LanguageDetection\Service\SiteConfigurationService
+     *
      * @dataProvider data
      */
     public function testWithDisableConfigurationInSiteAndActiveBackendUser(bool $isLoginState, bool $disableRedirectWithBackendSession, bool $isEnabled): void

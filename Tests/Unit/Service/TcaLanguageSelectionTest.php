@@ -12,6 +12,7 @@ use TYPO3\CMS\Core\Site\SiteFinder;
 
 /**
  * @internal
+ *
  * @coversNothing
  */
 class TcaLanguageSelectionTest extends AbstractUnitTest

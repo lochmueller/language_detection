@@ -10,6 +10,7 @@ use Lochmueller\LanguageDetection\Tests\Unit\AbstractUnitTest;
 
 /**
  * @internal
+ *
  * @coversNothing
  */
 class NormalizerTest extends AbstractUnitTest

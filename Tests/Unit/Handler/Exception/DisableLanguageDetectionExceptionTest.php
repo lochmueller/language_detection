@@ -9,6 +9,7 @@ use Lochmueller\LanguageDetection\Tests\Unit\AbstractUnitTest;
 
 /**
  * @internal
+ *
  * @coversNothing
  */
 class DisableLanguageDetectionExceptionTest extends AbstractUnitTest

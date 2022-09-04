@@ -10,6 +10,7 @@ use TYPO3\CMS\Core\Http\RequestFactory;
 
 /**
  * @internal
+ *
  * @coversNothing
  */
 class IpLocationTest extends AbstractUnitTest

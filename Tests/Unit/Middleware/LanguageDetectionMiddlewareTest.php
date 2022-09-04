@@ -14,6 +14,7 @@ use TYPO3\CMS\Core\Http\NullResponse;
 
 /**
  * @internal
+ *
  * @coversNothing
  */
 class LanguageDetectionMiddlewareTest extends AbstractUnitTest

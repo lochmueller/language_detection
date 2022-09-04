@@ -12,6 +12,7 @@ use TYPO3\CMS\Core\Site\Entity\Site;
 
 /**
  * @internal
+ *
  * @coversNothing
  */
 class RequestMethodCheckTest extends AbstractUnitTest
@@ -19,6 +20,7 @@ class RequestMethodCheckTest extends AbstractUnitTest
     /**
      * @covers \Lochmueller\LanguageDetection\Check\RequestMethodCheck
      * @covers \Lochmueller\LanguageDetection\Event\CheckLanguageDetectionEvent
+     *
      * @dataProvider data
      */
     public function testConfiguration(string $method, bool $result): void

@@ -21,6 +21,7 @@ use TYPO3\CMS\Core\EventDispatcher\ListenerProvider;
 
 /**
  * @internal
+ *
  * @coversNothing
  */
 abstract class AbstractHandlerTest extends AbstractUnitTest

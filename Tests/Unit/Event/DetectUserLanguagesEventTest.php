@@ -12,6 +12,7 @@ use TYPO3\CMS\Core\Site\Entity\SiteInterface;
 
 /**
  * @internal
+ *
  * @coversNothing
  */
 class DetectUserLanguagesEventTest extends AbstractEventTest

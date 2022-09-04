@@ -13,6 +13,7 @@ use TYPO3\CMS\Core\Site\Entity\Site;
 
 /**
  * @internal
+ *
  * @coversNothing
  */
 class JsonDetectionHandlerTest extends AbstractHandlerTest

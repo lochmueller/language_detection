@@ -13,6 +13,7 @@ use TYPO3\CMS\Core\Site\Entity\SiteInterface;
 
 /**
  * @internal
+ *
  * @coversNothing
  */
 class FromCurrentPageCheckTest extends AbstractUnitTest
@@ -20,6 +21,7 @@ class FromCurrentPageCheckTest extends AbstractUnitTest
     /**
      * @covers       \Lochmueller\LanguageDetection\Check\FromCurrentPageCheck
      * @covers       \Lochmueller\LanguageDetection\Event\CheckLanguageDetectionEvent
+     *
      * @dataProvider data
      */
     public function testInvalidReferrer(string $referrer, string $baseUri, bool $isStillEnabled): void

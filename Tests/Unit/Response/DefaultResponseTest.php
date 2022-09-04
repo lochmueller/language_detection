@@ -15,6 +15,7 @@ use TYPO3\CMS\Core\Site\Entity\SiteLanguage;
 
 /**
  * @internal
+ *
  * @coversNothing
  */
 class DefaultResponseTest extends AbstractUnitTest

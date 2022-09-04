@@ -9,6 +9,7 @@ use Lochmueller\LanguageDetection\Tests\Unit\AbstractUnitTest;
 
 /**
  * @internal
+ *
  * @coversNothing
  */
 class SiteConfigurationTest extends AbstractUnitTest

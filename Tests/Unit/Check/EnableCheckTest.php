@@ -13,6 +13,7 @@ use TYPO3\CMS\Core\Site\Entity\Site;
 
 /**
  * @internal
+ *
  * @coversNothing
  */
 class EnableCheckTest extends AbstractUnitTest
@@ -22,6 +23,7 @@ class EnableCheckTest extends AbstractUnitTest
      * @covers \Lochmueller\LanguageDetection\Domain\Model\Dto\SiteConfiguration
      * @covers \Lochmueller\LanguageDetection\Event\CheckLanguageDetectionEvent
      * @covers \Lochmueller\LanguageDetection\Service\SiteConfigurationService
+     *
      * @dataProvider data
      *
      * @param array<string, bool>|array<string, false>|mixed[] $configuration

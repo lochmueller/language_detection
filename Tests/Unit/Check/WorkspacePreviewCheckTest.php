@@ -13,6 +13,7 @@ use TYPO3\CMS\Core\Site\Entity\SiteInterface;
 
 /**
  * @internal
+ *
  * @coversNothing
  */
 class WorkspacePreviewCheckTest extends AbstractUnitTest
@@ -20,6 +21,7 @@ class WorkspacePreviewCheckTest extends AbstractUnitTest
     /**
      * @covers \Lochmueller\LanguageDetection\Check\WorkspacePreviewCheck
      * @covers \Lochmueller\LanguageDetection\Event\CheckLanguageDetectionEvent
+     *
      * @dataProvider data
      *
      * @param mixed[]|array<string, string> $queryParams

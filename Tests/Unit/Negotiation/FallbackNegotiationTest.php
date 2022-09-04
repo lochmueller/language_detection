@@ -17,6 +17,7 @@ use TYPO3\CMS\Core\Site\Entity\SiteLanguage;
 
 /**
  * @internal
+ *
  * @coversNothing
  */
 class FallbackNegotiationTest extends AbstractUnitTest
@@ -27,6 +28,7 @@ class FallbackNegotiationTest extends AbstractUnitTest
      * @covers \Lochmueller\LanguageDetection\Event\NegotiateSiteLanguageEvent
      * @covers \Lochmueller\LanguageDetection\Negotiation\FallbackNegotiation
      * @covers \Lochmueller\LanguageDetection\Service\SiteConfigurationService
+     *
      * @dataProvider dataInvalid
      *
      * @param mixed[]|array<string, array<int>>|array<string, string> $configuration

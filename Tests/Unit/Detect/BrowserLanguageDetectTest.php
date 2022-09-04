@@ -12,6 +12,7 @@ use TYPO3\CMS\Core\Site\Entity\SiteInterface;
 
 /**
  * @internal
+ *
  * @coversNothing
  */
 class BrowserLanguageDetectTest extends AbstractUnitTest
@@ -24,6 +25,7 @@ class BrowserLanguageDetectTest extends AbstractUnitTest
 
     /**
      * @dataProvider data
+     *
      * @covers \Lochmueller\LanguageDetection\Detect\BrowserLanguageDetect
      * @covers \Lochmueller\LanguageDetection\Domain\Collection\LocaleCollection
      * @covers \Lochmueller\LanguageDetection\Domain\Model\Dto\LocaleValueObject
