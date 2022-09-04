@@ -9,6 +9,7 @@ use Lochmueller\LanguageDetection\Handler\LinkLanguageHandler;
 use Lochmueller\LanguageDetection\Service\RespectLanguageLinkDetailsTrait;
 use Lochmueller\LanguageDetection\Tests\Unit\AbstractUnitTest;
 use TYPO3\CMS\Core\Http\NullResponse;
+use TYPO3\CMS\Core\Http\ServerRequestFactory;
 use TYPO3\CMS\Core\LinkHandling\LinkService;
 use TYPO3\CMS\Core\Site\Entity\Site;
 use TYPO3\CMS\Core\Site\SiteFinder;
@@ -59,7 +60,10 @@ class RespectLanguageLinkDetailsTraitTest extends AbstractUnitTest
             'pageuid' => 5,
         ];
 
-        self::assertEquals($configuration, $traitObject->addLanguageParameterByDetection($configuration));
+        $factory = new ServerRequestFactory();
+        $request = $factory->createServerRequest('GET', '/', []);
+
+        self::assertEquals($configuration, $traitObject->addLanguageParameterByDetection($configuration, $request));
     }
 
     /**
@@ -96,11 +100,14 @@ class RespectLanguageLinkDetailsTraitTest extends AbstractUnitTest
             'pageuid' => 5,
         ];
 
+        $factory = new ServerRequestFactory();
+        $request = $factory->createServerRequest('GET', '/', []);
+
         self::assertEquals([
             'type' => LinkService::TYPE_PAGE,
             'pageuid' => 5,
             'parameters' => 'L=5',
-        ], $traitObject->addLanguageParameterByDetection($configuration));
+        ], $traitObject->addLanguageParameterByDetection($configuration, $request));
     }
 
     protected function createTraitMock(?LinkLanguageHandler $linkLanguageHandler = null, ?SiteFinder $languageSiteFinder = null): object
