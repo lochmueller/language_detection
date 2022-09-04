@@ -6,7 +6,9 @@ namespace Lochmueller\LanguageDetection\Service;
 
 use Lochmueller\LanguageDetection\Handler\Exception\AbstractHandlerException;
 use Lochmueller\LanguageDetection\Handler\LinkLanguageHandler;
+use Psr\Http\Message\ServerRequestInterface;
 use TYPO3\CMS\Core\Http\ServerRequestFactory;
+use TYPO3\CMS\Core\Http\Uri;
 use TYPO3\CMS\Core\LinkHandling\LinkService;
 use TYPO3\CMS\Core\Site\SiteFinder;
 
@@ -22,14 +24,17 @@ trait RespectLanguageLinkDetailsTrait
     /**
      * @return mixed[]
      */
-    public function addLanguageParameterByDetection(array $linkDetails): array
+    public function addLanguageParameterByDetection(array $linkDetails, ?ServerRequestInterface $request = null): array
     {
         if (LinkService::TYPE_PAGE !== $linkDetails['type']) {
             return $linkDetails;
         }
 
-        $factory = new ServerRequestFactory();
-        $request = $factory->createServerRequest('GET', '/', []);
+        if (null === $request) {
+            $request = ServerRequestFactory::fromGlobals();
+            $request = $request->withMethod('GET')->withUri(new Uri('/'));
+        }
+
         $request = $request->withAttribute('site', $this->languageSiteFinder->getSiteByPageId((int)$linkDetails['pageuid'] ?? 0));
 
         try {
