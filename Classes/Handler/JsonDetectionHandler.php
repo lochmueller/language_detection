@@ -12,6 +12,7 @@ use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 use TYPO3\CMS\Core\Http\JsonResponse;
+use TYPO3\CMS\Core\Site\Entity\SiteLanguage;
 
 /**
  * Language detection via "language.json". Do not check if Detection is enabled and
@@ -37,10 +38,12 @@ class JsonDetectionHandler extends AbstractHandler implements RequestHandlerInte
         $negotiate = new NegotiateSiteLanguageEvent($site, $request, $detect->getUserLanguages());
         $this->eventDispatcher->dispatch($negotiate);
 
-        if (null === $negotiate->getSelectedLanguage()) {
+        $selectedLanguage = $negotiate->getSelectedLanguage();
+        if (null === $selectedLanguage) {
             $negotiate->setSelectedLanguage($site->getDefaultLanguage());
         }
 
-        return new JsonResponse($negotiate->getSelectedLanguage()->toArray());
+        /* @var SiteLanguage $selectedLanguage */
+        return new JsonResponse($selectedLanguage->toArray());
     }
 }

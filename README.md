@@ -18,7 +18,7 @@
 [![Test](https://github.com/lochmueller/language_detection/actions/workflows/Test.yml/badge.svg)](https://github.com/lochmueller/language_detection/actions/workflows/Test.yml)
 [![codecov](https://codecov.io/gh/lochmueller/language_detection/branch/main/graph/badge.svg?token=7VI1WFAX8Z)](https://codecov.io/gh/lochmueller/language_detection)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/lochmueller/language_detection/badges/quality-score.png?b=main)](https://scrutinizer-ci.com/g/lochmueller/language_detection/?branch=main)
-[![PHPStan](https://img.shields.io/badge/PHPStan-level%206-brightgreen.svg?style=flat)](https://github.com/lochmueller/language_detection/actions)
+[![PHPStan](https://img.shields.io/badge/PHPStan-level%208-brightgreen.svg?style=flat)](https://github.com/lochmueller/language_detection/actions)
 
 **Support:**
 [![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.me/lochmueller/19.99)

@@ -111,6 +111,7 @@ class JsonDetectionHandlerTest extends AbstractHandlerTest
         $content = json_decode($response->getBody()->getContents(), false, 512, \JSON_THROW_ON_ERROR);
         self::assertInstanceOf(ResponseInterface::class, $response);
         self::assertInstanceOf(\stdClass::class, $content);
+        /* @var \stdClass $content */
         self::assertEquals(3, $content->languageId);
     }
 
@@ -159,6 +160,7 @@ class JsonDetectionHandlerTest extends AbstractHandlerTest
         $content = json_decode($response->getBody()->getContents(), false, 512, \JSON_THROW_ON_ERROR);
         self::assertInstanceOf(ResponseInterface::class, $response);
         self::assertInstanceOf(\stdClass::class, $content);
+        /* @var \stdClass $content */
         self::assertEquals(1, $content->languageId);
     }
 }

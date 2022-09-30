@@ -82,7 +82,9 @@ class DefaultResponseTest extends AbstractUnitTest
         $defaultResponse($event);
 
         self::assertNotNull($event->getResponse());
-        self::assertEquals(307, $event->getResponse()->getStatusCode());
+        if (null !== $event->getResponse()) {
+            self::assertEquals(307, $event->getResponse()->getStatusCode());
+        }
     }
 
     /**
@@ -115,8 +117,10 @@ class DefaultResponseTest extends AbstractUnitTest
         $defaultResponse($event);
 
         self::assertNotNull($event->getResponse());
-        self::assertEquals(307, $event->getResponse()->getStatusCode());
-        self::assertEquals('/en/?test=1', $event->getResponse()->getHeaderLine('location'));
+        if (null !== $event->getResponse()) {
+            self::assertEquals(307, $event->getResponse()->getStatusCode());
+            self::assertEquals('/en/?test=1', $event->getResponse()->getHeaderLine('location'));
+        }
     }
 
     /**

@@ -28,6 +28,12 @@ class RespectLanguageLinkDetailsTraitTest extends AbstractUnitTest
     {
         $traitObject = $this->createTraitMock();
 
+        if (!\is_callable([$traitObject, 'addLanguageParameterByDetection'])) {
+            self::assertTrue(false, 'Trait object is not callable');
+
+            return;
+        }
+
         self::assertEquals(['type' => 'wrong'], $traitObject->addLanguageParameterByDetection(['type' => 'wrong']));
     }
 
@@ -62,6 +68,12 @@ class RespectLanguageLinkDetailsTraitTest extends AbstractUnitTest
 
         $factory = new ServerRequestFactory();
         $request = $factory->createServerRequest('GET', '/', []);
+
+        if (!\is_callable([$traitObject, 'addLanguageParameterByDetection'])) {
+            self::assertTrue(false, 'Trait object is not callable');
+
+            return;
+        }
 
         self::assertEquals($configuration, $traitObject->addLanguageParameterByDetection($configuration, $request));
     }
@@ -102,6 +114,12 @@ class RespectLanguageLinkDetailsTraitTest extends AbstractUnitTest
 
         $factory = new ServerRequestFactory();
         $request = $factory->createServerRequest('GET', '/', []);
+
+        if (!\is_callable([$traitObject, 'addLanguageParameterByDetection'])) {
+            self::assertTrue(false, 'Trait object is not callable');
+
+            return;
+        }
 
         self::assertEquals([
             'type' => LinkService::TYPE_PAGE,

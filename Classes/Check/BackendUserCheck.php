@@ -23,7 +23,9 @@ class BackendUserCheck
         if (!$this->siteConfigurationService->getConfiguration($event->getSite())->isDisableRedirectWithBackendSession()) {
             return;
         }
-        if (GeneralUtility::makeInstance(Context::class)->getAspect('backend.user')->get('isLoggedIn')) {
+        /** @var Context $context */
+        $context = GeneralUtility::makeInstance(Context::class);
+        if ($context->getAspect('backend.user')->get('isLoggedIn')) {
             $event->disableLanguageDetection();
         }
     }
