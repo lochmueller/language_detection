@@ -40,10 +40,9 @@ class JsonDetectionHandler extends AbstractHandler implements RequestHandlerInte
 
         $selectedLanguage = $negotiate->getSelectedLanguage();
         if ($selectedLanguage === null) {
-            $negotiate->setSelectedLanguage($site->getDefaultLanguage());
+            return new JsonResponse($site->getDefaultLanguage()->toArray());
         }
 
-        /* @var SiteLanguage $selectedLanguage */
         return new JsonResponse($selectedLanguage->toArray());
     }
 }
