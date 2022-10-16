@@ -5,7 +5,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        php: ["7.4", "8.0", "8.1"]
+        php: ["8.0", "8.1"]
         typo3: ["^11.5"]
 # Add v12 is first version is releases "^12.0@dev"
     runs-on: ubuntu-latest

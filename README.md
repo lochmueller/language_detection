@@ -43,7 +43,7 @@
 
 ## Why?
 
-TYPO3 Core do not handle language detection via client information. EXT:languag_detection use a PSR-15/PSR-7 middleware/request ([TYPO3 Documentation](https://docs.typo3.org/m/typo3/reference-coreapi/main/en-us/ApiOverview/RequestHandling/Index.html)) to handle a language detection logic via PSR-14 events([TYPO3 Documentation](https://docs.typo3.org/m/typo3/reference-coreapi/main/en-us/Events/EventDispatcher/Index.html)). Very flexible! Give it a try and checkout the future of language detection! Language Detection should be easy & simple to integrate and powerfull in development!
+Language Detection should be easy & simple to integrate and powerfully in development! TYPO3 Core do not handle language detection via client information. EXT:languag_detection use a PSR-15/PSR-7 middleware/request ([TYPO3 Documentation](https://docs.typo3.org/m/typo3/reference-coreapi/main/en-us/ApiOverview/RequestHandling/Index.html)) to handle a language detection logic via PSR-14 events([TYPO3 Documentation](https://docs.typo3.org/m/typo3/reference-coreapi/main/en-us/Events/EventDispatcher/Index.html)). Very flexible! Give it a try and checkout the future of language detection!
 
 ## Installation
 
