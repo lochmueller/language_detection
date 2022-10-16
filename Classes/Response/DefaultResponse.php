@@ -63,7 +63,7 @@ class DefaultResponse
             return false;
         }
 
-        if ('' === (string)$targetUri->getHost()) {
+        if ((string)$targetUri->getHost() === '') {
             $absoluteTargetUri = $targetUri->withScheme($request->getUri()->getScheme())->withHost($request->getUri()->getHost());
             if ((string)$request->getUri() === (string)$absoluteTargetUri) {
                 return false;

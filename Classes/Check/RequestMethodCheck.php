@@ -10,7 +10,7 @@ class RequestMethodCheck
 {
     public function __invoke(CheckLanguageDetectionEvent $event): void
     {
-        if ('GET' !== $event->getRequest()->getMethod()) {
+        if ($event->getRequest()->getMethod() !== 'GET') {
             $event->disableLanguageDetection();
         }
     }

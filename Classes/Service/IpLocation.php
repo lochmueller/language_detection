@@ -18,7 +18,7 @@ class IpLocation
 
     public function getCountryCode(string $ip): ?string
     {
-        if ('' === $ip) {
+        if ($ip === '') {
             return null;
         }
         $urlService = 'http://www.geoplugin.net/php.gp?ip=' . $ip;
@@ -26,12 +26,12 @@ class IpLocation
             $request = $this->requestFactory->createRequest('GET', $urlService);
             $response = GuzzleClientFactory::getClient()->send($request);
 
-            if (200 !== $response->getStatusCode()) {
+            if ($response->getStatusCode() !== 200) {
                 throw new IpLocationException('Missing information in response', 123781);
             }
             $result = (array)unserialize((string)$response->getBody(), ['allowed_classes' => false]);
 
-            if (empty($result) || 404 === (int)$result['geoplugin_status']) {
+            if (empty($result) || (int)$result['geoplugin_status'] === 404) {
                 throw new IpLocationException('No valid data', 162378);
             }
 

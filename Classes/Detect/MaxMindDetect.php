@@ -56,7 +56,7 @@ class MaxMindDetect
             return new Client($siteConfiguration->getMaxMindAccountId(), $siteConfiguration->getMaxMindLicenseKey());
         }
 
-        if ('' !== $siteConfiguration->getMaxMindDatabasePath()) {
+        if ($siteConfiguration->getMaxMindDatabasePath() !== '') {
             $dbPath = GeneralUtility::getFileAbsFileName($siteConfiguration->getMaxMindDatabasePath());
             if (is_file($dbPath)) {
                 return new Reader($dbPath);

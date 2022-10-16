@@ -14,7 +14,7 @@ class TcaLanguageSelection
 
     public function __construct(?SiteFinder $siteFinder = null)
     {
-        if (null === $siteFinder) {
+        if ($siteFinder === null) {
             /** @var SiteFinder $siteFinder */
             $siteFinder = GeneralUtility::makeInstance(SiteFinder::class);
         }

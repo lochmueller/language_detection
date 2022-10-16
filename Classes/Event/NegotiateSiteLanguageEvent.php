@@ -51,6 +51,6 @@ final class NegotiateSiteLanguageEvent extends AbstractEvent implements Stoppabl
 
     public function isPropagationStopped(): bool
     {
-        return null !== $this->selectedLanguage;
+        return $this->selectedLanguage !== null;
     }
 }

@@ -26,11 +26,11 @@ trait RespectLanguageLinkDetailsTrait
      */
     public function addLanguageParameterByDetection(array $linkDetails, ?ServerRequestInterface $request = null): array
     {
-        if (LinkService::TYPE_PAGE !== $linkDetails['type']) {
+        if ($linkDetails['type'] !== LinkService::TYPE_PAGE) {
             return $linkDetails;
         }
 
-        if (null === $request) {
+        if ($request === null) {
             $request = ServerRequestFactory::fromGlobals();
             $request = $request->withMethod('GET')->withUri(new Uri('/'));
         }

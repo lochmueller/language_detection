@@ -133,13 +133,13 @@ class RespectLanguageLinkDetailsTraitTest extends AbstractUnitTest
         $traitObject = $this->getObjectForTrait(RespectLanguageLinkDetailsTrait::class);
         $reflectionClass = new \ReflectionClass($traitObject);
 
-        if (null !== $linkLanguageHandler) {
+        if ($linkLanguageHandler !== null) {
             $propertyLanguageEventDispatcher = $reflectionClass->getProperty('linkLanguageHandler');
             $propertyLanguageEventDispatcher->setAccessible(true);
             $propertyLanguageEventDispatcher->setValue($traitObject, $linkLanguageHandler);
         }
 
-        if (null !== $languageSiteFinder) {
+        if ($languageSiteFinder !== null) {
             $propertyLanguageSiteFinder = $reflectionClass->getProperty('languageSiteFinder');
             $propertyLanguageSiteFinder->setAccessible(true);
             $propertyLanguageSiteFinder->setValue($traitObject, $languageSiteFinder);

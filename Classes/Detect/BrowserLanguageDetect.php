@@ -21,7 +21,7 @@ class BrowserLanguageDetect
         // Set default quality
         $acceptedLanguagesArr = [];
         foreach ($languages as $languageAndQualityStr) {
-            if (false !== strpos($languageAndQualityStr, ';')) {
+            if (str_contains($languageAndQualityStr, ';')) {
                 $parts = GeneralUtility::trimExplode(';', $languageAndQualityStr, true);
                 $languageCode = $parts[0];
                 $quality = isset($parts[1]) ? (string)$parts[1] : '';
@@ -29,14 +29,14 @@ class BrowserLanguageDetect
                 $languageCode = $languageAndQualityStr;
                 $quality = 'q=1.0';
             }
-            $acceptedLanguagesArr[$languageCode] = '' !== $quality ? (float)mb_substr($quality, 2) : 1.0;
+            $acceptedLanguagesArr[$languageCode] = $quality !== '' ? (float)mb_substr($quality, 2) : 1.0;
         }
 
         // Sort
         arsort($acceptedLanguagesArr);
 
         // Remove quality 0.0
-        $acceptedLanguagesArr = array_filter($acceptedLanguagesArr, fn ($value, $key): bool => 0.0 !== $value, \ARRAY_FILTER_USE_BOTH);
+        $acceptedLanguagesArr = array_filter($acceptedLanguagesArr, fn ($value, $key): bool => $value !== 0.0, \ARRAY_FILTER_USE_BOTH);
 
         $event->setUserLanguages(LocaleCollection::fromArray(array_keys($acceptedLanguagesArr)));
     }

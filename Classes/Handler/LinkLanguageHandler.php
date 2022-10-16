@@ -48,7 +48,7 @@ class LinkLanguageHandler extends AbstractHandler implements RequestHandlerInter
         $negotiate = new NegotiateSiteLanguageEvent($site, $request, $detect->getUserLanguages());
         $this->eventDispatcher->dispatch($negotiate);
 
-        if (null === $negotiate->getSelectedLanguage()) {
+        if ($negotiate->getSelectedLanguage() === null) {
             throw new NoSelectedLanguageException();
         }
 

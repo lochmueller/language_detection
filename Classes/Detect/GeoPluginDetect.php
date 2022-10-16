@@ -41,7 +41,7 @@ class GeoPluginDetect
         }
 
         $language = $this->getLanguage($event->getRequest());
-        if (null === $language) {
+        if ($language === null) {
             return;
         }
 
@@ -51,7 +51,7 @@ class GeoPluginDetect
     public function getLanguage(ServerRequestInterface $request): ?string
     {
         $countryCode = $this->ipLocation->getCountryCode($request->getServerParams()['REMOTE_ADDR'] ?? '');
-        if (null === $countryCode) {
+        if ($countryCode === null) {
             return null;
         }
 

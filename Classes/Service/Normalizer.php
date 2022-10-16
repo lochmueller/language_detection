@@ -20,7 +20,7 @@ class Normalizer
     {
         // Drop charset
         $pos = strpos($locale, '.');
-        if (false !== $pos) {
+        if ($pos !== false) {
             $locale = substr($locale, 0, $pos);
         }
 

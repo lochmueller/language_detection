@@ -43,14 +43,14 @@ class LanguageDetectionHandler extends AbstractHandler implements RequestHandler
         $negotiate = new NegotiateSiteLanguageEvent($site, $request, $detect->getUserLanguages());
         $this->eventDispatcher->dispatch($negotiate);
 
-        if (null === $negotiate->getSelectedLanguage()) {
+        if ($negotiate->getSelectedLanguage() === null) {
             throw new NoSelectedLanguageException();
         }
 
         $response = new BuildResponseEvent($site, $request, $negotiate->getSelectedLanguage());
         $this->eventDispatcher->dispatch($response);
 
-        if (null === $response->getResponse()) {
+        if ($response->getResponse() === null) {
             throw new NoResponseException();
         }
 

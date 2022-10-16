@@ -22,7 +22,7 @@ class PathCheck
             return;
         }
 
-        if ('/' !== $event->getRequest()->getUri()->getPath()) {
+        if ($event->getRequest()->getUri()->getPath() !== '/') {
             $event->disableLanguageDetection();
         }
     }

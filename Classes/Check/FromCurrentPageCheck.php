@@ -14,7 +14,7 @@ class FromCurrentPageCheck
 
         $referer = $serverInformation['HTTP_REFERER'] ?? '';
         $baseUri = rtrim((string)$event->getSite()->getBase(), '/');
-        if ('' !== $referer && '' !== $baseUri && str_starts_with((string)$referer, $baseUri)) {
+        if ($referer !== '' && $baseUri !== '' && str_starts_with((string)$referer, $baseUri)) {
             $event->disableLanguageDetection();
         }
     }

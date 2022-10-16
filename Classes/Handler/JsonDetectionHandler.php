@@ -22,7 +22,7 @@ class JsonDetectionHandler extends AbstractHandler implements RequestHandlerInte
 {
     public function handle(ServerRequestInterface $request): ResponseInterface
     {
-        if ('/language.json' !== $request->getUri()->getPath()) {
+        if ($request->getUri()->getPath() !== '/language.json') {
             throw new DisableLanguageDetectionException('Wrong URI for JSON detection', 2_346_782);
         }
 
@@ -39,7 +39,7 @@ class JsonDetectionHandler extends AbstractHandler implements RequestHandlerInte
         $this->eventDispatcher->dispatch($negotiate);
 
         $selectedLanguage = $negotiate->getSelectedLanguage();
-        if (null === $selectedLanguage) {
+        if ($selectedLanguage === null) {
             $negotiate->setSelectedLanguage($site->getDefaultLanguage());
         }
 

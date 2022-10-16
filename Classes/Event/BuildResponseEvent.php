@@ -51,6 +51,6 @@ final class BuildResponseEvent extends AbstractEvent implements StoppableEventIn
 
     public function isPropagationStopped(): bool
     {
-        return null !== $this->getResponse();
+        return $this->getResponse() !== null;
     }
 }
