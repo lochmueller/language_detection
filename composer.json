@@ -40,7 +40,8 @@
 		"phpstan/phpstan": "^1.8",
 		"infection/infection": "^0.26",
 		"qossmic/deptrac-shim": "^0.24",
-		"geoip2/geoip2": "^2.13"
+		"geoip2/geoip2": "^2.13",
+		"ssch/typo3-rector": "^1.0"
 	},
 	"optimize-autoloader": true,
 	"config": {
