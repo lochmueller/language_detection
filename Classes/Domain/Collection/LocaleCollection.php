@@ -28,7 +28,7 @@ class LocaleCollection
 
     public function isEmpty(): bool
     {
-        return empty($this->locales);
+        return $this->locales === [];
     }
 
     /**

@@ -36,7 +36,7 @@ class GeoPluginDetect
     public function __invoke(DetectUserLanguagesEvent $event): void
     {
         $addIp = $this->siteConfigurationService->getConfiguration($event->getSite())->getAddIpLocationToBrowserLanguage();
-        if (!\in_array($addIp, [LocaleCollectionSortService::SORT_BEFORE, LocaleCollectionSortService::SORT_AFTER, LocaleCollectionSortService::SORT_REPLACE])) {
+        if (!\in_array($addIp, [LocaleCollectionSortService::SORT_BEFORE, LocaleCollectionSortService::SORT_AFTER, LocaleCollectionSortService::SORT_REPLACE], true)) {
             return;
         }
 

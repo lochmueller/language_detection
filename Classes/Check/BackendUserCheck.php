@@ -25,7 +25,8 @@ class BackendUserCheck
         }
         /** @var Context $context */
         $context = GeneralUtility::makeInstance(Context::class);
-        if ($context->getAspect('backend.user')->get('isLoggedIn')) {
+        $isLoggedIn = (bool)$context->getAspect('backend.user')->get('isLoggedIn');
+        if ($isLoggedIn) {
             $event->disableLanguageDetection();
         }
     }

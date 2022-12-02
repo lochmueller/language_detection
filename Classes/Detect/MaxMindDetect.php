@@ -52,7 +52,7 @@ class MaxMindDetect
             return null;
         }
 
-        if ($siteConfiguration->getMaxMindAccountId() && $siteConfiguration->getMaxMindLicenseKey()) {
+        if ($siteConfiguration->getMaxMindAccountId() !== 0 && $siteConfiguration->getMaxMindLicenseKey() !== '') {
             return new Client($siteConfiguration->getMaxMindAccountId(), $siteConfiguration->getMaxMindLicenseKey());
         }
 
