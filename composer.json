@@ -70,7 +70,6 @@
         ],
 		"code:all": [
 			"@code:deptrac",
-			"@code:rector",
 			"@code:php-cs-fixer",
 			"@code:phpstan"
 		],

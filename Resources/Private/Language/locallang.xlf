@@ -32,6 +32,9 @@
 			<trans-unit id="ip.location.to.language">
 				<source>Add IP location to browser language</source>
 			</trans-unit>
+			<trans-unit id="languageDetectionMaxMindMode">
+				<source>Location for the maxmind detection (mode)</source>
+			</trans-unit>
 			<trans-unit id="allow.all.paths">
 				<source>Allow all paths (otherwise the detection works only on "/")</source>
 			</trans-unit>

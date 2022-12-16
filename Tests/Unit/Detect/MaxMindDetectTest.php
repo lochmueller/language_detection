@@ -67,20 +67,26 @@ class MaxMindDetectTest extends AbstractUnitTest
             'languageDetectionMaxMindDatabasePath' => $dbFile,
         ]);
 
+        self::assertExecutionTimeLessThenOrEqual(0.3, function () use ($site, $serverRequest) {
+            $event = new DetectUserLanguagesEvent($site, $serverRequest);
+            $event->setUserLanguages(LocaleCollection::fromArray([]));
+            $maxMindDetect = new MaxMindDetect(new LanguageService(), new SiteConfigurationService(), new LocaleCollectionSortService());
+            $maxMindDetect($event);
+        });
+
+        self::assertExecutionMemoryLessThenOrEqual(400, function () use ($site, $serverRequest) {
+            $event = new DetectUserLanguagesEvent($site, $serverRequest);
+            $event->setUserLanguages(LocaleCollection::fromArray([]));
+            $maxMindDetect = new MaxMindDetect(new LanguageService(), new SiteConfigurationService(), new LocaleCollectionSortService());
+            $maxMindDetect($event);
+        });
+
+        // regular Execution
         $event = new DetectUserLanguagesEvent($site, $serverRequest);
         $event->setUserLanguages(LocaleCollection::fromArray([]));
-
-        $beforeMemory = memory_get_usage();
-        $beforeTime = microtime(true);
-
         $maxMindDetect = new MaxMindDetect(new LanguageService(), new SiteConfigurationService(), new LocaleCollectionSortService());
         $maxMindDetect($event);
 
-        $memoryUsage = memory_get_usage() - $beforeMemory;
-        $timeUsage = microtime(true) - $beforeTime;
-
-        self::assertLessThanOrEqual(1024 * 400, $memoryUsage);
-        self::assertLessThanOrEqual(0.08, $timeUsage);
         $languages = $event->getUserLanguages()->toArray();
         self::assertCount(1, $languages);
         self::assertEquals('en_US', (string)$languages[0]);

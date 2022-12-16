@@ -18,7 +18,7 @@ $GLOBALS['SiteConfiguration']['site']['columns']['enableLanguageDetection'] = [
 ];
 
 $GLOBALS['SiteConfiguration']['site']['palettes']['languageDetectionMaxMind'] = [
-    'showitem' => 'languageDetectionMaxMindDatabasePath, --linebreak--, languageDetectionMaxMindAccountId, languageDetectionMaxMindLicenseKey',
+    'showitem' => 'languageDetectionMaxMindDatabasePath, --linebreak--, languageDetectionMaxMindAccountId, languageDetectionMaxMindLicenseKey, languageDetectionMaxMindMode',
 ];
 
 $GLOBALS['SiteConfiguration']['site']['columns']['languageDetectionMaxMindDatabasePath'] = [
@@ -39,6 +39,19 @@ $GLOBALS['SiteConfiguration']['site']['columns']['languageDetectionMaxMindLicens
     'label' => 'LLL:EXT:language_detection/Resources/Private/Language/locallang.xlf:languageDetectionMaxMindLicenseKey',
     'config' => [
         'type' => 'input',
+    ],
+];
+
+$GLOBALS['SiteConfiguration']['site']['columns']['languageDetectionMaxMindMode'] = [
+    'label' => 'LLL:EXT:language_detection/Resources/Private/Language/locallang.xlf:languageDetectionMaxMindMode',
+    'config' => [
+        'type' => 'select',
+        'renderType' => 'selectSingle',
+        'items' => [
+            ['Before', LocaleCollectionSortService::SORT_BEFORE],
+            ['After', LocaleCollectionSortService::SORT_AFTER],
+            ['Replace', LocaleCollectionSortService::SORT_REPLACE],
+        ],
     ],
 ];
 

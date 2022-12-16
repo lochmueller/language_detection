@@ -26,6 +26,8 @@ class SiteConfiguration
 
     protected string $maxMindLicenseKey;
 
+    protected string $maxMindMode;
+
     public function __construct(
         bool $enableLanguageDetection,
         bool $disableRedirectWithBackendSession,
@@ -36,7 +38,8 @@ class SiteConfiguration
         int $fallbackDetectionLanguage,
         string $maxMindDatabasePath,
         int $maxMindAccountId,
-        string $maxMindLicenseKey
+        string $maxMindLicenseKey,
+        string $maxMindMode
     ) {
         $this->enableLanguageDetection = $enableLanguageDetection;
         $this->disableRedirectWithBackendSession = $disableRedirectWithBackendSession;
@@ -48,6 +51,7 @@ class SiteConfiguration
         $this->maxMindDatabasePath = $maxMindDatabasePath;
         $this->maxMindAccountId = $maxMindAccountId;
         $this->maxMindLicenseKey = $maxMindLicenseKey;
+        $this->maxMindMode = $maxMindMode;
     }
 
     public function isEnableLanguageDetection(): bool
@@ -98,5 +102,10 @@ class SiteConfiguration
     public function getMaxMindLicenseKey(): string
     {
         return $this->maxMindLicenseKey;
+    }
+
+    public function getMaxMindMode(): string
+    {
+        return $this->maxMindMode;
     }
 }

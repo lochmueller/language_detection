@@ -30,6 +30,7 @@ class SiteConfigurationTest extends AbstractUnitTest
             'path.mmdb',
             42,
             'abcd',
+            'After'
         );
 
         self::assertTrue($dto->isEnableLanguageDetection());

@@ -25,6 +25,7 @@ class SiteConfigurationService
             (string)($config['languageDetectionMaxMindDatabasePath'] ?? ''),
             (int)($config['languageDetectionMaxMindAccountId'] ?? ''),
             (string)($config['languageDetectionMaxMindLicenseKey'] ?? ''),
+            (string)($config['languageDetectionMaxMindMode'] ?? 'After'),
         );
     }
 }

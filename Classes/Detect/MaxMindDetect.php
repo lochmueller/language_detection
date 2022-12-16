@@ -42,8 +42,9 @@ class MaxMindDetect
         } catch (\Exception $exception) {
             return;
         }
+        $mode = $configuration->getMaxMindMode();
         $locale = $this->languageService->getLanguageByCountry((string)$result->country->isoCode) . '_' . $result->country->isoCode;
-        $event->setUserLanguages($this->localeCollectionSortService->addLocaleByMode($event->getUserLanguages(), new LocaleValueObject($locale)));
+        $event->setUserLanguages($this->localeCollectionSortService->addLocaleByMode($event->getUserLanguages(), new LocaleValueObject($locale), $mode));
     }
 
     protected function getProvider(SiteConfiguration $siteConfiguration): ?ProviderInterface
