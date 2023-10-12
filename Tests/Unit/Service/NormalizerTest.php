@@ -36,9 +36,9 @@ class NormalizerTest extends AbstractUnitTest
     {
         $normalizer = new Normalizer();
 
-        $base = array_map(fn ($item): string => $item[0], $this->normalizeProvider());
+        $base = array_map(fn($item): string => $item[0], $this->normalizeProvider());
 
-        $result = array_map(fn ($item): string => $item[1], $this->normalizeProvider());
+        $result = array_map(fn($item): string => $item[1], $this->normalizeProvider());
 
         self::assertEquals(array_values($result), $normalizer->normalizeList(LocaleCollection::fromArray(array_values($base)))->toArray());
     }

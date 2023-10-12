@@ -28,7 +28,7 @@ class LocaleCollectionSortServiceTest extends AbstractUnitTest
 
         $result = $sortService->addLocaleByMode($collection, new LocaleValueObject('en'));
 
-        self::assertSame(['de', 'en'], array_map(fn (LocaleValueObject $item): string => (string)$item, $result->toArray()));
+        self::assertSame(['de', 'en'], array_map(fn(LocaleValueObject $item): string => (string)$item, $result->toArray()));
     }
 
     /**
@@ -43,6 +43,6 @@ class LocaleCollectionSortServiceTest extends AbstractUnitTest
 
         $result = $sortService->addLocaleByMode($collection, new LocaleValueObject('en'), LocaleCollectionSortService::SORT_REPLACE);
 
-        self::assertSame(['en'], array_map(fn (LocaleValueObject $item): string => (string)$item, $result->toArray()));
+        self::assertSame(['en'], array_map(fn(LocaleValueObject $item): string => (string)$item, $result->toArray()));
     }
 }

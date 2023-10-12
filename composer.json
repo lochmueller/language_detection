@@ -39,7 +39,7 @@
 		"rector/rector": "^0.14",
 		"phpstan/phpstan": "^1.8",
 		"infection/infection": "^0.26",
-		"qossmic/deptrac-shim": "^0.24",
+		"qossmic/deptrac-shim": "^1.0",
 		"geoip2/geoip2": "^2.13",
 		"ssch/typo3-rector": "^1.0",
 		"phpstan/extension-installer": "^1.2"
@@ -87,6 +87,9 @@
 		],
 		"test:unit": [
 			"phpunit -c phpunit.xml --coverage-text --testdox"
+		],
+		"test:unit:tmp": [
+			"phpunit -c phpunit.xml --coverage-text --testdox --group=tmp"
 		],
 		"test:clover": [
 			"phpunit -c phpunit.xml --coverage-clover coverage.xml"

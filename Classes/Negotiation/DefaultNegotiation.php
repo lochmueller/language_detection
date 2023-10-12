@@ -22,6 +22,7 @@ class DefaultNegotiation
             'getLocale',
             'getTwoLetterIsoCode',
         ];
+
         $userLanguages = $this->normalizer->normalizeList($event->getUserLanguages());
         foreach ($userLanguages->toArray() as $userLanguage) {
             foreach ($event->getSite()->getLanguages() as $siteLanguage) {

@@ -11,7 +11,7 @@ class Normalizer
 {
     public function normalizeList(LocaleCollection $locales): LocaleCollection
     {
-        $result = array_map(fn (LocaleValueObject $locale): string => $this->normalize((string)$locale), $locales->toArray());
+        $result = array_map(fn(LocaleValueObject $locale): string => $this->normalize((string)$locale), $locales->toArray());
 
         return LocaleCollection::fromArray($result);
     }

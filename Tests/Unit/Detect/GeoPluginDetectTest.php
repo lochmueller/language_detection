@@ -52,7 +52,7 @@ class GeoPluginDetectTest extends AbstractUnitTest
         $ipLanguage = new GeoPluginDetect($ipLocation, new LanguageService(), new SiteConfigurationService(), new LocaleCollectionSortService());
         $ipLanguage($event);
 
-        self::assertSame($result, array_map(fn ($locale): string => (string)$locale, $event->getUserLanguages()->toArray()));
+        self::assertSame($result, array_map(fn($locale): string => (string)$locale, $event->getUserLanguages()->toArray()));
     }
 
     /**

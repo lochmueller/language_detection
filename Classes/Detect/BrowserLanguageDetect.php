@@ -36,7 +36,7 @@ class BrowserLanguageDetect
         arsort($acceptedLanguagesArr);
 
         // Remove quality 0.0
-        $acceptedLanguagesArr = array_filter($acceptedLanguagesArr, fn ($value, $key): bool => $value !== 0.0, \ARRAY_FILTER_USE_BOTH);
+        $acceptedLanguagesArr = array_filter($acceptedLanguagesArr, fn($value, $key): bool => $value !== 0.0, \ARRAY_FILTER_USE_BOTH);
 
         $event->setUserLanguages(LocaleCollection::fromArray(array_keys($acceptedLanguagesArr)));
     }
