@@ -4,10 +4,27 @@ declare(strict_types=1);
 
 namespace Lochmueller\LanguageDetection\Tests\Unit\Handler;
 
+use Lochmueller\LanguageDetection\Check\BotAgentCheck;
+use Lochmueller\LanguageDetection\Detect\BrowserLanguageDetect;
+use Lochmueller\LanguageDetection\Detect\MaxMindDetect;
+use Lochmueller\LanguageDetection\Domain\Model\Dto\LocaleValueObject;
+use Lochmueller\LanguageDetection\Event\BuildResponseEvent;
+use Lochmueller\LanguageDetection\Event\CheckLanguageDetectionEvent;
+use Lochmueller\LanguageDetection\Event\DetectUserLanguagesEvent;
+use Lochmueller\LanguageDetection\Event\NegotiateSiteLanguageEvent;
 use Lochmueller\LanguageDetection\Handler\Exception\DisableLanguageDetectionException;
 use Lochmueller\LanguageDetection\Handler\Exception\NoUserLanguagesException;
 use Lochmueller\LanguageDetection\Handler\JsonDetectionHandler;
+use Lochmueller\LanguageDetection\Negotiation\DefaultNegotiation;
+use Lochmueller\LanguageDetection\Response\DefaultResponse;
+use Lochmueller\LanguageDetection\Service\LanguageService;
+use Lochmueller\LanguageDetection\Service\LocaleCollectionSortService;
+use Lochmueller\LanguageDetection\Service\Normalizer;
+use Lochmueller\LanguageDetection\Service\SiteConfigurationService;
 use Psr\Http\Message\ResponseInterface;
+use Symfony\Component\DependencyInjection\Container;
+use TYPO3\CMS\Core\EventDispatcher\EventDispatcher;
+use TYPO3\CMS\Core\EventDispatcher\ListenerProvider;
 use TYPO3\CMS\Core\Http\ServerRequest;
 use TYPO3\CMS\Core\Site\Entity\Site;
 
@@ -36,6 +53,74 @@ class JsonDetectionHandlerTest extends AbstractHandlerTest
         $serverRequest = new ServerRequest('https://www.dummy.de/', null, 'php://input', ['accept-language' => 'de,de_DE']);
         $handler = new JsonDetectionHandler($this->getSmallEventListenerStack());
         $handler->handle($serverRequest);
+    }
+    /**
+     * @covers \Lochmueller\LanguageDetection\Check\BotAgentCheck
+     * @covers \Lochmueller\LanguageDetection\Detect\BrowserLanguageDetect
+     * @covers \Lochmueller\LanguageDetection\Event\CheckLanguageDetectionEvent
+     * @covers \Lochmueller\LanguageDetection\Event\DetectUserLanguagesEvent
+     * @covers \Lochmueller\LanguageDetection\Handler\AbstractHandler
+     * @covers \Lochmueller\LanguageDetection\Handler\Exception\DisableLanguageDetectionException
+     * @covers \Lochmueller\LanguageDetection\Handler\JsonDetectionHandler
+     * @covers \Lochmueller\LanguageDetection\Negotiation\DefaultNegotiation
+     * @covers \Lochmueller\LanguageDetection\Response\DefaultResponse
+     * @see https://github.com/lochmueller/language_detection/issues/34
+     */
+    public function testIssue34ResultOfHeaderAndMaxmindUsMatchLanguages(): void
+    {
+        $container = new Container();
+        $container->set(BotAgentCheck::class, new BotAgentCheck());
+        $container->set(BrowserLanguageDetect::class, new BrowserLanguageDetect());
+        $container->set('staticMaxMind', new class (new LanguageService(), new SiteConfigurationService(), new LocaleCollectionSortService()) extends MaxMindDetect {
+            public function __invoke(DetectUserLanguagesEvent $event): void
+            {
+                $fakeMaxMindResult = 'us';
+                $mode = 'Before';
+                $locale = $this->languageService->getLanguageByCountry($fakeMaxMindResult) . '_' . $fakeMaxMindResult;
+                $event->setUserLanguages($this->localeCollectionSortService->addLocaleByMode($event->getUserLanguages(), new LocaleValueObject($locale), $mode));
+            }
+        });
+
+        $container->set(DefaultNegotiation::class, new DefaultNegotiation(new Normalizer()));
+        $container->set(DefaultResponse::class, new DefaultResponse(new SiteConfigurationService()));
+        $provider = new ListenerProvider($container);
+        $provider->addListener(CheckLanguageDetectionEvent::class, BotAgentCheck::class);
+        $provider->addListener(DetectUserLanguagesEvent::class, BrowserLanguageDetect::class);
+        $provider->addListener(DetectUserLanguagesEvent::class, 'staticMaxMind');
+        $provider->addListener(NegotiateSiteLanguageEvent::class, DefaultNegotiation::class);
+        $provider->addListener(BuildResponseEvent::class, DefaultResponse::class);
+
+        $serverRequest = new ServerRequest('https://www.dummy.de/language.json', null, 'php://input', ['accept-language' => 'en-US,en;q=0.9']);
+        $serverRequest = $serverRequest->withAttribute('site', new Site('dummy', 1, [
+            'languages' => [
+                [
+                    'languageId' => 1,
+                    'base' => '/de-de/',
+                    'locale' => 'de_DE',
+                ],
+                [
+                    'languageId' => 2,
+                    'base' => '/en-us/',
+                    'locale' => 'en_US',
+                ],
+                [
+                    'languageId' => 3,
+                    'base' => '/en-gb/',
+                    'locale' => 'en_GB',
+                ],
+                [
+                    'languageId' => 4,
+                    'base' => '/fr-fr/',
+                    'locale' => 'fr_FR',
+                ],
+            ],
+        ]));
+        $handler = new JsonDetectionHandler(new EventDispatcher($provider));
+        $result = $handler->handle($serverRequest);
+
+        $json = \json_decode($result->getBody()->getContents());
+
+        self::assertEquals('en_US', $json->locale);
     }
 
     /**
