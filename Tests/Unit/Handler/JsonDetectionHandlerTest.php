@@ -75,7 +75,7 @@ class JsonDetectionHandlerTest extends AbstractHandlerTest
             public function __invoke(DetectUserLanguagesEvent $event): void
             {
                 $fakeMaxMindResult = 'us';
-                $mode = 'Before';
+                $mode = 'before';
                 $locale = $this->languageService->getLanguageByCountry($fakeMaxMindResult) . '_' . $fakeMaxMindResult;
                 $event->setUserLanguages($this->localeCollectionSortService->addLocaleByMode($event->getUserLanguages(), new LocaleValueObject($locale), $mode));
             }
