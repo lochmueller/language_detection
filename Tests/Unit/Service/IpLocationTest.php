@@ -6,7 +6,6 @@ namespace Lochmueller\LanguageDetection\Tests\Unit\Service;
 
 use Lochmueller\LanguageDetection\Service\IpLocation;
 use Lochmueller\LanguageDetection\Tests\Unit\AbstractUnitTest;
-use TYPO3\CMS\Core\Http\RequestFactory;
 
 /**
  * @internal
@@ -20,7 +19,7 @@ class IpLocationTest extends AbstractUnitTest
      */
     public function testGetLocationForValidIp(): void
     {
-        $locationService = new IpLocation(new RequestFactory());
+        $locationService = new IpLocation($this->getRequestFactory());
         $result = $locationService->getCountryCode('8.8.8.8');
 
         self::assertEquals('US', $result);
@@ -31,7 +30,7 @@ class IpLocationTest extends AbstractUnitTest
      */
     public function testEmptyIpDirectNull(): void
     {
-        $locationService = new IpLocation(new RequestFactory());
+        $locationService = new IpLocation($this->getRequestFactory());
 
         self::assertNull($locationService->getCountryCode(''));
     }
@@ -41,7 +40,7 @@ class IpLocationTest extends AbstractUnitTest
      */
     public function testGetLocationForInvalidIp(): void
     {
-        $locationService = new IpLocation(new RequestFactory());
+        $locationService = new IpLocation($this->getRequestFactory());
         self::assertNull($locationService->getCountryCode('0.0.0.0'));
     }
 }

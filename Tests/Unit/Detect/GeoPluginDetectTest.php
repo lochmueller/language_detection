@@ -63,9 +63,9 @@ class GeoPluginDetectTest extends AbstractUnitTest
         return [
             'Empty LD configuration with country result' => ['', ['default'], 'DE'],
             'After LD configuration with no country result' => ['after', ['default'], null],
-            'After LD configuration with DE country result' => ['after', ['default', 'de'], 'DE'],
-            'Before LD configuration with DE country result' => ['before', ['de', 'default'], 'DE'],
-            'Replace LD configuration with DE country result' => ['replace', ['de'], 'DE'],
+            'After LD configuration with DE country result' => ['after', ['default', 'de_DE'], 'DE'],
+            'Before LD configuration with DE country result' => ['before', ['de_DE', 'default'], 'DE'],
+            'Replace LD configuration with DE country result' => ['replace', ['de_DE'], 'DE'],
             'Wrong LD configuration with DE country result' => ['wrong', ['default'], 'DE'],
         ];
     }

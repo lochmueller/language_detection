@@ -40,21 +40,21 @@ class GeoPluginDetect
             return;
         }
 
-        $language = $this->getLanguage($event->getRequest());
-        if ($language === null) {
+        $locale = $this->getLocale($event->getRequest());
+        if ($locale === null) {
             return;
         }
 
-        $event->setUserLanguages($this->localeCollectionSortService->addLocaleByMode($event->getUserLanguages(), new LocaleValueObject($language), $addIp));
+        $event->setUserLanguages($this->localeCollectionSortService->addLocaleByMode($event->getUserLanguages(), new LocaleValueObject($locale), $addIp));
     }
 
-    public function getLanguage(ServerRequestInterface $request): ?string
+    public function getLocale(ServerRequestInterface $request): ?string
     {
         $countryCode = $this->ipLocation->getCountryCode($request->getServerParams()['REMOTE_ADDR'] ?? '');
         if ($countryCode === null) {
             return null;
         }
 
-        return $this->languageService->getLanguageByCountry($countryCode);
+        return $this->languageService->getLanguageByCountry($countryCode) . '_' . $countryCode;
     }
 }
