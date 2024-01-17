@@ -12,17 +12,13 @@ use TYPO3\CMS\Core\Site\Entity\SiteLanguage;
 
 final class NegotiateSiteLanguageEvent extends AbstractEvent implements StoppableEventInterface
 {
-    private SiteInterface $site;
-    private ServerRequestInterface $request;
-    private LocaleCollection $userLanguages;
     private ?SiteLanguage $selectedLanguage = null;
 
-    public function __construct(SiteInterface $site, ServerRequestInterface $request, LocaleCollection $userLanguages)
-    {
-        $this->site = $site;
-        $this->request = $request;
-        $this->userLanguages = $userLanguages;
-    }
+    public function __construct(
+        private SiteInterface $site,
+        private ServerRequestInterface $request,
+        private LocaleCollection $userLanguages
+    ) {}
 
     public function getSite(): SiteInterface
     {

@@ -13,12 +13,7 @@ use Psr\Http\Server\RequestHandlerInterface;
 
 class JsonDetectionMiddleware implements MiddlewareInterface
 {
-    protected JsonDetectionHandler $jsonDetectionHandler;
-
-    public function __construct(JsonDetectionHandler $jsonDetectionHandler)
-    {
-        $this->jsonDetectionHandler = $jsonDetectionHandler;
-    }
+    public function __construct(protected JsonDetectionHandler $jsonDetectionHandler) {}
 
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {

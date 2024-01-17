@@ -46,7 +46,7 @@ class NormalizerTest extends AbstractUnitTest
     /**
      * @return array<string, array<int, string>>
      */
-    public function normalizeProvider(): array
+    public static function normalizeProvider(): array
     {
         return [
             'default' => [

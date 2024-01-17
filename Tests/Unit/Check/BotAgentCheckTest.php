@@ -56,7 +56,7 @@ class BotAgentCheckTest extends AbstractUnitTest
     /**
      * @return array<int, array<string|bool>>
      */
-    public function data(): array
+    public static function data(): array
     {
         return [
             ['AdsBot-Google', false],

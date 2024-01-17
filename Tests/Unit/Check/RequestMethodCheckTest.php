@@ -39,7 +39,7 @@ class RequestMethodCheckTest extends AbstractUnitTest
     /**
      * @return array<string, mixed[]>
      */
-    public function data(): array
+    public static function data(): array
     {
         return [
             'Right request method' => ['GET', true],

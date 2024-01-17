@@ -6,53 +6,19 @@ namespace Lochmueller\LanguageDetection\Domain\Model\Dto;
 
 class SiteConfiguration
 {
-    protected bool $enableLanguageDetection;
-
-    protected bool $disableRedirectWithBackendSession;
-
-    protected string $addIpLocationToBrowserLanguage;
-
-    protected bool $allowAllPaths;
-
-    protected int $redirectHttpStatusCode;
-
-    protected string $forwardRedirectParameters;
-
-    protected int $fallbackDetectionLanguage;
-
-    protected string $maxMindDatabasePath;
-
-    protected int $maxMindAccountId;
-
-    protected string $maxMindLicenseKey;
-
-    protected string $maxMindMode;
-
     public function __construct(
-        bool $enableLanguageDetection,
-        bool $disableRedirectWithBackendSession,
-        string $addIpLocationToBrowserLanguage,
-        bool $allowAllPaths,
-        int $redirectHttpStatusCode,
-        string $forwardRedirectParameters,
-        int $fallbackDetectionLanguage,
-        string $maxMindDatabasePath,
-        int $maxMindAccountId,
-        string $maxMindLicenseKey,
-        string $maxMindMode
-    ) {
-        $this->enableLanguageDetection = $enableLanguageDetection;
-        $this->disableRedirectWithBackendSession = $disableRedirectWithBackendSession;
-        $this->addIpLocationToBrowserLanguage = $addIpLocationToBrowserLanguage;
-        $this->allowAllPaths = $allowAllPaths;
-        $this->redirectHttpStatusCode = $redirectHttpStatusCode;
-        $this->forwardRedirectParameters = $forwardRedirectParameters;
-        $this->fallbackDetectionLanguage = $fallbackDetectionLanguage;
-        $this->maxMindDatabasePath = $maxMindDatabasePath;
-        $this->maxMindAccountId = $maxMindAccountId;
-        $this->maxMindLicenseKey = $maxMindLicenseKey;
-        $this->maxMindMode = $maxMindMode;
-    }
+        protected bool $enableLanguageDetection,
+        protected bool $disableRedirectWithBackendSession,
+        protected string $addIpLocationToBrowserLanguage,
+        protected bool $allowAllPaths,
+        protected int $redirectHttpStatusCode,
+        protected string $forwardRedirectParameters,
+        protected int $fallbackDetectionLanguage,
+        protected string $maxMindDatabasePath,
+        protected int $maxMindAccountId,
+        protected string $maxMindLicenseKey,
+        protected string $maxMindMode
+    ) {}
 
     public function isEnableLanguageDetection(): bool
     {

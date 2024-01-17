@@ -41,7 +41,7 @@ class FromCurrentPageCheckTest extends AbstractUnitTest
     /**
      * @return array<string, array<int, bool|string>>
      */
-    public function data(): array
+    public static function data(): array
     {
         return [
             'Internal referrer as deeplink' => ['https://www.website.de/deeplink', 'https://www.website.de', false],

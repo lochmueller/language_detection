@@ -110,7 +110,7 @@ class BackendUserCheckTest extends AbstractUnitTest
     /**
      * @return array<string, bool[]>
      */
-    public function data(): array
+    public static function data(): array
     {
         return [
             'Active be user and disableRedirectWithBackendSession' => [true, true, false],

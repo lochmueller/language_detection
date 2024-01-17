@@ -11,12 +11,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 class BackendUserCheck
 {
-    protected SiteConfigurationService $siteConfigurationService;
-
-    public function __construct(SiteConfigurationService $siteConfigurationService)
-    {
-        $this->siteConfigurationService = $siteConfigurationService;
-    }
+    public function __construct(protected SiteConfigurationService $siteConfigurationService) {}
 
     public function __invoke(CheckLanguageDetectionEvent $event): void
     {

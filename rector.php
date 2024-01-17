@@ -23,7 +23,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     $containerConfigurator->import(SetList::CODE_QUALITY);
     $containerConfigurator->import(SetList::TYPE_DECLARATION);
     $containerConfigurator->import(SetList::TYPE_DECLARATION_STRICT);
-    $containerConfigurator->import(LevelSetList::UP_TO_PHP_74);
+    $containerConfigurator->import(LevelSetList::UP_TO_PHP_80);
 
     $parameters = $containerConfigurator->parameters();
     $parameters->set(Option::PHPSTAN_FOR_RECTOR_PATH, Typo3Option::PHPSTAN_FOR_RECTOR_PATH);

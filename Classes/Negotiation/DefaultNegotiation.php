@@ -9,12 +9,7 @@ use Lochmueller\LanguageDetection\Service\Normalizer;
 
 class DefaultNegotiation
 {
-    protected Normalizer $normalizer;
-
-    public function __construct(Normalizer $normalizer)
-    {
-        $this->normalizer = $normalizer;
-    }
+    public function __construct(protected Normalizer $normalizer) {}
 
     public function __invoke(NegotiateSiteLanguageEvent $event): void
     {

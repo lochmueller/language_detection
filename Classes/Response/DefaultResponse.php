@@ -15,12 +15,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 class DefaultResponse
 {
-    protected SiteConfigurationService $siteConfigurationService;
-
-    public function __construct(SiteConfigurationService $siteConfigurationService)
-    {
-        $this->siteConfigurationService = $siteConfigurationService;
-    }
+    public function __construct(protected SiteConfigurationService $siteConfigurationService) {}
 
     public function __invoke(BuildResponseEvent $event): void
     {

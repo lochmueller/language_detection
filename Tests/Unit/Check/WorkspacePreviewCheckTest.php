@@ -44,7 +44,7 @@ class WorkspacePreviewCheckTest extends AbstractUnitTest
     /**
      * @return array<string, array<array<string, string>|bool>>
      */
-    public function data(): array
+    public static function data(): array
     {
         return [
             'no param' => [

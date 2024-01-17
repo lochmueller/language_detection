@@ -11,14 +11,12 @@ use TYPO3\CMS\Core\Site\Entity\SiteInterface;
 
 final class DetectUserLanguagesEvent extends AbstractEvent
 {
-    private SiteInterface $site;
-    private ServerRequestInterface $request;
     private LocaleCollection $userLanguages;
 
-    public function __construct(SiteInterface $site, ServerRequestInterface $request)
-    {
-        $this->site = $site;
-        $this->request = $request;
+    public function __construct(
+        protected SiteInterface $site,
+        protected ServerRequestInterface $request
+    ) {
         $this->userLanguages = new LocaleCollection();
     }
 

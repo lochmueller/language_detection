@@ -13,12 +13,7 @@ use Psr\Http\Server\RequestHandlerInterface;
 
 class LanguageDetectionMiddleware implements MiddlewareInterface
 {
-    protected LanguageDetectionHandler $languageDetectionHandler;
-
-    public function __construct(LanguageDetectionHandler $languageDetectionHandler)
-    {
-        $this->languageDetectionHandler = $languageDetectionHandler;
-    }
+    public function __construct(protected LanguageDetectionHandler $languageDetectionHandler) {}
 
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {

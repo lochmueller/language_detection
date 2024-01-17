@@ -59,7 +59,7 @@ class MaxMindDetectTest extends AbstractUnitTest
 
         $dbFile = \dirname(__FILE__, 3) . '/Fixtures/GeoIP2-Country.mmdb';
         if (!is_file($dbFile)) {
-            self::markTestIncomplete('No local GEO IP 2 database is found');
+            self::markTestSkipped('No local GEO IP 2 database is found');
         }
 
         $site = $this->createStub(Site::class);

@@ -10,12 +10,7 @@ use TYPO3\CMS\Core\Site\Entity\Site;
 
 class FallbackNegotiation
 {
-    protected SiteConfigurationService $siteConfigurationService;
-
-    public function __construct(SiteConfigurationService $siteConfigurationService)
-    {
-        $this->siteConfigurationService = $siteConfigurationService;
-    }
+    public function __construct(protected SiteConfigurationService $siteConfigurationService) {}
 
     public function __invoke(NegotiateSiteLanguageEvent $event): void
     {

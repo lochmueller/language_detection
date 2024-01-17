@@ -10,12 +10,7 @@ use TYPO3\CMS\Core\Site\Entity\SiteInterface;
 
 abstract class AbstractHandler
 {
-    protected EventDispatcherInterface $eventDispatcher;
-
-    public function __construct(EventDispatcherInterface $eventDispatcher)
-    {
-        $this->eventDispatcher = $eventDispatcher;
-    }
+    public function __construct(protected EventDispatcherInterface $eventDispatcher) {}
 
     protected function getSiteFromRequest(ServerRequestInterface $request): SiteInterface
     {

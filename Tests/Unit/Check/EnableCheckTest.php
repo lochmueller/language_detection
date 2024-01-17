@@ -44,7 +44,7 @@ class EnableCheckTest extends AbstractUnitTest
     /**
      * @return array<string, mixed[]>
      */
-    public function data(): array
+    public static function data(): array
     {
         return [
             'Explicit enabled' => [['enableLanguageDetection' => true], true],

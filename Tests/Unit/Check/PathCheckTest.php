@@ -45,7 +45,7 @@ class PathCheckTest extends AbstractUnitTest
     /**
      * @return array<string, mixed[]>
      */
-    public function data(): array
+    public static function data(): array
     {
         return [
             'allowAllPaths and deeplink' => [

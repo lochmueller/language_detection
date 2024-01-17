@@ -6,12 +6,7 @@ namespace Lochmueller\LanguageDetection\Domain\Model\Dto;
 
 class LocaleValueObject
 {
-    protected string $locale;
-
-    public function __construct(string $locale)
-    {
-        $this->locale = $locale;
-    }
+    public function __construct(protected string $locale) {}
 
     public function getLocale(): string
     {

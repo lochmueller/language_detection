@@ -12,17 +12,13 @@ use TYPO3\CMS\Core\Site\Entity\SiteLanguage;
 
 final class BuildResponseEvent extends AbstractEvent implements StoppableEventInterface
 {
-    private SiteInterface $site;
-    private ServerRequestInterface $request;
-    private SiteLanguage $selectedLanguage;
     private ?ResponseInterface $response = null;
 
-    public function __construct(SiteInterface $site, ServerRequestInterface $request, SiteLanguage $selectedLanguage)
-    {
-        $this->site = $site;
-        $this->request = $request;
-        $this->selectedLanguage = $selectedLanguage;
-    }
+    public function __construct(
+        private SiteInterface $site,
+        private ServerRequestInterface $request,
+        private SiteLanguage $selectedLanguage
+    ) {}
 
     public function getSite(): SiteInterface
     {

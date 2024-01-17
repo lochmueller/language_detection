@@ -20,18 +20,12 @@ use Psr\Http\Message\ServerRequestInterface;
  */
 class GeoPluginDetect
 {
-    protected IpLocation $ipLocation;
-    protected LanguageService $languageService;
-    protected SiteConfigurationService $siteConfigurationService;
-    protected LocaleCollectionSortService $localeCollectionSortService;
-
-    public function __construct(IpLocation $ipLocation, LanguageService $languageService, SiteConfigurationService $siteConfigurationService, LocaleCollectionSortService $localeCollectionSortService)
-    {
-        $this->ipLocation = $ipLocation;
-        $this->languageService = $languageService;
-        $this->siteConfigurationService = $siteConfigurationService;
-        $this->localeCollectionSortService = $localeCollectionSortService;
-    }
+    public function __construct(
+        protected IpLocation $ipLocation,
+        protected LanguageService $languageService,
+        protected SiteConfigurationService $siteConfigurationService,
+        protected LocaleCollectionSortService $localeCollectionSortService
+    ) {}
 
     public function __invoke(DetectUserLanguagesEvent $event): void
     {

@@ -48,7 +48,7 @@ class BrowserLanguageDetectTest extends AbstractUnitTest
     /**
      * @return array<string, array<int, array<int, string>|string>>
      */
-    public function data(): array
+    public static function data(): array
     {
         return [
             'empty' => ['', []],

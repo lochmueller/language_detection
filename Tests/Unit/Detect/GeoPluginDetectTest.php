@@ -58,7 +58,7 @@ class GeoPluginDetectTest extends AbstractUnitTest
     /**
      * @return array<string, array<string|string[]|string|null>>
      */
-    public function data(): array
+    public static function data(): array
     {
         return [
             'Empty LD configuration with country result' => ['', ['default'], 'DE'],

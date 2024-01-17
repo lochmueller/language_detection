@@ -124,7 +124,7 @@ class FallbackNegotiationTest extends AbstractUnitTest
     /**
      * @return array{empty: never[][], other: array<int, array{dummy: string}>, text: array<int, array{fallbackDetectionLanguage: string}>, array: array<int, array{fallbackDetectionLanguage: int[]}>}
      */
-    public function dataInvalid(): array
+    public static function dataInvalid(): array
     {
         return [
             'empty' => [[]],
