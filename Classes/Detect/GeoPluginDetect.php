@@ -16,7 +16,7 @@ use Psr\Http\Message\ServerRequestInterface;
  * Location Service.
  *
  * Get the Location based on the IP.
- * Use the geoplugin.net API.
+ * Use the ip-api.com API.
  */
 class GeoPluginDetect
 {

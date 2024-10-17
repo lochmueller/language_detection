@@ -13,6 +13,9 @@ class LanguageService
     {
         /** @var ResourceBundle $subtags */
         $subtags = ResourceBundle::create('likelySubtags', 'ICUDATA', false);
+        if ($subtags === null) {
+            return 'xx';
+        }
         $dummy = 'und_' . strtoupper($country);
         $locale = $subtags->get($dummy) ?: $subtags->get('und');
 

@@ -18,7 +18,7 @@ class IpLocation
         if ($ip === '') {
             return null;
         }
-        $urlService = 'http://www.geoplugin.net/php.gp?ip=' . $ip;
+        $urlService = 'http://ip-api.com/json/' . $ip;
         try {
             $request = $this->requestFactory->createRequest('GET', $urlService);
             $response = $this->getClient()->send($request);
@@ -26,13 +26,14 @@ class IpLocation
             if ($response->getStatusCode() !== 200) {
                 throw new IpLocationException('Missing information in response', 123781);
             }
-            $result = (array)unserialize((string)$response->getBody(), ['allowed_classes' => false]);
 
-            if ($result === [] || (int)$result['geoplugin_status'] === 404) {
+            $result = \json_decode((string)$response->getBody());
+
+            if (!($result instanceof \stdClass) || $result->status !== 'success') {
                 throw new IpLocationException('No valid data', 162378);
             }
 
-            return $result['geoplugin_countryCode'] ?? null;
+            return $result->countryCode ?? null;
         } catch (IpLocationException) {
             return null;
         }

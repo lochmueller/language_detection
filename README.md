@@ -83,11 +83,11 @@ This event collect user information to get the user languages. You can register 
 
 Default-Listener:
 
-| Name                  | Description                                                                                                                                         |
-|-----------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------|
-| BrowserLanguageDetect | Get the users "accept-language" languages                                                                                                           |
-| GeoPluginDetect       | Send the IP to geoplugin.net and add the language of the location to the checked languages (respect "addIpLocationToBrowserLanguage" configuration) |
-| MaxMindDetect         | Use MaxMind database or webservice to get the country information                                                                                   |
+| Name                  | Description                                                                                                                                      |
+|-----------------------|--------------------------------------------------------------------------------------------------------------------------------------------------|
+| BrowserLanguageDetect | Get the users "accept-language" languages                                                                                                        |
+| GeoPluginDetect       | Send the IP to ip-api.com and add the language of the location to the checked languages (respect "addIpLocationToBrowserLanguage" configuration) |
+| MaxMindDetect         | Use MaxMind database or webservice to get the country information                                                                                |
 
 _Please keep data privacy in mind in case of the "IpLanguage" Listener!_
 
