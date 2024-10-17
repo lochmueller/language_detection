@@ -12,7 +12,7 @@ class TcaLanguageSelection
 {
     public function __construct(protected ?SiteFinder $siteFinder = null)
     {
-        if ($siteFinder === null) {
+        if (!$siteFinder instanceof \TYPO3\CMS\Core\Site\SiteFinder) {
             /** @var SiteFinder $siteFinder */
             $siteFinder = GeneralUtility::makeInstance(SiteFinder::class);
             $this->siteFinder = $siteFinder;
@@ -30,7 +30,7 @@ class TcaLanguageSelection
 
         try {
             $site = $this->siteFinder->getSiteByIdentifier($configuration['row']['identifier']);
-        } catch (SiteNotFoundException $exception) {
+        } catch (SiteNotFoundException) {
             return;
         }
 

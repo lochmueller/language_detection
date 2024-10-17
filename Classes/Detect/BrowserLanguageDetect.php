@@ -24,7 +24,7 @@ class BrowserLanguageDetect
             if (str_contains($languageAndQualityStr, ';')) {
                 $parts = GeneralUtility::trimExplode(';', $languageAndQualityStr, true);
                 $languageCode = $parts[0];
-                $quality = isset($parts[1]) ? $parts[1] : '';
+                $quality = $parts[1] ?? '';
             } else {
                 $languageCode = $languageAndQualityStr;
                 $quality = 'q=1.0';

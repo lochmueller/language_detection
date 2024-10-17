@@ -133,13 +133,13 @@ class RespectLanguageLinkDetailsTraitTest extends AbstractUnitTest
         $traitObject = $this->getObjectForTrait(RespectLanguageLinkDetailsTrait::class);
         $reflectionClass = new \ReflectionClass($traitObject);
 
-        if ($linkLanguageHandler !== null) {
+        if ($linkLanguageHandler instanceof \Lochmueller\LanguageDetection\Handler\LinkLanguageHandler) {
             $propertyLanguageEventDispatcher = $reflectionClass->getProperty('linkLanguageHandler');
             $propertyLanguageEventDispatcher->setAccessible(true);
             $propertyLanguageEventDispatcher->setValue($traitObject, $linkLanguageHandler);
         }
 
-        if ($languageSiteFinder !== null) {
+        if ($languageSiteFinder instanceof \TYPO3\CMS\Core\Site\SiteFinder) {
             $propertyLanguageSiteFinder = $reflectionClass->getProperty('languageSiteFinder');
             $propertyLanguageSiteFinder->setAccessible(true);
             $propertyLanguageSiteFinder->setValue($traitObject, $languageSiteFinder);

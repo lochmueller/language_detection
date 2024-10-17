@@ -28,12 +28,12 @@ class IpLocation
             }
             $result = (array)unserialize((string)$response->getBody(), ['allowed_classes' => false]);
 
-            if (empty($result) || (int)$result['geoplugin_status'] === 404) {
+            if ($result === [] || (int)$result['geoplugin_status'] === 404) {
                 throw new IpLocationException('No valid data', 162378);
             }
 
             return $result['geoplugin_countryCode'] ?? null;
-        } catch (IpLocationException $exc) {
+        } catch (IpLocationException) {
             return null;
         }
     }
@@ -43,6 +43,6 @@ class IpLocation
         if (GeneralUtility::makeInstance(Typo3Version::class)->getMajorVersion() >= 12) {
             return GeneralUtility::makeInstance(GuzzleClientFactory::class)->getClient();
         }
-        return GuzzleClientFactory::getClient();
+        return (new GuzzleClientFactory())->getClient();
     }
 }

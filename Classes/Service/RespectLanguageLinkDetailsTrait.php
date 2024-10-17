@@ -30,7 +30,7 @@ trait RespectLanguageLinkDetailsTrait
             return $linkDetails;
         }
 
-        if ($request === null) {
+        if (!$request instanceof \Psr\Http\Message\ServerRequestInterface) {
             $request = ServerRequestFactory::fromGlobals();
             $request = $request->withMethod('GET')->withUri(new Uri('/'));
         }
@@ -43,7 +43,7 @@ trait RespectLanguageLinkDetailsTrait
             $linkDetails['parameters'] = 'L=' . $response->getHeaderLine(LinkLanguageHandler::HEADER_NAME);
 
             return $linkDetails;
-        } catch (AbstractHandlerException $exception) {
+        } catch (AbstractHandlerException) {
             return $linkDetails;
         }
     }

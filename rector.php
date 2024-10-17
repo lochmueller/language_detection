@@ -17,21 +17,14 @@ use Ssch\TYPO3Rector\Set\Typo3LevelSetList;
 use Ssch\TYPO3Rector\Set\Typo3SetList;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 
-return static function (ContainerConfigurator $containerConfigurator): void {
+return static function (\Rector\Config\RectorConfig $config): void {
 
-    $containerConfigurator->import(Typo3LevelSetList::UP_TO_TYPO3_12);
-    $containerConfigurator->import(SetList::CODE_QUALITY);
-    $containerConfigurator->import(SetList::TYPE_DECLARATION);
-    $containerConfigurator->import(SetList::TYPE_DECLARATION_STRICT);
-    $containerConfigurator->import(LevelSetList::UP_TO_PHP_80);
+    $config->import(Typo3LevelSetList::UP_TO_TYPO3_13);
+    $config->import(SetList::CODE_QUALITY);
+    $config->import(SetList::TYPE_DECLARATION);
+    $config->import(LevelSetList::UP_TO_PHP_81);
 
-    $parameters = $containerConfigurator->parameters();
-    $parameters->set(Option::PHPSTAN_FOR_RECTOR_PATH, Typo3Option::PHPSTAN_FOR_RECTOR_PATH);
-    $parameters->set(Option::AUTO_IMPORT_NAMES, true);
-    $parameters->set(Option::IMPORT_SHORT_CLASSES, false);
-    $parameters->set(Option::IMPORT_DOC_BLOCKS, false);
-
-    $parameters->set(Option::PATHS, [
+    $config->paths([
         'ext_emconf.php',
         'composer.json',
         __DIR__ . '/Classes/',
@@ -39,15 +32,11 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         __DIR__ . '/Tests/',
     ]);
 
-    $parameters->set(Option::SKIP, [
+    $config->skip([
         NameImportingPostRector::class => [
             'ext_emconf.php',
             'ext_localconf.php',
             'ext_tables.php',
         ],
     ]);
-
-    $services = $containerConfigurator->services();
-    $services->set(ExtEmConfRector::class);
-    $services->set(ExtensionComposerRector::class);
 };

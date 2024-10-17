@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Lochmueller\LanguageDetection\Domain\Model\Dto;
 
-class LocaleValueObject
+class LocaleValueObject implements \Stringable
 {
     public function __construct(protected string $locale) {}
 
@@ -18,7 +18,7 @@ class LocaleValueObject
         $this->locale = $locale;
     }
 
-    public function __toString()
+    public function __toString(): string
     {
         return $this->getLocale();
     }

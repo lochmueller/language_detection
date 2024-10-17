@@ -43,14 +43,14 @@ class LanguageDetectionHandler extends AbstractHandler implements RequestHandler
         $negotiate = new NegotiateSiteLanguageEvent($site, $request, $detect->getUserLanguages());
         $this->eventDispatcher->dispatch($negotiate);
 
-        if ($negotiate->getSelectedLanguage() === null) {
+        if (!$negotiate->getSelectedLanguage() instanceof \TYPO3\CMS\Core\Site\Entity\SiteLanguage) {
             throw new NoSelectedLanguageException();
         }
 
         $response = new BuildResponseEvent($site, $request, $negotiate->getSelectedLanguage());
         $this->eventDispatcher->dispatch($response);
 
-        if ($response->getResponse() === null) {
+        if (!$response->getResponse() instanceof \Psr\Http\Message\ResponseInterface) {
             throw new NoResponseException();
         }
 

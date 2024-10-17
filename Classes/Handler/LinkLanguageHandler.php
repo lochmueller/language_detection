@@ -48,7 +48,7 @@ class LinkLanguageHandler extends AbstractHandler implements RequestHandlerInter
         $negotiate = new NegotiateSiteLanguageEvent($site, $request, $detect->getUserLanguages());
         $this->eventDispatcher->dispatch($negotiate);
 
-        if ($negotiate->getSelectedLanguage() === null) {
+        if (!$negotiate->getSelectedLanguage() instanceof \TYPO3\CMS\Core\Site\Entity\SiteLanguage) {
             throw new NoSelectedLanguageException();
         }
 

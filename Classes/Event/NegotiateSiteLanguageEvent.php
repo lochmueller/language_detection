@@ -47,6 +47,6 @@ final class NegotiateSiteLanguageEvent extends AbstractEvent implements Stoppabl
 
     public function isPropagationStopped(): bool
     {
-        return $this->selectedLanguage !== null;
+        return $this->selectedLanguage instanceof \TYPO3\CMS\Core\Site\Entity\SiteLanguage;
     }
 }

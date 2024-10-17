@@ -19,7 +19,7 @@ class LanguageDetectionMiddleware implements MiddlewareInterface
     {
         try {
             return $this->languageDetectionHandler->handle($request);
-        } catch (AbstractHandlerException $exception) {
+        } catch (AbstractHandlerException) {
             return $handler->handle($request);
         }
     }

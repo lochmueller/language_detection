@@ -47,6 +47,6 @@ final class BuildResponseEvent extends AbstractEvent implements StoppableEventIn
 
     public function isPropagationStopped(): bool
     {
-        return $this->getResponse() !== null;
+        return $this->getResponse() instanceof \Psr\Http\Message\ResponseInterface;
     }
 }

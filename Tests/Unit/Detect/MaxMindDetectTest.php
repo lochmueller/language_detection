@@ -67,14 +67,14 @@ class MaxMindDetectTest extends AbstractUnitTest
             'languageDetectionMaxMindDatabasePath' => $dbFile,
         ]);
 
-        self::assertExecutionTimeLessThenOrEqual(0.3, function () use ($site, $serverRequest) {
+        self::assertExecutionTimeLessThenOrEqual(0.3, function () use ($site, $serverRequest): void {
             $event = new DetectUserLanguagesEvent($site, $serverRequest);
             $event->setUserLanguages(LocaleCollection::fromArray([]));
             $maxMindDetect = new MaxMindDetect(new LanguageService(), new SiteConfigurationService(), new LocaleCollectionSortService());
             $maxMindDetect($event);
         });
 
-        self::assertExecutionMemoryLessThenOrEqual(400, function () use ($site, $serverRequest) {
+        self::assertExecutionMemoryLessThenOrEqual(400, function () use ($site, $serverRequest): void {
             $event = new DetectUserLanguagesEvent($site, $serverRequest);
             $event->setUserLanguages(LocaleCollection::fromArray([]));
             $maxMindDetect = new MaxMindDetect(new LanguageService(), new SiteConfigurationService(), new LocaleCollectionSortService());

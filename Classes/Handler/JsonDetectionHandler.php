@@ -38,7 +38,7 @@ class JsonDetectionHandler extends AbstractHandler implements RequestHandlerInte
         $this->eventDispatcher->dispatch($negotiate);
 
         $selectedLanguage = $negotiate->getSelectedLanguage();
-        if ($selectedLanguage === null) {
+        if (!$selectedLanguage instanceof \TYPO3\CMS\Core\Site\Entity\SiteLanguage) {
             return new JsonResponse($site->getDefaultLanguage()->toArray());
         }
 

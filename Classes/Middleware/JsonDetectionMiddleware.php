@@ -19,7 +19,7 @@ class JsonDetectionMiddleware implements MiddlewareInterface
     {
         try {
             return $this->jsonDetectionHandler->handle($request);
-        } catch (AbstractHandlerException $exception) {
+        } catch (AbstractHandlerException) {
             return $handler->handle($request);
         }
     }

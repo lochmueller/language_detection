@@ -82,7 +82,7 @@ class DefaultResponseTest extends AbstractUnitTest
         $defaultResponse($event);
 
         self::assertNotNull($event->getResponse());
-        if ($event->getResponse() !== null) {
+        if ($event->getResponse() instanceof \Psr\Http\Message\ResponseInterface) {
             self::assertEquals(307, $event->getResponse()->getStatusCode());
         }
     }
@@ -117,7 +117,7 @@ class DefaultResponseTest extends AbstractUnitTest
         $defaultResponse($event);
 
         self::assertNotNull($event->getResponse());
-        if ($event->getResponse() !== null) {
+        if ($event->getResponse() instanceof \Psr\Http\Message\ResponseInterface) {
             self::assertEquals(307, $event->getResponse()->getStatusCode());
             self::assertEquals('/en/?test=1', $event->getResponse()->getHeaderLine('location'));
         }

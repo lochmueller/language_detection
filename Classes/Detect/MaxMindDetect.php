@@ -34,7 +34,7 @@ class MaxMindDetect
 
         try {
             $result = $provider->country($event->getRequest()->getServerParams()['REMOTE_ADDR'] ?? '');
-        } catch (\Exception $exception) {
+        } catch (\Exception) {
             return;
         }
         $mode = $configuration->getMaxMindMode();
