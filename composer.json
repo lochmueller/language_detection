@@ -82,7 +82,7 @@
 			"php-cs-fixer fix --config Resources/Private/Build/PhpCsFixer.php --cache-file=.Build/phpcs.cache"
 		],
 		"code:phpstan": [
-			"phpstan analyse -c phpstan.neon"
+			"phpstan analyse -c phpstan.neon --memory-limit=1G"
 		],
 		"test:unit": [
 			"phpunit -c phpunit.xml --coverage-text --testdox"
