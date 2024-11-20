@@ -13,19 +13,18 @@ class DefaultNegotiation
 
     public function __invoke(NegotiateSiteLanguageEvent $event): void
     {
-        $compareWith = [
-            'getLocale',
-            'getTwoLetterIsoCode',
-        ];
-
         $userLanguages = $this->normalizer->normalizeList($event->getUserLanguages());
         foreach ($userLanguages->toArray() as $userLanguage) {
             foreach ($event->getSite()->getLanguages() as $siteLanguage) {
-                foreach ($compareWith as $function) {
+                $compareWith = [
+                    (string)$siteLanguage->getLocale(),
+                    $siteLanguage->getLocale()->getLanguageCode(),
+                ];
+                foreach ($compareWith as $value) {
                     $config = $siteLanguage->toArray();
                     if ($siteLanguage->enabled()
                         && ($config['excludeFromLanguageDetection'] ?? false) !== true
-                        && (string)$userLanguage === $this->normalizer->normalize((string)$siteLanguage->{$function}())
+                        && (string)$userLanguage === $this->normalizer->normalize($value)
                     ) {
                         $event->setSelectedLanguage($siteLanguage);
 
