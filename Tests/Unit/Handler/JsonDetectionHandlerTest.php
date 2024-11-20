@@ -64,6 +64,13 @@ class JsonDetectionHandlerTest extends AbstractHandlerTest
      * @covers \Lochmueller\LanguageDetection\Handler\JsonDetectionHandler
      * @covers \Lochmueller\LanguageDetection\Negotiation\DefaultNegotiation
      * @covers \Lochmueller\LanguageDetection\Response\DefaultResponse
+     * @covers \Lochmueller\LanguageDetection\Detect\MaxMindDetect
+     * @covers \Lochmueller\LanguageDetection\Domain\Collection\LocaleCollection
+     * @covers \Lochmueller\LanguageDetection\Domain\Model\Dto\LocaleValueObject
+     * @covers \Lochmueller\LanguageDetection\Event\NegotiateSiteLanguageEvent
+     * @covers \Lochmueller\LanguageDetection\Service\LanguageService
+     * @covers \Lochmueller\LanguageDetection\Service\LocaleCollectionSortService
+     * @covers \Lochmueller\LanguageDetection\Service\Normalizer
      * @see https://github.com/lochmueller/language_detection/issues/34
      */
     public function testIssue34ResultOfHeaderAndMaxmindUsMatchLanguages(): void
