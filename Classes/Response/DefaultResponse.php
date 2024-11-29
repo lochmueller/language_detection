@@ -49,7 +49,7 @@ class DefaultResponse
             }
         }
 
-        return $target->withQuery(http_build_query($targetQuery));
+        return $target->withPath($request->getUri()->getPath())->withQuery(http_build_query($targetQuery));
     }
 
     protected function checkSameUri(ServerRequestInterface $request, Uri $targetUri): bool
