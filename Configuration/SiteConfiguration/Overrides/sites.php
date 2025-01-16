@@ -112,11 +112,17 @@ $GLOBALS['SiteConfiguration']['site']['columns']['forwardRedirectParameters'] = 
     ],
 ];
 
-$GLOBALS['SiteConfiguration']['site']['types']['0']['showitem'] = str_replace(
-    'base,',
-    'base,--div--;LLL:EXT:language_detection/Resources/Private/Language/locallang.xlf:language.detection,enableLanguageDetection,allowAllPaths,fallbackDetectionLanguage,addIpLocationToBrowserLanguage,redirectHttpStatusCode,disableRedirectWithBackendSession,forwardRedirectParameters,--palette--;MaxMind;languageDetectionMaxMind,',
-    $GLOBALS['SiteConfiguration']['site']['types']['0']['showitem']
-);
+$GLOBALS['SiteConfiguration']['site']['types']['0']['showitem'] .=
+    ',--div--;LLL:EXT:language_detection/Resources/Private/Language/locallang.xlf:language.detection,
+        enableLanguageDetection,
+        allowAllPaths,
+        fallbackDetectionLanguage,
+        addIpLocationToBrowserLanguage,
+        redirectHttpStatusCode,
+        disableRedirectWithBackendSession,
+        forwardRedirectParameters,
+        --palette--;MaxMind;languageDetectionMaxMind,
+    ';
 
 $GLOBALS['SiteConfiguration']['site_language']['columns']['excludeFromLanguageDetection'] = [
     'label' => 'LLL:EXT:language_detection/Resources/Private/Language/locallang.xlf:exclude.language.from.detection',
@@ -126,8 +132,4 @@ $GLOBALS['SiteConfiguration']['site_language']['columns']['excludeFromLanguageDe
     ],
 ];
 
-$GLOBALS['SiteConfiguration']['site_language']['types']['1']['showitem'] = str_replace(
-    'flag,',
-    'flag, excludeFromLanguageDetection, ',
-    $GLOBALS['SiteConfiguration']['site_language']['types']['1']['showitem']
-);
+$GLOBALS['SiteConfiguration']['site_language']['types']['1']['showitem'] .= ', excludeFromLanguageDetection, ';
