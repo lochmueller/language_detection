@@ -41,9 +41,6 @@ class IpLocation
 
     protected function getClient(): \Psr\Http\Client\ClientInterface
     {
-        if (GeneralUtility::makeInstance(Typo3Version::class)->getMajorVersion() >= 12) {
-            return GeneralUtility::makeInstance(GuzzleClientFactory::class)->getClient();
-        }
-        return (new GuzzleClientFactory())->getClient();
+        return GeneralUtility::makeInstance(GuzzleClientFactory::class)->getClient();
     }
 }
