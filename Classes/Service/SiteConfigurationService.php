@@ -26,6 +26,7 @@ class SiteConfigurationService
             (int)($config['languageDetectionMaxMindAccountId'] ?? ''),
             (string)($config['languageDetectionMaxMindLicenseKey'] ?? ''),
             (string)($config['languageDetectionMaxMindMode'] ?? 'After'),
+            (int)($config['ipAddressPrecision'] ?? 4),
         );
     }
 }

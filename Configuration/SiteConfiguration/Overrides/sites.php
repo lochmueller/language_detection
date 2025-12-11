@@ -52,6 +52,33 @@ $GLOBALS['SiteConfiguration']['site']['columns']['languageDetectionMaxMindMode']
     ],
 ];
 
+$GLOBALS['SiteConfiguration']['site']['columns']['ipAddressPrecision'] = [
+    'label' => 'LLL:EXT:language_detection/Resources/Private/Language/locallang.xlf:ipAddressPrecision',
+    'description' => 'LLL:EXT:language_detection/Resources/Private/Language/locallang.xlf:ipAddressPrecision.description',
+    'config' => [
+        'type' => 'select',
+        'renderType' => 'selectSingle',
+        'items' => [
+            [
+                'label' => '4 (Precise)',
+                'value' => '4',
+            ],
+            [
+                'label' => '3 (High precision)',
+                'value' => '3',
+            ],
+            [
+                'label' => '2 (Medium precision)',
+                'value' => '2',
+            ],
+            [
+                'label' => '1 (Low precision)',
+                'value' => '1',
+            ],
+        ],
+    ],
+];
+
 $GLOBALS['SiteConfiguration']['site']['columns']['addIpLocationToBrowserLanguage'] = [
     'label' => 'LLL:EXT:language_detection/Resources/Private/Language/locallang.xlf:ip.location.to.language',
     'config' => [
@@ -122,6 +149,7 @@ $GLOBALS['SiteConfiguration']['site']['types']['0']['showitem'] .=
         disableRedirectWithBackendSession,
         forwardRedirectParameters,
         --palette--;MaxMind;languageDetectionMaxMind,
+        ipAddressPrecision,
     ';
 
 $GLOBALS['SiteConfiguration']['site_language']['columns']['excludeFromLanguageDetection'] = [
