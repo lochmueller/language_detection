@@ -35,7 +35,7 @@ class FallbackNegotiationTest extends AbstractUnitTest
      */
     public function testInvalidFallbackLanguages(array $configuration): void
     {
-        $site = $this->createStub(Site::class);
+        $site = self::createStub(Site::class);
         $site->method('getConfiguration')->willReturn($configuration);
 
         $request = new ServerRequest(null, null, 'php://input', []);
@@ -56,7 +56,7 @@ class FallbackNegotiationTest extends AbstractUnitTest
      */
     public function testValidFallbackLanguages(): void
     {
-        $site = $this->createStub(Site::class);
+        $site = self::createStub(Site::class);
         $site->method('getConfiguration')->willReturn(['fallbackDetectionLanguage' => 2]);
 
         $siteLanguage1 = new SiteLanguage(1, 'de_DE', new Uri('/de/'), []);
@@ -83,7 +83,7 @@ class FallbackNegotiationTest extends AbstractUnitTest
      */
     public function testValidConfigurationButNoFallback(): void
     {
-        $site = $this->createStub(Site::class);
+        $site = self::createStub(Site::class);
         $site->method('getConfiguration')->willReturn(['fallbackDetectionLanguage' => 9]);
 
         $siteLanguage1 = new SiteLanguage(1, 'de_DE', new Uri('/de/'), []);

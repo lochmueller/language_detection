@@ -39,12 +39,12 @@ class GeoPluginDetectTest extends AbstractUnitTest
     public function testAddIpLanguageConfiguration(string $addIpLocationToBrowserLanguage, array $result, ?string $ipLocationConfiguration): void
     {
         self::markTestSkipped('Check ResourceBundle');
-        $ipLocation = $this->createStub(IpLocation::class);
+        $ipLocation = self::createStub(IpLocation::class);
         $ipLocation->method('getCountryCode')->willReturn($ipLocationConfiguration);
 
         $serverRequest = new ServerRequest(null, null, 'php://input', ['user-agent' => 'AdsBot-Google']);
 
-        $site = $this->createStub(Site::class);
+        $site = self::createStub(Site::class);
         $site->method('getConfiguration')->willReturn(['addIpLocationToBrowserLanguage' => $addIpLocationToBrowserLanguage]);
 
         $event = new DetectUserLanguagesEvent($site, $serverRequest);

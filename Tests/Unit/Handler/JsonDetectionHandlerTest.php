@@ -17,6 +17,7 @@ use Lochmueller\LanguageDetection\Handler\Exception\NoUserLanguagesException;
 use Lochmueller\LanguageDetection\Handler\JsonDetectionHandler;
 use Lochmueller\LanguageDetection\Negotiation\DefaultNegotiation;
 use Lochmueller\LanguageDetection\Response\DefaultResponse;
+use Lochmueller\LanguageDetection\Service\IpAnonymizationService;
 use Lochmueller\LanguageDetection\Service\LanguageService;
 use Lochmueller\LanguageDetection\Service\LocaleCollectionSortService;
 use Lochmueller\LanguageDetection\Service\Normalizer;
@@ -78,7 +79,7 @@ class JsonDetectionHandlerTest extends AbstractHandlerTest
         $container = new Container();
         $container->set(BotAgentCheck::class, new BotAgentCheck());
         $container->set(BrowserLanguageDetect::class, new BrowserLanguageDetect());
-        $container->set('staticMaxMind', new class (new LanguageService(), new SiteConfigurationService(), new LocaleCollectionSortService()) extends MaxMindDetect {
+        $container->set('staticMaxMind', new class (new IpAnonymizationService(), new LanguageService(), new SiteConfigurationService(), new LocaleCollectionSortService()) extends MaxMindDetect {
             public function __invoke(DetectUserLanguagesEvent $event): void
             {
                 $fakeMaxMindResult = 'us';

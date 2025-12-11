@@ -25,7 +25,7 @@ class RequestMethodCheckTest extends AbstractUnitTest
      */
     public function testConfiguration(string $method, bool $result): void
     {
-        $request = $this->createStub(ServerRequestInterface::class);
+        $request = self::createStub(ServerRequestInterface::class);
         $request->method('getMethod')->willReturn($method);
 
         $event = new CheckLanguageDetectionEvent($this->createMock(Site::class), $request);

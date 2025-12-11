@@ -34,7 +34,7 @@ class MaxMindDetectTest extends AbstractUnitTest
     {
         $serverRequest = new ServerRequest(null, null, 'php://input', []);
 
-        $site = $this->createStub(Site::class);
+        $site = self::createStub(Site::class);
         $site->method('getConfiguration')->willReturn([]);
 
         $event = new DetectUserLanguagesEvent($site, $serverRequest);
@@ -63,7 +63,7 @@ class MaxMindDetectTest extends AbstractUnitTest
             self::markTestSkipped('No local GEO IP 2 database is found');
         }
 
-        $site = $this->createStub(Site::class);
+        $site = self::createStub(Site::class);
         $site->method('getConfiguration')->willReturn([
             'languageDetectionMaxMindDatabasePath' => $dbFile,
         ]);

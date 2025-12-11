@@ -35,7 +35,7 @@ class TcaLanguageSelectionTest extends AbstractUnitTest
      */
     public function testLanguageSelectionWithNoFoundedSite(): void
     {
-        $siteFinder = $this->createStub(SiteFinder::class);
+        $siteFinder = self::createStub(SiteFinder::class);
         $siteFinder->method('getSiteByIdentifier')->willThrowException(new SiteNotFoundException());
 
         $tcaLanguageSelection = new TcaLanguageSelection($siteFinder);
@@ -103,7 +103,7 @@ class TcaLanguageSelectionTest extends AbstractUnitTest
             ],
         ]);
 
-        $siteFinder = $this->createStub(SiteFinder::class);
+        $siteFinder = self::createStub(SiteFinder::class);
         $siteFinder->method('getSiteByIdentifier')->willReturn($site);
 
         return $siteFinder;

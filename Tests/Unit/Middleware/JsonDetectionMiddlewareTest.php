@@ -24,7 +24,7 @@ class JsonDetectionMiddlewareTest extends AbstractUnitTest
      */
     public function testMiddlewareWillExecuteJsonDetection(): void
     {
-        $jsonDetectionHandler = $this->createStub(JsonDetectionHandler::class);
+        $jsonDetectionHandler = self::createStub(JsonDetectionHandler::class);
         $jsonDetectionHandler->method('handle')->willReturn(new NullResponse());
 
         $middleware = new JsonDetectionMiddleware($jsonDetectionHandler);
@@ -39,10 +39,10 @@ class JsonDetectionMiddlewareTest extends AbstractUnitTest
      */
     public function testMiddlewareWillExecuteDefaultHandler(): void
     {
-        $jsonDetectionHandler = $this->createStub(JsonDetectionHandler::class);
+        $jsonDetectionHandler = self::createStub(JsonDetectionHandler::class);
         $jsonDetectionHandler->method('handle')->willThrowException(new NoUserLanguagesException());
 
-        $defaultHandler = $this->createStub(RequestHandlerInterface::class);
+        $defaultHandler = self::createStub(RequestHandlerInterface::class);
         $defaultHandler->method('handle')->willReturn(new NullResponse());
 
         $middleware = new JsonDetectionMiddleware($jsonDetectionHandler);

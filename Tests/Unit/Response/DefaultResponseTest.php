@@ -28,13 +28,13 @@ class DefaultResponseTest extends AbstractUnitTest
      */
     public function testConfiguration(): void
     {
-        $siteLanguage = $this->createStub(SiteLanguage::class);
+        $siteLanguage = self::createStub(SiteLanguage::class);
         $siteLanguage->method('getBase')->willReturn(new Uri('/en/'));
 
-        $request = $this->createStub(ServerRequestInterface::class);
+        $request = self::createStub(ServerRequestInterface::class);
         $request->method('getUri')->willReturn(new Uri('/?test=1'));
 
-        $site = $this->createStub(Site::class);
+        $site = self::createStub(Site::class);
         $site->method('getConfiguration')->willReturn([
             'forwardRedirectParameters' => '',
             'redirectHttpStatusCode' => 307,
@@ -60,13 +60,13 @@ class DefaultResponseTest extends AbstractUnitTest
      */
     public function testConfigurationWithWrongErrorCode(): void
     {
-        $siteLanguage = $this->createStub(SiteLanguage::class);
+        $siteLanguage = self::createStub(SiteLanguage::class);
         $siteLanguage->method('getBase')->willReturn(new Uri('/en/'));
 
-        $request = $this->createStub(ServerRequestInterface::class);
+        $request = self::createStub(ServerRequestInterface::class);
         $request->method('getUri')->willReturn(new Uri('/?test=1'));
 
-        $site = $this->createStub(Site::class);
+        $site = self::createStub(Site::class);
         $site->method('getConfiguration')->willReturn([
             'forwardRedirectParameters' => '',
             'redirectHttpStatusCode' => 0,
@@ -95,13 +95,13 @@ class DefaultResponseTest extends AbstractUnitTest
      */
     public function testConfigurationWithRedirectParams(): void
     {
-        $siteLanguage = $this->createStub(SiteLanguage::class);
+        $siteLanguage = self::createStub(SiteLanguage::class);
         $siteLanguage->method('getBase')->willReturn(new Uri('/en/'));
 
-        $request = $this->createStub(ServerRequestInterface::class);
+        $request = self::createStub(ServerRequestInterface::class);
         $request->method('getUri')->willReturn(new Uri('/?test=1'));
 
-        $site = $this->createStub(Site::class);
+        $site = self::createStub(Site::class);
         $site->method('getConfiguration')->willReturn([
             'forwardRedirectParameters' => 'test',
             'redirectHttpStatusCode' => 307,
@@ -131,13 +131,13 @@ class DefaultResponseTest extends AbstractUnitTest
      */
     public function testConfigurationWithSameUrl(): void
     {
-        $siteLanguage = $this->createStub(SiteLanguage::class);
+        $siteLanguage = self::createStub(SiteLanguage::class);
         $siteLanguage->method('getBase')->willReturn(new Uri('/en/'));
 
-        $request = $this->createStub(ServerRequestInterface::class);
+        $request = self::createStub(ServerRequestInterface::class);
         $request->method('getUri')->willReturn(new Uri('/en/'));
 
-        $site = $this->createStub(Site::class);
+        $site = self::createStub(Site::class);
         $site->method('getConfiguration')->willReturn([
             'forwardRedirectParameters' => 'test',
             'redirectHttpStatusCode' => 307,

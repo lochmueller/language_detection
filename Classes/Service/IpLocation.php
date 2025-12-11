@@ -6,7 +6,6 @@ namespace Lochmueller\LanguageDetection\Service;
 
 use Psr\Http\Message\RequestFactoryInterface;
 use TYPO3\CMS\Core\Http\Client\GuzzleClientFactory;
-use TYPO3\CMS\Core\Information\Typo3Version;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 class IpLocation

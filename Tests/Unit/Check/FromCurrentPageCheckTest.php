@@ -26,7 +26,7 @@ class FromCurrentPageCheckTest extends AbstractUnitTest
      */
     public function testInvalidReferrer(string $referrer, string $baseUri, bool $isStillEnabled): void
     {
-        $site = $this->createStub(SiteInterface::class);
+        $site = self::createStub(SiteInterface::class);
         $site->method('getBase')->willReturn(new Uri($baseUri));
 
         $request = new ServerRequest(null, null, 'php://input', [], ['HTTP_REFERER' => $referrer]);

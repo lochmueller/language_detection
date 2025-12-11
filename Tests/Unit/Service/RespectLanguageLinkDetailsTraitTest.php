@@ -51,12 +51,12 @@ class RespectLanguageLinkDetailsTraitTest extends AbstractUnitTest
      */
     public function testTraitExecutionWithDisabledLanguageDetection(): void
     {
-        $siteFinder = $this->createStub(SiteFinder::class);
+        $siteFinder = self::createStub(SiteFinder::class);
         $siteFinder->method('getSiteByPageId')
             ->willReturn(new Site('dummy', 1, ['enableLanguageDetection' => false]))
         ;
 
-        $handler = $this->createStub(LinkLanguageHandler::class);
+        $handler = self::createStub(LinkLanguageHandler::class);
         $handler->method('handle')->willThrowException(new DisableLanguageDetectionException());
 
         $traitObject = $this->createTraitMock($handler, $siteFinder);
@@ -92,9 +92,9 @@ class RespectLanguageLinkDetailsTraitTest extends AbstractUnitTest
      */
     public function testTraitExecutionWithNoUserLanguages(): void
     {
-        $site = $this->createStub(Site::class);
+        $site = self::createStub(Site::class);
 
-        $siteFinder = $this->createStub(SiteFinder::class);
+        $siteFinder = self::createStub(SiteFinder::class);
         $siteFinder->method('getSiteByPageId')
             ->willReturn($site)
         ;
@@ -102,7 +102,7 @@ class RespectLanguageLinkDetailsTraitTest extends AbstractUnitTest
         $response = new NullResponse();
         $response = $response->withAddedHeader(LinkLanguageHandler::HEADER_NAME, '5');
 
-        $handler = $this->createStub(LinkLanguageHandler::class);
+        $handler = self::createStub(LinkLanguageHandler::class);
         $handler->method('handle')->willReturn($response);
 
         $traitObject = $this->createTraitMock($handler, $siteFinder);

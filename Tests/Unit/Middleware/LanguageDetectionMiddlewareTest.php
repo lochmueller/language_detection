@@ -24,7 +24,7 @@ class LanguageDetectionMiddlewareTest extends AbstractUnitTest
      */
     public function testMiddlewareWillExecuteLanguageDetection(): void
     {
-        $languageDetectionHandler = $this->createStub(LanguageDetectionHandler::class);
+        $languageDetectionHandler = self::createStub(LanguageDetectionHandler::class);
         $languageDetectionHandler->method('handle')->willReturn(new NullResponse());
 
         $middleware = new LanguageDetectionMiddleware($languageDetectionHandler);
@@ -39,10 +39,10 @@ class LanguageDetectionMiddlewareTest extends AbstractUnitTest
      */
     public function testMiddlewareWillExecuteDefaultHandler(): void
     {
-        $languageDetectionHandler = $this->createStub(LanguageDetectionHandler::class);
+        $languageDetectionHandler = self::createStub(LanguageDetectionHandler::class);
         $languageDetectionHandler->method('handle')->willThrowException(new NoSelectedLanguageException());
 
-        $defaultHandler = $this->createStub(RequestHandlerInterface::class);
+        $defaultHandler = self::createStub(RequestHandlerInterface::class);
         $defaultHandler->method('handle')->willReturn(new NullResponse());
 
         $middleware = new LanguageDetectionMiddleware($languageDetectionHandler);

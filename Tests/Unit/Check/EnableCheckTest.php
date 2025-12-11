@@ -30,7 +30,7 @@ class EnableCheckTest extends AbstractUnitTest
      */
     public function testConfiguration(array $configuration, bool $result): void
     {
-        $site = $this->createStub(Site::class);
+        $site = self::createStub(Site::class);
         $site->method('getConfiguration')->willReturn($configuration);
         $request = $this->createMock(ServerRequestInterface::class);
         $event = new CheckLanguageDetectionEvent($site, $request);

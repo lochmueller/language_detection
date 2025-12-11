@@ -53,7 +53,7 @@ class DefaultNegotiationTest extends AbstractUnitTest
         $en = new SiteLanguage(0, 'en_GB', new Uri('/en/'), ['enabled' => true]);
         $de = new SiteLanguage(1, 'de_DE', new Uri('/en/'), ['enabled' => true]);
 
-        $site = $this->createStub(Site::class);
+        $site = self::createStub(Site::class);
         $site->method('getLanguages')->willReturn([$en, $de]);
 
         $event = new NegotiateSiteLanguageEvent($site, $this->createMock(ServerRequestInterface::class), LocaleCollection::fromArray(['de_DE', 'en_GB']));

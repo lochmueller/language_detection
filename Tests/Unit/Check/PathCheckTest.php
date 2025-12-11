@@ -30,7 +30,7 @@ class PathCheckTest extends AbstractUnitTest
      */
     public function testPathConfiguration(array $config, string $uri, bool $result): void
     {
-        $site = $this->createStub(Site::class);
+        $site = self::createStub(Site::class);
         $site->method('getConfiguration')->willReturn($config);
 
         $request = new ServerRequest($uri, null, 'php://input', []);

@@ -35,7 +35,7 @@ class BackendUserCheckTest extends AbstractUnitTest
      */
     public function testWithoutDisableInSite(): void
     {
-        $site = $this->createStub(Site::class);
+        $site = self::createStub(Site::class);
         $site->method('getConfiguration')
             ->willReturn(['disableRedirectWithBackendSession' => false])
         ;
@@ -56,7 +56,7 @@ class BackendUserCheckTest extends AbstractUnitTest
      */
     public function testWithoutConfigurationInSite(): void
     {
-        $site = $this->createStub(Site::class);
+        $site = self::createStub(Site::class);
         $site->method('getConfiguration')
             ->willReturn([])
         ;
@@ -79,7 +79,7 @@ class BackendUserCheckTest extends AbstractUnitTest
      */
     public function testWithDisableConfigurationInSiteAndActiveBackendUser(bool $isLoginState, bool $disableRedirectWithBackendSession, bool $isEnabled): void
     {
-        $site = $this->createStub(Site::class);
+        $site = self::createStub(Site::class);
         $site->method('getConfiguration')
             ->willReturn(['disableRedirectWithBackendSession' => $disableRedirectWithBackendSession])
         ;

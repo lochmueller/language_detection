@@ -139,8 +139,8 @@ $GLOBALS['SiteConfiguration']['site']['columns']['forwardRedirectParameters'] = 
     ],
 ];
 
-$GLOBALS['SiteConfiguration']['site']['types']['0']['showitem'] .=
-    ',--div--;LLL:EXT:language_detection/Resources/Private/Language/locallang.xlf:language.detection,
+$GLOBALS['SiteConfiguration']['site']['types']['0']['showitem']
+    .= ',--div--;LLL:EXT:language_detection/Resources/Private/Language/locallang.xlf:language.detection,
         enableLanguageDetection,
         allowAllPaths,
         fallbackDetectionLanguage,
