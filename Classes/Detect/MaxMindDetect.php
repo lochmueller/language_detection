@@ -10,6 +10,7 @@ use GeoIp2\WebService\Client;
 use Lochmueller\LanguageDetection\Domain\Model\Dto\LocaleValueObject;
 use Lochmueller\LanguageDetection\Domain\Model\Dto\SiteConfiguration;
 use Lochmueller\LanguageDetection\Event\DetectUserLanguagesEvent;
+use Lochmueller\LanguageDetection\Service\IpAnonymizationService;
 use Lochmueller\LanguageDetection\Service\LanguageService;
 use Lochmueller\LanguageDetection\Service\LocaleCollectionSortService;
 use Lochmueller\LanguageDetection\Service\SiteConfigurationService;
@@ -18,6 +19,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 class MaxMindDetect
 {
     public function __construct(
+        protected IpAnonymizationService $ipAnonymizationService,
         protected LanguageService $languageService,
         protected SiteConfigurationService $siteConfigurationService,
         protected LocaleCollectionSortService $localeCollectionSortService
@@ -32,8 +34,9 @@ class MaxMindDetect
             return;
         }
 
+        $ipAddress = $this->ipAnonymizationService->anonymizeIpAddress($event->getRequest()->getServerParams()['REMOTE_ADDR'] ?? '', $configuration->getIpAddressPrecision());
         try {
-            $result = $provider->country($event->getRequest()->getServerParams()['REMOTE_ADDR'] ?? '');
+            $result = $provider->country($ipAddress);
         } catch (\Exception) {
             return;
         }

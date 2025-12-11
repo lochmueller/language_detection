@@ -17,7 +17,8 @@ class SiteConfiguration
         protected string $maxMindDatabasePath,
         protected int $maxMindAccountId,
         protected string $maxMindLicenseKey,
-        protected string $maxMindMode
+        protected string $maxMindMode,
+        protected int $ipAddressPrecision
     ) {}
 
     public function isEnableLanguageDetection(): bool
@@ -73,5 +74,10 @@ class SiteConfiguration
     public function getMaxMindMode(): string
     {
         return $this->maxMindMode;
+    }
+
+    public function getIpAddressPrecision(): int
+    {
+        return $this->ipAddressPrecision;
     }
 }

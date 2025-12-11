@@ -35,6 +35,12 @@
 			<trans-unit id="languageDetectionMaxMindMode">
 				<source>Location for the maxmind detection (mode)</source>
 			</trans-unit>
+			<trans-unit id="ipAddressPrecision">
+				<source>IP address precision</source>
+			</trans-unit>
+			<trans-unit id="ipAddressPrecision.description">
+				<source>4 retains the full IP address, 3 removes the last octet, etc.</source>
+			</trans-unit>
 			<trans-unit id="allow.all.paths">
 				<source>Allow all paths (otherwise the detection works only on "/")</source>
 			</trans-unit>
