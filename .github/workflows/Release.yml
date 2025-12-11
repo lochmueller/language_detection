@@ -9,14 +9,13 @@ jobs:
   publish:
     name: Publish new version to TER
     if: startsWith(github.ref, 'refs/tags/')
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-24.04
     env:
-      TYPO3_EXTENSION_KEY: 'language_detection'
       TYPO3_API_TOKEN: ${{ secrets.TYPO3_API_TOKEN }}
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v6
 
       - name: Check tag
         run: |
@@ -42,7 +41,7 @@ jobs:
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: 8.1
+          php-version: 8.2
           extensions: intl, mbstring, json, zip, curl
           tools: composer:v2
 
