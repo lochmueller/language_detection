@@ -6,7 +6,6 @@ namespace Lochmueller\LanguageDetection\Tests\Unit\Check;
 
 use Lochmueller\LanguageDetection\Check\BackendUserCheck;
 use Lochmueller\LanguageDetection\Event\CheckLanguageDetectionEvent;
-use Lochmueller\LanguageDetection\Service\SiteConfigurationService;
 use Lochmueller\LanguageDetection\Tests\Unit\AbstractUnitTest;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
@@ -41,7 +40,7 @@ class BackendUserCheckTest extends AbstractUnitTest
         $request = self::createStub(ServerRequestInterface::class);
         $event = new CheckLanguageDetectionEvent($site, $request);
 
-        $backendUserCheck = new BackendUserCheck(new SiteConfigurationService());
+        $backendUserCheck = new BackendUserCheck($this->getSiteConfigurationService());
         $backendUserCheck($event);
 
         self::assertTrue($event->isLanguageDetectionEnable());
@@ -56,7 +55,7 @@ class BackendUserCheckTest extends AbstractUnitTest
         $request = self::createStub(ServerRequestInterface::class);
         $event = new CheckLanguageDetectionEvent($site, $request);
 
-        $backendUserCheck = new BackendUserCheck(new SiteConfigurationService());
+        $backendUserCheck = new BackendUserCheck($this->getSiteConfigurationService());
         $backendUserCheck($event);
 
         self::assertTrue($event->isLanguageDetectionEnable());
@@ -85,7 +84,7 @@ class BackendUserCheckTest extends AbstractUnitTest
 
         GeneralUtility::setSingletonInstance(Context::class, $context);
 
-        $backendUserCheck = new BackendUserCheck(new SiteConfigurationService());
+        $backendUserCheck = new BackendUserCheck($this->getSiteConfigurationService());
         $backendUserCheck($event);
 
         self::assertSame($isLoginState, $context->getAspect('backend.user')->get('isLoggedIn'));

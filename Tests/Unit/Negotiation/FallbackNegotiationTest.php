@@ -7,7 +7,6 @@ namespace Lochmueller\LanguageDetection\Tests\Unit\Negotiation;
 use Lochmueller\LanguageDetection\Domain\Collection\LocaleCollection;
 use Lochmueller\LanguageDetection\Event\NegotiateSiteLanguageEvent;
 use Lochmueller\LanguageDetection\Negotiation\FallbackNegotiation;
-use Lochmueller\LanguageDetection\Service\SiteConfigurationService;
 use Lochmueller\LanguageDetection\Tests\Unit\AbstractUnitTest;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
@@ -39,7 +38,7 @@ class FallbackNegotiationTest extends AbstractUnitTest
         $request = new ServerRequest(null, null, 'php://input', []);
         $event = new NegotiateSiteLanguageEvent($site, $request, LocaleCollection::fromArray([]));
 
-        $fallbackNegotiation = new FallbackNegotiation(new SiteConfigurationService());
+        $fallbackNegotiation = new FallbackNegotiation($this->getSiteConfigurationService());
         $fallbackNegotiation($event);
 
         self::assertNull($event->getSelectedLanguage());
@@ -59,7 +58,7 @@ class FallbackNegotiationTest extends AbstractUnitTest
         $request = new ServerRequest(null, null, 'php://input', []);
         $event = new NegotiateSiteLanguageEvent($site, $request, LocaleCollection::fromArray([]));
 
-        $fallbackNegotiation = new FallbackNegotiation(new SiteConfigurationService());
+        $fallbackNegotiation = new FallbackNegotiation($this->getSiteConfigurationService());
         $fallbackNegotiation($event);
 
         self::assertEquals($siteLanguage2, $event->getSelectedLanguage());
@@ -79,7 +78,7 @@ class FallbackNegotiationTest extends AbstractUnitTest
         $request = new ServerRequest(null, null, 'php://input', []);
         $event = new NegotiateSiteLanguageEvent($site, $request, LocaleCollection::fromArray([]));
 
-        $fallbackNegotiation = new FallbackNegotiation(new SiteConfigurationService());
+        $fallbackNegotiation = new FallbackNegotiation($this->getSiteConfigurationService());
         $fallbackNegotiation($event);
 
         self::assertNull($event->getSelectedLanguage());
@@ -92,7 +91,7 @@ class FallbackNegotiationTest extends AbstractUnitTest
         $request = new ServerRequest(null, null, 'php://input', []);
         $event = new NegotiateSiteLanguageEvent($site, $request, LocaleCollection::fromArray([]));
 
-        $fallbackNegotiation = new FallbackNegotiation(new SiteConfigurationService());
+        $fallbackNegotiation = new FallbackNegotiation($this->getSiteConfigurationService());
         $fallbackNegotiation($event);
 
         self::assertNull($event->getSelectedLanguage());

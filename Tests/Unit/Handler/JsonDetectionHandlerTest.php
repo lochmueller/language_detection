@@ -21,7 +21,6 @@ use Lochmueller\LanguageDetection\Service\IpAnonymizationService;
 use Lochmueller\LanguageDetection\Service\LanguageService;
 use Lochmueller\LanguageDetection\Service\LocaleCollectionSortService;
 use Lochmueller\LanguageDetection\Service\Normalizer;
-use Lochmueller\LanguageDetection\Service\SiteConfigurationService;
 use PHPUnit\Framework\Attributes\CoversClass;
 use Psr\Http\Message\ResponseInterface;
 use Symfony\Component\DependencyInjection\Container;
@@ -71,7 +70,7 @@ class JsonDetectionHandlerTest extends AbstractHandlerTest
         $container = new Container();
         $container->set(BotAgentCheck::class, new BotAgentCheck());
         $container->set(BrowserLanguageDetect::class, new BrowserLanguageDetect());
-        $container->set('staticMaxMind', new class (new IpAnonymizationService(), new LanguageService(), new SiteConfigurationService(), new LocaleCollectionSortService()) extends MaxMindDetect {
+        $container->set('staticMaxMind', new class (new IpAnonymizationService(), new LanguageService(), $this->getSiteConfigurationService(), new LocaleCollectionSortService()) extends MaxMindDetect {
             public function __invoke(DetectUserLanguagesEvent $event): void
             {
                 $fakeMaxMindResult = 'us';
@@ -82,7 +81,7 @@ class JsonDetectionHandlerTest extends AbstractHandlerTest
         });
 
         $container->set(DefaultNegotiation::class, new DefaultNegotiation(new Normalizer()));
-        $container->set(DefaultResponse::class, new DefaultResponse(new SiteConfigurationService()));
+        $container->set(DefaultResponse::class, new DefaultResponse($this->getSiteConfigurationService()));
         $provider = new ListenerProvider($container);
         $provider->addListener(CheckLanguageDetectionEvent::class, BotAgentCheck::class);
         $provider->addListener(DetectUserLanguagesEvent::class, BrowserLanguageDetect::class);

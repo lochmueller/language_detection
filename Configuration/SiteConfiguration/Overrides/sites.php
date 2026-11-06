@@ -139,6 +139,15 @@ $GLOBALS['SiteConfiguration']['site']['columns']['forwardRedirectParameters'] = 
     ],
 ];
 
+$GLOBALS['SiteConfiguration']['site']['columns']['ignoreGlobalLanguageDetectionConfiguration'] = [
+    'label' => 'LLL:EXT:language_detection/Resources/Private/Language/locallang.xlf:ignore.global.configuration',
+    'description' => 'LLL:EXT:language_detection/Resources/Private/Language/locallang.xlf:ignore.global.configuration.description',
+    'config' => [
+        'type' => 'check',
+        'default' => '0',
+    ],
+];
+
 $GLOBALS['SiteConfiguration']['site']['types']['0']['showitem']
     .= ',--div--;LLL:EXT:language_detection/Resources/Private/Language/locallang.xlf:language.detection,
         enableLanguageDetection,
@@ -150,6 +159,7 @@ $GLOBALS['SiteConfiguration']['site']['types']['0']['showitem']
         forwardRedirectParameters,
         --palette--;MaxMind;languageDetectionMaxMind,
         ipAddressPrecision,
+        ignoreGlobalLanguageDetectionConfiguration,
     ';
 
 $GLOBALS['SiteConfiguration']['site_language']['columns']['excludeFromLanguageDetection'] = [

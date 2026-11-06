@@ -37,6 +37,28 @@ class NormalizerTest extends AbstractUnitTest
         self::assertEquals(array_values($result), $normalizer->normalizeList(LocaleCollection::fromArray(array_values($base)))->toArray());
     }
 
+    #[DataProvider('normalizeToLanguageCodeProvider')]
+    public function testNormalizeToLanguageCode(string $base, string $result): void
+    {
+        $normalizer = new Normalizer();
+
+        self::assertEquals($result, $normalizer->normalizeToLanguageCode($base));
+    }
+
+    /**
+     * @return array<string, array<int, string>>
+     */
+    public static function normalizeToLanguageCodeProvider(): array
+    {
+        return [
+            'locale with country' => ['de-CH', 'de'],
+            'locale with underscore' => ['de_DE', 'de'],
+            'locale with encoding' => ['de_DE.UTF-8', 'de'],
+            'language only' => ['DE', 'de'],
+            'empty' => ['', ''],
+        ];
+    }
+
     /**
      * @return array<string, array<int, string>>
      */

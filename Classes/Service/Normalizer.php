@@ -34,4 +34,12 @@ class Normalizer
 
         return $locale;
     }
+
+    /**
+     * Reduce a locale to the pure language code, so "de_CH" and "de-DE" both result in "de".
+     */
+    public function normalizeToLanguageCode(string $locale): string
+    {
+        return explode('_', $this->normalize($locale))[0];
+    }
 }

@@ -1,0 +1,50 @@
+# cat=detection/default/010; type=boolean; label=Enable language detection: Global default for the site configuration option "enableLanguageDetection".
+enableLanguageDetection = 1
+
+# cat=detection/default/020; type=boolean; label=Allow all paths: Global default for the site configuration option "allowAllPaths". Otherwise the detection works only on "/".
+allowAllPaths = 0
+
+# cat=detection/default/030; type=int+; label=Fallback detection language: Global default for the site configuration option "fallbackDetectionLanguage" (language ID).
+fallbackDetectionLanguage = 0
+
+# cat=detection/default/040; type=options[No=,Before=before,After=after,Replace=replace]; label=Add IP location to browser language: Global default for the site configuration option "addIpLocationToBrowserLanguage".
+addIpLocationToBrowserLanguage =
+
+# cat=detection/default/050; type=options[307=307,302=302,303=303,300=300]; label=Redirect HTTP status code: Global default for the site configuration option "redirectHttpStatusCode".
+redirectHttpStatusCode = 307
+
+# cat=detection/default/060; type=boolean; label=Disable redirect with backend session: Global default for the site configuration option "disableRedirectWithBackendSession".
+disableRedirectWithBackendSession = 0
+
+# cat=detection/default/070; type=string; label=Forward redirect parameters: Global default for the site configuration option "forwardRedirectParameters". Comma separated list of query parameters.
+forwardRedirectParameters =
+
+# cat=detection/default/080; type=options[4 (Precise)=4,3 (High precision)=3,2 (Medium precision)=2,1 (Low precision)=1]; label=IP address precision: Global default for the site configuration option "ipAddressPrecision".
+ipAddressPrecision = 4
+
+# cat=maxmind/default/010; type=string; label=MaxMind database file path: Global default for the site configuration option "languageDetectionMaxMindDatabasePath".
+languageDetectionMaxMindDatabasePath =
+
+# cat=maxmind/default/020; type=string; label=MaxMind web service account ID: Global default for the site configuration option "languageDetectionMaxMindAccountId".
+languageDetectionMaxMindAccountId =
+
+# cat=maxmind/default/030; type=string; label=MaxMind web service license key: Global default for the site configuration option "languageDetectionMaxMindLicenseKey".
+languageDetectionMaxMindLicenseKey =
+
+# cat=maxmind/default/040; type=options[Before=before,After=after,Replace=replace]; label=MaxMind detection mode: Global default for the site configuration option "languageDetectionMaxMindMode".
+languageDetectionMaxMindMode = after
+
+# cat=nullsite/default/010; type=boolean; label=Enable detection without a site: Run the language detection, if the request does not match any site (NullSite) and redirect to the best matching language of all other sites. Useful, if there is no site with the root base "/".
+enableNullSiteDetection = 0
+
+# cat=nullsite/default/020; type=boolean; label=Limit to the request host: Only use languages of sites that are configured for the host of the current request. Disable this option with care, because it allows cross domain redirects.
+nullSiteLimitToRequestHost = 1
+
+# cat=nullsite/default/030; type=string; label=Allowed sites: Comma separated list of site identifiers that are allowed as redirect target. Empty means all sites.
+nullSiteAllowedSites =
+
+# cat=nullsite/default/040; type=string; label=Fallback site: Site identifier that is used, if no language of the other sites matches. Empty means no fallback (the regular 404 handling of TYPO3 is used).
+nullSiteFallbackSite =
+
+# cat=nullsite/default/050; type=int+; label=Fallback site language: Language ID of the fallback site.
+nullSiteFallbackLanguageId = 0

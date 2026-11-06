@@ -10,7 +10,6 @@ use Lochmueller\LanguageDetection\Event\DetectUserLanguagesEvent;
 use Lochmueller\LanguageDetection\Service\IpAnonymizationService;
 use Lochmueller\LanguageDetection\Service\LanguageService;
 use Lochmueller\LanguageDetection\Service\LocaleCollectionSortService;
-use Lochmueller\LanguageDetection\Service\SiteConfigurationService;
 use Lochmueller\LanguageDetection\Tests\Unit\AbstractUnitTest;
 use PHPUnit\Framework\Attributes\CoversClass;
 use TYPO3\CMS\Core\Http\ServerRequest;
@@ -38,7 +37,7 @@ class MaxMindDetectTest extends AbstractUnitTest
         $event = new DetectUserLanguagesEvent($site, $serverRequest);
         $event->setUserLanguages(LocaleCollection::fromArray(['default']));
 
-        $maxMindDetect = new MaxMindDetect(new IpAnonymizationService(), new LanguageService(), new SiteConfigurationService(), new LocaleCollectionSortService());
+        $maxMindDetect = new MaxMindDetect(new IpAnonymizationService(), new LanguageService(), $this->getSiteConfigurationService(), new LocaleCollectionSortService());
         $maxMindDetect($event);
 
         self::assertCount(1, $event->getUserLanguages()->toArray());
@@ -69,21 +68,21 @@ class MaxMindDetectTest extends AbstractUnitTest
         self::assertExecutionTimeLessThenOrEqual(0.3, function () use ($site, $serverRequest): void {
             $event = new DetectUserLanguagesEvent($site, $serverRequest);
             $event->setUserLanguages(LocaleCollection::fromArray([]));
-            $maxMindDetect = new MaxMindDetect(new IpAnonymizationService(), new LanguageService(), new SiteConfigurationService(), new LocaleCollectionSortService());
+            $maxMindDetect = new MaxMindDetect(new IpAnonymizationService(), new LanguageService(), $this->getSiteConfigurationService(), new LocaleCollectionSortService());
             $maxMindDetect($event);
         });
 
         self::assertExecutionMemoryLessThenOrEqual(400, function () use ($site, $serverRequest): void {
             $event = new DetectUserLanguagesEvent($site, $serverRequest);
             $event->setUserLanguages(LocaleCollection::fromArray([]));
-            $maxMindDetect = new MaxMindDetect(new IpAnonymizationService(), new LanguageService(), new SiteConfigurationService(), new LocaleCollectionSortService());
+            $maxMindDetect = new MaxMindDetect(new IpAnonymizationService(), new LanguageService(), $this->getSiteConfigurationService(), new LocaleCollectionSortService());
             $maxMindDetect($event);
         });
 
         // regular Execution
         $event = new DetectUserLanguagesEvent($site, $serverRequest);
         $event->setUserLanguages(LocaleCollection::fromArray([]));
-        $maxMindDetect = new MaxMindDetect(new IpAnonymizationService(), new LanguageService(), new SiteConfigurationService(), new LocaleCollectionSortService());
+        $maxMindDetect = new MaxMindDetect(new IpAnonymizationService(), new LanguageService(), $this->getSiteConfigurationService(), new LocaleCollectionSortService());
         $maxMindDetect($event);
 
         $languages = $event->getUserLanguages()->toArray();

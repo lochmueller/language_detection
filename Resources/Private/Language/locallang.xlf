@@ -53,6 +53,12 @@
 			<trans-unit id="languageDetectionMaxMindLicenseKey">
 				<source>... license key.</source>
 			</trans-unit>
+			<trans-unit id="ignore.global.configuration">
+				<source>Ignore the global extension configuration</source>
+			</trans-unit>
+			<trans-unit id="ignore.global.configuration.description">
+				<source>By default the extension configuration is used as fallback for all options that are not set in this site. Enable this option to use only the configuration of this site.</source>
+			</trans-unit>
 		</body>
 	</file>
 </xliff>

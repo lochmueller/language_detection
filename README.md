@@ -29,6 +29,8 @@
 1. [Why?](#why)
 2. [Installation](#installation)
 3. [Configuration](#configuration)
+   1. [Global configuration](#global-configuration)
+   2. [Detection without a matching site](#detection-without-a-matching-site)
 4. [Event Structure](#event-structure)
    1. [CheckLanguageDetectionEvent](#checklanguagedetectionevent)
    2. [DetectUserLanguagesEvent](#detectuserlanguagesevent)
@@ -53,6 +55,28 @@ Use the site configuration module to configure the language detection. Just enab
 
 ![Configuration](https://raw.githubusercontent.com/lochmueller/language_detection/main/Resources/Public/Configuration.png)
 
+### Global configuration
+
+All options of the site configuration are also available in the extension configuration (Admin Tools > Settings > Extension Configuration > language_detection). They are used as **fallback** for every site, so shared values like the MaxMind credentials do not have to be repeated in every site YAML file.
+
+An option of a site configuration always wins over the global value. An empty field in the site configuration counts as "not set", because the site configuration module writes empty fields to the YAML file. If a site should not use the global configuration at all, enable "Ignore the global extension configuration" (`ignoreGlobalLanguageDetectionConfiguration`) in the site configuration.
+
+### Detection without a matching site
+
+If a request does not match any site, TYPO3 resolves a `NullSite` and the `PageResolver` answers with a 404. This happens for example, if every site has a country prefix in the base (`https://www.example.com/de/`, `https://www.example.com/ch/`, ...) and there is **no** site with the root base `https://www.example.com/`.
+
+The extension can handle this case and redirect to the best matching language of all other sites. The feature is disabled by default and is configured in the extension configuration only:
+
+| Option                       | Description                                                                                                                               |
+|------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------|
+| `enableNullSiteDetection`    | Enable the detection for requests without a matching site                                                                                 |
+| `nullSiteLimitToRequestHost` | Only use languages of sites that are configured for the host of the current request (enabled by default, disable it for cross domain redirects) |
+| `nullSiteAllowedSites`       | Comma separated list of site identifiers that are allowed as redirect target (empty means all sites)                                      |
+| `nullSiteFallbackSite`       | Site identifier that is used, if no language matches (empty means no fallback, so the regular 404 handling of TYPO3 is used)              |
+| `nullSiteFallbackLanguageId` | Language ID of the fallback site                                                                                                          |
+
+The user languages are checked in their quality order. Every user language is matched in two steps against all sites, because an exact locale match (e.g. `de_CH`) of any site is better than a language code match (e.g. `de`) of the first site. All other checks of the detection still apply, so bots and paths other than `/` are not redirected (unless `allowAllPaths` is enabled).
+
 ## Event Structure
 
 There are four central PSR-14 events that control the language detection. The attached list explain the different events and the default listener. The events are ordered in the execution order.
@@ -72,6 +96,7 @@ Default-Listener:
 | BotAgentCheck         | Check if a bot call the language detection and disable the redirect                                                               |
 | EnableCheck           | Check if the Language Detection is enabled in the current Site                                                                    |
 | FromCurrentPageCheck  | Check the referrer and disable the redirect if the user comes from the current site                                               |
+| NullSiteCheck         | Check if the request matches no site and disable the redirect (respect "enableNullSiteDetection" extension configuration)        |
 | PathCheck             | Check if the user call "/" and disable the redirect for other paths (respect "allowAllPaths" configuration)                       |
 | WorkspacePreviewCheck | Check if the page is a workspace preview and disable the redirect                                                                 |
 
@@ -97,8 +122,10 @@ Default-Listener:
 
 | Name                | Description                                                                                               |
 |---------------------|-----------------------------------------------------------------------------------------------------------|
-| DefaultNegotiation  | Check the Locale and TwoLetterIso of the TYPO3 languages against the user languages of the previous event |
-| FallbackNegotiation | Handle a fallback, if there are no matches by the default negotiation                                     |
+| NullSiteNegotiation         | Check the languages of all sites, if the request matches no site                                          |
+| DefaultNegotiation          | Check the Locale and TwoLetterIso of the TYPO3 languages against the user languages of the previous event |
+| FallbackNegotiation         | Handle a fallback, if there are no matches by the default negotiation                                     |
+| NullSiteFallbackNegotiation | Handle a fallback to a configured site, if the request matches no site and no language matches            |
 
 ### BuildResponseEvent
 

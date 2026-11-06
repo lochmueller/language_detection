@@ -6,7 +6,6 @@ namespace Lochmueller\LanguageDetection\Tests\Unit\Check;
 
 use Lochmueller\LanguageDetection\Check\EnableCheck;
 use Lochmueller\LanguageDetection\Event\CheckLanguageDetectionEvent;
-use Lochmueller\LanguageDetection\Service\SiteConfigurationService;
 use Lochmueller\LanguageDetection\Tests\Unit\AbstractUnitTest;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
@@ -33,7 +32,7 @@ class EnableCheckTest extends AbstractUnitTest
         $request = self::createStub(ServerRequestInterface::class);
         $event = new CheckLanguageDetectionEvent($site, $request);
 
-        $enableCheck = new EnableCheck(new SiteConfigurationService());
+        $enableCheck = new EnableCheck($this->getSiteConfigurationService());
         $enableCheck($event);
 
         self::assertEquals($result, $event->isLanguageDetectionEnable());

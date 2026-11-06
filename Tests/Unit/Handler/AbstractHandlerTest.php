@@ -13,7 +13,6 @@ use Lochmueller\LanguageDetection\Event\NegotiateSiteLanguageEvent;
 use Lochmueller\LanguageDetection\Negotiation\DefaultNegotiation;
 use Lochmueller\LanguageDetection\Response\DefaultResponse;
 use Lochmueller\LanguageDetection\Service\Normalizer;
-use Lochmueller\LanguageDetection\Service\SiteConfigurationService;
 use Lochmueller\LanguageDetection\Tests\Unit\AbstractUnitTest;
 use PHPUnit\Framework\Attributes\CoversNothing;
 use Symfony\Component\DependencyInjection\Container;
@@ -32,7 +31,7 @@ abstract class AbstractHandlerTest extends AbstractUnitTest
         $container->set(BotAgentCheck::class, new BotAgentCheck());
         $container->set(BrowserLanguageDetect::class, new BrowserLanguageDetect());
         $container->set(DefaultNegotiation::class, new DefaultNegotiation(new Normalizer()));
-        $container->set(DefaultResponse::class, new DefaultResponse(new SiteConfigurationService()));
+        $container->set(DefaultResponse::class, new DefaultResponse($this->getSiteConfigurationService()));
         $provider = new ListenerProvider($container);
         $provider->addListener(CheckLanguageDetectionEvent::class, BotAgentCheck::class);
         $provider->addListener(DetectUserLanguagesEvent::class, BrowserLanguageDetect::class);

@@ -4,8 +4,11 @@ declare(strict_types=1);
 
 namespace Lochmueller\LanguageDetection\Tests\Unit;
 
+use Lochmueller\LanguageDetection\Service\GlobalConfigurationService;
+use Lochmueller\LanguageDetection\Service\SiteConfigurationService;
 use TYPO3\CMS\Core\Cache\Frontend\FrontendInterface;
 use TYPO3\CMS\Core\Cache\Frontend\NullFrontend;
+use TYPO3\CMS\Core\Configuration\ExtensionConfiguration;
 use TYPO3\CMS\Core\Http\Client\GuzzleClientFactory;
 use TYPO3\CMS\Core\Http\RequestFactory;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
@@ -44,5 +47,23 @@ abstract class AbstractUnitTest extends UnitTestCase
     public function getNullCache(string $identifier = 'test'): FrontendInterface
     {
         return new NullFrontend($identifier);
+    }
+
+    /**
+     * @param array<string, mixed> $globalConfiguration
+     */
+    public function getGlobalConfigurationService(array $globalConfiguration = []): GlobalConfigurationService
+    {
+        $GLOBALS['TYPO3_CONF_VARS']['EXTENSIONS'][GlobalConfigurationService::EXTENSION_KEY] = $globalConfiguration;
+
+        return new GlobalConfigurationService(new ExtensionConfiguration());
+    }
+
+    /**
+     * @param array<string, mixed> $globalConfiguration
+     */
+    public function getSiteConfigurationService(array $globalConfiguration = []): SiteConfigurationService
+    {
+        return new SiteConfigurationService($this->getGlobalConfigurationService($globalConfiguration));
     }
 }

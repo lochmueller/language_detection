@@ -6,7 +6,6 @@ namespace Lochmueller\LanguageDetection\Tests\Unit\Response;
 
 use Lochmueller\LanguageDetection\Event\BuildResponseEvent;
 use Lochmueller\LanguageDetection\Response\DefaultResponse;
-use Lochmueller\LanguageDetection\Service\SiteConfigurationService;
 use Lochmueller\LanguageDetection\Tests\Unit\AbstractUnitTest;
 use PHPUnit\Framework\Attributes\CoversClass;
 use Psr\Http\Message\ResponseInterface;
@@ -44,7 +43,7 @@ class DefaultResponseTest extends AbstractUnitTest
             $siteLanguage
         );
 
-        $defaultResponse = new DefaultResponse(new SiteConfigurationService());
+        $defaultResponse = new DefaultResponse($this->getSiteConfigurationService());
         $defaultResponse($event);
 
         self::assertNotNull($event->getResponse());
@@ -70,7 +69,7 @@ class DefaultResponseTest extends AbstractUnitTest
             $siteLanguage
         );
 
-        $defaultResponse = new DefaultResponse(new SiteConfigurationService());
+        $defaultResponse = new DefaultResponse($this->getSiteConfigurationService());
         $defaultResponse($event);
 
         $response = $event->getResponse();
@@ -98,7 +97,7 @@ class DefaultResponseTest extends AbstractUnitTest
             $siteLanguage
         );
 
-        $defaultResponse = new DefaultResponse(new SiteConfigurationService());
+        $defaultResponse = new DefaultResponse($this->getSiteConfigurationService());
         $defaultResponse($event);
 
         $response = $event->getResponse();
@@ -127,7 +126,7 @@ class DefaultResponseTest extends AbstractUnitTest
             $siteLanguage
         );
 
-        $defaultResponse = new DefaultResponse(new SiteConfigurationService());
+        $defaultResponse = new DefaultResponse($this->getSiteConfigurationService());
         $defaultResponse($event);
 
         self::assertNull($event->getResponse());

@@ -18,6 +18,13 @@ services:
         identifier: 'languageDetectionEnableCheck'
         event: Lochmueller\LanguageDetection\Event\CheckLanguageDetectionEvent
 
+  Lochmueller\LanguageDetection\Check\NullSiteCheck:
+    tags:
+      - name: event.listener
+        identifier: 'languageDetectionNullSiteCheck'
+        after: 'languageDetectionEnableCheck'
+        event: Lochmueller\LanguageDetection\Event\CheckLanguageDetectionEvent
+
   Lochmueller\LanguageDetection\Check\BotAgentCheck:
     tags:
       - name: event.listener
@@ -60,6 +67,13 @@ services:
         after: 'languageDetectionEnableCheck'
         event: Lochmueller\LanguageDetection\Event\CheckLanguageDetectionEvent
 
+  Lochmueller\LanguageDetection\Negotiation\NullSiteNegotiation:
+    tags:
+      - name: event.listener
+        identifier: 'languageDetectionNullSiteNegotiation'
+        before: 'languageDetectionDefaultNegotiation'
+        event: Lochmueller\LanguageDetection\Event\NegotiateSiteLanguageEvent
+
   Lochmueller\LanguageDetection\Negotiation\DefaultNegotiation:
     tags:
       - name: event.listener
@@ -71,6 +85,13 @@ services:
       - name: event.listener
         identifier: 'languageDetectionFallbackNegotiation'
         after: 'languageDetectionDefaultNegotiation'
+        event: Lochmueller\LanguageDetection\Event\NegotiateSiteLanguageEvent
+
+  Lochmueller\LanguageDetection\Negotiation\NullSiteFallbackNegotiation:
+    tags:
+      - name: event.listener
+        identifier: 'languageDetectionNullSiteFallbackNegotiation'
+        after: 'languageDetectionFallbackNegotiation'
         event: Lochmueller\LanguageDetection\Event\NegotiateSiteLanguageEvent
 
   Lochmueller\LanguageDetection\Detect\BrowserLanguageDetect:

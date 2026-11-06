@@ -11,7 +11,6 @@ use Lochmueller\LanguageDetection\Service\IpAnonymizationService;
 use Lochmueller\LanguageDetection\Service\IpLocation;
 use Lochmueller\LanguageDetection\Service\LanguageService;
 use Lochmueller\LanguageDetection\Service\LocaleCollectionSortService;
-use Lochmueller\LanguageDetection\Service\SiteConfigurationService;
 use Lochmueller\LanguageDetection\Tests\Unit\AbstractUnitTest;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
@@ -51,7 +50,7 @@ class GeoPluginDetectTest extends AbstractUnitTest
         $event = new DetectUserLanguagesEvent($site, $serverRequest);
         $event->setUserLanguages(LocaleCollection::fromArray(['default']));
 
-        $ipLanguage = new GeoPluginDetect(new IpAnonymizationService(), $ipLocation, new LanguageService(), new SiteConfigurationService(), new LocaleCollectionSortService());
+        $ipLanguage = new GeoPluginDetect(new IpAnonymizationService(), $ipLocation, new LanguageService(), $this->getSiteConfigurationService(), new LocaleCollectionSortService());
         $ipLanguage($event);
 
         self::assertSame($result, array_map(fn($locale): string => (string)$locale, $event->getUserLanguages()->toArray()));
