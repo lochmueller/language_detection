@@ -7,35 +7,27 @@ namespace Lochmueller\LanguageDetection\Tests\Unit\Detect;
 use Lochmueller\LanguageDetection\Detect\BrowserLanguageDetect;
 use Lochmueller\LanguageDetection\Event\DetectUserLanguagesEvent;
 use Lochmueller\LanguageDetection\Tests\Unit\AbstractUnitTest;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\DataProvider;
 use TYPO3\CMS\Core\Http\ServerRequest;
 use TYPO3\CMS\Core\Site\Entity\SiteInterface;
 
 /**
  * @internal
- *
- * @coversNothing
  */
+#[CoversClass(\Lochmueller\LanguageDetection\Detect\BrowserLanguageDetect::class)]
+#[CoversClass(\Lochmueller\LanguageDetection\Domain\Collection\LocaleCollection::class)]
+#[CoversClass(\Lochmueller\LanguageDetection\Domain\Model\Dto\LocaleValueObject::class)]
+#[CoversClass(\Lochmueller\LanguageDetection\Event\DetectUserLanguagesEvent::class)]
 class BrowserLanguageDetectTest extends AbstractUnitTest
 {
-    public function testClassIsInvokable(): void
-    {
-        $class = new BrowserLanguageDetect();
-        self::assertIsCallable($class);
-    }
-
     /**
-     * @dataProvider data
-     *
-     * @covers \Lochmueller\LanguageDetection\Detect\BrowserLanguageDetect
-     * @covers \Lochmueller\LanguageDetection\Domain\Collection\LocaleCollection
-     * @covers \Lochmueller\LanguageDetection\Domain\Model\Dto\LocaleValueObject
-     * @covers \Lochmueller\LanguageDetection\Event\DetectUserLanguagesEvent
-     *
      * @param string[] $result
      */
+    #[DataProvider('data')]
     public function testFetchLanguageResults(string $acceptLanguage, array $result): void
     {
-        $siteMock = $this->createMock(SiteInterface::class);
+        $siteMock = self::createStub(SiteInterface::class);
         $serverRequest = new ServerRequest(null, null, 'php://input', ['accept-language' => $acceptLanguage]);
         $event = new DetectUserLanguagesEvent($siteMock, $serverRequest);
 

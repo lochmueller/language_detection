@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Lochmueller\LanguageDetection\Tests\Unit\Event;
 
 use Lochmueller\LanguageDetection\Event\BuildResponseEvent;
+use PHPUnit\Framework\Attributes\CoversClass;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use TYPO3\CMS\Core\Site\Entity\SiteInterface;
@@ -12,19 +13,15 @@ use TYPO3\CMS\Core\Site\Entity\SiteLanguage;
 
 /**
  * @internal
- *
- * @coversNothing
  */
+#[CoversClass(\Lochmueller\LanguageDetection\Event\BuildResponseEvent::class)]
 class BuildResponseEventTest extends AbstractEventTest
 {
-    /**
-     * @covers \Lochmueller\LanguageDetection\Event\BuildResponseEvent
-     */
     public function testEventGetterAndSetter(): void
     {
-        $site = $this->createMock(SiteInterface::class);
-        $request = $this->createMock(ServerRequestInterface::class);
-        $language = $this->createMock(SiteLanguage::class);
+        $site = self::createStub(SiteInterface::class);
+        $request = self::createStub(ServerRequestInterface::class);
+        $language = self::createStub(SiteLanguage::class);
 
         $event = new BuildResponseEvent($site, $request, $language);
 
@@ -34,7 +31,7 @@ class BuildResponseEventTest extends AbstractEventTest
         self::assertEquals($language, $event->getSelectedLanguage());
         self::assertFalse($event->isPropagationStopped());
 
-        $response = $this->createMock(ResponseInterface::class);
+        $response = self::createStub(ResponseInterface::class);
 
         $event->setResponse($response);
         self::assertEquals($response, $event->getResponse());

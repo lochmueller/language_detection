@@ -8,7 +8,10 @@ use Lochmueller\LanguageDetection\Check\BackendUserCheck;
 use Lochmueller\LanguageDetection\Event\CheckLanguageDetectionEvent;
 use Lochmueller\LanguageDetection\Service\SiteConfigurationService;
 use Lochmueller\LanguageDetection\Tests\Unit\AbstractUnitTest;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\DataProvider;
 use Psr\Http\Message\ServerRequestInterface;
+use TYPO3\CMS\Core\Authentication\BackendUserAuthentication;
 use TYPO3\CMS\Core\Context\Context;
 use TYPO3\CMS\Core\Context\UserAspect;
 use TYPO3\CMS\Core\Site\Entity\Site;
@@ -16,9 +19,11 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * @internal
- *
- * @coversNothing
  */
+#[CoversClass(\Lochmueller\LanguageDetection\Check\BackendUserCheck::class)]
+#[CoversClass(\Lochmueller\LanguageDetection\Domain\Model\Dto\SiteConfiguration::class)]
+#[CoversClass(\Lochmueller\LanguageDetection\Event\CheckLanguageDetectionEvent::class)]
+#[CoversClass(\Lochmueller\LanguageDetection\Service\SiteConfigurationService::class)]
 class BackendUserCheckTest extends AbstractUnitTest
 {
     protected function setUp(): void
@@ -27,19 +32,13 @@ class BackendUserCheckTest extends AbstractUnitTest
         parent::setUp();
     }
 
-    /**
-     * @covers \Lochmueller\LanguageDetection\Check\BackendUserCheck
-     * @covers \Lochmueller\LanguageDetection\Domain\Model\Dto\SiteConfiguration
-     * @covers \Lochmueller\LanguageDetection\Event\CheckLanguageDetectionEvent
-     * @covers \Lochmueller\LanguageDetection\Service\SiteConfigurationService
-     */
     public function testWithoutDisableInSite(): void
     {
         $site = self::createStub(Site::class);
         $site->method('getConfiguration')
             ->willReturn(['disableRedirectWithBackendSession' => false])
         ;
-        $request = $this->createMock(ServerRequestInterface::class);
+        $request = self::createStub(ServerRequestInterface::class);
         $event = new CheckLanguageDetectionEvent($site, $request);
 
         $backendUserCheck = new BackendUserCheck(new SiteConfigurationService());
@@ -48,19 +47,13 @@ class BackendUserCheckTest extends AbstractUnitTest
         self::assertTrue($event->isLanguageDetectionEnable());
     }
 
-    /**
-     * @covers \Lochmueller\LanguageDetection\Check\BackendUserCheck
-     * @covers \Lochmueller\LanguageDetection\Domain\Model\Dto\SiteConfiguration
-     * @covers \Lochmueller\LanguageDetection\Event\CheckLanguageDetectionEvent
-     * @covers \Lochmueller\LanguageDetection\Service\SiteConfigurationService
-     */
     public function testWithoutConfigurationInSite(): void
     {
         $site = self::createStub(Site::class);
         $site->method('getConfiguration')
             ->willReturn([])
         ;
-        $request = $this->createMock(ServerRequestInterface::class);
+        $request = self::createStub(ServerRequestInterface::class);
         $event = new CheckLanguageDetectionEvent($site, $request);
 
         $backendUserCheck = new BackendUserCheck(new SiteConfigurationService());
@@ -69,31 +62,23 @@ class BackendUserCheckTest extends AbstractUnitTest
         self::assertTrue($event->isLanguageDetectionEnable());
     }
 
-    /**
-     * @covers \Lochmueller\LanguageDetection\Check\BackendUserCheck
-     * @covers \Lochmueller\LanguageDetection\Domain\Model\Dto\SiteConfiguration
-     * @covers \Lochmueller\LanguageDetection\Event\CheckLanguageDetectionEvent
-     * @covers \Lochmueller\LanguageDetection\Service\SiteConfigurationService
-     *
-     * @dataProvider data
-     */
+    #[DataProvider('data')]
     public function testWithDisableConfigurationInSiteAndActiveBackendUser(bool $isLoginState, bool $disableRedirectWithBackendSession, bool $isEnabled): void
     {
         $site = self::createStub(Site::class);
         $site->method('getConfiguration')
             ->willReturn(['disableRedirectWithBackendSession' => $disableRedirectWithBackendSession])
         ;
-        $request = $this->createMock(ServerRequestInterface::class);
+        $request = self::createStub(ServerRequestInterface::class);
         $event = new CheckLanguageDetectionEvent($site, $request);
 
-        $userAspect = new UserAspect();
+        $backendUser = null;
         if ($isLoginState) {
-            $user = new \stdClass();
-            $user->user = ['uid' => 1];
-            $propertyReflection = new \ReflectionProperty($userAspect, 'user');
-            $propertyReflection->setAccessible(true);
-            $propertyReflection->setValue($userAspect, $user);
+            $backendUser = new BackendUserAuthentication();
+            $backendUser->user = ['uid' => 1];
         }
+
+        $userAspect = new UserAspect($backendUser);
 
         $context = new Context();
         $context->setAspect('backend.user', $userAspect);

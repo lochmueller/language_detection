@@ -12,24 +12,22 @@ use Lochmueller\LanguageDetection\Service\LanguageService;
 use Lochmueller\LanguageDetection\Service\LocaleCollectionSortService;
 use Lochmueller\LanguageDetection\Service\SiteConfigurationService;
 use Lochmueller\LanguageDetection\Tests\Unit\AbstractUnitTest;
+use PHPUnit\Framework\Attributes\CoversClass;
 use TYPO3\CMS\Core\Http\ServerRequest;
 use TYPO3\CMS\Core\Site\Entity\Site;
 
 /**
- * @covers \Lochmueller\LanguageDetection\Detect\MaxMindDetect
- *
  * @internal
  */
+#[CoversClass(\Lochmueller\LanguageDetection\Detect\MaxMindDetect::class)]
+#[CoversClass(\Lochmueller\LanguageDetection\Domain\Collection\LocaleCollection::class)]
+#[CoversClass(\Lochmueller\LanguageDetection\Domain\Model\Dto\LocaleValueObject::class)]
+#[CoversClass(\Lochmueller\LanguageDetection\Domain\Model\Dto\SiteConfiguration::class)]
+#[CoversClass(\Lochmueller\LanguageDetection\Event\DetectUserLanguagesEvent::class)]
+#[CoversClass(\Lochmueller\LanguageDetection\Service\LanguageService::class)]
+#[CoversClass(\Lochmueller\LanguageDetection\Service\SiteConfigurationService::class)]
 class MaxMindDetectTest extends AbstractUnitTest
 {
-    /**
-     * @covers \Lochmueller\LanguageDetection\Domain\Collection\LocaleCollection
-     * @covers \Lochmueller\LanguageDetection\Domain\Model\Dto\LocaleValueObject
-     * @covers \Lochmueller\LanguageDetection\Domain\Model\Dto\SiteConfiguration
-     * @covers \Lochmueller\LanguageDetection\Event\DetectUserLanguagesEvent
-     * @covers \Lochmueller\LanguageDetection\Service\LanguageService
-     * @covers \Lochmueller\LanguageDetection\Service\SiteConfigurationService
-     */
     public function testNoProviderConfiguration(): void
     {
         $serverRequest = new ServerRequest(null, null, 'php://input', []);

@@ -9,6 +9,7 @@ use Lochmueller\LanguageDetection\Event\NegotiateSiteLanguageEvent;
 use Lochmueller\LanguageDetection\Negotiation\DefaultNegotiation;
 use Lochmueller\LanguageDetection\Service\Normalizer;
 use Lochmueller\LanguageDetection\Tests\Unit\AbstractUnitTest;
+use PHPUnit\Framework\Attributes\CoversClass;
 use Psr\Http\Message\ServerRequestInterface;
 use TYPO3\CMS\Core\Http\Uri;
 use TYPO3\CMS\Core\Site\Entity\Site;
@@ -16,36 +17,26 @@ use TYPO3\CMS\Core\Site\Entity\SiteLanguage;
 
 /**
  * @internal
- *
- * @coversNothing
  */
+#[CoversClass(\Lochmueller\LanguageDetection\Domain\Collection\LocaleCollection::class)]
+#[CoversClass(\Lochmueller\LanguageDetection\Event\NegotiateSiteLanguageEvent::class)]
+#[CoversClass(\Lochmueller\LanguageDetection\Negotiation\DefaultNegotiation::class)]
+#[CoversClass(\Lochmueller\LanguageDetection\Service\Normalizer::class)]
+#[CoversClass(\Lochmueller\LanguageDetection\Domain\Model\Dto\LocaleValueObject::class)]
 class DefaultNegotiationTest extends AbstractUnitTest
 {
-    /**
-     * @covers \Lochmueller\LanguageDetection\Domain\Collection\LocaleCollection
-     * @covers \Lochmueller\LanguageDetection\Event\NegotiateSiteLanguageEvent
-     * @covers \Lochmueller\LanguageDetection\Negotiation\DefaultNegotiation
-     * @covers \Lochmueller\LanguageDetection\Service\Normalizer
-     */
     public function testNoLanguagesWithEmptyUserLanguages(): void
     {
         $negotiation = new DefaultNegotiation(new Normalizer());
 
-        $site = $this->createMock(Site::class);
+        $site = self::createStub(Site::class);
 
-        $event = new NegotiateSiteLanguageEvent($site, $this->createMock(ServerRequestInterface::class), LocaleCollection::fromArray([]));
+        $event = new NegotiateSiteLanguageEvent($site, self::createStub(ServerRequestInterface::class), LocaleCollection::fromArray([]));
         $negotiation($event);
 
         self::assertNull($event->getSelectedLanguage());
     }
 
-    /**
-     * @covers \Lochmueller\LanguageDetection\Domain\Collection\LocaleCollection
-     * @covers \Lochmueller\LanguageDetection\Domain\Model\Dto\LocaleValueObject
-     * @covers \Lochmueller\LanguageDetection\Event\NegotiateSiteLanguageEvent
-     * @covers \Lochmueller\LanguageDetection\Negotiation\DefaultNegotiation
-     * @covers \Lochmueller\LanguageDetection\Service\Normalizer
-     */
     public function testSelectedLanguagesWithUserLanguages(): void
     {
         $negotiation = new DefaultNegotiation(new Normalizer());
@@ -56,7 +47,7 @@ class DefaultNegotiationTest extends AbstractUnitTest
         $site = self::createStub(Site::class);
         $site->method('getLanguages')->willReturn([$en, $de]);
 
-        $event = new NegotiateSiteLanguageEvent($site, $this->createMock(ServerRequestInterface::class), LocaleCollection::fromArray(['de_DE', 'en_GB']));
+        $event = new NegotiateSiteLanguageEvent($site, self::createStub(ServerRequestInterface::class), LocaleCollection::fromArray(['de_DE', 'en_GB']));
         $negotiation($event);
 
         self::assertSame($de, $event->getSelectedLanguage());

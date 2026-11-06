@@ -9,26 +9,35 @@ use Lochmueller\LanguageDetection\Handler\Exception\NoResponseException;
 use Lochmueller\LanguageDetection\Handler\Exception\NoSelectedLanguageException;
 use Lochmueller\LanguageDetection\Handler\Exception\NoUserLanguagesException;
 use Lochmueller\LanguageDetection\Handler\LanguageDetectionHandler;
+use PHPUnit\Framework\Attributes\CoversClass;
 use Psr\Http\Message\ResponseInterface;
 use TYPO3\CMS\Core\Http\ServerRequest;
 use TYPO3\CMS\Core\Site\Entity\Site;
 
 /**
  * @internal
- *
- * @coversNothing
  */
+#[CoversClass(\Lochmueller\LanguageDetection\Check\BotAgentCheck::class)]
+#[CoversClass(\Lochmueller\LanguageDetection\Event\CheckLanguageDetectionEvent::class)]
+#[CoversClass(\Lochmueller\LanguageDetection\Handler\AbstractHandler::class)]
+#[CoversClass(\Lochmueller\LanguageDetection\Handler\Exception\DisableLanguageDetectionException::class)]
+#[CoversClass(\Lochmueller\LanguageDetection\Handler\LanguageDetectionHandler::class)]
+#[CoversClass(\Lochmueller\LanguageDetection\Negotiation\DefaultNegotiation::class)]
+#[CoversClass(\Lochmueller\LanguageDetection\Response\DefaultResponse::class)]
+#[CoversClass(\Lochmueller\LanguageDetection\Detect\BrowserLanguageDetect::class)]
+#[CoversClass(\Lochmueller\LanguageDetection\Domain\Collection\LocaleCollection::class)]
+#[CoversClass(\Lochmueller\LanguageDetection\Event\DetectUserLanguagesEvent::class)]
+#[CoversClass(\Lochmueller\LanguageDetection\Handler\Exception\NoUserLanguagesException::class)]
+#[CoversClass(\Lochmueller\LanguageDetection\Domain\Model\Dto\LocaleValueObject::class)]
+#[CoversClass(\Lochmueller\LanguageDetection\Event\NegotiateSiteLanguageEvent::class)]
+#[CoversClass(\Lochmueller\LanguageDetection\Handler\Exception\NoSelectedLanguageException::class)]
+#[CoversClass(\Lochmueller\LanguageDetection\Service\Normalizer::class)]
+#[CoversClass(\Lochmueller\LanguageDetection\Domain\Model\Dto\SiteConfiguration::class)]
+#[CoversClass(\Lochmueller\LanguageDetection\Event\BuildResponseEvent::class)]
+#[CoversClass(\Lochmueller\LanguageDetection\Handler\Exception\NoResponseException::class)]
+#[CoversClass(\Lochmueller\LanguageDetection\Service\SiteConfigurationService::class)]
 class LanguageDetectionHandlerTest extends AbstractHandlerTest
 {
-    /**
-     * @covers \Lochmueller\LanguageDetection\Check\BotAgentCheck
-     * @covers \Lochmueller\LanguageDetection\Event\CheckLanguageDetectionEvent
-     * @covers \Lochmueller\LanguageDetection\Handler\AbstractHandler
-     * @covers \Lochmueller\LanguageDetection\Handler\Exception\DisableLanguageDetectionException
-     * @covers \Lochmueller\LanguageDetection\Handler\LanguageDetectionHandler
-     * @covers \Lochmueller\LanguageDetection\Negotiation\DefaultNegotiation
-     * @covers \Lochmueller\LanguageDetection\Response\DefaultResponse
-     */
     public function testBreakAfterCheckLanguageDetectionByAddingBotAgent(): void
     {
         $this->expectException(DisableLanguageDetectionException::class);
@@ -41,18 +50,6 @@ class LanguageDetectionHandlerTest extends AbstractHandlerTest
         $handler->handle($serverRequest);
     }
 
-    /**
-     * @covers \Lochmueller\LanguageDetection\Check\BotAgentCheck
-     * @covers \Lochmueller\LanguageDetection\Detect\BrowserLanguageDetect
-     * @covers \Lochmueller\LanguageDetection\Domain\Collection\LocaleCollection
-     * @covers \Lochmueller\LanguageDetection\Event\CheckLanguageDetectionEvent
-     * @covers \Lochmueller\LanguageDetection\Event\DetectUserLanguagesEvent
-     * @covers \Lochmueller\LanguageDetection\Handler\AbstractHandler
-     * @covers \Lochmueller\LanguageDetection\Handler\Exception\NoUserLanguagesException
-     * @covers \Lochmueller\LanguageDetection\Handler\LanguageDetectionHandler
-     * @covers \Lochmueller\LanguageDetection\Negotiation\DefaultNegotiation
-     * @covers \Lochmueller\LanguageDetection\Response\DefaultResponse
-     */
     public function testBreakAfterDetectUserLanguagesByMissingLanguages(): void
     {
         $this->expectException(NoUserLanguagesException::class);
@@ -64,21 +61,6 @@ class LanguageDetectionHandlerTest extends AbstractHandlerTest
         $handler->handle($serverRequest);
     }
 
-    /**
-     * @covers \Lochmueller\LanguageDetection\Check\BotAgentCheck
-     * @covers \Lochmueller\LanguageDetection\Detect\BrowserLanguageDetect
-     * @covers \Lochmueller\LanguageDetection\Domain\Collection\LocaleCollection
-     * @covers \Lochmueller\LanguageDetection\Domain\Model\Dto\LocaleValueObject
-     * @covers \Lochmueller\LanguageDetection\Event\CheckLanguageDetectionEvent
-     * @covers \Lochmueller\LanguageDetection\Event\DetectUserLanguagesEvent
-     * @covers \Lochmueller\LanguageDetection\Event\NegotiateSiteLanguageEvent
-     * @covers \Lochmueller\LanguageDetection\Handler\AbstractHandler
-     * @covers \Lochmueller\LanguageDetection\Handler\Exception\NoSelectedLanguageException
-     * @covers \Lochmueller\LanguageDetection\Handler\LanguageDetectionHandler
-     * @covers \Lochmueller\LanguageDetection\Negotiation\DefaultNegotiation
-     * @covers \Lochmueller\LanguageDetection\Response\DefaultResponse
-     * @covers \Lochmueller\LanguageDetection\Service\Normalizer
-     */
     public function testBreakAfterNegotiateSiteLanguageByNotFoundTargetLanguage(): void
     {
         $this->expectException(NoSelectedLanguageException::class);
@@ -90,24 +72,6 @@ class LanguageDetectionHandlerTest extends AbstractHandlerTest
         $handler->handle($serverRequest);
     }
 
-    /**
-     * @covers \Lochmueller\LanguageDetection\Check\BotAgentCheck
-     * @covers \Lochmueller\LanguageDetection\Detect\BrowserLanguageDetect
-     * @covers \Lochmueller\LanguageDetection\Domain\Collection\LocaleCollection
-     * @covers \Lochmueller\LanguageDetection\Domain\Model\Dto\LocaleValueObject
-     * @covers \Lochmueller\LanguageDetection\Domain\Model\Dto\SiteConfiguration
-     * @covers \Lochmueller\LanguageDetection\Event\BuildResponseEvent
-     * @covers \Lochmueller\LanguageDetection\Event\CheckLanguageDetectionEvent
-     * @covers \Lochmueller\LanguageDetection\Event\DetectUserLanguagesEvent
-     * @covers \Lochmueller\LanguageDetection\Event\NegotiateSiteLanguageEvent
-     * @covers \Lochmueller\LanguageDetection\Handler\AbstractHandler
-     * @covers \Lochmueller\LanguageDetection\Handler\Exception\NoResponseException
-     * @covers \Lochmueller\LanguageDetection\Handler\LanguageDetectionHandler
-     * @covers \Lochmueller\LanguageDetection\Negotiation\DefaultNegotiation
-     * @covers \Lochmueller\LanguageDetection\Response\DefaultResponse
-     * @covers \Lochmueller\LanguageDetection\Service\Normalizer
-     * @covers \Lochmueller\LanguageDetection\Service\SiteConfigurationService
-     */
     public function testBreakAfterBuildResponseByEmptyResponseBecauseOfSameUri(): void
     {
         $this->expectException(NoResponseException::class);
@@ -136,23 +100,6 @@ class LanguageDetectionHandlerTest extends AbstractHandlerTest
         $handler->handle($serverRequest);
     }
 
-    /**
-     * @covers \Lochmueller\LanguageDetection\Check\BotAgentCheck
-     * @covers \Lochmueller\LanguageDetection\Detect\BrowserLanguageDetect
-     * @covers \Lochmueller\LanguageDetection\Domain\Collection\LocaleCollection
-     * @covers \Lochmueller\LanguageDetection\Domain\Model\Dto\LocaleValueObject
-     * @covers \Lochmueller\LanguageDetection\Domain\Model\Dto\SiteConfiguration
-     * @covers \Lochmueller\LanguageDetection\Event\BuildResponseEvent
-     * @covers \Lochmueller\LanguageDetection\Event\CheckLanguageDetectionEvent
-     * @covers \Lochmueller\LanguageDetection\Event\DetectUserLanguagesEvent
-     * @covers \Lochmueller\LanguageDetection\Event\NegotiateSiteLanguageEvent
-     * @covers \Lochmueller\LanguageDetection\Handler\AbstractHandler
-     * @covers \Lochmueller\LanguageDetection\Handler\LanguageDetectionHandler
-     * @covers \Lochmueller\LanguageDetection\Negotiation\DefaultNegotiation
-     * @covers \Lochmueller\LanguageDetection\Response\DefaultResponse
-     * @covers \Lochmueller\LanguageDetection\Service\Normalizer
-     * @covers \Lochmueller\LanguageDetection\Service\SiteConfigurationService
-     */
     public function testFullExecution(): void
     {
         $serverRequest = new ServerRequest('https://www.dummy.de/', null, 'php://input', ['accept-language' => 'de,de_DE']);

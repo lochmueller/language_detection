@@ -6,20 +6,17 @@ namespace Lochmueller\LanguageDetection\Tests\Unit\Service;
 
 use Lochmueller\LanguageDetection\Service\TcaLanguageSelection;
 use Lochmueller\LanguageDetection\Tests\Unit\AbstractUnitTest;
+use PHPUnit\Framework\Attributes\CoversClass;
 use TYPO3\CMS\Core\Exception\SiteNotFoundException;
 use TYPO3\CMS\Core\Site\Entity\Site;
 use TYPO3\CMS\Core\Site\SiteFinder;
 
 /**
  * @internal
- *
- * @coversNothing
  */
+#[CoversClass(\Lochmueller\LanguageDetection\Service\TcaLanguageSelection::class)]
 class TcaLanguageSelectionTest extends AbstractUnitTest
 {
-    /**
-     * @covers \Lochmueller\LanguageDetection\Service\TcaLanguageSelection
-     */
     public function testLanguageSelectionNoConfiguration(): void
     {
         $tcaLanguageSelection = new TcaLanguageSelection($this->getSiteFinder());
@@ -30,9 +27,6 @@ class TcaLanguageSelectionTest extends AbstractUnitTest
         self::assertSame([], $configuration);
     }
 
-    /**
-     * @covers \Lochmueller\LanguageDetection\Service\TcaLanguageSelection
-     */
     public function testLanguageSelectionWithNoFoundedSite(): void
     {
         $siteFinder = self::createStub(SiteFinder::class);
@@ -54,9 +48,6 @@ class TcaLanguageSelectionTest extends AbstractUnitTest
         ], $configuration);
     }
 
-    /**
-     * @covers \Lochmueller\LanguageDetection\Service\TcaLanguageSelection
-     */
     public function testLanguageSelectionWithConfiguration(): void
     {
         $tcaLanguageSelection = new TcaLanguageSelection($this->getSiteFinder());

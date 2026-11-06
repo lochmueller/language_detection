@@ -4,9 +4,10 @@ declare(strict_types=1);
 
 namespace Lochmueller\LanguageDetection\Tests\Unit;
 
+use TYPO3\CMS\Core\Cache\Frontend\FrontendInterface;
+use TYPO3\CMS\Core\Cache\Frontend\NullFrontend;
 use TYPO3\CMS\Core\Http\Client\GuzzleClientFactory;
 use TYPO3\CMS\Core\Http\RequestFactory;
-use TYPO3\CMS\Core\Information\Typo3Version;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 abstract class AbstractUnitTest extends UnitTestCase
@@ -28,11 +29,20 @@ abstract class AbstractUnitTest extends UnitTestCase
         self::assertLessThanOrEqual(1024 * $memoryInKb, $memoryUsage, 'Execution memory of this workload should be less then ' . $memoryInKb . 'KB.');
     }
 
+    public static function skipWithoutLikelySubtags(): void
+    {
+        if (!\ResourceBundle::create('likelySubtags', 'ICUDATA', false) instanceof \ResourceBundle) {
+            self::markTestSkipped('The ICU "likelySubtags" resource bundle is not available in this environment.');
+        }
+    }
+
     public function getRequestFactory(): RequestFactory
     {
-        if ((new Typo3Version())->getMajorVersion() >= 12) {
-            return new RequestFactory(new GuzzleClientFactory());
-        }
-        return new RequestFactory();
+        return new RequestFactory(new GuzzleClientFactory());
+    }
+
+    public function getNullCache(string $identifier = 'test'): FrontendInterface
+    {
+        return new NullFrontend($identifier);
     }
 }

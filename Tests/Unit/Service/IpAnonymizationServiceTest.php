@@ -6,17 +6,14 @@ namespace Lochmueller\LanguageDetection\Tests\Unit\Service;
 
 use Lochmueller\LanguageDetection\Service\IpAnonymizationService;
 use Lochmueller\LanguageDetection\Tests\Unit\AbstractUnitTest;
+use PHPUnit\Framework\Attributes\CoversClass;
 
 /**
  * @internal
- *
- * @coversNothing
  */
+#[CoversClass(\Lochmueller\LanguageDetection\Service\IpAnonymizationService::class)]
 class IpAnonymizationServiceTest extends AbstractUnitTest
 {
-    /**
-     * @covers \Lochmueller\LanguageDetection\Service\IpAnonymizationService
-     */
     public function testIpAddressAnonymizationForIpV4(): void
     {
         $ipAnonymizationService = new IpAnonymizationService();
@@ -28,9 +25,6 @@ class IpAnonymizationServiceTest extends AbstractUnitTest
         self::assertSame('192.0.0.0', $ipAnonymizationService->anonymizeIpAddress($ipv4, 1));
     }
 
-    /**
-     * @covers \Lochmueller\LanguageDetection\Service\IpAnonymizationService
-     */
     public function testIpAddressAnonymizationForIpV6(): void
     {
         $ipAnonymizationService = new IpAnonymizationService();
@@ -42,9 +36,6 @@ class IpAnonymizationServiceTest extends AbstractUnitTest
         self::assertSame('2001:0db8:0000:0000:0000:0000:0000:0000', $ipAnonymizationService->anonymizeIpAddress($ipv6, 1));
     }
 
-    /**
-     * @covers \Lochmueller\LanguageDetection\Service\IpAnonymizationService
-     */
     public function testIpAddressAnonymizationForInvalidIp(): void
     {
         $ipAnonymizationService = new IpAnonymizationService();

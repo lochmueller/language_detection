@@ -4,11 +4,13 @@ declare(strict_types=1);
 
 namespace Lochmueller\LanguageDetection\Service;
 
+use GuzzleHttp\ClientInterface;
 use Psr\Http\Message\RequestFactoryInterface;
+use Symfony\Component\DependencyInjection\Attribute\Autowire;
+use TYPO3\CMS\Core\Cache\Frontend\FrontendInterface;
 use TYPO3\CMS\Core\Http\Client\GuzzleClientFactory;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Core\Cache\Frontend\FrontendInterface;
-use Symfony\Component\DependencyInjection\Attribute\Autowire;
+
 class IpLocation
 {
     private const LIFETIME_SUCCESS = 86400; // 24h
@@ -21,13 +23,17 @@ class IpLocation
 
     public function getCountryCode(string $ip): ?string
     {
-        if ($ip === '') return null;
+        if ($ip === '') {
+            return null;
+        }
 
         // IPs contain "." / ":" which are not allowed in cache identifiers
         $cacheIdentifier = sha1($ip);
 
         $cached = $this->ipLocationCache->get($cacheIdentifier);
-        if (is_array($cached)) return $cached['countryCode']; // may be null (cached failure)
+        if (is_array($cached)) {
+            return $cached['countryCode'];
+        } // may be null (cached failure)
 
         $countryCode = $this->fetchCountryCode($ip);
 
@@ -47,13 +53,15 @@ class IpLocation
             $request = $this->requestFactory->createRequest('GET', 'http://ip-api.com/json/' . $ip);
             $response = $this->getClient()->send($request, ['http_errors' => false]);
 
-            if ($response->getStatusCode() !== 200)
+            if ($response->getStatusCode() !== 200) {
                 throw new IpLocationException('Missing information in response', 123781);
+            }
 
             $result = \json_decode((string)$response->getBody());
 
-            if (!($result instanceof \stdClass) || $result->status !== 'success')
+            if (!($result instanceof \stdClass) || $result->status !== 'success') {
                 throw new IpLocationException('No valid data', 162378);
+            }
 
             return $result->countryCode ?? null;
         } catch (IpLocationException) {
@@ -61,7 +69,7 @@ class IpLocation
         }
     }
 
-    protected function getClient(): \Psr\Http\Client\ClientInterface
+    protected function getClient(): ClientInterface
     {
         return GeneralUtility::makeInstance(GuzzleClientFactory::class)->getClient();
     }

@@ -8,27 +8,25 @@ use GuzzleHttp\Psr7\Query;
 use Lochmueller\LanguageDetection\Check\WorkspacePreviewCheck;
 use Lochmueller\LanguageDetection\Event\CheckLanguageDetectionEvent;
 use Lochmueller\LanguageDetection\Tests\Unit\AbstractUnitTest;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\DataProvider;
 use TYPO3\CMS\Core\Http\ServerRequest;
 use TYPO3\CMS\Core\Site\Entity\SiteInterface;
 
 /**
  * @internal
- *
- * @coversNothing
  */
+#[CoversClass(\Lochmueller\LanguageDetection\Check\WorkspacePreviewCheck::class)]
+#[CoversClass(\Lochmueller\LanguageDetection\Event\CheckLanguageDetectionEvent::class)]
 class WorkspacePreviewCheckTest extends AbstractUnitTest
 {
     /**
-     * @covers \Lochmueller\LanguageDetection\Check\WorkspacePreviewCheck
-     * @covers \Lochmueller\LanguageDetection\Event\CheckLanguageDetectionEvent
-     *
-     * @dataProvider data
-     *
      * @param mixed[]|array<string, string> $queryParams
      */
+    #[DataProvider('data')]
     public function testWorkspacePreviewListener(array $queryParams, bool $result): void
     {
-        $site = $this->createMock(SiteInterface::class);
+        $site = self::createStub(SiteInterface::class);
         $uri = 'https://www.google.de/test-page?' . Query::build($queryParams);
         $request = new ServerRequest($uri, null, 'php://input', []);
         $request = $request->withQueryParams($queryParams);

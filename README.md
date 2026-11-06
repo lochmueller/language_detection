@@ -10,14 +10,12 @@
 [![Percentage of issues still open](https://isitmaintained.com/badge/open/lochmueller/language_detection.svg)](https://isitmaintained.com/project/lochmueller/language_detection "Percentage of issues still open")
 
 **Compatibility:**
-[![TYPO3](https://img.shields.io/badge/TYPO3-10-orange.svg)](https://get.typo3.org/version/10)
-[![TYPO3](https://img.shields.io/badge/TYPO3-11-orange.svg)](https://get.typo3.org/version/11)
-[![TYPO3](https://img.shields.io/badge/TYPO3-12-orange.svg)](https://get.typo3.org/version/12)
+[![TYPO3](https://img.shields.io/badge/TYPO3-13-orange.svg)](https://get.typo3.org/version/13)
+[![TYPO3](https://img.shields.io/badge/TYPO3-14-orange.svg)](https://get.typo3.org/version/14)
 
 **Quality:**
 [![Test](https://github.com/lochmueller/language_detection/actions/workflows/Test.yml/badge.svg)](https://github.com/lochmueller/language_detection/actions/workflows/Test.yml)
 [![codecov](https://codecov.io/gh/lochmueller/language_detection/branch/main/graph/badge.svg?token=7VI1WFAX8Z)](https://codecov.io/gh/lochmueller/language_detection)
-[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/lochmueller/language_detection/badges/quality-score.png?b=main)](https://scrutinizer-ci.com/g/lochmueller/language_detection/?branch=main)
 [![PHPStan](https://img.shields.io/badge/PHPStan-level%208-brightgreen.svg?style=flat)](https://github.com/lochmueller/language_detection/actions)
 
 **Support:**
@@ -126,21 +124,29 @@ The middleware is early in the middleware stack. There is no concept of links an
 
 ## Dev
 
-Run all code standards
+The extension supports TYPO3 13.4 and 14.3 on PHP 8.2 - 8.5. Install the dev dependencies first:
 
-> docker run --rm -it --volume $(pwd):/app prooph/composer:8.0 -d /app code:all
+> composer install
 
-Execute tests with PHP  8.0:
+Run all code standards (PHP CS Fixer, PHPStan and deptrac):
 
-> docker run --rm -it --volume $(pwd):/app prooph/composer:8.0 -d /app test:unit
+> composer code:all
 
-With coverage:
+Execute the unit tests:
 
-> docker run --rm -it --volume $(pwd):/app cicnavi/dap:80 /app/.Build/bin/phpunit -c /app/phpunit.xml --coverage-text --testdox --coverage-html=/app/var/phpunit
+> composer test:unit
 
-Run Mutation tests:
+With a HTML coverage report:
 
-> docker run --rm -it --workdir=/app/ --volume $(pwd):/app cicnavi/dap:80 /app/.Build/bin/infection -c /app/phpunit.xml
+> .Build/bin/phpunit -c phpunit.xml --testdox --coverage-html=var/phpunit
+
+Run the mutation tests:
+
+> composer test:infection
+
+Check the extension against another TYPO3 version:
+
+> composer require "typo3/cms-core:^13.4" "typo3/cms-frontend:^13.4" --update-with-all-dependencies
 
 ## Contribution
 

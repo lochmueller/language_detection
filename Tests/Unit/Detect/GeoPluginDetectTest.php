@@ -7,38 +7,39 @@ namespace Lochmueller\LanguageDetection\Tests\Unit\Detect;
 use Lochmueller\LanguageDetection\Detect\GeoPluginDetect;
 use Lochmueller\LanguageDetection\Domain\Collection\LocaleCollection;
 use Lochmueller\LanguageDetection\Event\DetectUserLanguagesEvent;
+use Lochmueller\LanguageDetection\Service\IpAnonymizationService;
 use Lochmueller\LanguageDetection\Service\IpLocation;
 use Lochmueller\LanguageDetection\Service\LanguageService;
 use Lochmueller\LanguageDetection\Service\LocaleCollectionSortService;
 use Lochmueller\LanguageDetection\Service\SiteConfigurationService;
 use Lochmueller\LanguageDetection\Tests\Unit\AbstractUnitTest;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\DataProvider;
 use TYPO3\CMS\Core\Http\ServerRequest;
 use TYPO3\CMS\Core\Site\Entity\Site;
 
 /**
- * @covers \Lochmueller\LanguageDetection\Detect\GeoPluginDetect
- *
  * @internal
  */
+#[CoversClass(\Lochmueller\LanguageDetection\Detect\GeoPluginDetect::class)]
+#[CoversClass(\Lochmueller\LanguageDetection\Domain\Collection\LocaleCollection::class)]
+#[CoversClass(\Lochmueller\LanguageDetection\Domain\Model\Dto\LocaleValueObject::class)]
+#[CoversClass(\Lochmueller\LanguageDetection\Domain\Model\Dto\SiteConfiguration::class)]
+#[CoversClass(\Lochmueller\LanguageDetection\Event\DetectUserLanguagesEvent::class)]
+#[CoversClass(\Lochmueller\LanguageDetection\Service\LanguageService::class)]
+#[CoversClass(\Lochmueller\LanguageDetection\Service\LocaleCollectionSortService::class)]
+#[CoversClass(\Lochmueller\LanguageDetection\Service\SiteConfigurationService::class)]
 class GeoPluginDetectTest extends AbstractUnitTest
 {
     /**
-     * @covers \Lochmueller\LanguageDetection\Domain\Collection\LocaleCollection
-     * @covers \Lochmueller\LanguageDetection\Domain\Model\Dto\LocaleValueObject
-     * @covers \Lochmueller\LanguageDetection\Domain\Model\Dto\SiteConfiguration
-     * @covers \Lochmueller\LanguageDetection\Event\DetectUserLanguagesEvent
-     * @covers \Lochmueller\LanguageDetection\Service\LanguageService
-     * @covers \Lochmueller\LanguageDetection\Service\LocaleCollectionSortService
-     * @covers \Lochmueller\LanguageDetection\Service\SiteConfigurationService
-     *
-     * @dataProvider data
-     *
      * @param string[] $result
      * @param ?string  $ipLocationConfiguration
      */
+    #[DataProvider('data')]
     public function testAddIpLanguageConfiguration(string $addIpLocationToBrowserLanguage, array $result, ?string $ipLocationConfiguration): void
     {
-        self::markTestSkipped('Check ResourceBundle');
+        self::skipWithoutLikelySubtags();
+
         $ipLocation = self::createStub(IpLocation::class);
         $ipLocation->method('getCountryCode')->willReturn($ipLocationConfiguration);
 
@@ -50,7 +51,7 @@ class GeoPluginDetectTest extends AbstractUnitTest
         $event = new DetectUserLanguagesEvent($site, $serverRequest);
         $event->setUserLanguages(LocaleCollection::fromArray(['default']));
 
-        $ipLanguage = new GeoPluginDetect($ipLocation, new LanguageService(), new SiteConfigurationService(), new LocaleCollectionSortService());
+        $ipLanguage = new GeoPluginDetect(new IpAnonymizationService(), $ipLocation, new LanguageService(), new SiteConfigurationService(), new LocaleCollectionSortService());
         $ipLanguage($event);
 
         self::assertSame($result, array_map(fn($locale): string => (string)$locale, $event->getUserLanguages()->toArray()));

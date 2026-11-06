@@ -7,25 +7,22 @@ namespace Lochmueller\LanguageDetection\Tests\Unit\Event;
 use Lochmueller\LanguageDetection\Domain\Collection\LocaleCollection;
 use Lochmueller\LanguageDetection\Domain\Model\Dto\LocaleValueObject;
 use Lochmueller\LanguageDetection\Event\DetectUserLanguagesEvent;
+use PHPUnit\Framework\Attributes\CoversClass;
 use Psr\Http\Message\ServerRequestInterface;
 use TYPO3\CMS\Core\Site\Entity\SiteInterface;
 
 /**
  * @internal
- *
- * @coversNothing
  */
+#[CoversClass(\Lochmueller\LanguageDetection\Domain\Collection\LocaleCollection::class)]
+#[CoversClass(\Lochmueller\LanguageDetection\Domain\Model\Dto\LocaleValueObject::class)]
+#[CoversClass(\Lochmueller\LanguageDetection\Event\DetectUserLanguagesEvent::class)]
 class DetectUserLanguagesEventTest extends AbstractEventTest
 {
-    /**
-     * @covers \Lochmueller\LanguageDetection\Domain\Collection\LocaleCollection
-     * @covers \Lochmueller\LanguageDetection\Domain\Model\Dto\LocaleValueObject
-     * @covers \Lochmueller\LanguageDetection\Event\DetectUserLanguagesEvent
-     */
     public function testEventGetterAndSetter(): void
     {
-        $site = $this->createMock(SiteInterface::class);
-        $request = $this->createMock(ServerRequestInterface::class);
+        $site = self::createStub(SiteInterface::class);
+        $request = self::createStub(ServerRequestInterface::class);
 
         $event = new DetectUserLanguagesEvent($site, $request);
 

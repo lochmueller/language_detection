@@ -6,8 +6,9 @@ namespace Lochmueller\LanguageDetection\Tests\Unit\Service;
 
 use Lochmueller\LanguageDetection\Handler\Exception\DisableLanguageDetectionException;
 use Lochmueller\LanguageDetection\Handler\LinkLanguageHandler;
-use Lochmueller\LanguageDetection\Service\RespectLanguageLinkDetailsTrait;
+use Lochmueller\LanguageDetection\Tests\Fixtures\RespectLanguageLinkDetailsTraitFixture;
 use Lochmueller\LanguageDetection\Tests\Unit\AbstractUnitTest;
+use PHPUnit\Framework\Attributes\CoversClass;
 use TYPO3\CMS\Core\Http\NullResponse;
 use TYPO3\CMS\Core\Http\ServerRequestFactory;
 use TYPO3\CMS\Core\LinkHandling\LinkService;
@@ -16,39 +17,26 @@ use TYPO3\CMS\Core\Site\SiteFinder;
 
 /**
  * @internal
- *
- * @coversNothing
  */
+#[CoversClass(\Lochmueller\LanguageDetection\Service\RespectLanguageLinkDetailsTrait::class)]
+#[CoversClass(\Lochmueller\LanguageDetection\Check\EnableCheck::class)]
+#[CoversClass(\Lochmueller\LanguageDetection\Detect\BrowserLanguageDetect::class)]
+#[CoversClass(\Lochmueller\LanguageDetection\Domain\Model\Dto\SiteConfiguration::class)]
+#[CoversClass(\Lochmueller\LanguageDetection\Event\CheckLanguageDetectionEvent::class)]
+#[CoversClass(\Lochmueller\LanguageDetection\Event\DetectUserLanguagesEvent::class)]
+#[CoversClass(\Lochmueller\LanguageDetection\Event\NegotiateSiteLanguageEvent::class)]
+#[CoversClass(\Lochmueller\LanguageDetection\Negotiation\DefaultNegotiation::class)]
+#[CoversClass(\Lochmueller\LanguageDetection\Service\Normalizer::class)]
+#[CoversClass(\Lochmueller\LanguageDetection\Service\SiteConfigurationService::class)]
 class RespectLanguageLinkDetailsTraitTest extends AbstractUnitTest
 {
-    /**
-     * @covers \Lochmueller\LanguageDetection\Service\RespectLanguageLinkDetailsTrait
-     */
     public function testTraitExecutionWithWrongType(): void
     {
         $traitObject = $this->createTraitMock();
 
-        if (!\is_callable([$traitObject, 'addLanguageParameterByDetection'])) {
-            self::assertTrue(false, 'Trait object is not callable');
-
-            return;
-        }
-
         self::assertEquals(['type' => 'wrong'], $traitObject->addLanguageParameterByDetection(['type' => 'wrong']));
     }
 
-    /**
-     * @covers \Lochmueller\LanguageDetection\Check\EnableCheck
-     * @covers \Lochmueller\LanguageDetection\Detect\BrowserLanguageDetect
-     * @covers \Lochmueller\LanguageDetection\Domain\Model\Dto\SiteConfiguration
-     * @covers \Lochmueller\LanguageDetection\Event\CheckLanguageDetectionEvent
-     * @covers \Lochmueller\LanguageDetection\Event\DetectUserLanguagesEvent
-     * @covers \Lochmueller\LanguageDetection\Event\NegotiateSiteLanguageEvent
-     * @covers \Lochmueller\LanguageDetection\Negotiation\DefaultNegotiation
-     * @covers \Lochmueller\LanguageDetection\Service\Normalizer
-     * @covers \Lochmueller\LanguageDetection\Service\RespectLanguageLinkDetailsTrait
-     * @covers \Lochmueller\LanguageDetection\Service\SiteConfigurationService
-     */
     public function testTraitExecutionWithDisabledLanguageDetection(): void
     {
         $siteFinder = self::createStub(SiteFinder::class);
@@ -69,27 +57,9 @@ class RespectLanguageLinkDetailsTraitTest extends AbstractUnitTest
         $factory = new ServerRequestFactory();
         $request = $factory->createServerRequest('GET', '/', []);
 
-        if (!\is_callable([$traitObject, 'addLanguageParameterByDetection'])) {
-            self::assertTrue(false, 'Trait object is not callable');
-
-            return;
-        }
-
         self::assertEquals($configuration, $traitObject->addLanguageParameterByDetection($configuration, $request));
     }
 
-    /**
-     * @covers \Lochmueller\LanguageDetection\Check\EnableCheck
-     * @covers \Lochmueller\LanguageDetection\Detect\BrowserLanguageDetect
-     * @covers \Lochmueller\LanguageDetection\Domain\Model\Dto\SiteConfiguration
-     * @covers \Lochmueller\LanguageDetection\Event\CheckLanguageDetectionEvent
-     * @covers \Lochmueller\LanguageDetection\Event\DetectUserLanguagesEvent
-     * @covers \Lochmueller\LanguageDetection\Event\NegotiateSiteLanguageEvent
-     * @covers \Lochmueller\LanguageDetection\Negotiation\DefaultNegotiation
-     * @covers \Lochmueller\LanguageDetection\Service\Normalizer
-     * @covers \Lochmueller\LanguageDetection\Service\RespectLanguageLinkDetailsTrait
-     * @covers \Lochmueller\LanguageDetection\Service\SiteConfigurationService
-     */
     public function testTraitExecutionWithNoUserLanguages(): void
     {
         $site = self::createStub(Site::class);
@@ -115,12 +85,6 @@ class RespectLanguageLinkDetailsTraitTest extends AbstractUnitTest
         $factory = new ServerRequestFactory();
         $request = $factory->createServerRequest('GET', '/', []);
 
-        if (!\is_callable([$traitObject, 'addLanguageParameterByDetection'])) {
-            self::assertTrue(false, 'Trait object is not callable');
-
-            return;
-        }
-
         self::assertEquals([
             'type' => LinkService::TYPE_PAGE,
             'pageuid' => 5,
@@ -128,23 +92,8 @@ class RespectLanguageLinkDetailsTraitTest extends AbstractUnitTest
         ], $traitObject->addLanguageParameterByDetection($configuration, $request));
     }
 
-    protected function createTraitMock(?LinkLanguageHandler $linkLanguageHandler = null, ?SiteFinder $languageSiteFinder = null): object
+    protected function createTraitMock(?LinkLanguageHandler $linkLanguageHandler = null, ?SiteFinder $languageSiteFinder = null): RespectLanguageLinkDetailsTraitFixture
     {
-        $traitObject = $this->getObjectForTrait(RespectLanguageLinkDetailsTrait::class);
-        $reflectionClass = new \ReflectionClass($traitObject);
-
-        if ($linkLanguageHandler instanceof \Lochmueller\LanguageDetection\Handler\LinkLanguageHandler) {
-            $propertyLanguageEventDispatcher = $reflectionClass->getProperty('linkLanguageHandler');
-            $propertyLanguageEventDispatcher->setAccessible(true);
-            $propertyLanguageEventDispatcher->setValue($traitObject, $linkLanguageHandler);
-        }
-
-        if ($languageSiteFinder instanceof \TYPO3\CMS\Core\Site\SiteFinder) {
-            $propertyLanguageSiteFinder = $reflectionClass->getProperty('languageSiteFinder');
-            $propertyLanguageSiteFinder->setAccessible(true);
-            $propertyLanguageSiteFinder->setValue($traitObject, $languageSiteFinder);
-        }
-
-        return $traitObject;
+        return new RespectLanguageLinkDetailsTraitFixture($languageSiteFinder, $linkLanguageHandler);
     }
 }

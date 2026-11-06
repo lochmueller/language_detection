@@ -7,19 +7,18 @@ namespace Lochmueller\LanguageDetection\Tests\Unit\Service;
 use Lochmueller\LanguageDetection\Domain\Collection\LocaleCollection;
 use Lochmueller\LanguageDetection\Service\Normalizer;
 use Lochmueller\LanguageDetection\Tests\Unit\AbstractUnitTest;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\DataProvider;
 
 /**
  * @internal
- *
- * @coversNothing
  */
+#[CoversClass(\Lochmueller\LanguageDetection\Service\Normalizer::class)]
+#[CoversClass(\Lochmueller\LanguageDetection\Domain\Collection\LocaleCollection::class)]
+#[CoversClass(\Lochmueller\LanguageDetection\Domain\Model\Dto\LocaleValueObject::class)]
 class NormalizerTest extends AbstractUnitTest
 {
-    /**
-     * @dataProvider normalizeProvider
-     *
-     * @covers \Lochmueller\LanguageDetection\Service\Normalizer
-     */
+    #[DataProvider('normalizeProvider')]
     public function testNormalize(string $base, string $result): void
     {
         $normalizer = new Normalizer();
@@ -27,11 +26,6 @@ class NormalizerTest extends AbstractUnitTest
         self::assertEquals($result, $normalizer->normalize($base));
     }
 
-    /**
-     * @covers \Lochmueller\LanguageDetection\Domain\Collection\LocaleCollection
-     * @covers \Lochmueller\LanguageDetection\Domain\Model\Dto\LocaleValueObject
-     * @covers \Lochmueller\LanguageDetection\Service\Normalizer
-     */
     public function testNormalizeList(): void
     {
         $normalizer = new Normalizer();

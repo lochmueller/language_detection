@@ -5,23 +5,20 @@ declare(strict_types=1);
 namespace Lochmueller\LanguageDetection\Tests\Unit\Event;
 
 use Lochmueller\LanguageDetection\Event\CheckLanguageDetectionEvent;
+use PHPUnit\Framework\Attributes\CoversClass;
 use Psr\Http\Message\ServerRequestInterface;
 use TYPO3\CMS\Core\Site\Entity\SiteInterface;
 
 /**
  * @internal
- *
- * @coversNothing
  */
+#[CoversClass(\Lochmueller\LanguageDetection\Event\CheckLanguageDetectionEvent::class)]
 class CheckLanguageDetectionEventTest extends AbstractEventTest
 {
-    /**
-     * @covers \Lochmueller\LanguageDetection\Event\CheckLanguageDetectionEvent
-     */
     public function testEventGetterAndSetter(): void
     {
-        $site = $this->createMock(SiteInterface::class);
-        $request = $this->createMock(ServerRequestInterface::class);
+        $site = self::createStub(SiteInterface::class);
+        $request = self::createStub(ServerRequestInterface::class);
 
         $event = new CheckLanguageDetectionEvent($site, $request);
 

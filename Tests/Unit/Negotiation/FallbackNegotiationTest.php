@@ -9,6 +9,8 @@ use Lochmueller\LanguageDetection\Event\NegotiateSiteLanguageEvent;
 use Lochmueller\LanguageDetection\Negotiation\FallbackNegotiation;
 use Lochmueller\LanguageDetection\Service\SiteConfigurationService;
 use Lochmueller\LanguageDetection\Tests\Unit\AbstractUnitTest;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\DataProvider;
 use TYPO3\CMS\Core\Http\ServerRequest;
 use TYPO3\CMS\Core\Http\Uri;
 use TYPO3\CMS\Core\Site\Entity\NullSite;
@@ -17,22 +19,18 @@ use TYPO3\CMS\Core\Site\Entity\SiteLanguage;
 
 /**
  * @internal
- *
- * @coversNothing
  */
+#[CoversClass(\Lochmueller\LanguageDetection\Domain\Collection\LocaleCollection::class)]
+#[CoversClass(\Lochmueller\LanguageDetection\Domain\Model\Dto\SiteConfiguration::class)]
+#[CoversClass(\Lochmueller\LanguageDetection\Event\NegotiateSiteLanguageEvent::class)]
+#[CoversClass(\Lochmueller\LanguageDetection\Negotiation\FallbackNegotiation::class)]
+#[CoversClass(\Lochmueller\LanguageDetection\Service\SiteConfigurationService::class)]
 class FallbackNegotiationTest extends AbstractUnitTest
 {
     /**
-     * @covers \Lochmueller\LanguageDetection\Domain\Collection\LocaleCollection
-     * @covers \Lochmueller\LanguageDetection\Domain\Model\Dto\SiteConfiguration
-     * @covers \Lochmueller\LanguageDetection\Event\NegotiateSiteLanguageEvent
-     * @covers \Lochmueller\LanguageDetection\Negotiation\FallbackNegotiation
-     * @covers \Lochmueller\LanguageDetection\Service\SiteConfigurationService
-     *
-     * @dataProvider dataInvalid
-     *
      * @param mixed[]|array<string, array<int>>|array<string, string> $configuration
      */
+    #[DataProvider('dataInvalid')]
     public function testInvalidFallbackLanguages(array $configuration): void
     {
         $site = self::createStub(Site::class);
@@ -47,13 +45,6 @@ class FallbackNegotiationTest extends AbstractUnitTest
         self::assertNull($event->getSelectedLanguage());
     }
 
-    /**
-     * @covers \Lochmueller\LanguageDetection\Domain\Collection\LocaleCollection
-     * @covers \Lochmueller\LanguageDetection\Domain\Model\Dto\SiteConfiguration
-     * @covers \Lochmueller\LanguageDetection\Event\NegotiateSiteLanguageEvent
-     * @covers \Lochmueller\LanguageDetection\Negotiation\FallbackNegotiation
-     * @covers \Lochmueller\LanguageDetection\Service\SiteConfigurationService
-     */
     public function testValidFallbackLanguages(): void
     {
         $site = self::createStub(Site::class);
@@ -74,13 +65,6 @@ class FallbackNegotiationTest extends AbstractUnitTest
         self::assertEquals($siteLanguage2, $event->getSelectedLanguage());
     }
 
-    /**
-     * @covers \Lochmueller\LanguageDetection\Domain\Collection\LocaleCollection
-     * @covers \Lochmueller\LanguageDetection\Domain\Model\Dto\SiteConfiguration
-     * @covers \Lochmueller\LanguageDetection\Event\NegotiateSiteLanguageEvent
-     * @covers \Lochmueller\LanguageDetection\Negotiation\FallbackNegotiation
-     * @covers \Lochmueller\LanguageDetection\Service\SiteConfigurationService
-     */
     public function testValidConfigurationButNoFallback(): void
     {
         $site = self::createStub(Site::class);
@@ -101,16 +85,9 @@ class FallbackNegotiationTest extends AbstractUnitTest
         self::assertNull($event->getSelectedLanguage());
     }
 
-    /**
-     * @covers \Lochmueller\LanguageDetection\Domain\Collection\LocaleCollection
-     * @covers \Lochmueller\LanguageDetection\Domain\Model\Dto\SiteConfiguration
-     * @covers \Lochmueller\LanguageDetection\Event\NegotiateSiteLanguageEvent
-     * @covers \Lochmueller\LanguageDetection\Negotiation\FallbackNegotiation
-     * @covers \Lochmueller\LanguageDetection\Service\SiteConfigurationService
-     */
     public function testCallWithNullSite(): void
     {
-        $site = $this->createMock(NullSite::class);
+        $site = self::createStub(NullSite::class);
 
         $request = new ServerRequest(null, null, 'php://input', []);
         $event = new NegotiateSiteLanguageEvent($site, $request, LocaleCollection::fromArray([]));

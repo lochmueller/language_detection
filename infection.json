@@ -1,5 +1,5 @@
 {
-    "$schema": "https://raw.githubusercontent.com/infection/infection/0.25.3/resources/schema.json",
+    "$schema": "https://raw.githubusercontent.com/infection/infection/0.31.9/resources/schema.json",
     "source": {
         "directories": [
             "Classes"

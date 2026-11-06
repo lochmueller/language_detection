@@ -8,6 +8,8 @@ use Lochmueller\LanguageDetection\Event\BuildResponseEvent;
 use Lochmueller\LanguageDetection\Response\DefaultResponse;
 use Lochmueller\LanguageDetection\Service\SiteConfigurationService;
 use Lochmueller\LanguageDetection\Tests\Unit\AbstractUnitTest;
+use PHPUnit\Framework\Attributes\CoversClass;
+use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use TYPO3\CMS\Core\Http\Uri;
 use TYPO3\CMS\Core\Site\Entity\Site;
@@ -15,17 +17,13 @@ use TYPO3\CMS\Core\Site\Entity\SiteLanguage;
 
 /**
  * @internal
- *
- * @coversNothing
  */
+#[CoversClass(\Lochmueller\LanguageDetection\Domain\Model\Dto\SiteConfiguration::class)]
+#[CoversClass(\Lochmueller\LanguageDetection\Event\BuildResponseEvent::class)]
+#[CoversClass(\Lochmueller\LanguageDetection\Response\DefaultResponse::class)]
+#[CoversClass(\Lochmueller\LanguageDetection\Service\SiteConfigurationService::class)]
 class DefaultResponseTest extends AbstractUnitTest
 {
-    /**
-     * @covers \Lochmueller\LanguageDetection\Domain\Model\Dto\SiteConfiguration
-     * @covers \Lochmueller\LanguageDetection\Event\BuildResponseEvent
-     * @covers \Lochmueller\LanguageDetection\Response\DefaultResponse
-     * @covers \Lochmueller\LanguageDetection\Service\SiteConfigurationService
-     */
     public function testConfiguration(): void
     {
         $siteLanguage = self::createStub(SiteLanguage::class);
@@ -52,12 +50,6 @@ class DefaultResponseTest extends AbstractUnitTest
         self::assertNotNull($event->getResponse());
     }
 
-    /**
-     * @covers \Lochmueller\LanguageDetection\Domain\Model\Dto\SiteConfiguration
-     * @covers \Lochmueller\LanguageDetection\Event\BuildResponseEvent
-     * @covers \Lochmueller\LanguageDetection\Response\DefaultResponse
-     * @covers \Lochmueller\LanguageDetection\Service\SiteConfigurationService
-     */
     public function testConfigurationWithWrongErrorCode(): void
     {
         $siteLanguage = self::createStub(SiteLanguage::class);
@@ -81,18 +73,11 @@ class DefaultResponseTest extends AbstractUnitTest
         $defaultResponse = new DefaultResponse(new SiteConfigurationService());
         $defaultResponse($event);
 
-        self::assertNotNull($event->getResponse());
-        if ($event->getResponse() instanceof \Psr\Http\Message\ResponseInterface) {
-            self::assertEquals(307, $event->getResponse()->getStatusCode());
-        }
+        $response = $event->getResponse();
+        self::assertInstanceOf(ResponseInterface::class, $response);
+        self::assertEquals(307, $response->getStatusCode());
     }
 
-    /**
-     * @covers \Lochmueller\LanguageDetection\Domain\Model\Dto\SiteConfiguration
-     * @covers \Lochmueller\LanguageDetection\Event\BuildResponseEvent
-     * @covers \Lochmueller\LanguageDetection\Response\DefaultResponse
-     * @covers \Lochmueller\LanguageDetection\Service\SiteConfigurationService
-     */
     public function testConfigurationWithRedirectParams(): void
     {
         $siteLanguage = self::createStub(SiteLanguage::class);
@@ -116,19 +101,12 @@ class DefaultResponseTest extends AbstractUnitTest
         $defaultResponse = new DefaultResponse(new SiteConfigurationService());
         $defaultResponse($event);
 
-        self::assertNotNull($event->getResponse());
-        if ($event->getResponse() instanceof \Psr\Http\Message\ResponseInterface) {
-            self::assertEquals(307, $event->getResponse()->getStatusCode());
-            self::assertEquals('/en/?test=1', $event->getResponse()->getHeaderLine('location'));
-        }
+        $response = $event->getResponse();
+        self::assertInstanceOf(ResponseInterface::class, $response);
+        self::assertEquals(307, $response->getStatusCode());
+        self::assertEquals('/en/?test=1', $response->getHeaderLine('location'));
     }
 
-    /**
-     * @covers \Lochmueller\LanguageDetection\Domain\Model\Dto\SiteConfiguration
-     * @covers \Lochmueller\LanguageDetection\Event\BuildResponseEvent
-     * @covers \Lochmueller\LanguageDetection\Response\DefaultResponse
-     * @covers \Lochmueller\LanguageDetection\Service\SiteConfigurationService
-     */
     public function testConfigurationWithSameUrl(): void
     {
         $siteLanguage = self::createStub(SiteLanguage::class);

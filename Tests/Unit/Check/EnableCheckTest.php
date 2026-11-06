@@ -8,31 +8,29 @@ use Lochmueller\LanguageDetection\Check\EnableCheck;
 use Lochmueller\LanguageDetection\Event\CheckLanguageDetectionEvent;
 use Lochmueller\LanguageDetection\Service\SiteConfigurationService;
 use Lochmueller\LanguageDetection\Tests\Unit\AbstractUnitTest;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\DataProvider;
 use Psr\Http\Message\ServerRequestInterface;
 use TYPO3\CMS\Core\Site\Entity\Site;
 
 /**
  * @internal
- *
- * @coversNothing
  */
+#[CoversClass(\Lochmueller\LanguageDetection\Check\EnableCheck::class)]
+#[CoversClass(\Lochmueller\LanguageDetection\Domain\Model\Dto\SiteConfiguration::class)]
+#[CoversClass(\Lochmueller\LanguageDetection\Event\CheckLanguageDetectionEvent::class)]
+#[CoversClass(\Lochmueller\LanguageDetection\Service\SiteConfigurationService::class)]
 class EnableCheckTest extends AbstractUnitTest
 {
     /**
-     * @covers \Lochmueller\LanguageDetection\Check\EnableCheck
-     * @covers \Lochmueller\LanguageDetection\Domain\Model\Dto\SiteConfiguration
-     * @covers \Lochmueller\LanguageDetection\Event\CheckLanguageDetectionEvent
-     * @covers \Lochmueller\LanguageDetection\Service\SiteConfigurationService
-     *
-     * @dataProvider data
-     *
      * @param array<string, bool>|array<string, false>|mixed[] $configuration
      */
+    #[DataProvider('data')]
     public function testConfiguration(array $configuration, bool $result): void
     {
         $site = self::createStub(Site::class);
         $site->method('getConfiguration')->willReturn($configuration);
-        $request = $this->createMock(ServerRequestInterface::class);
+        $request = self::createStub(ServerRequestInterface::class);
         $event = new CheckLanguageDetectionEvent($site, $request);
 
         $enableCheck = new EnableCheck(new SiteConfigurationService());

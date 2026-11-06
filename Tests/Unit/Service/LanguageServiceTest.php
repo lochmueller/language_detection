@@ -6,20 +6,17 @@ namespace Lochmueller\LanguageDetection\Tests\Unit\Service;
 
 use Lochmueller\LanguageDetection\Service\LanguageService;
 use Lochmueller\LanguageDetection\Tests\Unit\AbstractUnitTest;
+use PHPUnit\Framework\Attributes\CoversClass;
 
 /**
  * @internal
- *
- * @coversNothing
  */
+#[CoversClass(\Lochmueller\LanguageDetection\Service\LanguageService::class)]
 class LanguageServiceTest extends AbstractUnitTest
 {
-    /**
-     * @covers \Lochmueller\LanguageDetection\Service\LanguageService
-     */
     public function testGetLanguageForCountry(): void
     {
-        self::markTestSkipped('Check ResourceBundle');
+        self::skipWithoutLikelySubtags();
 
         $languageService = new LanguageService();
         self::assertEquals('de', $languageService->getLanguageByCountry('DE'));

@@ -15,15 +15,15 @@ use Lochmueller\LanguageDetection\Response\DefaultResponse;
 use Lochmueller\LanguageDetection\Service\Normalizer;
 use Lochmueller\LanguageDetection\Service\SiteConfigurationService;
 use Lochmueller\LanguageDetection\Tests\Unit\AbstractUnitTest;
+use PHPUnit\Framework\Attributes\CoversNothing;
 use Symfony\Component\DependencyInjection\Container;
 use TYPO3\CMS\Core\EventDispatcher\EventDispatcher;
 use TYPO3\CMS\Core\EventDispatcher\ListenerProvider;
 
 /**
  * @internal
- *
- * @coversNothing
  */
+#[CoversNothing]
 abstract class AbstractHandlerTest extends AbstractUnitTest
 {
     protected function getSmallEventListenerStack(): EventDispatcher

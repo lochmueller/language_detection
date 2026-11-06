@@ -8,26 +8,24 @@ use Lochmueller\LanguageDetection\Check\PathCheck;
 use Lochmueller\LanguageDetection\Event\CheckLanguageDetectionEvent;
 use Lochmueller\LanguageDetection\Service\SiteConfigurationService;
 use Lochmueller\LanguageDetection\Tests\Unit\AbstractUnitTest;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\DataProvider;
 use TYPO3\CMS\Core\Http\ServerRequest;
 use TYPO3\CMS\Core\Site\Entity\Site;
 
 /**
  * @internal
- *
- * @coversNothing
  */
+#[CoversClass(\Lochmueller\LanguageDetection\Check\PathCheck::class)]
+#[CoversClass(\Lochmueller\LanguageDetection\Domain\Model\Dto\SiteConfiguration::class)]
+#[CoversClass(\Lochmueller\LanguageDetection\Event\CheckLanguageDetectionEvent::class)]
+#[CoversClass(\Lochmueller\LanguageDetection\Service\SiteConfigurationService::class)]
 class PathCheckTest extends AbstractUnitTest
 {
     /**
-     * @covers \Lochmueller\LanguageDetection\Check\PathCheck
-     * @covers \Lochmueller\LanguageDetection\Domain\Model\Dto\SiteConfiguration
-     * @covers \Lochmueller\LanguageDetection\Event\CheckLanguageDetectionEvent
-     * @covers \Lochmueller\LanguageDetection\Service\SiteConfigurationService
-     *
-     * @dataProvider data
-     *
      * @param array<string, bool>|array<string, false>|mixed[] $config
      */
+    #[DataProvider('data')]
     public function testPathConfiguration(array $config, string $uri, bool $result): void
     {
         $site = self::createStub(Site::class);

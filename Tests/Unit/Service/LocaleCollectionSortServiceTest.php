@@ -8,18 +8,16 @@ use Lochmueller\LanguageDetection\Domain\Collection\LocaleCollection;
 use Lochmueller\LanguageDetection\Domain\Model\Dto\LocaleValueObject;
 use Lochmueller\LanguageDetection\Service\LocaleCollectionSortService;
 use Lochmueller\LanguageDetection\Tests\Unit\AbstractUnitTest;
+use PHPUnit\Framework\Attributes\CoversClass;
 
 /**
- * @covers \Lochmueller\LanguageDetection\Service\LocaleCollectionSortService
- *
  * @internal
  */
+#[CoversClass(\Lochmueller\LanguageDetection\Service\LocaleCollectionSortService::class)]
+#[CoversClass(\Lochmueller\LanguageDetection\Domain\Collection\LocaleCollection::class)]
+#[CoversClass(\Lochmueller\LanguageDetection\Domain\Model\Dto\LocaleValueObject::class)]
 class LocaleCollectionSortServiceTest extends AbstractUnitTest
 {
-    /**
-     * @covers \Lochmueller\LanguageDetection\Domain\Collection\LocaleCollection
-     * @covers \Lochmueller\LanguageDetection\Domain\Model\Dto\LocaleValueObject
-     */
     public function testDefaultSortingOfCollection(): void
     {
         $collection = LocaleCollection::fromArray(['de']);
@@ -31,10 +29,6 @@ class LocaleCollectionSortServiceTest extends AbstractUnitTest
         self::assertSame(['de', 'en'], array_map(fn(LocaleValueObject $item): string => (string)$item, $result->toArray()));
     }
 
-    /**
-     * @covers \Lochmueller\LanguageDetection\Domain\Collection\LocaleCollection
-     * @covers \Lochmueller\LanguageDetection\Domain\Model\Dto\LocaleValueObject
-     */
     public function testReplaceSortingOfCollection(): void
     {
         $collection = LocaleCollection::fromArray(['de']);

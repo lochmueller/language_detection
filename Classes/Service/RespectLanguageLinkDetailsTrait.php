@@ -22,6 +22,8 @@ trait RespectLanguageLinkDetailsTrait
     protected LinkLanguageHandler $linkLanguageHandler;
 
     /**
+     * @param mixed[] $linkDetails
+     *
      * @return mixed[]
      */
     public function addLanguageParameterByDetection(array $linkDetails, ?ServerRequestInterface $request = null): array
@@ -35,7 +37,7 @@ trait RespectLanguageLinkDetailsTrait
             $request = $request->withMethod('GET')->withUri(new Uri('/'));
         }
 
-        $request = $request->withAttribute('site', $this->languageSiteFinder->getSiteByPageId((int)$linkDetails['pageuid'] ?? 0));
+        $request = $request->withAttribute('site', $this->languageSiteFinder->getSiteByPageId((int)($linkDetails['pageuid'] ?? 0)));
 
         try {
             $response = $this->linkLanguageHandler->handle($request);

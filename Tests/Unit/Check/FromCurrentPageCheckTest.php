@@ -7,23 +7,20 @@ namespace Lochmueller\LanguageDetection\Tests\Unit\Check;
 use Lochmueller\LanguageDetection\Check\FromCurrentPageCheck;
 use Lochmueller\LanguageDetection\Event\CheckLanguageDetectionEvent;
 use Lochmueller\LanguageDetection\Tests\Unit\AbstractUnitTest;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\DataProvider;
 use TYPO3\CMS\Core\Http\ServerRequest;
 use TYPO3\CMS\Core\Http\Uri;
 use TYPO3\CMS\Core\Site\Entity\SiteInterface;
 
 /**
  * @internal
- *
- * @coversNothing
  */
+#[CoversClass(\Lochmueller\LanguageDetection\Check\FromCurrentPageCheck::class)]
+#[CoversClass(\Lochmueller\LanguageDetection\Event\CheckLanguageDetectionEvent::class)]
 class FromCurrentPageCheckTest extends AbstractUnitTest
 {
-    /**
-     * @covers       \Lochmueller\LanguageDetection\Check\FromCurrentPageCheck
-     * @covers       \Lochmueller\LanguageDetection\Event\CheckLanguageDetectionEvent
-     *
-     * @dataProvider data
-     */
+    #[DataProvider('data')]
     public function testInvalidReferrer(string $referrer, string $baseUri, bool $isStillEnabled): void
     {
         $site = self::createStub(SiteInterface::class);

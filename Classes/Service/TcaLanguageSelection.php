@@ -10,13 +10,11 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 class TcaLanguageSelection
 {
-    public function __construct(protected ?SiteFinder $siteFinder = null)
+    protected SiteFinder $siteFinder;
+
+    public function __construct(?SiteFinder $siteFinder = null)
     {
-        if (!$siteFinder instanceof \TYPO3\CMS\Core\Site\SiteFinder) {
-            /** @var SiteFinder $siteFinder */
-            $siteFinder = GeneralUtility::makeInstance(SiteFinder::class);
-            $this->siteFinder = $siteFinder;
-        }
+        $this->siteFinder = $siteFinder ?? GeneralUtility::makeInstance(SiteFinder::class);
     }
 
     /**

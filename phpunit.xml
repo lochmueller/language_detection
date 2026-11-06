@@ -2,7 +2,7 @@
 <phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" backupGlobals="true"
          bootstrap=".Build/vendor/typo3/testing-framework/Resources/Core/Build/UnitTestsBootstrap.php" colors="true"
          processIsolation="false" stopOnError="false" stopOnFailure="false" stopOnIncomplete="false"
-         stopOnSkipped="false" xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/10.1/phpunit.xsd"
+         stopOnSkipped="false" xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/12.5/phpunit.xsd"
          cacheDirectory=".phpunit.cache" backupStaticProperties="false" requireCoverageMetadata="false">
   <testsuites>
     <testsuite name="language_detection tests">
@@ -12,11 +12,6 @@
       <exclude>Tests/Unit/Handler/AbstractHandlerTest.php</exclude>
     </testsuite>
   </testsuites>
-  <coverage>
-    <report>
-      <clover outputFile=".phpunit.cache/clover.xml"/>
-    </report>
-  </coverage>
   <source>
     <include>
       <directory suffix=".php">Classes</directory>

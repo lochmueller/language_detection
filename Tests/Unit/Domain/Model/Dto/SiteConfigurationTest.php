@@ -6,17 +6,14 @@ namespace Lochmueller\LanguageDetection\Tests\Unit\Domain\Model\Dto;
 
 use Lochmueller\LanguageDetection\Domain\Model\Dto\SiteConfiguration;
 use Lochmueller\LanguageDetection\Tests\Unit\AbstractUnitTest;
+use PHPUnit\Framework\Attributes\CoversClass;
 
 /**
  * @internal
- *
- * @coversNothing
  */
+#[CoversClass(\Lochmueller\LanguageDetection\Domain\Model\Dto\SiteConfiguration::class)]
 class SiteConfigurationTest extends AbstractUnitTest
 {
-    /**
-     * @covers \Lochmueller\LanguageDetection\Domain\Model\Dto\SiteConfiguration
-     */
     public function testGetterOfDto(): void
     {
         $dto = new SiteConfiguration(
