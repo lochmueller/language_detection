@@ -4,6 +4,11 @@ services:
     autoconfigure: true
     public: false
 
+  cache.language_detection_ip_location:
+    class: TYPO3\CMS\Core\Cache\Frontend\FrontendInterface
+    factory: ['@TYPO3\CMS\Core\Cache\CacheManager', 'getCache']
+    arguments: ['language_detection_ip_location']
+
   Lochmueller\LanguageDetection\:
     resource: '../Classes/*'
 
