@@ -124,7 +124,7 @@ The middleware is early in the middleware stack. There is no concept of links an
 
 ## Dev
 
-The extension supports TYPO3 13.4 and 14.3 on PHP 8.2 - 8.5. Install the dev dependencies first:
+The extension supports TYPO3 13.4 and 14.3 on PHP 8.3 - 8.5. Install the dev dependencies first:
 
 > composer install
 
