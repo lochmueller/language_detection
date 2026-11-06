@@ -44,7 +44,7 @@ class IpLocation
     protected function fetchCountryCode(string $ip): ?string
     {
         try {
-            $request = $this->requestFactory->createRequest('GET', 'https://ip-api.com/json/' . $ip);
+            $request = $this->requestFactory->createRequest('GET', 'http://ip-api.com/json/' . $ip);
             $response = $this->getClient()->send($request, ['http_errors' => false]);
 
             if ($response->getStatusCode() !== 200)
