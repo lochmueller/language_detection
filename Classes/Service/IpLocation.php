@@ -45,7 +45,7 @@ class IpLocation
     {
         try {
             $request = $this->requestFactory->createRequest('GET', 'https://ip-api.com/json/' . $ip);
-            $response = $this->getClient()->send($request);
+            $response = $this->getClient()->send($request, ['http_errors' => false]);
 
             if ($response->getStatusCode() !== 200)
                 throw new IpLocationException('Missing information in response', 123781);
